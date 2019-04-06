@@ -1,5 +1,5 @@
 import { apply, isEmpty, Maybe, Ms, Ordinal } from '@musical-patterns/utilities'
-import { Voice } from '../../../../../performer'
+import { Voice } from '../../../performer'
 import { Entity, Scale } from '../../types'
 import { SectionInfo } from '../individual'
 import { Section } from '../types'

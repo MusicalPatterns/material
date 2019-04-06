@@ -1,5 +1,5 @@
 import { to } from '@musical-patterns/utilities'
-import { SourceRequest, Voice } from '../../../../../performer'
+import { SourceRequest, Voice } from '../../../performer'
 import { compileSourceRequest } from '../../source'
 import { Entity, Scale } from '../../types'
 import { CompileVoiceParameters } from '../types'
