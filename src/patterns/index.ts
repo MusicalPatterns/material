@@ -3,16 +3,25 @@
 export {
     computeTotalPitchDurationContourDuration,
     pitchDurationRest,
+} from './contours'
+export {
     computeNotesTotalDurationByIndex,
     computeNotesTotalDurationByScalar,
+} from './notes'
+export {
     materializeStandardScales,
     computeNonScale,
     computeFlatDurationsScale,
     computeHarmonicSeriesScale,
     computeOctaveSeriesScale,
     computeSubharmonicSeriesScale,
+} from './scales'
+export {
     PitchCircularTechnique,
     pitchCirculate,
+} from './custom'
+
+export {
     Segment,
     Rendering,
     RenderingByBlockElement,
@@ -138,15 +147,12 @@ export {
     PitchDurationGainSustainXScale,
     PitchDurationGainSustainXYScale,
     PitchDurationGainSustainXYZScale,
+} from './types'
+
+export {
     STANDARD_DURATIONS_SCALE_INDEX,
     STANDARD_PITCH_SCALE_INDEX,
     FULL_GAIN,
     SILENT,
     STANDARD_PITCH_INDEX_INDICATING_REST,
-} from './patterns'
-export {
-
-} from './compiler'
-export {
-
-} from './performer'
+} from './constants'

@@ -1,6 +1,6 @@
 {
   "name": "@musical-patterns/material",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "license": "MIT",
@@ -9,6 +9,19 @@
     "url": "https://github.com/MusicalPatterns/material.git"
   },
   "devDependencies": {
-    "@musical-patterns/cli": "^1.0.536"
+    "@mohayonao/wave-tables": "^0.2.0",
+    "@musical-patterns/cli": "^1.0.536",
+    "@musical-patterns/pattern": "^1.0.243",
+    "@musical-patterns/pattern-performer-qa": "^1.0.111",
+    "@musical-patterns/utilities": "^1.0.413",
+    "@types/three": "^0.93.22",
+    "@types/webpack-env": "^1.13.7",
+    "raf": "^3.4.0",
+    "redux": "^4.0.0",
+    "redux-batched-actions": "^0.4.1",
+    "three": "^0.100.0",
+    "url-loader": "^1.1.2",
+    "vrb": "^1.1.56",
+    "worker-loader": "^2.0.0"
   }
 }
