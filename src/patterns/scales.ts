@@ -1,4 +1,4 @@
-import { StandardSpec, StandardSpecs } from '@musical-patterns/pattern'
+import { StandardSpec, StandardSpecs } from '@musical-patterns/spec'
 import {
     apply,
     from,
