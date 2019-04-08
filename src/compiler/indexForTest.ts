@@ -16,8 +16,6 @@ export {
 } from './source/indexForTest'
 export {
     computeNotesTotalCompiledDuration,
-} from './support/indexForTest'
-export {
     computeIndividualVoiceAndInfo,
     IndividualVoiceAndInfo,
     Section,

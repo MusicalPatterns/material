@@ -23,6 +23,7 @@ export {
     computeCollectiveInfos,
     CollectiveVoiceInfos,
 } from './collective/indexForTest'
+export { computeNotesTotalCompiledDuration } from './totalCompiledDuration'
 
 export {
     Section,

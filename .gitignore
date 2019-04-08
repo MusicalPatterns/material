@@ -41,3 +41,7 @@ webpack.local.js
 webpack.prod.js
 webpack.publish.js
 webpack.qa.js
+test/customMatchers.ts
+test/types/index.d.ts
+Makefile.snapshots
+test/snapshots.test.ts
