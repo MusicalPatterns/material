@@ -1,4 +1,5 @@
-import { compilePattern, Preset } from '@musical-patterns/material'
+import { compilePattern } from '@musical-patterns/material'
+import { Preset } from '@musical-patterns/spec'
 import { ObjectOf } from '@musical-patterns/utilities'
 import * as path from 'path'
 
