@@ -8,8 +8,8 @@ import {
     Ordinal,
     round,
 } from '@musical-patterns/utilities'
+import { Scale } from '../../types'
 import { SoundFeature } from '../nominals'
-import { Scale } from '../types'
 import { COMPILER_PRECISION } from './constants'
 import { CompileSoundsOptions, ComputeScalePropertiesParameters, NoteFeature, ScaleProperties } from './types'
 

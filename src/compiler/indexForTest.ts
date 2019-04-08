@@ -38,11 +38,3 @@ export {
     compileVoices,
     TEMPORARY_UNDEFINED_SEGNO_INDEX,
 } from './voice/indexForTest'
-
-export {
-    Scale,
-    Material,
-    MaterializeEntities,
-    MaterializeScales,
-    Entity,
-} from './types'

@@ -145,8 +145,34 @@ export {
     STANDARD_PITCH_INDEX_INDICATING_REST,
 } from './patterns'
 export {
-
+    Note,
+    computeSoundsDuration,
+    compilePattern,
+    CompilePatternParameters,
+    computeNotesTotalCompiledDuration,
+    TimbreNameEnum,
+    NoteFeature,
+    Section,
+    TimbreName,
 } from './compiler'
 export {
-
+    CompiledPattern,
+    enableImmersiveAudio,
+    OnUpdate,
+    pause,
+    play,
+    setTimePosition,
+    setPattern,
+    setupPerformer,
+    stop,
+    ToggleImmersiveAudioHandlers,
+    Voice,
 } from './performer'
+
+export {
+    Material,
+    Scale,
+    MaterializeScales,
+    MaterializeEntities,
+    Entity,
+} from './types'

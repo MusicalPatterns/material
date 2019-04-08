@@ -31,11 +31,6 @@ export {
     SoundsAndSectionInfos,
     compileVoices,
     TEMPORARY_UNDEFINED_SEGNO_INDEX,
-    Scale,
-    Material,
-    MaterializeEntities,
-    MaterializeScales,
-    Entity,
 } from './compiler/indexForTest'
 
 export {
@@ -64,3 +59,11 @@ export {
     CompiledPattern,
     SourceRequest,
 } from './performer/indexForTest'
+
+export {
+    Scale,
+    Material,
+    MaterializeEntities,
+    MaterializeScales,
+    Entity,
+} from './types'

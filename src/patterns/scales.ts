@@ -13,7 +13,7 @@ import {
     Translation,
     zeroAndPositiveIntegers,
 } from '@musical-patterns/utilities'
-import { Scale } from '../compiler'
+import { Scale } from '../types'
 import { MaterializeStandardScalesOptions } from './types'
 
 const computeNonScale: () => Scale =

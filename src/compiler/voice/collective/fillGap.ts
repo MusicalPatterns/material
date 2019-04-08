@@ -1,7 +1,7 @@
 import { difference, isUndefined, Maybe, Ms } from '@musical-patterns/utilities'
 import { Sound } from '../../../performer'
+import { Scale } from '../../../types'
 import { computeSoundsDuration } from '../../support'
-import { Scale } from '../../types'
 import { SectionInfo } from '../individual'
 import { Section } from '../types'
 import { computeFillGapSounds } from './fillGapSounds'

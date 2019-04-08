@@ -17,11 +17,5 @@ export {
 } from './voice'
 
 export {
-    Adjustable,
-    Material,
     CompilePatternParameters,
-    Scale,
-    Entity,
-    MaterializeEntities,
-    MaterializeScales,
 } from './types'

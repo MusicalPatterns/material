@@ -1,7 +1,7 @@
 import { to } from '@musical-patterns/utilities'
 import { SourceRequest, Voice } from '../../../performer'
+import { Entity, Scale } from '../../../types'
 import { compileSourceRequest } from '../../source'
-import { Entity, Scale } from '../../types'
 import { CompileVoiceParameters } from '../types'
 import { TEMPORARY_UNDEFINED_SEGNO_INDEX } from './constants'
 import { computeIndividualVoiceInfo } from './infos'

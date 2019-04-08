@@ -1,7 +1,7 @@
 import { Ms, NO_DURATION, sum } from '@musical-patterns/utilities'
 import { Sound } from '../../performer'
+import { Scale } from '../../types'
 import { compileSoundFeature, Note, NoteFeature } from '../sound'
-import { Scale } from '../types'
 
 const computeNotesTotalCompiledDuration: (notes: Note[], scales?: Scale[]) => Ms =
     (notes: Note[], scales?: Scale[]): Ms =>

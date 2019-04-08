@@ -1,6 +1,6 @@
 import { Cardinal } from '@musical-patterns/utilities'
+import { Entity, Scale } from '../../types'
 import { Note } from '../sound'
-import { Entity, Scale } from '../types'
 
 interface Section {
     notes?: Note[],

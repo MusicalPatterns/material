@@ -1,6 +1,6 @@
 import { Maybe, Ordinal, Scalar, Translation } from '@musical-patterns/utilities'
+import { Adjustable, Scale } from '../../types'
 import { SoundFeature } from '../nominals'
-import { Adjustable, Scale } from '../types'
 
 interface NoteFeature extends Adjustable {
     index?: Ordinal,
