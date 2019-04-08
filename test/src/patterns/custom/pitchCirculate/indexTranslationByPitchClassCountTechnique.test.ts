@@ -1,6 +1,3 @@
-// tslint:disable-next-line no-reference
-/// <reference path="../../../../types/index.d.ts" />
-
 // tslint:disable number-literal-format
 
 import { apply, Scalar, to } from '@musical-patterns/utilities'

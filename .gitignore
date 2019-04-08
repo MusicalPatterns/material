@@ -28,6 +28,7 @@ test/noFailureOnNonEmptySuite.ts
 test/reporter.ts
 test/setup.ts
 test/tslint.json
+tsconfig.build.json
 tsconfig.common.json
 tsconfig.json
 tsconfig.node.json
