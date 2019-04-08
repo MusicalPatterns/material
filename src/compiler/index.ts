@@ -11,8 +11,6 @@ export {
 export {
     computeNotesTotalCompiledDuration,
     computeSoundsDuration,
-} from './support'
-export {
     Section,
 } from './voice'
 
