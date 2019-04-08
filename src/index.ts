@@ -167,6 +167,7 @@ export {
     stop,
     ToggleImmersiveAudioHandlers,
     Voice,
+    Sound,
 } from './performer'
 
 export {
