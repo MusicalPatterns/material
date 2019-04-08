@@ -24,7 +24,6 @@ export {
     NON_SEGNO_INDEX,
     NON_SEGNO_TIME,
 } from './performance'
-export { setupQa } from './setupQa'
 
 export {
     Voice,
