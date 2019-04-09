@@ -1,6 +1,6 @@
 import { BEGINNING } from '@musical-patterns/utilities'
 import { BatchAction, batchActions } from 'redux-batched-actions'
-import { Action, StateKey, store } from '../state'
+import { Action, StateKey, store } from '../performer'
 import { computeSetTimeActions, stopExistingVoices } from './helpers'
 
 const stop: () => Promise<void> =

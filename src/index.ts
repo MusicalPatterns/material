@@ -156,19 +156,23 @@ export {
     TimbreName,
 } from './compiler'
 export {
-    CompiledPattern,
-    enableImmersiveAudio,
     OnUpdate,
-    pause,
-    play,
-    setTimePosition,
-    setPattern,
-    setupPerformer,
-    stop,
-    ToggleImmersiveAudioHandlers,
     Voice,
     Sound,
 } from './performer'
+export {
+    enableImmersiveAudio,
+    setPattern,
+    setupPerformer,
+    play,
+    pause,
+    stop,
+    setTimePosition,
+    EnableImmersiveAudioParameters,
+    SetupPerformerParameters,
+    ToggleImmersiveAudioHandlers,
+    CompiledPattern,
+} from './interface'
 
 export {
     Material,

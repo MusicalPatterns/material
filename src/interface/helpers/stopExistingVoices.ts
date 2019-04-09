@@ -1,5 +1,4 @@
-import { StateKey, store } from '../../state'
-import { PreparedVoice } from '../../types'
+import { PreparedVoice, StateKey, store } from '../../performer'
 
 const stopExistingVoices: () => void =
     (): void => {

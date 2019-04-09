@@ -1,5 +1,6 @@
 import { map, Ordinal } from '@musical-patterns/utilities'
-import { CompiledPattern, Voice } from '../../performer'
+import { CompiledPattern } from '../../interface'
+import { Voice } from '../../performer'
 import { Entity, Scale } from '../../types'
 import { applyCollectiveInfos, computeCollectiveInfos } from './collective'
 import { computeIndividualVoiceAndInfo, IndividualVoiceAndInfo } from './individual'

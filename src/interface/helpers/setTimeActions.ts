@@ -1,7 +1,5 @@
 import { Ms } from '@musical-patterns/utilities'
-import { prepareVoices } from '../../preparation'
-import { Action, StateKey, store } from '../../state'
-import { PreparedVoice, Voice } from '../../types'
+import { Action, PreparedVoice, prepareVoices, StateKey, store, Voice } from '../../performer'
 
 const computeSetTimeActions: (timePosition: Ms) => Promise<Action[]> =
     async (timePosition: Ms): Promise<Action[]> => {

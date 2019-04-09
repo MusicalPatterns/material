@@ -32,7 +32,9 @@ export {
     compileVoices,
     TEMPORARY_UNDEFINED_SEGNO_INDEX,
 } from './compiler/indexForTest'
-
+export {
+    CompiledPattern,
+} from './interface/indexForTest'
 export {
     computeOctaveSeriesScale,
     computeNotesTotalDurationByIndex,
@@ -43,7 +45,6 @@ export {
     Segment,
     PitchDuration,
 } from './patterns/indexForTest'
-
 export {
     update,
     NON_SEGNO_TIME,
@@ -56,7 +57,6 @@ export {
     PreparedVoice,
     Voice,
     Sound,
-    CompiledPattern,
     SourceRequest,
 } from './performer/indexForTest'
 

@@ -1,6 +1,6 @@
 import { Ms } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
-import { Action, store } from '../state'
+import { Action, store } from '../performer'
 import { computeSetTimeActions, stopExistingVoices } from './helpers'
 
 const setTimePosition: (timePosition: Ms) => Promise<void> =

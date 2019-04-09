@@ -1,4 +1,4 @@
-import { StateKey, store } from '../state'
+import { StateKey, store } from '../performer'
 
 const pause: VoidFunction =
     (): void => {

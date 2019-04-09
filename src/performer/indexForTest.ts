@@ -1,9 +1,6 @@
 // tslint:disable no-reaching-imports
 
 export {
-    CompiledPattern,
-} from './interface/indexForTest'
-export {
     update,
     NON_SEGNO_TIME,
     NON_SEGNO_INDEX,

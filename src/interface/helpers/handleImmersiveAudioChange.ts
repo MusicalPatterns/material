@@ -1,7 +1,5 @@
 import { BatchAction, batchActions } from 'redux-batched-actions'
-import { prepareVoices } from '../../preparation'
-import { ImmutableState, StateKey, store } from '../../state'
-import { PreparedVoice, Voice } from '../../types'
+import { ImmutableState, PreparedVoice, prepareVoices, StateKey, store, Voice } from '../../performer'
 import { stopExistingVoices } from './stopExistingVoices'
 
 const handleImmersiveAudioChange: () => Promise<void> =

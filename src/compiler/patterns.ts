@@ -1,4 +1,4 @@
-import { CompiledPattern } from '../performer'
+import { CompiledPattern } from '../interface'
 import { Entity, Material, Scale } from '../types'
 import { CompilePatternParameters } from './types'
 import { compileVoices } from './voice'

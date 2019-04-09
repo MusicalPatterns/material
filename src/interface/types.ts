@@ -1,7 +1,7 @@
 import { Coordinate, Ms } from '@musical-patterns/utilities'
 import { Vrb } from 'vrb'
-import { OnUpdate } from '../setup'
-import { Voice } from '../types'
+import { CompilePatternParameters } from '../compiler'
+import { OnUpdate, Voice } from '../performer'
 
 interface ComputeToggleImmersiveAudioParameters {
     vrb: Vrb,
@@ -15,8 +15,8 @@ interface EnableImmersiveAudioParameters {
 }
 
 interface SetupPerformerParameters {
-    compiledPattern?: CompiledPattern,
     onUpdate?: OnUpdate,
+    pattern?: CompilePatternParameters,
 }
 
 interface ToggleImmersiveAudioHandlers {

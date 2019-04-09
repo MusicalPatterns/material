@@ -1,7 +1,7 @@
 import { Coordinate, noop } from '@musical-patterns/utilities'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { buildVrb, Vrb } from 'vrb'
-import { StateKey, store } from '../state'
+import { StateKey, store } from '../performer'
 import { handleImmersiveAudioChange } from './helpers'
 import {
     ComputeToggleImmersiveAudioParameters,
