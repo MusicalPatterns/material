@@ -2,9 +2,10 @@ import { BatchAction, batchActions } from 'redux-batched-actions'
 import { compilePattern, CompilePatternParameters } from '../compiler'
 import { PreparedVoice, prepareVoices, StateKey, store } from '../performer'
 import { stopExistingVoices } from './helpers'
+import { CompiledPattern } from './types'
 
-const setPattern: (pattern: CompilePatternParameters) => Promise<void> =
-    async (pattern: CompilePatternParameters): Promise<void> => {
+const setPattern: (pattern: CompilePatternParameters) => Promise<CompiledPattern> =
+    async (pattern: CompilePatternParameters): Promise<CompiledPattern> => {
         const { voices, segnoTime, totalDuration } = await compilePattern(pattern)
 
         stopExistingVoices()
@@ -18,6 +19,8 @@ const setPattern: (pattern: CompilePatternParameters) => Promise<void> =
             { type: StateKey.PREPARED_VOICES, data: preparedVoices },
         ])
         store.dispatch(batchedAction)
+
+        return { voices, segnoTime, totalDuration }
     }
 
 export {
