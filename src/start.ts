@@ -1,9 +1,11 @@
-import { pattern } from '@musical-patterns/pattern-performer-qa'
-import { to } from '@musical-patterns/utilities'
+import { Id } from '@musical-patterns/id'
+import { patterns } from '@musical-patterns/pattern-material-qa'
+import { isUndefined, to } from '@musical-patterns/utilities'
 import {
     enableImmersiveAudio,
     pause,
     play,
+    setPattern,
     setTimePosition,
     setupPerformer,
     stop,
@@ -12,7 +14,8 @@ import {
 
 const setupQa: () => Promise<void> =
     async (): Promise<void> => {
-        await setupPerformer({ pattern })
+        const { [ Id.MATERIAL_QA ]: materialQa, [ Id.MATERIAL_QA_DELAY ]: materialQaDelay } = patterns
+        await setupPerformer({ pattern: materialQa })
         const { enterImmersiveAudio, exitImmersiveAudio }: ToggleImmersiveAudioHandlers = enableImmersiveAudio()
 
         const setTimeButton: HTMLElement = document.createElement('button')
@@ -45,6 +48,17 @@ const setupQa: () => Promise<void> =
         exitImmersiveAudioButton.innerText = 'Exit Immersive Audio'
         exitImmersiveAudioButton.addEventListener('click', exitImmersiveAudio)
         document.body.appendChild(exitImmersiveAudioButton)
+
+        const materialQaDelayButton: HTMLElement = document.createElement('button')
+        materialQaDelayButton.innerText = 'Switch to Delay Pattern'
+        materialQaDelayButton.addEventListener('click', async () => {
+            if (isUndefined(materialQaDelay)) {
+                return
+            }
+
+            await setPattern(materialQaDelay)
+        })
+        document.body.appendChild(materialQaDelayButton)
     }
 
 setupQa()
