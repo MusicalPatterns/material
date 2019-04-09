@@ -1,4 +1,4 @@
-// tslint:disable ban-types no-any
+// tslint:disable no-any
 
 import {
     computeNominalInterface,
