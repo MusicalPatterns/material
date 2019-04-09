@@ -5,13 +5,13 @@ import {
     Integer,
     NO_TRANSLATION,
     OCTAVE,
-    positiveIntegers,
+    POSITIVE_INTEGERS,
     Power,
     reciprocal,
     Scalar,
     to,
     Translation,
-    zeroAndPositiveIntegers,
+    ZERO_AND_POSITIVE_INTEGERS,
 } from '@musical-patterns/utilities'
 import { Scale } from '../types'
 import { MaterializeStandardScalesOptions } from './types'
@@ -21,12 +21,12 @@ const computeNonScale: () => Scale =
 
 const computeHarmonicSeriesScale: () => Scale =
     (): Scale => ({
-        scalars: positiveIntegers.map((integer: Integer): Scalar => to.Scalar(integer)),
+        scalars: POSITIVE_INTEGERS.map((integer: Integer): Scalar => to.Scalar(integer)),
     })
 
 const computeSubharmonicSeriesScale: () => Scale =
     (): Scale => ({
-        scalars: positiveIntegers.map((integer: Integer): Scalar => to.Scalar(reciprocal(integer))),
+        scalars: POSITIVE_INTEGERS.map((integer: Integer): Scalar => to.Scalar(reciprocal(integer))),
     })
 
 const computeFlatDurationsScale: () => Scale =
@@ -36,7 +36,7 @@ const computeFlatDurationsScale: () => Scale =
 
 const computeOctaveSeriesScale: () => Scale =
     (): Scale => ({
-        scalars: zeroAndPositiveIntegers
+        scalars: ZERO_AND_POSITIVE_INTEGERS
             .map(to.Power)
             .map((power: Power): Scalar =>
                 to.Scalar(from.Base(apply.Power(
