@@ -1,4 +1,4 @@
-// import { pattern } from '@musical-patterns/pattern-performer-qa'
+import { pattern } from '@musical-patterns/pattern-performer-qa'
 import { to } from '@musical-patterns/utilities'
 import {
     enableImmersiveAudio,
@@ -12,7 +12,7 @@ import {
 
 const setupQa: () => Promise<void> =
     async (): Promise<void> => {
-        // await setupPerformer({ pattern })
+        await setupPerformer({ pattern })
         const { enterImmersiveAudio, exitImmersiveAudio }: ToggleImmersiveAudioHandlers = enableImmersiveAudio()
 
         const setTimeButton: HTMLElement = document.createElement('button')
