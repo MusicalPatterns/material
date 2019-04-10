@@ -4,6 +4,8 @@ require(`${ESCAPE_COMPILER_NODE_MODULES_FOR_PATTERN_FOR_REQUIRING}test/mockDom`)
 const { appendFileSync, existsSync, unlinkSync } = require('fs')
 const { compilePattern } = require('@musical-patterns/material')
 
+Error.stackTraceLimit = Infinity
+
 const saveSnapshot = (compiledPattern, name) => {
     const snapshotsFile = `snapshots/${name}.json`
     existsSync(snapshotsFile) && unlinkSync(snapshotsFile)
