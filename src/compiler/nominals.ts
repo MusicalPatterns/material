@@ -1,6 +1,7 @@
 // tslint:disable no-any
 
 import {
+    Amplitude,
     computeNominalInterface,
     Coordinate,
     DUMMY_VALUE_FOR_COMPUTING_NOMINAL_INTERFACE,
@@ -14,6 +15,7 @@ type SoundFeature =
     (
         // tslint:disable-next-line max-union-size
         Ms |
+        Scalar<Amplitude> |
         Scalar |
         Hz |
         Coordinate<Meters> |

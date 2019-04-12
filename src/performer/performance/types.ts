@@ -1,12 +1,12 @@
-import { Coordinate, Hz, Maybe, Meters, Scalar } from '@musical-patterns/utilities'
+import { Amplitude, Coordinate, Hz, Maybe, Meters, Scalar } from '@musical-patterns/utilities'
 import { Object3D, PositionalAudio } from 'three'
 import { Vrb } from 'vrb'
 import { SourceNode } from './source'
 
 interface SoundToPlay {
     frequency: Hz,
-    gain: Scalar,
-    playbackRate?: Scalar,
+    gain: Scalar<Amplitude>,
+    playbackRate?: Scalar<Hz>,
     position: Coordinate<Meters>,
 }
 

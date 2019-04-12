@@ -3,7 +3,7 @@ import {
     Cardinal,
     Frequency,
     from,
-    Ordinal,
+    Index,
     Scalar,
     to,
     Translation,
@@ -12,17 +12,17 @@ import {
 import { ComputeCircledPitchIndexParameters, ComputeCircledPitchScalarParameters } from './types'
 
 const transposePitchIndexForTier:
-    (originalPitchIndex: Ordinal, parameters: { pitchClassCount: Cardinal, tierIndex: Ordinal }) => Ordinal =
-    (originalPitchIndex: Ordinal, { pitchClassCount, tierIndex }: ComputeCircledPitchIndexParameters): Ordinal => {
-        const pitchIndexWrappedWithinPitchClassCountToRemoveOriginalWindowLocationInformation: Ordinal = apply.Modulus(
+    (originalPitchIndex: Index, parameters: { pitchClassCount: Cardinal, tierIndex: Index }) => Index =
+    (originalPitchIndex: Index, { pitchClassCount, tierIndex }: ComputeCircledPitchIndexParameters): Index => {
+        const pitchIndexWrappedWithinPitchClassCountToRemoveOriginalWindowLocationInformation: Index = apply.Modulus(
             originalPitchIndex,
-            to.Modulus(from.Cardinal(pitchClassCount)),
+            to.Modulus(to.Index(from.Cardinal(pitchClassCount))),
         )
 
-        const baseTierTransposition: Translation = to.Translation(from.Ordinal(apply.Scalar(
+        const baseTierTransposition: Translation<Index> = to.Translation(apply.Scalar(
             tierIndex,
-            to.Scalar(from.Cardinal(pitchClassCount)),
-        )))
+            to.Scalar(to.Index(from.Cardinal(pitchClassCount))),
+        ))
 
         return apply.Translation(
             pitchIndexWrappedWithinPitchClassCountToRemoveOriginalWindowLocationInformation,
@@ -32,7 +32,7 @@ const transposePitchIndexForTier:
 
 const scalePitchScalarForTier: (
     originalPitchScalar: Scalar<Frequency>,
-    parameters: { tierIndex: Ordinal, windowSize: Scalar<Frequency> },
+    parameters: { tierIndex: Index, windowSize: Scalar<Scalar<Frequency>> },
 ) => Scalar<Frequency> =
     (
         originalPitchScalar: Scalar<Frequency>,
@@ -43,7 +43,8 @@ const scalePitchScalarForTier: (
             windowSize,
         )
 
-        const baseTierScaling: Scalar<Frequency> = apply.Power(windowSize, to.Power(from.Ordinal(tierIndex)))
+        const baseTierScaling: Scalar<Scalar<Frequency>> =
+            apply.Power(windowSize, to.Power(to.Scalar(to.Scalar(to.Frequency(from.Index<number, Index>(tierIndex))))))
 
         return apply.Scalar(
             pitchScalarReducedWithinWindowSizeToRemoveWindowLocationInformation,

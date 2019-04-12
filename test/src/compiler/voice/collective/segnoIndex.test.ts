@@ -1,4 +1,4 @@
-import { Ms, NO_DURATION, Ordinal, repeat, to } from '@musical-patterns/utilities'
+import { Index, Ms, NO_DURATION, repeat, to } from '@musical-patterns/utilities'
 import {
     computeSegnoIndex,
     NON_SEGNO_INDEX,
@@ -18,7 +18,7 @@ describe('compute segno index', () => {
                 {
                     duration: to.Ms(20),
                     frequency: to.Hz(1),
-                    gain: to.Scalar(1),
+                    gain: to.Scalar(to.Amplitude(1)),
                     position: [ 0 ].map(to.Meters),
                     sustain: to.Ms(9),
                 },
@@ -38,7 +38,7 @@ describe('compute segno index', () => {
         })
 
         it('it returns the non-segno-index which will tell the performer not to repeat it', () => {
-            const actualSegnoIndex: Ordinal = computeSegnoIndex({
+            const actualSegnoIndex: Index = computeSegnoIndex({
                 collectiveSegnoTime,
                 individualSegnoTime,
                 voice,
@@ -56,14 +56,14 @@ describe('compute segno index', () => {
         })
 
         it('returns the first index of the voice sounds after the collective segno time', () => {
-            const actualSegnoIndex: Ordinal = computeSegnoIndex({
+            const actualSegnoIndex: Index = computeSegnoIndex({
                 collectiveSegnoTime,
                 individualSegnoTime,
                 voice,
             })
 
             expect(actualSegnoIndex)
-                .toBe(to.Ordinal(3))
+                .toBe(to.Index(3))
         })
     })
 
@@ -74,7 +74,7 @@ describe('compute segno index', () => {
         })
 
         it('returns the non segno index', () => {
-            const actualSegnoIndex: Ordinal = computeSegnoIndex({
+            const actualSegnoIndex: Index = computeSegnoIndex({
                 collectiveSegnoTime,
                 individualSegnoTime,
                 voice: {
@@ -89,7 +89,7 @@ describe('compute segno index', () => {
             })
 
             expect(actualSegnoIndex)
-                .toBe(to.Ordinal(-1))
+                .toBe(to.Index(-1))
         })
     })
 })

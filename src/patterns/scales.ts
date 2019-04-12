@@ -1,6 +1,6 @@
 import { StandardSpec, StandardSpecs } from '@musical-patterns/spec'
 import {
-    apply,
+    apply, Base,
     from,
     Integer,
     NO_TRANSLATION,
@@ -37,8 +37,9 @@ const computeFlatDurationsScale: () => Scale =
 const computeOctaveSeriesScale: () => Scale =
     (): Scale => ({
         scalars: ZERO_AND_POSITIVE_INTEGERS
+            .map(to.Base)
             .map(to.Power)
-            .map((power: Power): Scalar =>
+            .map((power: Power<Base>): Scalar =>
                 to.Scalar(from.Base(apply.Power(
                     OCTAVE,
                     power,

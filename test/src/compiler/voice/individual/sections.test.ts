@@ -29,14 +29,14 @@ describe('compute individual sounds and section infos', () => {
         const expectedSound: Sound = {
             duration: to.Ms(3),
             frequency: to.Hz(1),
-            gain: to.Scalar(1),
+            gain: to.Scalar(to.Amplitude(1)),
             position: [ 0, 0, 0 ].map(to.Meters),
             sustain: to.Ms(2.9),
         }
         const otherExpectedSound: Sound = {
             duration: to.Ms(9),
             frequency: to.Hz(1),
-            gain: to.Scalar(1),
+            gain: to.Scalar(to.Amplitude(1)),
             position: [ 0, 0, 0 ].map(to.Meters),
             sustain: to.Ms(8.9),
         }

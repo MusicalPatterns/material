@@ -1,5 +1,6 @@
 import {
     ADDITIVE_IDENTITY,
+    Amplitude,
     apply,
     Coordinate,
     from,
@@ -62,7 +63,7 @@ const compileSound: (note: Note, options?: CompileSoundsOptions) => Sound =
         } = note
 
         const duration: Ms = compileSoundFeature(noteDuration, options)
-        const gain: Scalar = compileSoundFeature(noteGain, options)
+        const gain: Scalar<Amplitude> = compileSoundFeature(noteGain, options)
         const frequency: Hz = compileSoundFeature(notePitch, options)
 
         const position: Coordinate<Meters> = compilePosition(note.position, options)

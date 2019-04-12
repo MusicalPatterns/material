@@ -12,7 +12,7 @@ describe('total compiled duration', () => {
                 },
                 {
                     duration: {
-                        index: to.Ordinal(1),
+                        index: to.Index(1),
                     },
                 },
             ]

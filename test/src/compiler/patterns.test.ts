@@ -28,7 +28,7 @@ describe('compile pattern', () => {
     const expectedSound: Sound = {
         duration: to.Ms(9),
         frequency: to.Hz(9),
-        gain: to.Scalar(9),
+        gain: to.Scalar(to.Amplitude(9)),
         position: [ 9, 0, 0 ].map(to.Meters),
         sustain: to.Ms(8.9),
     }
@@ -66,7 +66,7 @@ describe('compile pattern', () => {
                 voices: [
                     {
                         delay: NO_DURATION,
-                        segnoIndex: to.Ordinal(0),
+                        segnoIndex: to.Index(0),
                         sounds: [ expectedSound ],
                         sourceRequest: {
                             sourceType: SourceType.OSCILLATOR,
@@ -96,7 +96,7 @@ describe('compile pattern', () => {
                 voices: [
                     {
                         delay: NO_DURATION,
-                        segnoIndex: to.Ordinal(0),
+                        segnoIndex: to.Index(0),
                         sounds: [ expectedSound ],
                         sourceRequest: {
                             sourceType: SourceType.OSCILLATOR,
@@ -128,7 +128,7 @@ describe('compile pattern', () => {
                 voices: [
                     {
                         delay: NO_DURATION,
-                        segnoIndex: to.Ordinal(0),
+                        segnoIndex: to.Index(0),
                         sounds: [ expectedSound ],
                         sourceRequest: {
                             sourceType: SourceType.OSCILLATOR,

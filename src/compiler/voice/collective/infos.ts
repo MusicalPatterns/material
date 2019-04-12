@@ -2,6 +2,7 @@ import {
     allValuesAreTheSame,
     computeLeastCommonMultiple,
     from,
+    Index,
     max,
     Ms,
     NO_DURATION,
@@ -25,9 +26,10 @@ const pluckInfos: (individualVoicesAndInfos: IndividualVoiceAndInfo[]) => Plucke
         const individualRepetendDurations: Ms[] = individualVoiceInfos.map((individualVoiceInfo: IndividualVoiceInfo) =>
             individualVoiceInfo.individualRepetendDuration,
         )
-        const individualEndTimes: Ms[] = individualVoiceInfos.map((individualVoiceInfo: IndividualVoiceInfo) =>
-            individualVoiceInfo.individualEndTime,
-        )
+        const individualEndTimes: Ms[] =
+            individualVoiceInfos.map((individualVoiceInfo: IndividualVoiceInfo) =>
+                individualVoiceInfo.individualEndTime,
+            )
 
         return {
             individualEndTimes,
@@ -58,7 +60,7 @@ const computeCollectiveInfosFromPluckedInfos: (parameters: {
             ))
         const collectiveEndTime: Ms = collectiveSegnoTime === NON_SEGNO_TIME ?
             max(...individualEndTimes) :
-            sum(collectiveSegnoTime, collectiveRepetendDuration)
+            to.Ms(sum(collectiveSegnoTime, collectiveRepetendDuration))
 
         return {
             collectiveEndTime,

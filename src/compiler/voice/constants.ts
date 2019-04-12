@@ -1,8 +1,8 @@
 // tslint:disable no-magic-numbers
 
-import { Ordinal, to } from '@musical-patterns/utilities'
+import { Index, to } from '@musical-patterns/utilities'
 
-const NOT_FOUND: Ordinal = to.Ordinal(-1)
+const NOT_FOUND: Index = to.Index(-1)
 
 export {
     NOT_FOUND,

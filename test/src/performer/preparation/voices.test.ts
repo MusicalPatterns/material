@@ -1,4 +1,4 @@
-import { INITIAL, Ms, NO_DURATION, to } from '@musical-patterns/utilities'
+import { Index, INITIAL, Ms, NO_DURATION, to } from '@musical-patterns/utilities'
 import { OscillatorName, PreparedVoice, prepareVoices, SourceType, Voice } from '../../../../src/indexForTest'
 
 describe('prepare voices', () => {
@@ -30,14 +30,14 @@ describe('prepare voices', () => {
                         {
                             duration: to.Ms(5),
                             frequency: to.Hz(1),
-                            gain: to.Scalar(1),
+                            gain: to.Scalar(to.Amplitude(1)),
                             position: [ 1 ].map(to.Meters),
                             sustain: to.Ms(4),
                         },
                         {
                             duration: to.Ms(3),
                             frequency: to.Hz(1),
-                            gain: to.Scalar(1),
+                            gain: to.Scalar(to.Amplitude(1)),
                             position: [ 1 ].map(to.Meters),
                             sustain: to.Ms(1),
                         },
@@ -48,9 +48,7 @@ describe('prepare voices', () => {
                     },
                 },
             ]
-            const startTime
-                :
-                Ms = to.Ms(2)
+            const startTime: Ms = to.Ms(2)
 
             const preparedVoices: PreparedVoice[] = await prepareVoices(voices, startTime)
             const preparedVoice: PreparedVoice = preparedVoices[ 0 ]
@@ -60,7 +58,7 @@ describe('prepare voices', () => {
             expect(preparedVoice.nextStart)
                 .toBe(to.Ms(5))
             expect(preparedVoice.soundIndex)
-                .toBe(to.Ordinal(1))
+                .toBe(to.Index(1))
 
             done()
         })
@@ -74,14 +72,14 @@ describe('prepare voices', () => {
                         {
                             duration: to.Ms(5),
                             frequency: to.Hz(1),
-                            gain: to.Scalar(1),
+                            gain: to.Scalar(to.Amplitude(1)),
                             position: [ 1 ].map(to.Meters),
                             sustain: to.Ms(4),
                         },
                         {
                             duration: to.Ms(3),
                             frequency: to.Hz(1),
-                            gain: to.Scalar(1),
+                            gain: to.Scalar(to.Amplitude(1)),
                             position: [ 1 ].map(to.Meters),
                             sustain: to.Ms(1),
                         },
@@ -102,7 +100,7 @@ describe('prepare voices', () => {
             expect(preparedVoice.nextStart)
                 .toBe(to.Ms(16))
             expect(preparedVoice.soundIndex)
-                .toBe(to.Ordinal(0))
+                .toBe(to.Index(0))
 
             done()
         })
@@ -111,26 +109,26 @@ describe('prepare voices', () => {
             const voices: Voice[] = [
                 {
                     delay: NO_DURATION,
-                    segnoIndex: to.Ordinal(1),
+                    segnoIndex: to.Index(1),
                     sounds: [
                         {
                             duration: to.Ms(5),
                             frequency: to.Hz(1),
-                            gain: to.Scalar(1),
+                            gain: to.Scalar(to.Amplitude(1)),
                             position: [ 1 ].map(to.Meters),
                             sustain: to.Ms(4),
                         },
                         {
                             duration: to.Ms(1),
                             frequency: to.Hz(1),
-                            gain: to.Scalar(1),
+                            gain: to.Scalar(to.Amplitude(1)),
                             position: [ 1 ].map(to.Meters),
                             sustain: to.Ms(1),
                         },
                         {
                             duration: to.Ms(3),
                             frequency: to.Hz(1),
-                            gain: to.Scalar(1),
+                            gain: to.Scalar(to.Amplitude(1)),
                             position: [ 1 ].map(to.Meters),
                             sustain: to.Ms(1),
                         },
@@ -151,7 +149,7 @@ describe('prepare voices', () => {
             expect(preparedVoice.nextStart)
                 .toBe(to.Ms(14))
             expect(preparedVoice.soundIndex)
-                .toBe(to.Ordinal(2))
+                .toBe(to.Index(2))
 
             done()
         })

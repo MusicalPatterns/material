@@ -16,7 +16,7 @@ describe('compile sound', () => {
 
         it('gain to 1', () => {
             expect(sound.gain)
-                .toBe(to.Scalar(1))
+                .toBe(to.Scalar(to.Amplitude(1)))
         })
 
         it('frequency to 1', () => {

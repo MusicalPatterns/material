@@ -1,4 +1,4 @@
-import { INITIAL, Ms, NO_DURATION, Ordinal, repeat, to } from '@musical-patterns/utilities'
+import { Index, INITIAL, Ms, NO_DURATION, repeat, to } from '@musical-patterns/utilities'
 import {
     applyCollectiveInfos,
     Entity,
@@ -17,7 +17,7 @@ describe('apply collective infos', () => {
                 {
                     duration: to.Ms(20),
                     frequency: to.Hz(1),
-                    gain: to.Scalar(1),
+                    gain: to.Scalar(to.Amplitude(1)),
                     position: [ 0 ].map(to.Meters),
                     sustain: to.Ms(9),
                 },
@@ -34,7 +34,7 @@ describe('apply collective infos', () => {
             },
         }
 
-        const index: Ordinal = to.Ordinal(2)
+        const index: Index = to.Index(2)
 
         const entities: Entity[] = [ {}, {}, {
             sections: [
@@ -84,26 +84,26 @@ describe('apply collective infos', () => {
         expect(actualVoice)
             .toEqual({
                 delay: NO_DURATION,
-                segnoIndex: to.Ordinal(3),
+                segnoIndex: to.Index(3),
                 sounds: originalSounds.concat([
                     {
                         duration: to.Ms(11),
                         frequency: to.Hz(1),
-                        gain: to.Scalar(1),
+                        gain: to.Scalar(to.Amplitude(1)),
                         position: [ 0, 0, 0 ].map(to.Meters),
                         sustain: to.Ms(10.9),
                     },
                     {
                         duration: to.Ms(11),
                         frequency: to.Hz(1),
-                        gain: to.Scalar(1),
+                        gain: to.Scalar(to.Amplitude(1)),
                         position: [ 0, 0, 0 ].map(to.Meters),
                         sustain: to.Ms(10.9),
                     },
                     {
                         duration: to.Ms(11),
                         frequency: to.Hz(1),
-                        gain: to.Scalar(1),
+                        gain: to.Scalar(to.Amplitude(1)),
                         position: [ 0, 0, 0 ].map(to.Meters),
                         sustain: to.Ms(10.9),
                     },

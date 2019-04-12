@@ -1,6 +1,6 @@
 // tslint:disable no-magic-numbers
 
-import { ContourElement, ContourPiece, sum, to } from '@musical-patterns/utilities'
+import { ContourElement, ContourPiece, from, sum, to } from '@musical-patterns/utilities'
 import { STANDARD_PITCH_INDEX_INDICATING_REST } from './constants'
 import { PitchDuration } from './types'
 
@@ -17,7 +17,7 @@ const computeTotalPitchDurationContourDuration: (contour: ContourPiece<PitchDura
 
 const pitchDurationRest: (duration: number) => ContourPiece<PitchDuration> =
     (duration: number): ContourPiece<PitchDuration> =>
-        to.ContourPiece<PitchDuration>([ [ STANDARD_PITCH_INDEX_INDICATING_REST, duration ] ])
+        to.ContourPiece<PitchDuration>([ [ from.Index(STANDARD_PITCH_INDEX_INDICATING_REST), duration ] ])
 
 export {
     computeTotalPitchDurationContourDuration,

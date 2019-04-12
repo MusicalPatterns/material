@@ -1,4 +1,4 @@
-import { Ms, Ordinal } from '@musical-patterns/utilities'
+import { Index, Ms } from '@musical-patterns/utilities'
 import { Sound, Voice } from '../../../performer'
 import { Scale } from '../../../types'
 import { IndividualVoiceAndInfo, SectionInfo } from '../individual'
@@ -41,7 +41,7 @@ interface ApplyCollectiveInfosParameters extends CompileVoicesParameters {
     collectiveEndTime: Ms,
     collectiveSegnoTime: Ms,
     collectiveShareSegnoTime: boolean,
-    index: Ordinal,
+    index: Index,
     individualSegnoTime: Ms,
     sectionInfos: SectionInfo[],
     voice: Voice,

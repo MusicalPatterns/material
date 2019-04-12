@@ -1,10 +1,14 @@
-import { apply, difference, Ms, sum, to } from '@musical-patterns/utilities'
+import { apply, difference, from, Index, Ms, sum, to } from '@musical-patterns/utilities'
 import { NON_SEGNO_TIME } from '../performance'
 import { ComputePatternTimeParameters } from './types'
 
-const computePatternTime: (parameters: { segnoTime: Ms, timePosition: Ms, totalDuration: Ms }) => Ms =
+const computePatternTime: (parameters: {
+    segnoTime: Ms,
+    timePosition: Ms,
+    totalDuration: Ms,
+}) => Ms =
     ({ timePosition, totalDuration, segnoTime }: ComputePatternTimeParameters): Ms => {
-        const repetendDuration: Ms = difference(totalDuration, segnoTime)
+        const repetendDuration: Ms = from.Translation(difference(totalDuration, segnoTime))
 
         if (timePosition < totalDuration) {
             return timePosition
@@ -14,16 +18,16 @@ const computePatternTime: (parameters: { segnoTime: Ms, timePosition: Ms, totalD
             return totalDuration
         }
 
-        const introDuration: Ms = difference(totalDuration, repetendDuration)
+        const introDuration: Ms = from.Translation(difference(totalDuration, repetendDuration))
         const timeWithinRepetend: Ms = apply.Modulus(
-            difference(timePosition, introDuration),
+            from.Translation(difference(timePosition, introDuration)),
             to.Modulus(repetendDuration),
         )
 
-        return sum(
+        return to.Ms(sum(
             introDuration,
             timeWithinRepetend,
-        )
+        ))
     }
 
 export {

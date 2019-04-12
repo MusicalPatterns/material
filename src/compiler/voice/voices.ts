@@ -1,4 +1,4 @@
-import { map, Ordinal } from '@musical-patterns/utilities'
+import { from, Index, map } from '@musical-patterns/utilities'
 import { CompiledPattern } from '../../interface'
 import { Voice } from '../../performer'
 import { Entity, Scale } from '../../types'
@@ -20,7 +20,7 @@ const compileVoices: (parameters: { entities: Entity[], scales?: Scale[] }) => C
 
         const voices: Voice[] = map(
             individualVoicesAndInfos,
-            ({ voice, voiceInfo: { sectionInfos, individualSegnoTime } }: IndividualVoiceAndInfo, index: Ordinal) =>
+            ({ voice, voiceInfo: { sectionInfos, individualSegnoTime } }: IndividualVoiceAndInfo, index: Index) =>
                 applyCollectiveInfos({
                     collectiveEndTime,
                     collectiveSegnoTime,

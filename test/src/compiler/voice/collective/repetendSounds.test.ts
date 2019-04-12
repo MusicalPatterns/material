@@ -32,7 +32,7 @@ describe('compute repetend sounds', () => {
                 {
                     duration: to.Ms(11),
                     frequency: to.Hz(1),
-                    gain: to.Scalar(1),
+                    gain: to.Scalar(to.Amplitude(1)),
                     position: [ 0, 0, 0 ].map(to.Meters),
                     sustain: to.Ms(10.9),
                 },

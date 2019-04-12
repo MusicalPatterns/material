@@ -1,4 +1,4 @@
-import { apply, Cents, CENTS_PER_SEMITONE, Semitones, to } from '@musical-patterns/utilities'
+import { apply, Cents, CENTS_PER_SEMITONE, from, Semitones, to } from '@musical-patterns/utilities'
 import { StateKey, store } from '../../state'
 import {
     DOWN_ONE_SEMITONE,
@@ -11,7 +11,7 @@ import { SampleDatas, SampleName } from './types'
 
 const semitonesToCents: (semitones: Semitones) => Cents =
     (semitones: Semitones): Cents =>
-        apply.Scalar(CENTS_PER_SEMITONE, to.Scalar(semitones))
+        apply.Scalar(CENTS_PER_SEMITONE, to.Scalar(to.Cents(from.Semitones(semitones))))
 
 const computeSampleData: VoidFunction =
     (): void => {

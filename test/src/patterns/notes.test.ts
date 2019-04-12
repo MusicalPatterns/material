@@ -34,17 +34,17 @@ describe('notes utilities', () => {
             const notes: Note[] = [
                 {
                     duration: {
-                        index: to.Ordinal(4),
+                        index: to.Index(4),
                     },
                 },
                 {
                     duration: {
-                        index: to.Ordinal(7),
+                        index: to.Index(7),
                     },
                 },
                 {
                     duration: {
-                        index: to.Ordinal(8),
+                        index: to.Index(8),
                     },
                 },
             ]

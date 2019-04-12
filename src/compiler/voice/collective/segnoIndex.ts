@@ -1,30 +1,29 @@
 import {
     apply,
     BEGINNING,
-    from,
+    Index,
     indexOfFinalElement,
     INITIAL,
     isEmpty,
     isUndefined,
     Ms,
     NEXT,
-    Ordinal,
     to,
 } from '@musical-patterns/utilities'
 import { NON_SEGNO_INDEX, NON_SEGNO_TIME, Sound, Voice } from '../../../performer'
 import { ComputeSegnoIndexParameters } from './types'
 
-const computeFirstSoundIndexAfterTime: (sounds: Sound[], timePosition: Ms) => Ordinal =
-    (sounds: Sound[], timePosition: Ms): Ordinal => {
-        let soundIndex: Ordinal = INITIAL
+const computeFirstSoundIndexAfterTime: (sounds: Sound[], timePosition: Ms) => Index =
+    (sounds: Sound[], timePosition: Ms): Index => {
+        let soundIndex: Index = INITIAL
         let nextStart: Ms = BEGINNING
         while (nextStart < timePosition) {
-            const nextSound: Sound = apply.Ordinal(sounds, soundIndex)
+            const nextSound: Sound = apply.Index(sounds, soundIndex as Index<Sound>)
             const duration: Ms = nextSound.duration
-            nextStart = apply.Translation(nextStart, to.Translation(duration))
+            nextStart = apply.Translation(nextStart, to.Translation(to.Index(duration)))
             soundIndex = apply.Translation(soundIndex, NEXT)
 
-            if (from.Ordinal(soundIndex) > indexOfFinalElement(sounds)) {
+            if (soundIndex > indexOfFinalElement(sounds)) {
                 break
             }
         }
@@ -36,14 +35,14 @@ const computeSegnoIndex: (parameters: {
     collectiveSegnoTime: Ms
     individualSegnoTime: Ms,
     voice: Voice,
-}) => Ordinal =
+}) => Index =
     (
         {
             collectiveSegnoTime,
             individualSegnoTime,
             voice,
         }: ComputeSegnoIndexParameters,
-    ): Ordinal =>
+    ): Index =>
         individualSegnoTime === NON_SEGNO_TIME || isUndefined(voice.sounds) || isEmpty(voice.sounds) ?
             NON_SEGNO_INDEX :
             computeFirstSoundIndexAfterTime(

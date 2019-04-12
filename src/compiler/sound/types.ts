@@ -1,16 +1,16 @@
-import { Maybe, Ordinal, Scalar, Translation } from '@musical-patterns/utilities'
+import { Index, Maybe, Scalar, Translation } from '@musical-patterns/utilities'
 import { Adjustable, Scale } from '../../types'
 import { SoundFeature } from '../nominals'
 
 interface NoteFeature extends Adjustable {
-    index?: Ordinal,
-    scaleIndex?: Ordinal,
+    index?: Index,
+    scaleIndex?: Index,
 }
 
 interface ComputeScalePropertiesParameters {
-    index: Ordinal,
+    index: Index,
     options?: CompileSoundsOptions,
-    scaleIndex: Ordinal,
+    scaleIndex: Index,
 }
 
 interface ScaleProperties {

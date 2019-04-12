@@ -1,4 +1,4 @@
-import { Amplitude, Cardinal, Frequency, from, Ordinal, Scalar, to } from '@musical-patterns/utilities'
+import { Amplitude, Cardinal, Frequency, from, Index, Scalar, to } from '@musical-patterns/utilities'
 import { Note } from '../../../compiler'
 import {
     applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount,
@@ -7,14 +7,14 @@ import {
 import { scalePitchScalarForTier, transposePitchIndexForTier } from './pitchCurve'
 
 const computeTierWithTechniqueIndexTranslationByPitchClassCount:
-    (notes: Note[], tierIndex: Ordinal, pitchClassCount: Cardinal) => Note[] =
-    (notes: Note[], tierIndex: Ordinal, pitchClassCount: Cardinal): Note[] =>
+    (notes: Note[], tierIndex: Index, pitchClassCount: Cardinal) => Note[] =
+    (notes: Note[], tierIndex: Index, pitchClassCount: Cardinal): Note[] =>
         notes.map((note: Note): Note => {
-            const originalPitchIndex: Ordinal = note.pitch && note.pitch.index || to.Ordinal(0)
+            const originalPitchIndex: Index = note.pitch && note.pitch.index || to.Index(0)
             const originalGainScalar: Scalar<Amplitude> =
                 to.Amplitude(note.gain && note.gain.scalar || to.Scalar(1))
 
-            const circledPitchIndex: Ordinal = transposePitchIndexForTier(
+            const circledPitchIndex: Index = transposePitchIndexForTier(
                 originalPitchIndex,
                 { pitchClassCount, tierIndex },
             )
@@ -39,8 +39,8 @@ const computeTierWithTechniqueIndexTranslationByPitchClassCount:
         })
 
 const computeTierWithTechniqueScalarScalingByWindowSize:
-    (notes: Note[], tierIndex: Ordinal, windowSize: Scalar<Frequency>) => Note[] =
-    (notes: Note[], tierIndex: Ordinal, windowSize: Scalar<Frequency>): Note[] =>
+    (notes: Note[], tierIndex: Index, windowSize: Scalar<Scalar<Frequency>>) => Note[] =
+    (notes: Note[], tierIndex: Index, windowSize: Scalar<Scalar<Frequency>>): Note[] =>
         notes.map((note: Note): Note => {
             const originalPitchScalar: Scalar<Frequency> =
                 to.Frequency(note.pitch && note.pitch.scalar || to.Scalar(1))
