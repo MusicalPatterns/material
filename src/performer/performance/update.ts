@@ -11,11 +11,11 @@ const startPreparedVoiceSound: (preparedVoice: PreparedVoice, sound: Sound) => v
 
         preparedVoice.nextStop = apply.Translation(
             preparedVoice.nextStart,
-            to.Translation(to.Index(sound.sustain)),
+            to.Translation(sound.sustain),
         )
         preparedVoice.nextStart = apply.Translation(
             preparedVoice.nextStart,
-            to.Translation(to.Index(sound.duration)),
+            to.Translation(sound.duration),
         )
 
         preparedVoice.soundIndex = apply.Translation(preparedVoice.soundIndex, NEXT)
@@ -42,7 +42,7 @@ const update: (preparedVoice: PreparedVoice, timePosition: Ms) => void =
         }
         const sound: Sound = apply.Index(sounds, soundIndex as Index<Sound>)
 
-        if (timePosition > apply.Translation(nextStart, to.Translation(to.Index(delay)))) {
+        if (timePosition > apply.Translation(nextStart, to.Translation(delay))) {
             startPreparedVoiceSound(preparedVoice, sound)
         }
     }
