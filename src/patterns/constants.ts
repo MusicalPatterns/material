@@ -2,8 +2,8 @@
 
 import { Amplitude, Index, negative, Scalar, to } from '@musical-patterns/utilities'
 
-const FULL_GAIN: Scalar<Amplitude> = to.Scalar(to.Amplitude(1))
-const SILENT: Scalar<Amplitude> = to.Scalar(to.Amplitude(0))
+const FULL_GAIN: Scalar<Amplitude> = to.Scalar<Amplitude>(1)
+const SILENT: Scalar<Amplitude> = to.Scalar<Amplitude>(0)
 
 const STANDARD_PITCH_INDEX_INDICATING_REST: Index = to.Index(negative(1))
 

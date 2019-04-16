@@ -1,4 +1,4 @@
-import { BEGINNING, Index, isUndefined, Ms, to } from '@musical-patterns/utilities'
+import { BEGINNING, isUndefined, Ms } from '@musical-patterns/utilities'
 import { StateKey, store } from '../state'
 import { PreparedVoice, Sound, Voice } from '../types'
 import { computeNextSoundAfterTimePosition } from './nextSoundAfterTimePosition'

@@ -17,13 +17,13 @@ interface Entity {
     timbreName?: TimbreName,
 }
 
-interface Scale extends Adjustable {
-    scalars?: Scalar[],
+interface Scale<NumericType extends Number = number> extends Adjustable<NumericType> {
+    scalars?: Array<Scalar<NumericType>>,
 }
 
-interface Adjustable {
-    scalar?: Scalar,
-    translation?: Translation,
+interface Adjustable<NumericType extends Number = number> {
+    scalar?: Scalar<NumericType>,
+    translation?: Translation<NumericType>,
 }
 
 export {

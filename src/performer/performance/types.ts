@@ -41,7 +41,7 @@ interface ComputeStopSoundParameters {
 }
 
 interface ComputeGainNodeParameters {
-    gain: Scalar,
+    gain: Scalar<Amplitude>,
     positionalAudio: Maybe<PositionalAudio>,
     sourceNode: SourceNode,
 }

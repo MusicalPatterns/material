@@ -6,6 +6,7 @@ import {
     E,
     Frequency,
     from,
+    Hz,
     Index,
     negative,
     ONE_HALF,
@@ -25,7 +26,7 @@ import {
 const applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount:
     (
         originalGainScalar: Scalar<Amplitude>,
-        parameters: { circledPitchIndex: Index, pitchClassCount: Cardinal },
+        parameters: { circledPitchIndex: Index<Hz>, pitchClassCount: Cardinal },
     ) => Scalar<Amplitude> =
     (
         originalGainScalar: Scalar<Amplitude>,
@@ -36,10 +37,10 @@ const applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount:
 
         const pitchCircularBase: Base = apply.Power(
             E,
-            negative(apply.Scalar(normalDistributionPower, ONE_HALF as Scalar<Power<Base>>)),
+            negative(apply.Scalar(normalDistributionPower, ONE_HALF)),
         )
         const pitchCircularScaling: Scalar<Scalar<Amplitude>> =
-            to.Scalar(to.Scalar(to.Amplitude(from.Base<number, Base>(pitchCircularBase))))
+            to.Scalar<Scalar<Amplitude>>(from.Base(pitchCircularBase))
 
         return apply.Scalar(originalGainScalar, pitchCircularScaling)
     }
@@ -47,7 +48,7 @@ const applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount:
 const applyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSize:
     (
         originalGainScalar: Scalar<Amplitude>,
-        parameters: { circledPitchScalar: Scalar<Frequency>, windowSize: Scalar<Frequency> },
+        parameters: { circledPitchScalar: Scalar<Frequency>, windowSize: Scalar<Scalar<Frequency>> },
     ) => Scalar<Amplitude> =
     (
         originalGainScalar: Scalar<Amplitude>,
@@ -58,10 +59,10 @@ const applyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSize:
 
         const pitchCircularBase: Base = apply.Power(
             E,
-            negative(apply.Scalar(normalDistributionPower, ONE_HALF as Scalar<Power<Base>>)),
+            negative(apply.Scalar(normalDistributionPower, ONE_HALF)),
         )
         const pitchCircularScaling: Scalar<Scalar<Amplitude>> =
-            to.Scalar(to.Scalar(to.Amplitude(from.Base<number, Base>(pitchCircularBase))))
+            to.Scalar<Scalar<Amplitude>>(from.Base(pitchCircularBase))
 
         return apply.Scalar(originalGainScalar, pitchCircularScaling)
     }

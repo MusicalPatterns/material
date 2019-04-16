@@ -1,4 +1,4 @@
-import { Coordinate, Index, Ms } from '@musical-patterns/utilities'
+import { Coordinate, Ms } from '@musical-patterns/utilities'
 import { Vrb } from 'vrb'
 import { CompilePatternParameters } from '../compiler'
 import { OnUpdate, Voice } from '../performer'

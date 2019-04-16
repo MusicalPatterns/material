@@ -1,4 +1,4 @@
-import { Index, Ms } from '@musical-patterns/utilities'
+import { Ms } from '@musical-patterns/utilities'
 
 type OnUpdate = (timePosition: Ms) => void
 

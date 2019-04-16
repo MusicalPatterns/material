@@ -1,5 +1,5 @@
 import { apply, Index, isEmpty, Maybe, Ms } from '@musical-patterns/utilities'
-import { Voice } from '../../../performer'
+import { Sound, Voice } from '../../../performer'
 import { Entity, Scale } from '../../../types'
 import { SectionInfo } from '../individual'
 import { Section } from '../types'
@@ -7,18 +7,18 @@ import { fillGap } from './fillGap'
 import { computeSegnoIndex } from './segnoIndex'
 import { ApplyCollectiveInfosParameters } from './types'
 
-const computeSections: (entities: Entity[], index: Index) => Section[] =
-    (entities: Entity[], index: Index): Section[] =>
+const computeSections: (entities: Entity[], index: Index<Entity>) => Section[] =
+    (entities: Entity[], index: Index<Entity>): Section[] =>
         isEmpty(entities) ?
             [] :
-            apply.Index(entities, index as Index<Entity>).sections || []
+            apply.Index(entities, index).sections || []
 
 const applyCollectiveInfos: (parameters: {
     collectiveEndTime: Ms,
     collectiveSegnoTime: Ms,
     collectiveShareSegnoTime: boolean,
     entities: Entity[],
-    index: Index,
+    entityIndex: Index<Entity>,
     individualSegnoTime: Ms,
     scales: Maybe<Scale[]>,
     sectionInfos: SectionInfo[],
@@ -30,7 +30,7 @@ const applyCollectiveInfos: (parameters: {
             collectiveSegnoTime,
             collectiveShareSegnoTime,
             entities,
-            index,
+            entityIndex,
             voice,
             sectionInfos,
             individualSegnoTime,
@@ -42,12 +42,12 @@ const applyCollectiveInfos: (parameters: {
                 collectiveEndTime,
                 scales: scales || [],
                 sectionInfos,
-                sections: computeSections(entities, index),
+                sections: computeSections(entities, entityIndex),
                 sounds: voice.sounds || [],
             })
         }
 
-        const segnoIndex: Index = computeSegnoIndex({ collectiveSegnoTime, individualSegnoTime, voice })
+        const segnoIndex: Index<Sound> = computeSegnoIndex({ collectiveSegnoTime, individualSegnoTime, voice })
 
         return { ...voice, segnoIndex }
     }

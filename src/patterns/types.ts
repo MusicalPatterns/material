@@ -1,11 +1,11 @@
 // tslint:disable no-magic-numbers max-file-line-count
 
-import { Block, ContourPiece, Scalar } from '@musical-patterns/utilities'
+import { Block, ContourPiece, Hz, Ms, Scalar } from '@musical-patterns/utilities'
 import { Note } from '../compiler'
 
 interface MaterializeStandardScalesOptions {
-    durationScalars?: Scalar[],
-    pitchScalars?: Scalar[],
+    durationScalars?: Array<Scalar<Ms>>,
+    pitchScalars?: Array<Scalar<Hz>>,
 }
 
 type Segment = Note[][]

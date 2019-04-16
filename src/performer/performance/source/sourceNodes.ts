@@ -32,7 +32,7 @@ const setPitchObjectValue: (setupPitchObjectParameters: {
 const computeSourceNode: (parameters: {
     frequency: Hz,
     immersiveAudioEnabled: boolean,
-    playbackRate?: Maybe<Scalar>,
+    playbackRate?: Maybe<Scalar<Hz>>,
     sourceType: SourceType,
     timbre: Timbre,
     webVr?: Vrb,

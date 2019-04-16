@@ -1,9 +1,9 @@
-import { Index, Ms, to } from '@musical-patterns/utilities'
-import { computeIndividualSegnoTime, NON_SEGNO_INDEX, SectionInfo } from '../../../../../src/indexForTest'
+import { Index, Ms, NOT_FOUND, to } from '@musical-patterns/utilities'
+import { computeIndividualSegnoTime, SectionInfo } from '../../../../../src/indexForTest'
 
 describe('compute individual segno time', () => {
     it('sums the durations of the sections leading up to the repetend', () => {
-        const individualRepetendIndex: Index = to.Index(2)
+        const individualRepetendIndex: Index<SectionInfo> = to.Index<SectionInfo>(2)
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
@@ -29,7 +29,7 @@ describe('compute individual segno time', () => {
     })
 
     it('gives -1 if voice has no repetend', () => {
-        const individualRepetendIndex: Index = NON_SEGNO_INDEX
+        const individualRepetendIndex: Index<SectionInfo> = NOT_FOUND
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,

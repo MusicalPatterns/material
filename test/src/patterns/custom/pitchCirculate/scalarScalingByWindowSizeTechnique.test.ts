@@ -1,30 +1,30 @@
 // tslint:disable number-literal-format
 
-import { apply, computeEqualDivisionScalars, Scalar, to } from '@musical-patterns/utilities'
+import { apply, computeEqualDivisionScalars, Frequency, insteadOf, Scalar, to } from '@musical-patterns/utilities'
 import { Note, PitchCircularTechnique, pitchCirculate } from '../../../../../src/indexForTest'
 
 describe('pitch circulate, using the technique of scalar scaling by window size', () => {
     let outputSetOfNotes: Note[][]
 
-    const A: Scalar = to.Scalar(0.011)
-    const B: Scalar = to.Scalar(0.020)
-    const C: Scalar = to.Scalar(0.034)
-    const D: Scalar = to.Scalar(0.056)
-    const E: Scalar = to.Scalar(0.089)
-    const F: Scalar = to.Scalar(0.135)
-    const G: Scalar = to.Scalar(0.198)
-    const H: Scalar = to.Scalar(0.278)
-    const I: Scalar = to.Scalar(0.375)
-    const J: Scalar = to.Scalar(0.487)
-    const K: Scalar = to.Scalar(0.607)
-    const L: Scalar = to.Scalar(0.726)
-    const M: Scalar = to.Scalar(0.835)
-    const N: Scalar = to.Scalar(0.923)
-    const O: Scalar = to.Scalar(0.980)
-    const P: Scalar = to.Scalar(1.000)
+    const A: Scalar<Scalar> = to.Scalar<Scalar>(0.011)
+    const B: Scalar<Scalar> = to.Scalar<Scalar>(0.020)
+    const C: Scalar<Scalar> = to.Scalar<Scalar>(0.034)
+    const D: Scalar<Scalar> = to.Scalar<Scalar>(0.056)
+    const E: Scalar<Scalar> = to.Scalar<Scalar>(0.089)
+    const F: Scalar<Scalar> = to.Scalar<Scalar>(0.135)
+    const G: Scalar<Scalar> = to.Scalar<Scalar>(0.198)
+    const H: Scalar<Scalar> = to.Scalar<Scalar>(0.278)
+    const I: Scalar<Scalar> = to.Scalar<Scalar>(0.375)
+    const J: Scalar<Scalar> = to.Scalar<Scalar>(0.487)
+    const K: Scalar<Scalar> = to.Scalar<Scalar>(0.607)
+    const L: Scalar<Scalar> = to.Scalar<Scalar>(0.726)
+    const M: Scalar<Scalar> = to.Scalar<Scalar>(0.835)
+    const N: Scalar<Scalar> = to.Scalar<Scalar>(0.923)
+    const O: Scalar<Scalar> = to.Scalar<Scalar>(0.980)
+    const P: Scalar<Scalar> = to.Scalar<Scalar>(1.000)
 
     describe('given some notes, will return a set of version of those notes which together constitute the pitch circled version of it', () => {
-        const originalGain: Scalar = to.Scalar(0.5)
+        const originalGain: Scalar<Scalar> = to.Scalar<Scalar>(0.5)
         beforeEach(() => {
             const inputNotes: Note[] = [ {
                 gain: {
@@ -39,7 +39,7 @@ describe('pitch circulate, using the technique of scalar scaling by window size'
                 inputNotes,
                 {
                     technique: PitchCircularTechnique.SCALAR_SCALING_BY_WINDOW_SIZE,
-                    windowSize: to.Scalar(to.Scalar(to.Frequency(2))),
+                    windowSize: to.Scalar<Scalar<Frequency>>(2),
                 },
             )
         })
@@ -54,16 +54,16 @@ describe('pitch circulate, using the technique of scalar scaling by window size'
         })
 
         it('maps the gain to a normal distribution curve, so that the center set of notes is loud, and the outer sets of notes get quieter depending on how far from the center they are', () => {
-            const MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE: Scalar = to.Scalar(0.410)
-            const LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES: Scalar = to.Scalar(0.800)
-            const QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE: Scalar = to.Scalar(0.028)
+            const MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE: Scalar<Scalar> = to.Scalar<Scalar>(0.410)
+            const LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES: Scalar<Scalar> = to.Scalar<Scalar>(0.800)
+            const QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE: Scalar<Scalar> = to.Scalar<Scalar>(0.028)
 
             expect(outputSetOfNotes[ 0 ][ 0 ].gain!.scalar!)
-                .toBeCloseToTyped(apply.Scalar(MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE, to.Scalar(originalGain)))
+                .toBeCloseToTyped(apply.Scalar(MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE, insteadOf<Scalar, Scalar<Scalar>>(originalGain)))
             expect(outputSetOfNotes[ 1 ][ 0 ].gain!.scalar!)
-                .toBeCloseToTyped(apply.Scalar(LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES, to.Scalar(originalGain)))
+                .toBeCloseToTyped(apply.Scalar(LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES, insteadOf<Scalar, Scalar<Scalar>>(originalGain)))
             expect(outputSetOfNotes[ 2 ][ 0 ].gain!.scalar!)
-                .toBeCloseToTyped(apply.Scalar(QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE, to.Scalar(originalGain)))
+                .toBeCloseToTyped(apply.Scalar(QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE, insteadOf<Scalar, Scalar<Scalar>>(originalGain)))
         })
     })
 
@@ -101,7 +101,7 @@ describe('pitch circulate, using the technique of scalar scaling by window size'
                 inputNotes,
                 {
                     technique: PitchCircularTechnique.SCALAR_SCALING_BY_WINDOW_SIZE,
-                    windowSize: to.Scalar(to.Scalar(to.Frequency(2))),
+                    windowSize: to.Scalar<Scalar<Frequency>>(2),
                 },
             )
         })
@@ -208,18 +208,18 @@ describe('pitch circulate, using the technique of scalar scaling by window size'
 
     describe('gain goes in a cycle', () => {
         beforeEach(() => {
-            const tenEdScalars: Scalar[] = computeEqualDivisionScalars(to.Denominator(10))
+            const tenEdScalars: Array<Scalar<Frequency>> = computeEqualDivisionScalars(to.Denominator(10))
             const inputNotes: Note[] = [
-                { pitch: { scalar: tenEdScalars[ 0 ] } },
-                { pitch: { scalar: tenEdScalars[ 1 ] } },
-                { pitch: { scalar: tenEdScalars[ 2 ] } },
-                { pitch: { scalar: tenEdScalars[ 3 ] } },
-                { pitch: { scalar: tenEdScalars[ 4 ] } },
-                { pitch: { scalar: tenEdScalars[ 5 ] } },
-                { pitch: { scalar: tenEdScalars[ 6 ] } },
-                { pitch: { scalar: tenEdScalars[ 7 ] } },
-                { pitch: { scalar: tenEdScalars[ 8 ] } },
-                { pitch: { scalar: tenEdScalars[ 9 ] } },
+                { pitch: { scalar: insteadOf<Scalar, Scalar>(tenEdScalars[ 0 ]) } },
+                { pitch: { scalar: insteadOf<Scalar, Scalar>(tenEdScalars[ 1 ]) } },
+                { pitch: { scalar: insteadOf<Scalar, Scalar>(tenEdScalars[ 2 ]) } },
+                { pitch: { scalar: insteadOf<Scalar, Scalar>(tenEdScalars[ 3 ]) } },
+                { pitch: { scalar: insteadOf<Scalar, Scalar>(tenEdScalars[ 4 ]) } },
+                { pitch: { scalar: insteadOf<Scalar, Scalar>(tenEdScalars[ 5 ]) } },
+                { pitch: { scalar: insteadOf<Scalar, Scalar>(tenEdScalars[ 6 ]) } },
+                { pitch: { scalar: insteadOf<Scalar, Scalar>(tenEdScalars[ 7 ]) } },
+                { pitch: { scalar: insteadOf<Scalar, Scalar>(tenEdScalars[ 8 ]) } },
+                { pitch: { scalar: insteadOf<Scalar, Scalar>(tenEdScalars[ 9 ]) } },
                 { pitch: { scalar: to.Scalar(2) } },
             ]
 
@@ -227,7 +227,7 @@ describe('pitch circulate, using the technique of scalar scaling by window size'
                 inputNotes,
                 {
                     technique: PitchCircularTechnique.SCALAR_SCALING_BY_WINDOW_SIZE,
-                    windowSize: to.Scalar(to.Scalar(to.Frequency(2))),
+                    windowSize: to.Scalar<Scalar<Frequency>>(2),
                 },
             )
         })
@@ -313,20 +313,20 @@ describe('pitch circulate, using the technique of scalar scaling by window size'
 
     describe('gain curve is almost zero at the edges and slopes nicely up to a 1 in the middle, for other pitch class counts too', () => {
         beforeEach(() => {
-            const fiveEdScalars: Scalar[] = computeEqualDivisionScalars(to.Denominator(5))
+            const fiveEdScalars: Array<Scalar<Frequency>> = computeEqualDivisionScalars(to.Denominator(5))
             const inputNotes: Note[] = [
-                { pitch: { scalar: fiveEdScalars[ 0 ] } },
-                { pitch: { scalar: fiveEdScalars[ 1 ] } },
-                { pitch: { scalar: fiveEdScalars[ 2 ] } },
-                { pitch: { scalar: fiveEdScalars[ 3 ] } },
-                { pitch: { scalar: fiveEdScalars[ 4 ] } },
+                { pitch: { scalar: insteadOf<Scalar, Scalar>(fiveEdScalars[ 0 ]) } },
+                { pitch: { scalar: insteadOf<Scalar, Scalar>(fiveEdScalars[ 1 ]) } },
+                { pitch: { scalar: insteadOf<Scalar, Scalar>(fiveEdScalars[ 2 ]) } },
+                { pitch: { scalar: insteadOf<Scalar, Scalar>(fiveEdScalars[ 3 ]) } },
+                { pitch: { scalar: insteadOf<Scalar, Scalar>(fiveEdScalars[ 4 ]) } },
             ]
 
             outputSetOfNotes = pitchCirculate(
                 inputNotes,
                 {
                     technique: PitchCircularTechnique.SCALAR_SCALING_BY_WINDOW_SIZE,
-                    windowSize: to.Scalar(to.Scalar(to.Frequency(2))),
+                    windowSize: to.Scalar<Scalar<Frequency>>(2),
                 },
             )
         })

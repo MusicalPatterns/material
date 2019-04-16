@@ -9,7 +9,8 @@ import {
     SourceType,
     StartedSound,
     StartSound,
-    StartSoundAndStartedSound, Timbre,
+    StartSoundAndStartedSound,
+    Timbre,
 } from './types'
 
 const computeStartSound: (parameters: {

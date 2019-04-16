@@ -1,8 +1,13 @@
 import { StandardSpec, StandardSpecs } from '@musical-patterns/spec'
 import {
-    apply, Base,
+    Amplitude,
+    apply,
+    Base,
+    Frequency,
     from,
+    Hz,
     Integer,
+    Ms,
     NO_TRANSLATION,
     OCTAVE,
     POSITIVE_INTEGERS,
@@ -16,31 +21,30 @@ import {
 import { Scale } from '../types'
 import { MaterializeStandardScalesOptions } from './types'
 
-const computeNonScale: () => Scale =
-    (): Scale => ({})
+const computeNonScale: <NumericType extends Number = number>() => Scale<NumericType> =
+    <NumericType extends Number = number>(): Scale<NumericType> => ({})
 
-const computeHarmonicSeriesScale: () => Scale =
-    (): Scale => ({
-        scalars: POSITIVE_INTEGERS.map((integer: Integer): Scalar => to.Scalar(integer)),
+const computeHarmonicSeriesScale: <NumericType extends Number = Hz>() => Scale<NumericType> =
+    <NumericType extends Number = Hz>(): Scale<NumericType> => ({
+        scalars: POSITIVE_INTEGERS.map((integer: Integer) => integer as unknown as Scalar<NumericType>),
     })
 
-const computeSubharmonicSeriesScale: () => Scale =
-    (): Scale => ({
-        scalars: POSITIVE_INTEGERS.map((integer: Integer): Scalar => to.Scalar(reciprocal(integer))),
+const computeSubharmonicSeriesScale: <NumericType extends Number = Hz>() => Scale<NumericType> =
+    <NumericType extends Number = Hz>(): Scale<NumericType> => ({
+        scalars: POSITIVE_INTEGERS.map((integer: Integer) => reciprocal(integer) as unknown as Scalar<NumericType>),
     })
 
-const computeFlatDurationsScale: () => Scale =
+const computeFlatDurationsScale: () => Scale<Ms> =
     // tslint:disable-next-line no-unnecessary-callback-wrapper
-    (): Scale =>
+    (): Scale<Ms> =>
         computeHarmonicSeriesScale()
 
-const computeOctaveSeriesScale: () => Scale =
-    (): Scale => ({
+const computeOctaveSeriesScale: () => Scale<Hz> =
+    (): Scale<Hz> => ({
         scalars: ZERO_AND_POSITIVE_INTEGERS
-            .map(to.Base)
-            .map(to.Power)
-            .map((power: Power<Base>): Scalar =>
-                to.Scalar(from.Base(apply.Power(
+            .map((integer: Integer) => to.Power<Base<Frequency>>(integer))
+            .map((power: Power<Base<Frequency>>): Scalar<Hz> =>
+                to.Scalar<Hz>(from.Base<Frequency>(apply.Power(
                     OCTAVE,
                     power,
                 ))),
@@ -48,26 +52,25 @@ const computeOctaveSeriesScale: () => Scale =
     })
 
 const materializeStandardScales:
-    <SpecsType extends StandardSpecs>(specs: SpecsType, options?: MaterializeStandardScalesOptions) => Scale[] =
+    <SpecsType extends StandardSpecs>(
+        specs: SpecsType,
+        options?: MaterializeStandardScalesOptions,
+    ) => [ Scale<Amplitude>, Scale<Ms>, Scale<Hz> ] =
     <SpecsType extends StandardSpecs>(
         specs: SpecsType,
         { durationScalars, pitchScalars }: MaterializeStandardScalesOptions = {},
-    ): Scale[] => {
-        const gainScale: Scale = computeNonScale()
-        const durationScalar: Scalar =
-            from.Ms(specs[ StandardSpec.BASE_DURATION ] || to.Scalar(to.Ms(1)))
-        const durationTranslation: Translation =
-            from.Ms(specs[ StandardSpec.BASE_DURATION_TRANSLATION ] || to.Ms(NO_TRANSLATION))
-        const durationsScale: Scale = {
+    ): [ Scale<Amplitude>, Scale<Ms>, Scale<Hz> ] => {
+        const gainScale: Scale<Amplitude> = computeNonScale()
+        const durationScalar: Scalar<Ms> = specs[ StandardSpec.BASE_DURATION ] || to.Scalar<Ms>(1)
+        const durationTranslation: Translation<Ms> = specs[ StandardSpec.BASE_DURATION_TRANSLATION ] || NO_TRANSLATION
+        const durationsScale: Scale<Ms> = {
             scalar: durationScalar,
             scalars: durationScalars,
             translation: durationTranslation,
         }
-        const pitchesScalar: Scalar =
-            from.Hz(specs[ StandardSpec.BASE_FREQUENCY ] || to.Scalar(to.Hz(1)))
-        const pitchesTranslation: Translation =
-            from.Hz(specs[ StandardSpec.BASE_FREQUENCY_TRANSLATION ] || to.Hz(NO_TRANSLATION))
-        const pitchesScale: Scale = {
+        const pitchesScalar: Scalar<Hz> = specs[ StandardSpec.BASE_FREQUENCY ] || to.Scalar<Hz>(1)
+        const pitchesTranslation: Translation<Hz> = specs[ StandardSpec.BASE_FREQUENCY_TRANSLATION ] || NO_TRANSLATION
+        const pitchesScale: Scale<Hz> = {
             scalar: pitchesScalar,
             scalars: pitchScalars,
             translation: pitchesTranslation,

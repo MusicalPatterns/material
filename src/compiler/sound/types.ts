@@ -2,15 +2,15 @@ import { Index, Maybe, Scalar, Translation } from '@musical-patterns/utilities'
 import { Adjustable, Scale } from '../../types'
 import { SoundFeature } from '../nominals'
 
-interface NoteFeature extends Adjustable {
-    index?: Index,
-    scaleIndex?: Index,
+interface NoteFeature extends Adjustable<Scalar> {
+    index?: Index<Scalar>,
+    scaleIndex?: Index<Scale>,
 }
 
 interface ComputeScalePropertiesParameters {
-    index: Index,
+    index: Index<Scalar>,
     options?: CompileSoundsOptions,
-    scaleIndex: Index,
+    scaleIndex: Index<Scale>,
 }
 
 interface ScaleProperties {

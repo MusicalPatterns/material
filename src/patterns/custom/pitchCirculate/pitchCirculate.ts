@@ -1,4 +1,13 @@
-import { from, Index, INITIAL, slice, to, ZERO_AND_POSITIVE_INTEGERS } from '@musical-patterns/utilities'
+import {
+    Frequency,
+    from,
+    Index,
+    INITIAL,
+    Scalar,
+    slice,
+    to,
+    ZERO_AND_POSITIVE_INTEGERS,
+} from '@musical-patterns/utilities'
 import { Note } from '../../../compiler'
 import { PITCH_CIRCULAR_TIER_COUNT } from './constants'
 import {
@@ -13,7 +22,7 @@ const pitchCirculate: (notes: Note[], options: PitchCirculateOptions) => Note[][
         {
             technique,
             pitchClassCount = to.Cardinal(0),
-            windowSize = to.Scalar(to.Scalar(to.Frequency(1))),
+            windowSize = to.Scalar<Scalar<Frequency>>(1),
         }: PitchCirculateOptions,
     ): Note[][] =>
         slice(ZERO_AND_POSITIVE_INTEGERS, INITIAL, to.Index(from.Cardinal(PITCH_CIRCULAR_TIER_COUNT)))

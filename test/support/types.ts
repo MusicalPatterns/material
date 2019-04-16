@@ -1,7 +1,7 @@
 import { Scalar } from '@musical-patterns/utilities'
 
 interface TestSpecs {
-    testSpec: Scalar,
+    testSpec: Scalar<Scalar>,
 }
 
 enum ExampleEnum {

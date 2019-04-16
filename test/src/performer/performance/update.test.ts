@@ -1,4 +1,4 @@
-import { BEGINNING, INITIAL, NO_DURATION, noop, to } from '@musical-patterns/utilities'
+import { Amplitude, BEGINNING, INITIAL, NO_DURATION, noop, to } from '@musical-patterns/utilities'
 import { NON_SEGNO_INDEX, PreparedVoice, Sound, update } from '../../../../src/indexForTest'
 import Spy = jasmine.Spy
 
@@ -6,7 +6,7 @@ describe('update', () => {
     const testSoundDurationFive: Sound = {
         duration: to.Ms(5),
         frequency: to.Hz(1),
-        gain: to.Scalar(to.Amplitude(1)),
+        gain: to.Scalar<Amplitude>(1),
         position: [ 1 ].map(to.Meters),
         sustain: to.Ms(1),
     }
@@ -14,7 +14,7 @@ describe('update', () => {
     const testSoundDurationThree: Sound = {
         duration: to.Ms(3),
         frequency: to.Hz(1),
-        gain: to.Scalar(to.Amplitude(1)),
+        gain: to.Scalar<Amplitude>(1),
         position: [ 1 ].map(to.Meters),
         sustain: to.Ms(1),
     }

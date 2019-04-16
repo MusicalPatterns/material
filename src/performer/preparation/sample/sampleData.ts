@@ -1,4 +1,4 @@
-import { apply, Cents, CENTS_PER_SEMITONE, from, Semitones, to } from '@musical-patterns/utilities'
+import { ofUnits, semitonesToCents, to } from '@musical-patterns/utilities'
 import { StateKey, store } from '../../state'
 import {
     DOWN_ONE_SEMITONE,
@@ -9,29 +9,25 @@ import {
 } from './constants'
 import { SampleDatas, SampleName } from './types'
 
-const semitonesToCents: (semitones: Semitones) => Cents =
-    (semitones: Semitones): Cents =>
-        apply.Scalar(CENTS_PER_SEMITONE, to.Scalar(to.Cents(from.Semitones(semitones))))
-
 const computeSampleData: VoidFunction =
     (): void => {
         const sampleData: SampleDatas = {
             [ SampleName.CELLO ]: {},
             [ SampleName.DOUBLE_BASS ]: {
-                centsTranslation: to.Translation(semitonesToCents(UP_TWO_OCTAVES_IN_SEMITONES)),
+                centsTranslation: to.Translation(ofUnits<'Cents'>(semitonesToCents(UP_TWO_OCTAVES_IN_SEMITONES))),
             },
             [ SampleName.FLUTE ]: {},
             [ SampleName.PIANO ]: {
-                centsTranslation: to.Translation(semitonesToCents(DOWN_TWO_OCTAVES_IN_SEMITONES)),
+                centsTranslation: to.Translation(ofUnits<'Cents'>(semitonesToCents(DOWN_TWO_OCTAVES_IN_SEMITONES))),
             },
             [ SampleName.TROMBONE ]: {
-                centsTranslation: to.Translation(semitonesToCents(UP_TWO_SEMITONES)),
+                centsTranslation: to.Translation(ofUnits<'Cents'>(semitonesToCents(UP_TWO_SEMITONES))),
             },
             [ SampleName.TRUMPET ]: {
-                centsTranslation: to.Translation(semitonesToCents(DOWN_ONE_SEMITONE)),
+                centsTranslation: to.Translation(ofUnits<'Cents'>(semitonesToCents(DOWN_ONE_SEMITONE))),
             },
             [ SampleName.TUBA ]: {
-                centsTranslation: to.Translation(semitonesToCents(UP_ONE_OCTAVE_IN_SEMITONES)),
+                centsTranslation: to.Translation(ofUnits<'Cents'>(semitonesToCents(UP_ONE_OCTAVE_IN_SEMITONES))),
             },
             [ SampleName.VIOLIN ]: {},
             [ SampleName.SNARE ]: {

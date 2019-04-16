@@ -1,4 +1,4 @@
-import { BEGINNING, Index, Ms } from '@musical-patterns/utilities'
+import { BEGINNING, Ms } from '@musical-patterns/utilities'
 import { ImmutableState, StateKey, store } from '../state'
 import { computePatternTime } from './patternTime'
 import { OnUpdate } from './types'

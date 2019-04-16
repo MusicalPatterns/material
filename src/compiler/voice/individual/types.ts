@@ -2,12 +2,12 @@ import { Index, Ms } from '@musical-patterns/utilities'
 import { Sound, Voice } from '../../../performer'
 
 interface ComputeIndividualRepetendDurationParameters {
-    individualRepetendIndex: Index,
+    individualRepetendIndex: Index<SectionInfo>,
     sectionInfos: SectionInfo[],
 }
 
 interface ComputeIndividualSegnoTimeParameters {
-    individualRepetendIndex: Index,
+    individualRepetendIndex: Index<SectionInfo>,
     sectionInfos: SectionInfo[],
 }
 

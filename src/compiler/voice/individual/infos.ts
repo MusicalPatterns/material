@@ -1,11 +1,11 @@
-import { findIndex, Index, Ms, sum, to } from '@musical-patterns/utilities'
+import { findIndex, Index, Ms, sum } from '@musical-patterns/utilities'
 import { computeIndividualRepetendDuration } from './repetendDuration'
 import { computeIndividualSegnoTime } from './segnoTime'
 import { IndividualVoiceInfo, SectionInfo } from './types'
 
 const computeIndividualVoiceInfo: (sectionInfos: SectionInfo[]) => IndividualVoiceInfo =
     (sectionInfos: SectionInfo[]): IndividualVoiceInfo => {
-        const individualRepetendIndex: Index = findIndex(
+        const individualRepetendIndex: Index<SectionInfo> = findIndex(
             sectionInfos,
             (sectionInfo: SectionInfo) => sectionInfo.doesRepeatForever,
         )
@@ -18,8 +18,7 @@ const computeIndividualVoiceInfo: (sectionInfos: SectionInfo[]) => IndividualVoi
             individualRepetendIndex,
             sectionInfos,
         })
-        const individualEndTime: Ms =
-            to.Ms(sum(...sectionInfos.map((sectionInfo: SectionInfo) => sectionInfo.totalDuration)))
+        const individualEndTime: Ms = sum(...sectionInfos.map((sectionInfo: SectionInfo) => sectionInfo.totalDuration))
 
         return {
             individualEndTime,

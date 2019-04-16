@@ -18,11 +18,11 @@ interface OscillatorSourceRequest {
 
 interface NextSound {
     nextStart: Ms,
-    soundIndex: Index,
+    soundIndex: Index<Sound>,
 }
 
 interface ComputeNextSoundAfterTimePositionParameters {
-    segnoIndex: Index,
+    segnoIndex: Index<Sound>,
     sounds: Sound[],
     timePosition: Ms,
 }

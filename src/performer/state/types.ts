@@ -1,15 +1,6 @@
 // tslint:disable no-type-definitions-outside-types-modules
 
-import {
-    ActionForState,
-    Coordinate,
-    Index,
-    Maybe,
-    Meters,
-    Ms,
-    ThreeDimensional,
-    TypedMap,
-} from '@musical-patterns/utilities'
+import { ActionForState, Coordinate, Maybe, Meters, Ms, ThreeDimensional, TypedMap } from '@musical-patterns/utilities'
 import { Vrb } from 'vrb'
 import { SampleDatas } from '../preparation'
 import { PreparedVoice, Voice } from '../types'

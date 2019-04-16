@@ -6,7 +6,7 @@ import { SourceType, Timbre } from '../types'
 interface ComputeSourceNodeParameters extends ObjectOf<any> {
     frequency: Hz,
     immersiveAudioEnabled: boolean,
-    playbackRate?: Maybe<Scalar>,
+    playbackRate?: Maybe<Scalar<Hz>>,
     sourceType: SourceType,
     timbre: Timbre,
     webVr?: Vrb,

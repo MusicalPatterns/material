@@ -1,33 +1,33 @@
 // tslint:disable number-literal-format
 
-import { apply, Scalar, to } from '@musical-patterns/utilities'
+import { apply, insteadOf, Scalar, to } from '@musical-patterns/utilities'
 import { Note, PitchCircularTechnique, pitchCirculate } from '../../../../../src/indexForTest'
 
 describe('pitch circulate, using the technique of index translation by pitch class count', () => {
     let outputSetOfNotes: Note[][]
 
-    const A: Scalar = to.Scalar(0.011)
-    const B: Scalar = to.Scalar(0.018)
-    const C: Scalar = to.Scalar(0.029)
-    const D: Scalar = to.Scalar(0.043)
-    const E: Scalar = to.Scalar(0.066)
-    const F: Scalar = to.Scalar(0.096)
-    const G: Scalar = to.Scalar(0.135)
-    const H: Scalar = to.Scalar(0.186)
-    const I: Scalar = to.Scalar(0.249)
-    const J: Scalar = to.Scalar(0.324)
-    const K: Scalar = to.Scalar(0.411)
-    const L: Scalar = to.Scalar(0.506)
-    const M: Scalar = to.Scalar(0.606)
-    const N: Scalar = to.Scalar(0.707)
-    const O: Scalar = to.Scalar(0.801)
-    const P: Scalar = to.Scalar(0.882)
-    const Q: Scalar = to.Scalar(0.945)
-    const R: Scalar = to.Scalar(0.986)
-    const S: Scalar = to.Scalar(1.000)
+    const A: Scalar<Scalar> = to.Scalar<Scalar>(0.011)
+    const B: Scalar<Scalar> = to.Scalar<Scalar>(0.018)
+    const C: Scalar<Scalar> = to.Scalar<Scalar>(0.029)
+    const D: Scalar<Scalar> = to.Scalar<Scalar>(0.043)
+    const E: Scalar<Scalar> = to.Scalar<Scalar>(0.066)
+    const F: Scalar<Scalar> = to.Scalar<Scalar>(0.096)
+    const G: Scalar<Scalar> = to.Scalar<Scalar>(0.135)
+    const H: Scalar<Scalar> = to.Scalar<Scalar>(0.186)
+    const I: Scalar<Scalar> = to.Scalar<Scalar>(0.249)
+    const J: Scalar<Scalar> = to.Scalar<Scalar>(0.324)
+    const K: Scalar<Scalar> = to.Scalar<Scalar>(0.411)
+    const L: Scalar<Scalar> = to.Scalar<Scalar>(0.506)
+    const M: Scalar<Scalar> = to.Scalar<Scalar>(0.606)
+    const N: Scalar<Scalar> = to.Scalar<Scalar>(0.707)
+    const O: Scalar<Scalar> = to.Scalar<Scalar>(0.801)
+    const P: Scalar<Scalar> = to.Scalar<Scalar>(0.882)
+    const Q: Scalar<Scalar> = to.Scalar<Scalar>(0.945)
+    const R: Scalar<Scalar> = to.Scalar<Scalar>(0.986)
+    const S: Scalar<Scalar> = to.Scalar<Scalar>(1.000)
 
     describe('given a set of notes, will return a set of sets of notes which together constitute the pitch circled version of it', () => {
-        const originalGain: Scalar = to.Scalar(0.5)
+        const originalGain: Scalar<Scalar> = to.Scalar<Scalar>(0.5)
         beforeEach(() => {
             const inputNotes: Note[] = [ {
                 gain: {
@@ -57,16 +57,16 @@ describe('pitch circulate, using the technique of index translation by pitch cla
         })
 
         it('maps the gain to a normal distribution curve, so that the center set of notes is loud, and the outer sets of notes get quieter depending on how far from the center they are (treating each index as an equal step, irrespective to whether they give differently sized pitch changes)', () => {
-            const MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE: Scalar = to.Scalar(0.324)
-            const LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES: Scalar = to.Scalar(0.882)
-            const QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE: Scalar = to.Scalar(0.043)
+            const MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE: Scalar<Scalar> = to.Scalar<Scalar>(0.324)
+            const LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES: Scalar<Scalar> = to.Scalar<Scalar>(0.882)
+            const QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE: Scalar<Scalar> = to.Scalar<Scalar>(0.043)
 
             expect(outputSetOfNotes[ 0 ][ 0 ].gain!.scalar!)
-                .toBeCloseToTyped(apply.Scalar(MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE, to.Scalar(originalGain)))
+                .toBeCloseToTyped(apply.Scalar(MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE, insteadOf<Scalar, Scalar<Scalar>>(originalGain)))
             expect(outputSetOfNotes[ 1 ][ 0 ].gain!.scalar!)
-                .toBeCloseToTyped(apply.Scalar(LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES, to.Scalar(originalGain)))
+                .toBeCloseToTyped(apply.Scalar(LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES, insteadOf<Scalar, Scalar<Scalar>>(originalGain)))
             expect(outputSetOfNotes[ 2 ][ 0 ].gain!.scalar!)
-                .toBeCloseToTyped(apply.Scalar(QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE, to.Scalar(originalGain)))
+                .toBeCloseToTyped(apply.Scalar(QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE, insteadOf<Scalar, Scalar<Scalar>>(originalGain)))
         })
     })
 

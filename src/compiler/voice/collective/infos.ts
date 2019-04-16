@@ -2,7 +2,6 @@ import {
     allValuesAreTheSame,
     computeLeastCommonMultiple,
     from,
-    Index,
     max,
     Ms,
     NO_DURATION,
@@ -60,7 +59,7 @@ const computeCollectiveInfosFromPluckedInfos: (parameters: {
             ))
         const collectiveEndTime: Ms = collectiveSegnoTime === NON_SEGNO_TIME ?
             max(...individualEndTimes) :
-            to.Ms(sum(collectiveSegnoTime, collectiveRepetendDuration))
+            sum(collectiveSegnoTime, collectiveRepetendDuration)
 
         return {
             collectiveEndTime,

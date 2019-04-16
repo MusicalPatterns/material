@@ -1,4 +1,4 @@
-import { BEGINNING, NO_DURATION, to } from '@musical-patterns/utilities'
+import { BEGINNING, insteadOf, NO_DURATION, of, Scalar, to } from '@musical-patterns/utilities'
 import {
     CompiledPattern,
     compilePattern,
@@ -14,7 +14,7 @@ import { TestSpecs } from '../../support'
 
 describe('compile pattern', () => {
     const specs: TestSpecs = {
-        testSpec: to.Scalar(3),
+        testSpec: to.Scalar<Scalar>(3),
     }
 
     const testNote: (testSpecs: TestSpecs) => Note =
@@ -28,7 +28,7 @@ describe('compile pattern', () => {
     const expectedSound: Sound = {
         duration: to.Ms(9),
         frequency: to.Hz(9),
-        gain: to.Scalar(to.Amplitude(9)),
+        gain: to.Scalar(of.Amplitude(9)),
         position: [ 9, 0, 0 ].map(to.Meters),
         sustain: to.Ms(8.9),
     }
@@ -37,7 +37,7 @@ describe('compile pattern', () => {
         materializeEntities: (): Entity[] => [],
         materializeScales: (testSpecs: TestSpecs): Scale[] => [
             {
-                scalars: [ testSpecs.testSpec ],
+                scalars: [ insteadOf<Scalar>(testSpecs.testSpec) ],
             },
         ],
     }

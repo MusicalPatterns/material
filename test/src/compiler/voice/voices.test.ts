@@ -1,4 +1,4 @@
-import { BEGINNING, INITIAL, NO_DURATION, to } from '@musical-patterns/utilities'
+import { Amplitude, BEGINNING, INITIAL, NO_DURATION, to } from '@musical-patterns/utilities'
 import {
     CompiledPattern,
     compileVoices,
@@ -24,7 +24,7 @@ describe('compile voices', () => {
     const expectedSound: Sound = {
         duration: to.Ms(9),
         frequency: to.Hz(9),
-        gain: to.Scalar(to.Amplitude(9)),
+        gain: to.Scalar<Amplitude>(9),
         position: [ 9, 0, 0 ].map(to.Meters),
         sustain: to.Ms(8.9),
     }
@@ -39,7 +39,7 @@ describe('compile voices', () => {
     const otherExpectedSound: Sound = {
         duration: to.Ms(9),
         frequency: to.Hz(9),
-        gain: to.Scalar(to.Amplitude(0)),
+        gain: to.Scalar<Amplitude>(0),
         position: [ 9, 0, 0 ].map(to.Meters),
         sustain: to.Ms(8.9),
     }
@@ -54,7 +54,7 @@ describe('compile voices', () => {
     const otherOtherExpectedSound: Sound = {
         duration: to.Ms(9),
         frequency: to.Hz(0),
-        gain: to.Scalar(to.Amplitude(9)),
+        gain: to.Scalar<Amplitude>(9),
         position: [ 9, 0, 0 ].map(to.Meters),
         sustain: to.Ms(8.9),
     }

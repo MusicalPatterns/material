@@ -6,15 +6,15 @@ interface PreparedVoice {
     delay: Ms,
     nextStart: Ms,
     nextStop: Ms,
-    segnoIndex: Index,
-    soundIndex: Index,
+    segnoIndex: Index<Sound>,
+    soundIndex: Index<Sound>,
     sounds: Sound[],
     source: Source,
 }
 
 interface Voice {
     delay: Ms,
-    segnoIndex: Index,
+    segnoIndex: Index<Sound>,
     sounds: Sound[],
     sourceRequest: SourceRequest,
 }

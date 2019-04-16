@@ -1,4 +1,4 @@
-import { BEGINNING, Index, Ms, to } from '@musical-patterns/utilities'
+import { BEGINNING, Ms, to } from '@musical-patterns/utilities'
 import { computePatternTime, NON_SEGNO_TIME } from '../../../../src/indexForTest'
 
 describe('pattern time', () => {

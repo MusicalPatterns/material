@@ -7,8 +7,8 @@ import {
     DOUBLE,
     Frequency,
     from,
+    Hz,
     Index,
-    Multiple,
     Power,
     quotient,
     Scalar,
@@ -22,19 +22,19 @@ import {
 } from './types'
 
 const computeNumeratorOfPowerOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount:
-    (parameters: { circledPitchIndex: Index, pitchClassCount: Cardinal }) => number =
+    (parameters: { circledPitchIndex: Index<Hz>, pitchClassCount: Cardinal }) => number =
     (
         {
             pitchClassCount,
             circledPitchIndex,
         }: ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
     ): number => {
-        const maximumPitchAcrossAllTiers: Index = to.Index(from.Cardinal(apply.Scalar(
+        const maximumPitchAcrossAllTiers: Index<Hz> = to.Index<Hz>(from.Cardinal(apply.Scalar(
             pitchClassCount,
             to.Scalar(PITCH_CIRCULAR_TIER_COUNT),
         )))
         const circledPitchIndexProportionOfTotalPitchCount: number =
-            from.Index<number, Index>(from.Scalar(quotient(circledPitchIndex, maximumPitchAcrossAllTiers)))
+            from.Index<Hz>(quotient(circledPitchIndex, maximumPitchAcrossAllTiers))
         const pitchProportionOfTotalTranslatedToBePositiveIfGreaterThanMedianAndNegativeIfLesser: number =
             apply.Translation(circledPitchIndexProportionOfTotalPitchCount, NEGATIVE_POINT_FIVE_TRANSLATION)
         const pitchProportionOfTotalScaledToBeBetweenNegativeAndPositiveOne: number = apply.Multiple(
@@ -49,22 +49,22 @@ const computeNumeratorOfPowerOfNormalDistributionWithTechniqueIndexTranslationBy
     }
 
 const computeNumeratorOfPowerOfNormalDistributionWithTechniqueScalarScalingByWindowSize:
-    (parameters: { circledPitchScalar: Scalar<Frequency>, windowSize: Scalar<Frequency> }) => number =
+    (parameters: { circledPitchScalar: Scalar<Frequency>, windowSize: Scalar<Scalar<Frequency>> }) => number =
     (
         {
             windowSize,
             circledPitchScalar,
         }: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters,
     ): number => {
-        const maximumPitchAcrossAllTiers: Scalar<Frequency> = apply.Power(
+        const maximumPitchAcrossAllTiers: Scalar<Scalar<Frequency>> = apply.Power(
             windowSize,
-            to.Power(to.Scalar(to.Frequency(from.Cardinal(PITCH_CIRCULAR_TIER_COUNT)))),
+            to.Power<Scalar<Scalar<Frequency>>>(from.Cardinal(PITCH_CIRCULAR_TIER_COUNT)),
         )
         const circledPitchScalarProportionOfTotalPitchCount: number =
-            from.Scalar(from.Frequency<Scalar, Scalar<Frequency>>(apply.Base(
+            from.Scalar<Frequency>(apply.Base(
                 circledPitchScalar,
-                to.Base(maximumPitchAcrossAllTiers),
-            )))
+                to.Base<Scalar<Frequency>>(from.Scalar<Scalar<Frequency>>(maximumPitchAcrossAllTiers)),
+            ))
         const pitchProportionOfTotalTranslatedToBePositiveIfGreaterThanMedianAndNegativeIfLesser: number =
             apply.Translation(circledPitchScalarProportionOfTotalPitchCount, NEGATIVE_POINT_FIVE_TRANSLATION)
         const pitchProportionOfTotalScaledToBeBetweenNegativeAndPositiveOne: number = apply.Multiple(
@@ -79,26 +79,26 @@ const computeNumeratorOfPowerOfNormalDistributionWithTechniqueScalarScalingByWin
     }
 
 const computePowerOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount:
-    (parameters: { circledPitchIndex: Index, pitchClassCount: Cardinal }) => Power<Base> =
+    (parameters: { circledPitchIndex: Index<Hz>, pitchClassCount: Cardinal }) => Power<Base> =
     (parameters: ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters): Power<Base> =>
-        to.Power(to.Base(
+        to.Power<Base>(
             computeNumeratorOfPowerOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount(parameters) /
             from.Base(apply.Multiple(
-                apply.Power(KINDA_GUESSING_AT_A_GOOD_SIGMA, SQUARED as Power<Base>),
-                DOUBLE as Multiple<Base>,
+                apply.Power(KINDA_GUESSING_AT_A_GOOD_SIGMA, SQUARED),
+                DOUBLE,
             )),
-        ))
+        )
 
 const computePowerOfNormalDistributionWithTechniqueScalarScalingByWindowSize:
-    (parameters: { circledPitchScalar: Scalar<Frequency>, windowSize: Scalar<Frequency> }) => Power<Base> =
+    (parameters: { circledPitchScalar: Scalar<Frequency>, windowSize: Scalar<Scalar<Frequency>> }) => Power<Base> =
     (parameters: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters): Power<Base> =>
-        to.Power(to.Base(
+        to.Power<Base>(
             computeNumeratorOfPowerOfNormalDistributionWithTechniqueScalarScalingByWindowSize(parameters) /
             from.Base(apply.Multiple(
-                apply.Power(KINDA_GUESSING_AT_A_GOOD_SIGMA, SQUARED as Power<Base>),
-                DOUBLE as Multiple<Base>,
+                apply.Power(KINDA_GUESSING_AT_A_GOOD_SIGMA, SQUARED),
+                DOUBLE,
             )),
-        ))
+        )
 
 export {
     computePowerOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount,

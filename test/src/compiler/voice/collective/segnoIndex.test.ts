@@ -1,8 +1,9 @@
-import { Index, Ms, NO_DURATION, repeat, to } from '@musical-patterns/utilities'
+import { Amplitude, Index, Ms, NO_DURATION, repeat, to } from '@musical-patterns/utilities'
 import {
     computeSegnoIndex,
     NON_SEGNO_INDEX,
     OscillatorName,
+    Sound,
     SourceType,
     TEMPORARY_UNDEFINED_SEGNO_INDEX,
     Voice,
@@ -18,7 +19,7 @@ describe('compute segno index', () => {
                 {
                     duration: to.Ms(20),
                     frequency: to.Hz(1),
-                    gain: to.Scalar(to.Amplitude(1)),
+                    gain: to.Scalar<Amplitude>(1),
                     position: [ 0 ].map(to.Meters),
                     sustain: to.Ms(9),
                 },
@@ -38,7 +39,7 @@ describe('compute segno index', () => {
         })
 
         it('it returns the non-segno-index which will tell the performer not to repeat it', () => {
-            const actualSegnoIndex: Index = computeSegnoIndex({
+            const actualSegnoIndex: Index<Sound> = computeSegnoIndex({
                 collectiveSegnoTime,
                 individualSegnoTime,
                 voice,
@@ -56,7 +57,7 @@ describe('compute segno index', () => {
         })
 
         it('returns the first index of the voice sounds after the collective segno time', () => {
-            const actualSegnoIndex: Index = computeSegnoIndex({
+            const actualSegnoIndex: Index<Sound> = computeSegnoIndex({
                 collectiveSegnoTime,
                 individualSegnoTime,
                 voice,
@@ -74,7 +75,7 @@ describe('compute segno index', () => {
         })
 
         it('returns the non segno index', () => {
-            const actualSegnoIndex: Index = computeSegnoIndex({
+            const actualSegnoIndex: Index<Sound> = computeSegnoIndex({
                 collectiveSegnoTime,
                 individualSegnoTime,
                 voice: {

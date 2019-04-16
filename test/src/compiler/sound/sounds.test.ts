@@ -1,4 +1,4 @@
-import { to } from '@musical-patterns/utilities'
+import { Amplitude, to } from '@musical-patterns/utilities'
 import { compileSound, Note, Sound } from '../../../../src/indexForTest'
 
 describe('compile sound', () => {
@@ -16,7 +16,7 @@ describe('compile sound', () => {
 
         it('gain to 1', () => {
             expect(sound.gain)
-                .toBe(to.Scalar(to.Amplitude(1)))
+                .toBe(to.Scalar<Amplitude>(1))
         })
 
         it('frequency to 1', () => {

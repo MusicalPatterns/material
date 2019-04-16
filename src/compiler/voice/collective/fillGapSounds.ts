@@ -1,34 +1,35 @@
 import {
     apply,
+    INCREMENT,
     Index,
     indexOfFinalElement,
     INITIAL,
     isEmpty,
     Ms,
-    NEXT,
     NO_DURATION,
+    ofUnits,
     to,
-    Translation,
 } from '@musical-patterns/utilities'
 import { Sound } from '../../../performer'
 
-const computeFillGapSounds: (repetendSounds: Sound[], gapToBeFilled: Translation<Ms>) => Sound[] =
-    (repetendSounds: Sound[], gapToBeFilled: Translation<Ms>): Sound[] => {
+const computeFillGapSounds: (repetendSounds: Sound[], gapToBeFilled: Ms) => Sound[] =
+    (repetendSounds: Sound[], gapToBeFilled: Ms): Sound[] => {
         if (isEmpty(repetendSounds)) {
             throw new Error('You will never fill a gap from a source of no sounds')
         }
 
         const fillGapSounds: Sound[] = []
+        const initialSoundIndex: Index<Sound> = INITIAL
         let gapFilled: Ms = NO_DURATION
-        let soundIndex: Index = INITIAL
+        let soundIndex: Index<Sound> = initialSoundIndex
         while (gapFilled < gapToBeFilled) {
-            const nextSound: Sound = apply.Index(repetendSounds, soundIndex as Index<Sound>)
+            const nextSound: Sound = apply.Index(repetendSounds, soundIndex)
             const duration: Ms = nextSound.duration
-            gapFilled = apply.Translation(gapFilled, to.Translation(duration))
+            gapFilled = apply.Translation(gapFilled, to.Translation(ofUnits<'Ms'>(duration)))
             fillGapSounds.push(nextSound)
-            soundIndex = apply.Translation(soundIndex, NEXT)
+            soundIndex = apply.Translation(soundIndex, INCREMENT)
             if (soundIndex > indexOfFinalElement(repetendSounds)) {
-                soundIndex = INITIAL
+                soundIndex = initialSoundIndex
             }
         }
 
