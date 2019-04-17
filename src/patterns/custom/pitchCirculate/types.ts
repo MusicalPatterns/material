@@ -8,17 +8,17 @@ enum PitchCircularTechnique {
 interface PitchCirculateOptions {
     pitchClassCount?: Cardinal,
     technique: PitchCircularTechnique,
-    windowSize?: Scalar<Scalar<Frequency>>,
+    windowSize?: WindowSize,
 }
 
 interface ComputeCircledPitchIndexParameters {
     pitchClassCount: Cardinal,
-    tierIndex: Index,
+    tierIndex: Index<Scalar<Scalar<Frequency>>>,
 }
 
 interface ComputeCircledPitchScalarParameters {
-    tierIndex: Index,
-    windowSize: Scalar<Scalar<Frequency>>,
+    tierIndex: Index<Scalar<Scalar<Frequency>>>,
+    windowSize: WindowSize,
 }
 
 interface ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters {
@@ -28,8 +28,10 @@ interface ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCo
 
 interface ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters {
     circledPitchScalar: Scalar<Frequency>,
-    windowSize: Scalar<Scalar<Frequency>>,
+    windowSize: WindowSize,
 }
+
+type WindowSize = Scalar<Scalar<Frequency>>
 
 export {
     PitchCircularTechnique,
@@ -38,4 +40,5 @@ export {
     ComputeCircledPitchScalarParameters,
     ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
     ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters,
+    WindowSize,
 }

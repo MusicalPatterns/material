@@ -3,6 +3,7 @@ import {
     from,
     Index,
     INITIAL,
+    Integer,
     Scalar,
     slice,
     to,
@@ -14,7 +15,7 @@ import {
     computeTierWithTechniqueIndexTranslationByPitchClassCount,
     computeTierWithTechniqueScalarScalingByWindowSize,
 } from './tier'
-import { PitchCircularTechnique, PitchCirculateOptions } from './types'
+import { PitchCircularTechnique, PitchCirculateOptions, WindowSize } from './types'
 
 const pitchCirculate: (notes: Note[], options: PitchCirculateOptions) => Note[][] =
     (
@@ -26,8 +27,8 @@ const pitchCirculate: (notes: Note[], options: PitchCirculateOptions) => Note[][
         }: PitchCirculateOptions,
     ): Note[][] =>
         slice(ZERO_AND_POSITIVE_INTEGERS, INITIAL, to.Index(from.Cardinal(PITCH_CIRCULAR_TIER_COUNT)))
-            .map(to.Index)
-            .map((tierIndex: Index): Note[] =>
+            .map((integer: Integer) => to.Index<WindowSize>(integer))
+            .map((tierIndex: Index<WindowSize>): Note[] =>
                 technique === PitchCircularTechnique.INDEX_TRANSLATION_BY_PITCH_CLASS_COUNT ?
                     computeTierWithTechniqueIndexTranslationByPitchClassCount(notes, tierIndex, pitchClassCount) :
                     computeTierWithTechniqueScalarScalingByWindowSize(notes, tierIndex, windowSize),

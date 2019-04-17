@@ -6,16 +6,17 @@ import {
     Hz,
     Index,
     insteadOf,
-    ofOperation,
     Scalar,
     to,
     Translation,
     windowReduce,
 } from '@musical-patterns/utilities'
-import { ComputeCircledPitchIndexParameters, ComputeCircledPitchScalarParameters } from './types'
+import { ComputeCircledPitchIndexParameters, ComputeCircledPitchScalarParameters, WindowSize } from './types'
 
-const transposePitchIndexForTier:
-    (originalPitchIndex: Index<Hz>, parameters: { pitchClassCount: Cardinal, tierIndex: Index }) => Index<Hz> =
+const transposePitchIndexForTier: (
+    originalPitchIndex: Index<Hz>,
+    parameters: { pitchClassCount: Cardinal, tierIndex: Index<Scalar<Scalar<Frequency>>> },
+) => Index<Hz> =
     (originalPitchIndex: Index<Hz>, { pitchClassCount, tierIndex }: ComputeCircledPitchIndexParameters): Index<Hz> => {
         const pitchIndexWrappedWithinPitchClassCountToRemoveOriginalWindowLocationInformation: Index<Hz> =
             apply.Modulus(
@@ -23,10 +24,11 @@ const transposePitchIndexForTier:
                 to.Modulus<Index<Hz>>(from.Cardinal(pitchClassCount)),
             )
 
-        const baseTierTransposition: Translation<Index> = to.Translation(ofOperation<'Index'>(apply.Scalar(
-            tierIndex,
-            to.Scalar<Index>(from.Cardinal(pitchClassCount)),
-        )))
+        const baseTierTransposition: Translation<Index<Hz>> =
+            to.Translation<Index<Hz>>(from.Index<Scalar<Scalar<Frequency>>>(apply.Scalar(
+                tierIndex,
+                to.Scalar<Index<Scalar<Scalar<Frequency>>>>(from.Cardinal(pitchClassCount)),
+            )))
 
         return apply.Translation(
             pitchIndexWrappedWithinPitchClassCountToRemoveOriginalWindowLocationInformation,
@@ -36,7 +38,7 @@ const transposePitchIndexForTier:
 
 const scalePitchScalarForTier: (
     originalPitchScalar: Scalar<Frequency>,
-    parameters: { tierIndex: Index, windowSize: Scalar<Scalar<Frequency>> },
+    parameters: { tierIndex: Index<Scalar<Scalar<Frequency>>>, windowSize: WindowSize },
 ) => Scalar<Frequency> =
     (
         originalPitchScalar: Scalar<Frequency>,
@@ -47,8 +49,10 @@ const scalePitchScalarForTier: (
             windowSize,
         )
 
-        const baseTierScaling: Scalar<Scalar<Frequency>> =
-            apply.Power(windowSize, to.Power<Scalar<Scalar<Frequency>>>(from.Index(tierIndex)))
+        const baseTierScaling: WindowSize = apply.Power(
+            windowSize,
+            to.Power<Scalar<Scalar<Frequency>>>(from.Index<Scalar<Scalar<Frequency>>>(tierIndex)),
+        )
 
         return apply.Scalar(
             pitchScalarReducedWithinWindowSizeToRemoveWindowLocationInformation,

@@ -18,7 +18,7 @@ import {
 import { KINDA_GUESSING_AT_A_GOOD_SIGMA, NEGATIVE_POINT_FIVE_TRANSLATION, PITCH_CIRCULAR_TIER_COUNT } from './constants'
 import {
     ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
-    ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters,
+    ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters, WindowSize,
 } from './types'
 
 const computeNumeratorOfPowerOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount:
@@ -49,14 +49,14 @@ const computeNumeratorOfPowerOfNormalDistributionWithTechniqueIndexTranslationBy
     }
 
 const computeNumeratorOfPowerOfNormalDistributionWithTechniqueScalarScalingByWindowSize:
-    (parameters: { circledPitchScalar: Scalar<Frequency>, windowSize: Scalar<Scalar<Frequency>> }) => number =
+    (parameters: { circledPitchScalar: Scalar<Frequency>, windowSize: WindowSize }) => number =
     (
         {
             windowSize,
             circledPitchScalar,
         }: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters,
     ): number => {
-        const maximumPitchAcrossAllTiers: Scalar<Scalar<Frequency>> = apply.Power(
+        const maximumPitchAcrossAllTiers: WindowSize = apply.Power(
             windowSize,
             to.Power<Scalar<Scalar<Frequency>>>(from.Cardinal(PITCH_CIRCULAR_TIER_COUNT)),
         )
@@ -90,7 +90,7 @@ const computePowerOfNormalDistributionWithTechniqueIndexTranslationByPitchClassC
         )
 
 const computePowerOfNormalDistributionWithTechniqueScalarScalingByWindowSize:
-    (parameters: { circledPitchScalar: Scalar<Frequency>, windowSize: Scalar<Scalar<Frequency>> }) => Power<Base> =
+    (parameters: { circledPitchScalar: Scalar<Frequency>, windowSize: WindowSize }) => Power<Base> =
     (parameters: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters): Power<Base> =>
         to.Power<Base>(
             computeNumeratorOfPowerOfNormalDistributionWithTechniqueScalarScalingByWindowSize(parameters) /

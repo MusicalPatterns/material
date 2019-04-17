@@ -26,12 +26,12 @@ const computeNonScale: <NumericType extends Number = number>() => Scale<NumericT
 
 const computeHarmonicSeriesScale: <NumericType extends Number = Hz>() => Scale<NumericType> =
     <NumericType extends Number = Hz>(): Scale<NumericType> => ({
-        scalars: POSITIVE_INTEGERS.map((integer: Integer) => integer as unknown as Scalar<NumericType>),
+        scalars: POSITIVE_INTEGERS.map((integer: Integer) => to.Scalar<NumericType>(integer)),
     })
 
 const computeSubharmonicSeriesScale: <NumericType extends Number = Hz>() => Scale<NumericType> =
     <NumericType extends Number = Hz>(): Scale<NumericType> => ({
-        scalars: POSITIVE_INTEGERS.map((integer: Integer) => reciprocal(integer) as unknown as Scalar<NumericType>),
+        scalars: POSITIVE_INTEGERS.map((integer: Integer) => to.Scalar<NumericType>(reciprocal(integer))),
     })
 
 const computeFlatDurationsScale: () => Scale<Ms> =
@@ -55,11 +55,13 @@ const materializeStandardScales:
     <SpecsType extends StandardSpecs>(
         specs: SpecsType,
         options?: MaterializeStandardScalesOptions,
-    ) => [ Scale<Amplitude>, Scale<Ms>, Scale<Hz> ] =
+        // tslint:disable-next-line no-any
+    ) => [ Scale<Amplitude>, Scale<Ms>, Scale<Hz> ] & Array<Scale<any>> =
     <SpecsType extends StandardSpecs>(
         specs: SpecsType,
         { durationScalars, pitchScalars }: MaterializeStandardScalesOptions = {},
-    ): [ Scale<Amplitude>, Scale<Ms>, Scale<Hz> ] => {
+        // tslint:disable-next-line no-any
+    ): [ Scale<Amplitude>, Scale<Ms>, Scale<Hz> ] & Array<Scale<any>> => {
         const gainScale: Scale<Amplitude> = computeNonScale()
         const durationScalar: Scalar<Ms> = specs[ StandardSpec.BASE_DURATION ] || to.Scalar<Ms>(1)
         const durationTranslation: Translation<Ms> = specs[ StandardSpec.BASE_DURATION_TRANSLATION ] || NO_TRANSLATION

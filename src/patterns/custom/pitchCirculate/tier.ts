@@ -5,10 +5,11 @@ import {
     applyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSize,
 } from './gainCurve'
 import { scalePitchScalarForTier, transposePitchIndexForTier } from './pitchCurve'
+import { WindowSize } from './types'
 
 const computeTierWithTechniqueIndexTranslationByPitchClassCount:
-    (notes: Note[], tierIndex: Index, pitchClassCount: Cardinal) => Note[] =
-    (notes: Note[], tierIndex: Index, pitchClassCount: Cardinal): Note[] =>
+    (notes: Note[], tierIndex: Index<WindowSize>, pitchClassCount: Cardinal) => Note[] =
+    (notes: Note[], tierIndex: Index<WindowSize>, pitchClassCount: Cardinal): Note[] =>
         notes.map((note: Note): Note => {
             const originalPitchIndex: Index<Hz> = insteadOf<Index, Hz>(note.pitch && note.pitch.index || to.Index(0))
             const originalGainScalar: Scalar<Amplitude> =
@@ -39,8 +40,8 @@ const computeTierWithTechniqueIndexTranslationByPitchClassCount:
         })
 
 const computeTierWithTechniqueScalarScalingByWindowSize:
-    (notes: Note[], tierIndex: Index, windowSize: Scalar<Scalar<Frequency>>) => Note[] =
-    (notes: Note[], tierIndex: Index, windowSize: Scalar<Scalar<Frequency>>): Note[] =>
+    (notes: Note[], tierIndex: Index<Scalar<Scalar<Frequency>>>, windowSize: WindowSize) => Note[] =
+    (notes: Note[], tierIndex: Index<Scalar<Scalar<Frequency>>>, windowSize: WindowSize): Note[] =>
         notes.map((note: Note): Note => {
             const originalPitchScalar: Scalar<Frequency> =
                 insteadOf<Scalar, Frequency>(note.pitch && note.pitch.scalar || to.Scalar(1))
