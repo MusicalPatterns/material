@@ -1,4 +1,4 @@
-import { Amplitude, Ordinal, INITIAL, Ms, NO_DURATION, repeat, to } from '@musical-patterns/utilities'
+import { Amplitude, INITIAL, Ms, NO_DURATION, Ordinal, repeat, to } from '@musical-patterns/utilities'
 import {
     applyCollectiveInfos,
     Entity,

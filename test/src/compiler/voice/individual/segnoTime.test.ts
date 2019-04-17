@@ -1,4 +1,4 @@
-import { Ordinal, Ms, NOT_FOUND, to } from '@musical-patterns/utilities'
+import { Ms, NOT_FOUND, Ordinal, to } from '@musical-patterns/utilities'
 import { computeIndividualSegnoTime, SectionInfo } from '../../../../../src/indexForTest'
 
 describe('compute individual segno time', () => {

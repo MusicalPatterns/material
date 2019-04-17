@@ -1,4 +1,4 @@
-import { Amplitude, Ordinal, Ms, NO_DURATION, repeat, to } from '@musical-patterns/utilities'
+import { Amplitude, Ms, NO_DURATION, Ordinal, repeat, to } from '@musical-patterns/utilities'
 import {
     computeSegnoIndex,
     NON_SEGNO_INDEX,

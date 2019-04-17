@@ -1,4 +1,4 @@
-import { Ordinal, Ms, NO_DURATION, NOT_FOUND, to } from '@musical-patterns/utilities'
+import { Ms, NO_DURATION, NOT_FOUND, Ordinal, to } from '@musical-patterns/utilities'
 import { computeIndividualRepetendDuration, SectionInfo } from '../../../../../src/indexForTest'
 
 describe('compute individual repetend duration', () => {
