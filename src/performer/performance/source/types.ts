@@ -18,11 +18,11 @@ type SampleSourceNode = AudioBufferSourceNode & TimbreSetterKeyIndexSignature & 
 type OscillatorSourceNode = OscillatorNode & TimbreSetterKeyIndexSignature & PitchKeyIndexSignature
 
 type PitchKeyIndexSignature = {
-    [Ordinal in PitchKey]: PitchObject
+    [Index in PitchKey]: PitchObject
 }
 
 type TimbreSetterKeyIndexSignature = {
-    [Ordinal in TimbreSetterKey]: TimbreSetter
+    [Index in TimbreSetterKey]: TimbreSetter
 }
 
 interface PitchObject {
