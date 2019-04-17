@@ -1,4 +1,4 @@
-import { apply, Index, isEmpty, Maybe, Ms } from '@musical-patterns/utilities'
+import { apply, isEmpty, Maybe, Ms, Ordinal } from '@musical-patterns/utilities'
 import { Sound, Voice } from '../../../performer'
 import { Entity, Scale } from '../../../types'
 import { SectionInfo } from '../individual'
@@ -7,18 +7,18 @@ import { fillGap } from './fillGap'
 import { computeSegnoIndex } from './segnoIndex'
 import { ApplyCollectiveInfosParameters } from './types'
 
-const computeSections: (entities: Entity[], index: Index<Entity>) => Section[] =
-    (entities: Entity[], index: Index<Entity>): Section[] =>
+const computeSections: (entities: Entity[], index: Ordinal<Entity>) => Section[] =
+    (entities: Entity[], index: Ordinal<Entity>): Section[] =>
         isEmpty(entities) ?
             [] :
-            apply.Index(entities, index).sections || []
+            apply.Ordinal(entities, index).sections || []
 
 const applyCollectiveInfos: (parameters: {
     collectiveEndTime: Ms,
     collectiveSegnoTime: Ms,
     collectiveShareSegnoTime: boolean,
     entities: Entity[],
-    entityIndex: Index<Entity>,
+    entityIndex: Ordinal<Entity>,
     individualSegnoTime: Ms,
     scales: Maybe<Scale[]>,
     sectionInfos: SectionInfo[],
@@ -47,7 +47,7 @@ const applyCollectiveInfos: (parameters: {
             })
         }
 
-        const segnoIndex: Index<Sound> = computeSegnoIndex({ collectiveSegnoTime, individualSegnoTime, voice })
+        const segnoIndex: Ordinal<Sound> = computeSegnoIndex({ collectiveSegnoTime, individualSegnoTime, voice })
 
         return { ...voice, segnoIndex }
     }

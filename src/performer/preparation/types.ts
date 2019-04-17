@@ -1,4 +1,4 @@
-import { Index, Ms } from '@musical-patterns/utilities'
+import { Ms, Ordinal } from '@musical-patterns/utilities'
 import { SourceType } from '../performance'
 import { Sound } from '../types'
 import { OscillatorName } from './oscillator'
@@ -18,11 +18,11 @@ interface OscillatorSourceRequest {
 
 interface NextSound {
     nextStart: Ms,
-    soundIndex: Index<Sound>,
+    soundIndex: Ordinal<Sound>,
 }
 
 interface ComputeNextSoundAfterTimePositionParameters {
-    segnoIndex: Index<Sound>,
+    segnoIndex: Ordinal<Sound>,
     sounds: Sound[],
     timePosition: Ms,
 }

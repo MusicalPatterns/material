@@ -192,7 +192,7 @@ describe('compile voices', () => {
                         },
                         {
                             delay: NO_DURATION,
-                            segnoIndex: to.Index(3),
+                            segnoIndex: to.Ordinal(3),
                             sounds: [
                                 otherOtherExpectedSound,
                                 otherOtherExpectedSound,
@@ -207,7 +207,7 @@ describe('compile voices', () => {
                         },
                         {
                             delay: NO_DURATION,
-                            segnoIndex: to.Index(3),
+                            segnoIndex: to.Ordinal(3),
                             sounds: [
                                 expectedSound,
                                 otherExpectedSound,
@@ -268,7 +268,7 @@ describe('compile voices', () => {
                     voices: [
                         {
                             delay: NO_DURATION,
-                            segnoIndex: to.Index(1),
+                            segnoIndex: to.Ordinal(1),
                             sounds: [
                                 expectedSound,
                                 otherExpectedSound,
@@ -289,7 +289,7 @@ describe('compile voices', () => {
                         },
                         {
                             delay: NO_DURATION,
-                            segnoIndex: to.Index(1),
+                            segnoIndex: to.Ordinal(1),
                             sounds: [
                                 otherExpectedSound,
                                 expectedSound,
@@ -364,7 +364,7 @@ describe('compile voices', () => {
                     voices: [
                         {
                             delay: NO_DURATION,
-                            segnoIndex: to.Index(3),
+                            segnoIndex: to.Ordinal(3),
                             sounds: [
                                 otherOtherExpectedSound,
                                 otherOtherExpectedSound,
@@ -387,7 +387,7 @@ describe('compile voices', () => {
                         },
                         {
                             delay: NO_DURATION,
-                            segnoIndex: to.Index(3),
+                            segnoIndex: to.Ordinal(3),
                             sounds: [
                                 otherOtherExpectedSound,
                                 expectedSound,

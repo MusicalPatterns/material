@@ -5,7 +5,7 @@ import {
     Frequency,
     Hz,
     insteadOf,
-    ofUnits,
+    ofFrom,
     reciprocal,
     Scalar,
     to,
@@ -19,9 +19,9 @@ const computePlaybackRate: (sampleData: SampleData, frequency: Hz) => Scalar<Hz>
             return to.Scalar<Hz>(1)
         }
 
-        const pitch: Scalar<Hz> = to.Scalar(ofUnits<'Hz'>(apply.Scalar(
+        const pitch: Scalar<Hz> = to.Scalar(ofFrom(apply.Scalar(
             frequency,
-            to.Scalar(ofUnits<'Hz'>(reciprocal(STANDARDIZED_SAMPLE_PITCH_OF_C5))),
+            to.Scalar(ofFrom(reciprocal(STANDARDIZED_SAMPLE_PITCH_OF_C5))),
         )))
         const samplePitchScalar: Scalar<Frequency> =
             centsTranslationToPitchScalar(sampleData.centsTranslation || to.Translation<Cents>(0))

@@ -1,4 +1,4 @@
-import { Amplitude, Cardinal, Frequency, Hz, Index, insteadOf, Scalar, to } from '@musical-patterns/utilities'
+import { Amplitude, Cardinal, Frequency, Hz, insteadOf, Ordinal, Scalar, to } from '@musical-patterns/utilities'
 import { Note } from '../../../compiler'
 import {
     applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount,
@@ -8,14 +8,15 @@ import { scalePitchScalarForTier, transposePitchIndexForTier } from './pitchCurv
 import { WindowSize } from './types'
 
 const computeTierWithTechniqueIndexTranslationByPitchClassCount:
-    (notes: Note[], tierIndex: Index<WindowSize>, pitchClassCount: Cardinal) => Note[] =
-    (notes: Note[], tierIndex: Index<WindowSize>, pitchClassCount: Cardinal): Note[] =>
+    (notes: Note[], tierIndex: Ordinal<WindowSize>, pitchClassCount: Cardinal) => Note[] =
+    (notes: Note[], tierIndex: Ordinal<WindowSize>, pitchClassCount: Cardinal): Note[] =>
         notes.map((note: Note): Note => {
-            const originalPitchIndex: Index<Hz> = insteadOf<Index, Hz>(note.pitch && note.pitch.index || to.Index(0))
+            const originalPitchIndex: Ordinal<Hz> =
+                insteadOf<Ordinal, Hz>(note.pitch && note.pitch.index || to.Ordinal(0))
             const originalGainScalar: Scalar<Amplitude> =
                 insteadOf<Scalar, Amplitude>(note.gain && note.gain.scalar || to.Scalar(1))
 
-            const circledPitchIndex: Index<Hz> = transposePitchIndexForTier(
+            const circledPitchIndex: Ordinal<Hz> = transposePitchIndexForTier(
                 originalPitchIndex,
                 { pitchClassCount, tierIndex },
             )
@@ -34,14 +35,14 @@ const computeTierWithTechniqueIndexTranslationByPitchClassCount:
                 },
                 pitch: {
                     ...note.pitch,
-                    index: insteadOf<Index, Scalar>(circledPitchIndex),
+                    index: insteadOf<Ordinal, Scalar>(circledPitchIndex),
                 },
             }
         })
 
 const computeTierWithTechniqueScalarScalingByWindowSize:
-    (notes: Note[], tierIndex: Index<Scalar<Scalar<Frequency>>>, windowSize: WindowSize) => Note[] =
-    (notes: Note[], tierIndex: Index<Scalar<Scalar<Frequency>>>, windowSize: WindowSize): Note[] =>
+    (notes: Note[], tierIndex: Ordinal<Scalar<Scalar<Frequency>>>, windowSize: WindowSize) => Note[] =
+    (notes: Note[], tierIndex: Ordinal<Scalar<Scalar<Frequency>>>, windowSize: WindowSize): Note[] =>
         notes.map((note: Note): Note => {
             const originalPitchScalar: Scalar<Frequency> =
                 insteadOf<Scalar, Frequency>(note.pitch && note.pitch.scalar || to.Scalar(1))

@@ -1,4 +1,4 @@
-import { Amplitude, Index, Ms, NO_DURATION, repeat, to } from '@musical-patterns/utilities'
+import { Amplitude, Ordinal, Ms, NO_DURATION, repeat, to } from '@musical-patterns/utilities'
 import {
     computeSegnoIndex,
     NON_SEGNO_INDEX,
@@ -39,7 +39,7 @@ describe('compute segno index', () => {
         })
 
         it('it returns the non-segno-index which will tell the performer not to repeat it', () => {
-            const actualSegnoIndex: Index<Sound> = computeSegnoIndex({
+            const actualSegnoIndex: Ordinal<Sound> = computeSegnoIndex({
                 collectiveSegnoTime,
                 individualSegnoTime,
                 voice,
@@ -57,14 +57,14 @@ describe('compute segno index', () => {
         })
 
         it('returns the first index of the voice sounds after the collective segno time', () => {
-            const actualSegnoIndex: Index<Sound> = computeSegnoIndex({
+            const actualSegnoIndex: Ordinal<Sound> = computeSegnoIndex({
                 collectiveSegnoTime,
                 individualSegnoTime,
                 voice,
             })
 
             expect(actualSegnoIndex)
-                .toBe(to.Index(3))
+                .toBe(to.Ordinal(3))
         })
     })
 
@@ -75,7 +75,7 @@ describe('compute segno index', () => {
         })
 
         it('returns the non segno index', () => {
-            const actualSegnoIndex: Index<Sound> = computeSegnoIndex({
+            const actualSegnoIndex: Ordinal<Sound> = computeSegnoIndex({
                 collectiveSegnoTime,
                 individualSegnoTime,
                 voice: {
@@ -90,7 +90,7 @@ describe('compute segno index', () => {
             })
 
             expect(actualSegnoIndex)
-                .toBe(to.Index(-1))
+                .toBe(to.Ordinal(-1))
         })
     })
 })

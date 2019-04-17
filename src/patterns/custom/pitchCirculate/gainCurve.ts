@@ -7,9 +7,9 @@ import {
     Frequency,
     from,
     Hz,
-    Index,
     negative,
     ONE_HALF,
+    Ordinal,
     Power,
     Scalar,
     to,
@@ -26,7 +26,7 @@ import {
 const applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount:
     (
         originalGainScalar: Scalar<Amplitude>,
-        parameters: { circledPitchIndex: Index<Hz>, pitchClassCount: Cardinal },
+        parameters: { circledPitchIndex: Ordinal<Hz>, pitchClassCount: Cardinal },
     ) => Scalar<Amplitude> =
     (
         originalGainScalar: Scalar<Amplitude>,

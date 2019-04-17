@@ -1,9 +1,9 @@
 import {
     Frequency,
     from,
-    Index,
     INITIAL,
     Integer,
+    Ordinal,
     Scalar,
     slice,
     to,
@@ -26,9 +26,9 @@ const pitchCirculate: (notes: Note[], options: PitchCirculateOptions) => Note[][
             windowSize = to.Scalar<Scalar<Frequency>>(1),
         }: PitchCirculateOptions,
     ): Note[][] =>
-        slice(ZERO_AND_POSITIVE_INTEGERS, INITIAL, to.Index(from.Cardinal(PITCH_CIRCULAR_TIER_COUNT)))
-            .map((integer: Integer) => to.Index<WindowSize>(integer))
-            .map((tierIndex: Index<WindowSize>): Note[] =>
+        slice(ZERO_AND_POSITIVE_INTEGERS, INITIAL, to.Ordinal(from.Cardinal(PITCH_CIRCULAR_TIER_COUNT)))
+            .map((integer: Integer) => to.Ordinal<WindowSize>(integer))
+            .map((tierIndex: Ordinal<WindowSize>): Note[] =>
                 technique === PitchCircularTechnique.INDEX_TRANSLATION_BY_PITCH_CLASS_COUNT ?
                     computeTierWithTechniqueIndexTranslationByPitchClassCount(notes, tierIndex, pitchClassCount) :
                     computeTierWithTechniqueScalarScalingByWindowSize(notes, tierIndex, windowSize),

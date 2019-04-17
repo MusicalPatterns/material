@@ -1,4 +1,4 @@
-import { Cardinal, Frequency, Hz, Index, Scalar } from '@musical-patterns/utilities'
+import { Cardinal, Frequency, Hz, Ordinal, Scalar } from '@musical-patterns/utilities'
 
 enum PitchCircularTechnique {
     INDEX_TRANSLATION_BY_PITCH_CLASS_COUNT = 'INDEX_TRANSLATION_BY_PITCH_CLASS_COUNT',
@@ -13,16 +13,16 @@ interface PitchCirculateOptions {
 
 interface ComputeCircledPitchIndexParameters {
     pitchClassCount: Cardinal,
-    tierIndex: Index<Scalar<Scalar<Frequency>>>,
+    tierIndex: Ordinal<Scalar<Scalar<Frequency>>>,
 }
 
 interface ComputeCircledPitchScalarParameters {
-    tierIndex: Index<Scalar<Scalar<Frequency>>>,
+    tierIndex: Ordinal<Scalar<Scalar<Frequency>>>,
     windowSize: WindowSize,
 }
 
 interface ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters {
-    circledPitchIndex: Index<Hz>,
+    circledPitchIndex: Ordinal<Hz>,
     pitchClassCount: Cardinal,
 }
 

@@ -1,4 +1,4 @@
-import { Amplitude, Index, INITIAL, Ms, NO_DURATION, repeat, to } from '@musical-patterns/utilities'
+import { Amplitude, Ordinal, INITIAL, Ms, NO_DURATION, repeat, to } from '@musical-patterns/utilities'
 import {
     applyCollectiveInfos,
     Entity,
@@ -34,7 +34,7 @@ describe('apply collective infos', () => {
             },
         }
 
-        const entityIndex: Index<Entity> = to.Index(2)
+        const entityIndex: Ordinal<Entity> = to.Ordinal(2)
 
         const entities: Entity[] = [ {}, {}, {
             sections: [
@@ -84,7 +84,7 @@ describe('apply collective infos', () => {
         expect(actualVoice)
             .toEqual({
                 delay: NO_DURATION,
-                segnoIndex: to.Index(3),
+                segnoIndex: to.Ordinal(3),
                 sounds: originalSounds.concat([
                     {
                         duration: to.Ms(11),

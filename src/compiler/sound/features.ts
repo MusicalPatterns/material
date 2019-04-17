@@ -1,12 +1,12 @@
 import {
     ADDITIVE_IDENTITY,
     apply,
-    Index,
     INITIAL,
     insteadOf,
     isEmpty,
     Maybe,
     MULTIPLICATIVE_IDENTITY,
+    Ordinal,
     round,
     Scalar,
     Translation,
@@ -17,13 +17,13 @@ import { COMPILER_PRECISION } from './constants'
 import { CompileSoundsOptions, ComputeScalePropertiesParameters, NoteFeature, ScaleProperties } from './types'
 
 const computeScaleProperties: (scaleStuffParameters: {
-    index: Index<Scalar>,
+    index: Ordinal<Scalar>,
     options?: CompileSoundsOptions,
-    scaleIndex: Index<Scale>,
+    scaleIndex: Ordinal<Scale>,
 }) => ScaleProperties =
     ({ index, scaleIndex, options }: ComputeScalePropertiesParameters): ScaleProperties => {
         const { scales = [] } = options || {}
-        const scale: Scale = isEmpty(scales) ? { scalars: [] } : apply.Index(scales, scaleIndex)
+        const scale: Scale = isEmpty(scales) ? { scalars: [] } : apply.Ordinal(scales, scaleIndex)
         const {
             translation: scaleTranslation = ADDITIVE_IDENTITY,
             scalar: scaleScalar = MULTIPLICATIVE_IDENTITY,
@@ -32,7 +32,7 @@ const computeScaleProperties: (scaleStuffParameters: {
 
         const scaleElement: Maybe<SoundFeature> = isEmpty(scalars) ?
             undefined :
-            apply.Index(scalars, index)
+            apply.Ordinal(scalars, index)
 
         return { scaleTranslation, scaleScalar, scaleElement }
     }

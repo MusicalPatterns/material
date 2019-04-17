@@ -4,8 +4,8 @@ import {
     Frequency,
     from,
     Hz,
-    Index,
     insteadOf,
+    Ordinal,
     Scalar,
     to,
     Translation,
@@ -14,31 +14,34 @@ import {
 import { ComputeCircledPitchIndexParameters, ComputeCircledPitchScalarParameters, WindowSize } from './types'
 
 const transposePitchIndexForTier: (
-    originalPitchIndex: Index<Hz>,
-    parameters: { pitchClassCount: Cardinal, tierIndex: Index<Scalar<Scalar<Frequency>>> },
-) => Index<Hz> =
-    (originalPitchIndex: Index<Hz>, { pitchClassCount, tierIndex }: ComputeCircledPitchIndexParameters): Index<Hz> => {
-        const pitchIndexWrappedWithinPitchClassCountToRemoveOriginalWindowLocationInformation: Index<Hz> =
+    originalPitchIndex: Ordinal<Hz>,
+    parameters: { pitchClassCount: Cardinal, tierIndex: Ordinal<Scalar<Scalar<Frequency>>> },
+) => Ordinal<Hz> =
+    (
+        originalPitchIndex: Ordinal<Hz>,
+        { pitchClassCount, tierIndex }: ComputeCircledPitchIndexParameters,
+    ): Ordinal<Hz> => {
+        const pitchIndexWrappedWithinPitchClassCountToRemoveOriginalWindowLocationInformation: Ordinal<Hz> =
             apply.Modulus(
                 originalPitchIndex,
-                to.Modulus<Index<Hz>>(from.Cardinal(pitchClassCount)),
+                to.Modulus<Ordinal<Hz>>(from.Cardinal(pitchClassCount)),
             )
 
-        const baseTierTransposition: Translation<Index<Hz>> =
-            to.Translation<Index<Hz>>(from.Index<Scalar<Scalar<Frequency>>>(apply.Scalar(
+        const baseTierTransposition: Translation<Ordinal<Hz>> =
+            to.Translation<Ordinal<Hz>>(from.Ordinal<Scalar<Scalar<Frequency>>>(apply.Scalar(
                 tierIndex,
-                to.Scalar<Index<Scalar<Scalar<Frequency>>>>(from.Cardinal(pitchClassCount)),
+                to.Scalar<Ordinal<Scalar<Scalar<Frequency>>>>(from.Cardinal(pitchClassCount)),
             )))
 
         return apply.Translation(
             pitchIndexWrappedWithinPitchClassCountToRemoveOriginalWindowLocationInformation,
-            insteadOf<Translation, Index<Hz>>(baseTierTransposition),
+            insteadOf<Translation, Ordinal<Hz>>(baseTierTransposition),
         )
     }
 
 const scalePitchScalarForTier: (
     originalPitchScalar: Scalar<Frequency>,
-    parameters: { tierIndex: Index<Scalar<Scalar<Frequency>>>, windowSize: WindowSize },
+    parameters: { tierIndex: Ordinal<Scalar<Scalar<Frequency>>>, windowSize: WindowSize },
 ) => Scalar<Frequency> =
     (
         originalPitchScalar: Scalar<Frequency>,
@@ -51,7 +54,7 @@ const scalePitchScalarForTier: (
 
         const baseTierScaling: WindowSize = apply.Power(
             windowSize,
-            to.Power<Scalar<Scalar<Frequency>>>(from.Index<Scalar<Scalar<Frequency>>>(tierIndex)),
+            to.Power<Scalar<Scalar<Frequency>>>(from.Ordinal<Scalar<Scalar<Frequency>>>(tierIndex)),
         )
 
         return apply.Scalar(

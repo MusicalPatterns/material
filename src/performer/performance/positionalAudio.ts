@@ -8,9 +8,9 @@ const setPosition: (positionNode: Object3D, position: Coordinate<Meters>) => voi
     (positionNode: Object3D, position: Coordinate<Meters>): void => {
         const rawPosition: number[] = position.map(from.Meters)
         positionNode.position.set(
-            apply.Index(rawPosition, X_AXIS) || 0,
-            apply.Index(rawPosition, Y_AXIS) || 0,
-            apply.Index(rawPosition, Z_AXIS) || 0,
+            apply.Ordinal(rawPosition, X_AXIS) || 0,
+            apply.Ordinal(rawPosition, Y_AXIS) || 0,
+            apply.Ordinal(rawPosition, Z_AXIS) || 0,
         )
     }
 

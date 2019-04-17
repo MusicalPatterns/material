@@ -1,13 +1,13 @@
 import {
     apply,
     INCREMENT,
-    Index,
     indexOfFinalElement,
     INITIAL,
     isEmpty,
     Ms,
     NO_DURATION,
-    ofUnits,
+    ofFrom,
+    Ordinal,
     to,
 } from '@musical-patterns/utilities'
 import { Sound } from '../../../performer'
@@ -19,13 +19,13 @@ const computeFillGapSounds: (repetendSounds: Sound[], gapToBeFilled: Ms) => Soun
         }
 
         const fillGapSounds: Sound[] = []
-        const initialSoundIndex: Index<Sound> = INITIAL
+        const initialSoundIndex: Ordinal<Sound> = INITIAL
         let gapFilled: Ms = NO_DURATION
-        let soundIndex: Index<Sound> = initialSoundIndex
+        let soundIndex: Ordinal<Sound> = initialSoundIndex
         while (gapFilled < gapToBeFilled) {
-            const nextSound: Sound = apply.Index(repetendSounds, soundIndex)
+            const nextSound: Sound = apply.Ordinal(repetendSounds, soundIndex)
             const duration: Ms = nextSound.duration
-            gapFilled = apply.Translation(gapFilled, to.Translation(ofUnits<'Ms'>(duration)))
+            gapFilled = apply.Translation(gapFilled, to.Translation(ofFrom(duration)))
             fillGapSounds.push(nextSound)
             soundIndex = apply.Translation(soundIndex, INCREMENT)
             if (soundIndex > indexOfFinalElement(repetendSounds)) {

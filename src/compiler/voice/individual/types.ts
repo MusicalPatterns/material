@@ -1,13 +1,13 @@
-import { Index, Ms } from '@musical-patterns/utilities'
+import { Ms, Ordinal } from '@musical-patterns/utilities'
 import { Sound, Voice } from '../../../performer'
 
 interface ComputeIndividualRepetendDurationParameters {
-    individualRepetendIndex: Index<SectionInfo>,
+    individualRepetendIndex: Ordinal<SectionInfo>,
     sectionInfos: SectionInfo[],
 }
 
 interface ComputeIndividualSegnoTimeParameters {
-    individualRepetendIndex: Index<SectionInfo>,
+    individualRepetendIndex: Ordinal<SectionInfo>,
     sectionInfos: SectionInfo[],
 }
 

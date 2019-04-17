@@ -1,4 +1,4 @@
-import { Index, Ms } from '@musical-patterns/utilities'
+import { Ms, Ordinal } from '@musical-patterns/utilities'
 import { Sound, Voice } from '../../../performer'
 import { Entity, Scale } from '../../../types'
 import { IndividualVoiceAndInfo, SectionInfo } from '../individual'
@@ -41,7 +41,7 @@ interface ApplyCollectiveInfosParameters extends CompileVoicesParameters {
     collectiveEndTime: Ms,
     collectiveSegnoTime: Ms,
     collectiveShareSegnoTime: boolean,
-    entityIndex: Index<Entity>,
+    entityIndex: Ordinal<Entity>,
     individualSegnoTime: Ms,
     sectionInfos: SectionInfo[],
     voice: Voice,

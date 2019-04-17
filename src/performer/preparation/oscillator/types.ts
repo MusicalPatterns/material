@@ -53,7 +53,7 @@ enum OscillatorName {
     WURLITZER_2 = 'WURLITZER_2',
 }
 
-type OscillatorNameToPeriodicWaveNameMap = { [Index in OscillatorName]: string }
+type OscillatorNameToPeriodicWaveNameMap = { [Ordinal in OscillatorName]: string }
 
 interface CreatePeriodicWaveParameters {
     imag: number[],

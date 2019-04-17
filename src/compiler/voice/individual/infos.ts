@@ -1,11 +1,11 @@
-import { findIndex, Index, Ms, sum } from '@musical-patterns/utilities'
+import { findIndex, Ms, Ordinal, sum } from '@musical-patterns/utilities'
 import { computeIndividualRepetendDuration } from './repetendDuration'
 import { computeIndividualSegnoTime } from './segnoTime'
 import { IndividualVoiceInfo, SectionInfo } from './types'
 
 const computeIndividualVoiceInfo: (sectionInfos: SectionInfo[]) => IndividualVoiceInfo =
     (sectionInfos: SectionInfo[]): IndividualVoiceInfo => {
-        const individualRepetendIndex: Index<SectionInfo> = findIndex(
+        const individualRepetendIndex: Ordinal<SectionInfo> = findIndex(
             sectionInfos,
             (sectionInfo: SectionInfo) => sectionInfo.doesRepeatForever,
         )
