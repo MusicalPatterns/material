@@ -4,13 +4,13 @@ import {
     apply,
     Cardinal,
     DOUBLE,
+    Exponent,
     Frequency,
     from,
     Hz,
     Logarithm,
     ofFrom,
     Ordinal,
-    Power,
     quotient,
     Scalar,
     SQUARED,
@@ -23,7 +23,7 @@ import {
     WindowSize,
 } from './types'
 
-const computeNumeratorOfPowerOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount:
+const computeNumeratorOfExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount:
     (parameters: { circledPitchIndex: Ordinal<Hz>, pitchClassCount: Cardinal }) => number =
     (
         {
@@ -50,7 +50,7 @@ const computeNumeratorOfPowerOfNormalDistributionWithTechniqueIndexTranslationBy
         )
     }
 
-const computeNumeratorOfPowerOfNormalDistributionWithTechniqueScalarScalingByWindowSize:
+const computeNumeratorOfExponentOfNormalDistributionWithTechniqueScalarScalingByWindowSize:
     (parameters: { circledPitchScalar: Scalar<Frequency>, windowSize: WindowSize }) => number =
     (
         {
@@ -58,9 +58,9 @@ const computeNumeratorOfPowerOfNormalDistributionWithTechniqueScalarScalingByWin
             circledPitchScalar,
         }: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters,
     ): number => {
-        const maximumPitchAcrossAllTiers: WindowSize = apply.Power(
+        const maximumPitchAcrossAllTiers: WindowSize = apply.Exponent(
             windowSize,
-            to.Power<Scalar<Scalar<Frequency>>>(from.Cardinal(PITCH_CIRCULAR_TIER_COUNT)),
+            to.Exponent<Scalar<Scalar<Frequency>>>(from.Cardinal(PITCH_CIRCULAR_TIER_COUNT)),
         )
         const circledPitchScalarProportionOfTotalPitchCount: number =
             from.Scalar<Frequency>(apply.Base(
@@ -80,24 +80,24 @@ const computeNumeratorOfPowerOfNormalDistributionWithTechniqueScalarScalingByWin
         )
     }
 
-const computePowerOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount:
-    (parameters: { circledPitchIndex: Ordinal<Hz>, pitchClassCount: Cardinal }) => Power<Logarithm> =
+const computeExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount:
+    (parameters: { circledPitchIndex: Ordinal<Hz>, pitchClassCount: Cardinal }) => Exponent<Logarithm> =
     (
         parameters: ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
-    ): Power<Logarithm> =>
-        to.Power<Logarithm>(
-            computeNumeratorOfPowerOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount(parameters) /
+    ): Exponent<Logarithm> =>
+        to.Exponent<Logarithm>(
+            computeNumeratorOfExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount(parameters) /
             from.Logarithm(apply.Multiple(
                 apply.Power(KINDA_GUESSING_AT_A_GOOD_SIGMA, SQUARED),
                 DOUBLE,
             )),
         )
 
-const computePowerOfNormalDistributionWithTechniqueScalarScalingByWindowSize:
-    (parameters: { circledPitchScalar: Scalar<Frequency>, windowSize: WindowSize }) => Power<Logarithm> =
-    (parameters: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters): Power<Logarithm> =>
-        to.Power<Logarithm>(
-            computeNumeratorOfPowerOfNormalDistributionWithTechniqueScalarScalingByWindowSize(parameters) /
+const computeExponentOfNormalDistributionWithTechniqueScalarScalingByWindowSize:
+    (parameters: { circledPitchScalar: Scalar<Frequency>, windowSize: WindowSize }) => Exponent<Logarithm> =
+    (parameters: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters): Exponent<Logarithm> =>
+        to.Exponent<Logarithm>(
+            computeNumeratorOfExponentOfNormalDistributionWithTechniqueScalarScalingByWindowSize(parameters) /
             from.Logarithm(apply.Multiple(
                 apply.Power(KINDA_GUESSING_AT_A_GOOD_SIGMA, SQUARED),
                 DOUBLE,
@@ -105,6 +105,6 @@ const computePowerOfNormalDistributionWithTechniqueScalarScalingByWindowSize:
         )
 
 export {
-    computePowerOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount,
-    computePowerOfNormalDistributionWithTechniqueScalarScalingByWindowSize,
+    computeExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount,
+    computeExponentOfNormalDistributionWithTechniqueScalarScalingByWindowSize,
 }

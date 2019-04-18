@@ -1,9 +1,9 @@
 import {
     Amplitude,
     apply,
-    Base,
     Cardinal,
     E,
+    Exponent,
     Frequency,
     from,
     Hz,
@@ -12,14 +12,13 @@ import {
     NormalScalar,
     ONE_HALF,
     Ordinal,
-    Power,
     Scalar,
     to,
 } from '@musical-patterns/utilities'
 import {
-    computePowerOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount,
-    computePowerOfNormalDistributionWithTechniqueScalarScalingByWindowSize,
-} from './normalDistributionPower'
+    computeExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount,
+    computeExponentOfNormalDistributionWithTechniqueScalarScalingByWindowSize,
+} from './normalDistributionExponent'
 import {
     ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
     ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters,
@@ -35,12 +34,12 @@ const applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount:
         originalGainScalar: NormalScalar<Amplitude>,
         parameters: ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
     ): NormalScalar<Amplitude> => {
-        const normalDistributionPower: Power<Logarithm> =
-            computePowerOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount(parameters)
+        const normalDistributionExponent: Exponent<Logarithm> =
+            computeExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount(parameters)
 
-        const pitchCircularBase: Logarithm<NormalScalar<Amplitude>> = apply.Power(
+        const pitchCircularBase: Logarithm<NormalScalar<Amplitude>> = apply.Exponent(
             E,
-            negative(apply.Scalar(normalDistributionPower, ONE_HALF)),
+            negative(apply.Scalar(normalDistributionExponent, ONE_HALF)),
         )
         const pitchCircularScaling: Scalar<NormalScalar<Amplitude>> =
             to.Scalar(from.Logarithm<NormalScalar<Amplitude>>(pitchCircularBase))
@@ -57,12 +56,12 @@ const applyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSize:
         originalGainScalar: NormalScalar<Amplitude>,
         parameters: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters,
     ): NormalScalar<Amplitude> => {
-        const normalDistributionPower: Power<Logarithm> =
-            computePowerOfNormalDistributionWithTechniqueScalarScalingByWindowSize(parameters)
+        const normalDistributionExponent: Exponent<Logarithm> =
+            computeExponentOfNormalDistributionWithTechniqueScalarScalingByWindowSize(parameters)
 
-        const pitchCircularBase: Logarithm<NormalScalar<Amplitude>> = apply.Power(
+        const pitchCircularBase: Logarithm<NormalScalar<Amplitude>> = apply.Exponent(
             E,
-            negative(apply.Scalar(normalDistributionPower, ONE_HALF)),
+            negative(apply.Scalar(normalDistributionExponent, ONE_HALF)),
         )
         const pitchCircularScaling: Scalar<NormalScalar<Amplitude>> =
             to.Scalar(from.Logarithm<NormalScalar<Amplitude>>(pitchCircularBase))
