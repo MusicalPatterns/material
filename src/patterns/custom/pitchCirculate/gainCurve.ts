@@ -7,6 +7,7 @@ import {
     Frequency,
     from,
     Hz,
+    Logarithm,
     negative,
     NormalScalar,
     ONE_HALF,
@@ -34,15 +35,15 @@ const applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount:
         originalGainScalar: NormalScalar<Amplitude>,
         parameters: ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
     ): NormalScalar<Amplitude> => {
-        const normalDistributionPower: Power<Base> =
+        const normalDistributionPower: Power<Logarithm> =
             computePowerOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount(parameters)
 
-        const pitchCircularBase: Base<NormalScalar<Amplitude>> = apply.Power(
+        const pitchCircularBase: Logarithm<NormalScalar<Amplitude>> = apply.Power(
             E,
             negative(apply.Scalar(normalDistributionPower, ONE_HALF)),
         )
         const pitchCircularScaling: Scalar<NormalScalar<Amplitude>> =
-            to.Scalar(from.Base<NormalScalar<Amplitude>>(pitchCircularBase))
+            to.Scalar(from.Logarithm<NormalScalar<Amplitude>>(pitchCircularBase))
 
         return apply.Scalar(originalGainScalar, pitchCircularScaling)
     }
@@ -56,15 +57,15 @@ const applyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSize:
         originalGainScalar: NormalScalar<Amplitude>,
         parameters: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters,
     ): NormalScalar<Amplitude> => {
-        const normalDistributionPower: Power<Base> =
+        const normalDistributionPower: Power<Logarithm> =
             computePowerOfNormalDistributionWithTechniqueScalarScalingByWindowSize(parameters)
 
-        const pitchCircularBase: Base<NormalScalar<Amplitude>> = apply.Power(
+        const pitchCircularBase: Logarithm<NormalScalar<Amplitude>> = apply.Power(
             E,
             negative(apply.Scalar(normalDistributionPower, ONE_HALF)),
         )
         const pitchCircularScaling: Scalar<NormalScalar<Amplitude>> =
-            to.Scalar(from.Base<NormalScalar<Amplitude>>(pitchCircularBase))
+            to.Scalar(from.Logarithm<NormalScalar<Amplitude>>(pitchCircularBase))
 
         return apply.Scalar(originalGainScalar, pitchCircularScaling)
     }

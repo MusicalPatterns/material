@@ -2,12 +2,12 @@
 
 import {
     apply,
-    Base,
     Cardinal,
     DOUBLE,
     Frequency,
     from,
     Hz,
+    Logarithm,
     ofFrom,
     Ordinal,
     Power,
@@ -31,10 +31,10 @@ const computeNumeratorOfPowerOfNormalDistributionWithTechniqueIndexTranslationBy
             circledPitchIndex,
         }: ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
     ): number => {
-        const maximumPitchAcrossAllTiers: Ordinal<Hz> = to.Ordinal<Hz>(apply.Scalar(
+        const maximumPitchAcrossAllTiers: Ordinal<Hz> = to.Ordinal<Hz>(from.Cardinal(apply.Scalar(
             pitchClassCount,
             to.Scalar(ofFrom(PITCH_CIRCULAR_TIER_COUNT)),
-        ))
+        )))
         const circledPitchIndexProportionOfTotalPitchCount: number =
             from.Ordinal<Hz>(quotient(circledPitchIndex, maximumPitchAcrossAllTiers))
         const pitchProportionOfTotalTranslatedToBePositiveIfGreaterThanMedianAndNegativeIfLesser: number =
@@ -81,22 +81,24 @@ const computeNumeratorOfPowerOfNormalDistributionWithTechniqueScalarScalingByWin
     }
 
 const computePowerOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount:
-    (parameters: { circledPitchIndex: Ordinal<Hz>, pitchClassCount: Cardinal }) => Power<Base> =
-    (parameters: ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters): Power<Base> =>
-        to.Power<Base>(
+    (parameters: { circledPitchIndex: Ordinal<Hz>, pitchClassCount: Cardinal }) => Power<Logarithm> =
+    (
+        parameters: ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
+    ): Power<Logarithm> =>
+        to.Power<Logarithm>(
             computeNumeratorOfPowerOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount(parameters) /
-            from.Base(apply.Multiple(
+            from.Logarithm(apply.Multiple(
                 apply.Power(KINDA_GUESSING_AT_A_GOOD_SIGMA, SQUARED),
                 DOUBLE,
             )),
         )
 
 const computePowerOfNormalDistributionWithTechniqueScalarScalingByWindowSize:
-    (parameters: { circledPitchScalar: Scalar<Frequency>, windowSize: WindowSize }) => Power<Base> =
-    (parameters: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters): Power<Base> =>
-        to.Power<Base>(
+    (parameters: { circledPitchScalar: Scalar<Frequency>, windowSize: WindowSize }) => Power<Logarithm> =
+    (parameters: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters): Power<Logarithm> =>
+        to.Power<Logarithm>(
             computeNumeratorOfPowerOfNormalDistributionWithTechniqueScalarScalingByWindowSize(parameters) /
-            from.Base(apply.Multiple(
+            from.Logarithm(apply.Multiple(
                 apply.Power(KINDA_GUESSING_AT_A_GOOD_SIGMA, SQUARED),
                 DOUBLE,
             )),
