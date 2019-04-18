@@ -19,7 +19,7 @@ describe('compute segno index', () => {
                 {
                     duration: to.Ms(20),
                     frequency: to.Hz(1),
-                    gain: to.Scalar<Amplitude>(1),
+                    gain: to.NormalScalar<Amplitude>(1),
                     position: [ 0 ].map(to.Meters),
                     sustain: to.Ms(9),
                 },
@@ -64,7 +64,7 @@ describe('compute segno index', () => {
             })
 
             expect(actualSegnoIndex)
-                .toBe(to.Ordinal(3))
+                .toBe(to.Ordinal<Sound>(3))
         })
     })
 
@@ -90,7 +90,7 @@ describe('compute segno index', () => {
             })
 
             expect(actualSegnoIndex)
-                .toBe(to.Ordinal(-1))
+                .toBe(to.Ordinal<Sound>(-1))
         })
     })
 })

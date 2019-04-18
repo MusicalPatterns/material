@@ -1,4 +1,4 @@
-import { Amplitude, INITIAL, Ms, NO_DURATION, Ordinal, repeat, to } from '@musical-patterns/utilities'
+import { Amplitude, INITIAL, Ms, NO_DURATION, Ordinal, repeat, Scalar, to } from '@musical-patterns/utilities'
 import {
     applyCollectiveInfos,
     Entity,
@@ -17,7 +17,7 @@ describe('apply collective infos', () => {
                 {
                     duration: to.Ms(20),
                     frequency: to.Hz(1),
-                    gain: to.Scalar<Amplitude>(1),
+                    gain: to.NormalScalar<Amplitude>(1),
                     position: [ 0 ].map(to.Meters),
                     sustain: to.Ms(9),
                 },
@@ -34,16 +34,16 @@ describe('apply collective infos', () => {
             },
         }
 
-        const entityIndex: Ordinal<Entity> = to.Ordinal(2)
+        const entityIndex: Ordinal<Entity> = to.Ordinal<Entity>(2)
 
         const entities: Entity[] = [ {}, {}, {
             sections: [
                 {
-                    notes: [ { duration: { scalar: to.Scalar(11) } } ],
+                    notes: [ { duration: { scalar: to.Scalar<Scalar>(11) } } ],
                     repetitions: to.Cardinal(9),
                 },
                 {
-                    notes: [ { duration: { scalar: to.Scalar(11) } } ],
+                    notes: [ { duration: { scalar: to.Scalar<Scalar>(11) } } ],
                 },
             ],
         } ]
@@ -84,26 +84,26 @@ describe('apply collective infos', () => {
         expect(actualVoice)
             .toEqual({
                 delay: NO_DURATION,
-                segnoIndex: to.Ordinal(3),
+                segnoIndex: to.Ordinal<Sound>(3),
                 sounds: originalSounds.concat([
                     {
                         duration: to.Ms(11),
                         frequency: to.Hz(1),
-                        gain: to.Scalar<Amplitude>(1),
+                        gain: to.NormalScalar<Amplitude>(1),
                         position: [ 0, 0, 0 ].map(to.Meters),
                         sustain: to.Ms(10.9),
                     },
                     {
                         duration: to.Ms(11),
                         frequency: to.Hz(1),
-                        gain: to.Scalar<Amplitude>(1),
+                        gain: to.NormalScalar<Amplitude>(1),
                         position: [ 0, 0, 0 ].map(to.Meters),
                         sustain: to.Ms(10.9),
                     },
                     {
                         duration: to.Ms(11),
                         frequency: to.Hz(1),
-                        gain: to.Scalar<Amplitude>(1),
+                        gain: to.NormalScalar<Amplitude>(1),
                         position: [ 0, 0, 0 ].map(to.Meters),
                         sustain: to.Ms(10.9),
                     },

@@ -1,4 +1,4 @@
-import { Ms, to } from '@musical-patterns/utilities'
+import { Ms, Scalar, to } from '@musical-patterns/utilities'
 import { computeNotesTotalCompiledDuration, Note, Scale } from '../../../../src/indexForTest'
 
 describe('total compiled duration', () => {
@@ -7,12 +7,12 @@ describe('total compiled duration', () => {
             const notes: Note[] = [
                 {
                     duration: {
-                        scalar: to.Scalar(2),
+                        scalar: to.Scalar<Scalar>(2),
                     },
                 },
                 {
                     duration: {
-                        index: to.Ordinal(1),
+                        index: to.Ordinal<Scalar>(1),
                     },
                 },
             ]

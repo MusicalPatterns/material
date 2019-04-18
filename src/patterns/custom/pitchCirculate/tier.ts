@@ -1,4 +1,15 @@
-import { Amplitude, Cardinal, Frequency, Hz, insteadOf, Ordinal, Scalar, to } from '@musical-patterns/utilities'
+import {
+    Amplitude,
+    Cardinal,
+    Frequency,
+    from,
+    Hz,
+    insteadOf,
+    NormalScalar,
+    Ordinal,
+    Scalar,
+    to,
+} from '@musical-patterns/utilities'
 import { Note } from '../../../compiler'
 import {
     applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount,
@@ -13,15 +24,15 @@ const computeTierWithTechniqueIndexTranslationByPitchClassCount:
         notes.map((note: Note): Note => {
             const originalPitchIndex: Ordinal<Hz> =
                 insteadOf<Ordinal, Hz>(note.pitch && note.pitch.index || to.Ordinal(0))
-            const originalGainScalar: Scalar<Amplitude> =
-                insteadOf<Scalar, Amplitude>(note.gain && note.gain.scalar || to.Scalar(1))
+            const originalGainScalar: NormalScalar<Amplitude> =
+                to.NormalScalar<Amplitude>(from.Scalar<Scalar>(note.gain && note.gain.scalar || to.Scalar<Scalar>(1)))
 
             const circledPitchIndex: Ordinal<Hz> = transposePitchIndexForTier(
                 originalPitchIndex,
                 { pitchClassCount, tierIndex },
             )
 
-            const pitchCircledGainScalar: Scalar<Amplitude> =
+            const pitchCircledGainScalar: NormalScalar<Amplitude> =
                 applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount(
                     originalGainScalar,
                     { circledPitchIndex, pitchClassCount },
@@ -31,7 +42,7 @@ const computeTierWithTechniqueIndexTranslationByPitchClassCount:
                 ...note,
                 gain: {
                     ...note.gain,
-                    scalar: insteadOf<Scalar, Scalar>(pitchCircledGainScalar),
+                    scalar: to.Scalar<Scalar>(from.NormalScalar<Amplitude>(pitchCircledGainScalar)),
                 },
                 pitch: {
                     ...note.pitch,
@@ -46,15 +57,15 @@ const computeTierWithTechniqueScalarScalingByWindowSize:
         notes.map((note: Note): Note => {
             const originalPitchScalar: Scalar<Frequency> =
                 insteadOf<Scalar, Frequency>(note.pitch && note.pitch.scalar || to.Scalar(1))
-            const originalGainScalar: Scalar<Amplitude> =
-                insteadOf<Scalar, Amplitude>(note.gain && note.gain.scalar || to.Scalar(1))
+            const originalGainScalar: NormalScalar<Amplitude> =
+                to.NormalScalar<Amplitude>(from.Scalar<Scalar>(note.gain && note.gain.scalar || to.Scalar<Scalar>(1)))
 
             const circledPitchScalar: Scalar<Frequency> = scalePitchScalarForTier(
                 originalPitchScalar,
                 { windowSize, tierIndex },
             )
 
-            const pitchCircledGainScalar: Scalar<Amplitude> =
+            const pitchCircledGainScalar: NormalScalar<Amplitude> =
                 applyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSize(
                     originalGainScalar,
                     { circledPitchScalar, windowSize },
@@ -64,7 +75,7 @@ const computeTierWithTechniqueScalarScalingByWindowSize:
                 ...note,
                 gain: {
                     ...note.gain,
-                    scalar: insteadOf<Scalar, Scalar>(pitchCircledGainScalar),
+                    scalar: to.Scalar<Scalar>(from.NormalScalar<Amplitude>(pitchCircledGainScalar)),
                 },
                 pitch: {
                     ...note.pitch,

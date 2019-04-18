@@ -1,4 +1,4 @@
-import { Amplitude, BEGINNING, INITIAL, NO_DURATION, to } from '@musical-patterns/utilities'
+import { Amplitude, BEGINNING, INITIAL, NO_DURATION, Scalar, to } from '@musical-patterns/utilities'
 import {
     CompiledPattern,
     compileVoices,
@@ -15,46 +15,46 @@ describe('compile voices', () => {
     const scales: Scale[] = [ { scalars: [ to.Scalar(3) ] } ]
 
     const testNote: Note = {
-        duration: { scalar: to.Scalar(3) },
-        gain: { scalar: to.Scalar(3) },
-        pitch: { scalar: to.Scalar(3) },
-        position: { scalar: to.Scalar(3) },
-        sustain: { scalar: to.Scalar(3) },
+        duration: { scalar: to.Scalar<Scalar>(3) },
+        gain: { scalar: to.Scalar<Scalar>(0.3) },
+        pitch: { scalar: to.Scalar<Scalar>(3) },
+        position: { scalar: to.Scalar<Scalar>(3) },
+        sustain: { scalar: to.Scalar<Scalar>(3) },
     }
     const expectedSound: Sound = {
         duration: to.Ms(9),
         frequency: to.Hz(9),
-        gain: to.Scalar<Amplitude>(9),
+        gain: to.NormalScalar<Amplitude>(0.9),
         position: [ 9, 0, 0 ].map(to.Meters),
         sustain: to.Ms(8.9),
     }
 
     const otherTestNote: Note = {
-        duration: { scalar: to.Scalar(3) },
-        gain: { scalar: to.Scalar(0) },
-        pitch: { scalar: to.Scalar(3) },
-        position: { scalar: to.Scalar(3) },
-        sustain: { scalar: to.Scalar(3) },
+        duration: { scalar: to.Scalar<Scalar>(3) },
+        gain: { scalar: to.Scalar<Scalar>(0) },
+        pitch: { scalar: to.Scalar<Scalar>(3) },
+        position: { scalar: to.Scalar<Scalar>(3) },
+        sustain: { scalar: to.Scalar<Scalar>(3) },
     }
     const otherExpectedSound: Sound = {
         duration: to.Ms(9),
         frequency: to.Hz(9),
-        gain: to.Scalar<Amplitude>(0),
+        gain: to.NormalScalar<Amplitude>(0),
         position: [ 9, 0, 0 ].map(to.Meters),
         sustain: to.Ms(8.9),
     }
 
     const otherOtherTestNote: Note = {
-        duration: { scalar: to.Scalar(3) },
-        gain: { scalar: to.Scalar(3) },
-        pitch: { scalar: to.Scalar(0) },
-        position: { scalar: to.Scalar(3) },
-        sustain: { scalar: to.Scalar(3) },
+        duration: { scalar: to.Scalar<Scalar>(3) },
+        gain: { scalar: to.Scalar<Scalar>(0.3) },
+        pitch: { scalar: to.Scalar<Scalar>(0) },
+        position: { scalar: to.Scalar<Scalar>(3) },
+        sustain: { scalar: to.Scalar<Scalar>(3) },
     }
     const otherOtherExpectedSound: Sound = {
         duration: to.Ms(9),
         frequency: to.Hz(0),
-        gain: to.Scalar<Amplitude>(9),
+        gain: to.NormalScalar<Amplitude>(0.9),
         position: [ 9, 0, 0 ].map(to.Meters),
         sustain: to.Ms(8.9),
     }
@@ -192,7 +192,7 @@ describe('compile voices', () => {
                         },
                         {
                             delay: NO_DURATION,
-                            segnoIndex: to.Ordinal(3),
+                            segnoIndex: to.Ordinal<Sound>(3),
                             sounds: [
                                 otherOtherExpectedSound,
                                 otherOtherExpectedSound,
@@ -207,7 +207,7 @@ describe('compile voices', () => {
                         },
                         {
                             delay: NO_DURATION,
-                            segnoIndex: to.Ordinal(3),
+                            segnoIndex: to.Ordinal<Sound>(3),
                             sounds: [
                                 expectedSound,
                                 otherExpectedSound,
@@ -268,7 +268,7 @@ describe('compile voices', () => {
                     voices: [
                         {
                             delay: NO_DURATION,
-                            segnoIndex: to.Ordinal(1),
+                            segnoIndex: to.Ordinal<Sound>(1),
                             sounds: [
                                 expectedSound,
                                 otherExpectedSound,
@@ -289,7 +289,7 @@ describe('compile voices', () => {
                         },
                         {
                             delay: NO_DURATION,
-                            segnoIndex: to.Ordinal(1),
+                            segnoIndex: to.Ordinal<Sound>(1),
                             sounds: [
                                 otherExpectedSound,
                                 expectedSound,
@@ -364,7 +364,7 @@ describe('compile voices', () => {
                     voices: [
                         {
                             delay: NO_DURATION,
-                            segnoIndex: to.Ordinal(3),
+                            segnoIndex: to.Ordinal<Sound>(3),
                             sounds: [
                                 otherOtherExpectedSound,
                                 otherOtherExpectedSound,
@@ -387,7 +387,7 @@ describe('compile voices', () => {
                         },
                         {
                             delay: NO_DURATION,
-                            segnoIndex: to.Ordinal(3),
+                            segnoIndex: to.Ordinal<Sound>(3),
                             sounds: [
                                 otherOtherExpectedSound,
                                 expectedSound,

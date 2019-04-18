@@ -9,7 +9,7 @@ import {
     Meters,
     Ms,
     MULTIPLICATIVE_IDENTITY,
-    Scalar,
+    NormalScalar,
     THREE_DIMENSIONAL,
     to,
 } from '@musical-patterns/utilities'
@@ -63,7 +63,7 @@ const compileSound: (note: Note, options?: CompileSoundsOptions) => Sound =
         } = note
 
         const duration: Ms = compileSoundFeature(noteDuration, options)
-        const gain: Scalar<Amplitude> = compileSoundFeature(noteGain, options)
+        const gain: NormalScalar<Amplitude> = compileSoundFeature(noteGain, options)
         const frequency: Hz = compileSoundFeature(notePitch, options)
 
         const position: Coordinate<Meters> = compilePosition(note.position, options)

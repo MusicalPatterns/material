@@ -1,4 +1,4 @@
-import { Amplitude, Maybe, to } from '@musical-patterns/utilities'
+import { Amplitude, Maybe, Scalar, to } from '@musical-patterns/utilities'
 import { computeRepetendSounds, Scale, Section, SectionInfo, Sound } from '../../../../../src/indexForTest'
 
 describe('compute repetend sounds', () => {
@@ -17,11 +17,11 @@ describe('compute repetend sounds', () => {
         ]
         const sections: Section[] = [
             {
-                notes: [ { duration: { scalar: to.Scalar(11) } } ],
+                notes: [ { duration: { scalar: to.Scalar<Scalar>(11) } } ],
                 repetitions: to.Cardinal(9),
             },
             {
-                notes: [ { duration: { scalar: to.Scalar(11) } } ],
+                notes: [ { duration: { scalar: to.Scalar<Scalar>(11) } } ],
             },
         ]
 
@@ -32,7 +32,7 @@ describe('compute repetend sounds', () => {
                 {
                     duration: to.Ms(11),
                     frequency: to.Hz(1),
-                    gain: to.Scalar<Amplitude>(1),
+                    gain: to.NormalScalar<Amplitude>(1),
                     position: [ 0, 0, 0 ].map(to.Meters),
                     sustain: to.Ms(10.9),
                 },
@@ -52,11 +52,11 @@ describe('compute repetend sounds', () => {
         ]
         const sections: Section[] = [
             {
-                notes: [ { duration: { scalar: to.Scalar(11) } } ],
+                notes: [ { duration: { scalar: to.Scalar<Scalar>(11) } } ],
                 repetitions: to.Cardinal(9),
             },
             {
-                notes: [ { duration: { scalar: to.Scalar(11) } } ],
+                notes: [ { duration: { scalar: to.Scalar<Scalar>(11) } } ],
                 repetitions: to.Cardinal(8),
             },
         ]
