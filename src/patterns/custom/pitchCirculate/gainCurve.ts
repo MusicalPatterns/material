@@ -42,7 +42,7 @@ const applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount:
             negative(apply.Scalar(normalDistributionExponent, ONE_HALF)),
         )
         const pitchCircularScaling: Scalar<Scalar<Amplitude>> =
-            to.Scalar(from.Logarithm<Scalar<Amplitude>>(pitchCircularBase))
+            to.Scalar<Scalar<Amplitude>>(from.Logarithm(pitchCircularBase))
 
         return to.NormalScalar<Amplitude>(from.Scalar(apply.Scalar(originalGainScalar, pitchCircularScaling)))
     }
@@ -64,7 +64,7 @@ const applyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSize:
             negative(apply.Scalar(normalDistributionExponent, ONE_HALF)),
         )
         const pitchCircularScaling: Scalar<Scalar<Amplitude>> =
-            to.Scalar(from.Logarithm<Scalar<Amplitude>>(pitchCircularBase))
+            to.Scalar<Scalar<Amplitude>>(from.Logarithm(pitchCircularBase))
 
         return to.NormalScalar<Amplitude>(from.Scalar(apply.Scalar(originalGainScalar, pitchCircularScaling)))
     }
