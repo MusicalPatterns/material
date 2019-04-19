@@ -1,4 +1,4 @@
-import { BEGINNING, insteadOf, NO_DURATION, of, Scalar, to } from '@musical-patterns/utilities'
+import { Amplitude, apply, BEGINNING, insteadOf, NO_DURATION, ONE_TENTH, Scalar, to } from '@musical-patterns/utilities'
 import {
     CompiledPattern,
     compilePattern,
@@ -20,7 +20,7 @@ describe('compile pattern', () => {
     const testNote: (testSpecs: TestSpecs) => Note =
         (testSpecs: TestSpecs): Note => ({
             duration: { scalar: testSpecs.testSpec },
-            gain: { scalar: testSpecs.testSpec },
+            gain: { scalar: apply.Scalar(testSpecs.testSpec, ONE_TENTH) },
             pitch: { scalar: testSpecs.testSpec },
             position: { scalar: testSpecs.testSpec },
             sustain: { scalar: testSpecs.testSpec },
@@ -28,7 +28,7 @@ describe('compile pattern', () => {
     const expectedSound: Sound = {
         duration: to.Ms(9),
         frequency: to.Hz(9),
-        gain: to.Scalar(of.Amplitude(9)),
+        gain: to.NormalScalar<Amplitude>(0.9),
         position: [ 9, 0, 0 ].map(to.Meters),
         sustain: to.Ms(8.9),
     }

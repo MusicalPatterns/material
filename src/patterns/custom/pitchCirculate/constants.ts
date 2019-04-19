@@ -3,7 +3,6 @@
 import {
     apply,
     Cardinal,
-    from,
     Logarithm,
     negative,
     reciprocal,
@@ -16,7 +15,7 @@ const PITCH_CIRCULAR_TIER_COUNT: Cardinal = to.Cardinal(3)
 const NEGATIVE_POINT_FIVE_TRANSLATION: Translation = negative(to.Translation(0.5))
 const KINDA_GUESSING_AT_A_GOOD_SIGMA: Logarithm = to.Logarithm(apply.Scalar(
     reciprocal(SQUARE_ROOT_OF_TWO),
-    to.Scalar(from.Cardinal(reciprocal(PITCH_CIRCULAR_TIER_COUNT))),
+    to.Scalar(reciprocal(PITCH_CIRCULAR_TIER_COUNT)),
 ))
 
 export {

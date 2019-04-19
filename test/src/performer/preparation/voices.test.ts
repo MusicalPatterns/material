@@ -1,5 +1,5 @@
 import { Amplitude, INITIAL, Ms, NO_DURATION, to } from '@musical-patterns/utilities'
-import { OscillatorName, PreparedVoice, prepareVoices, SourceType, Voice } from '../../../../src/indexForTest'
+import { OscillatorName, PreparedVoice, prepareVoices, Sound, SourceType, Voice } from '../../../../src/indexForTest'
 
 describe('prepare voices', () => {
     it('does not crash if a voice with empty sounds is prepared when the time position is not at the beginning', async (done: DoneFn) => {
@@ -58,7 +58,7 @@ describe('prepare voices', () => {
             expect(preparedVoice.nextStart)
                 .toBe(to.Ms(5))
             expect(preparedVoice.soundIndex)
-                .toBe(to.Ordinal(1))
+                .toBe(to.Ordinal<Sound>(1))
 
             done()
         })
@@ -100,7 +100,7 @@ describe('prepare voices', () => {
             expect(preparedVoice.nextStart)
                 .toBe(to.Ms(16))
             expect(preparedVoice.soundIndex)
-                .toBe(to.Ordinal(0))
+                .toBe(to.Ordinal<Sound>(0))
 
             done()
         })
@@ -109,7 +109,7 @@ describe('prepare voices', () => {
             const voices: Voice[] = [
                 {
                     delay: NO_DURATION,
-                    segnoIndex: to.Ordinal(1),
+                    segnoIndex: to.Ordinal<Sound>(1),
                     sounds: [
                         {
                             duration: to.Ms(5),
@@ -149,7 +149,7 @@ describe('prepare voices', () => {
             expect(preparedVoice.nextStart)
                 .toBe(to.Ms(14))
             expect(preparedVoice.soundIndex)
-                .toBe(to.Ordinal(2))
+                .toBe(to.Ordinal<Sound>(2))
 
             done()
         })

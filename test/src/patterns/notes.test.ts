@@ -1,4 +1,4 @@
-import { to } from '@musical-patterns/utilities'
+import { Scalar, to } from '@musical-patterns/utilities'
 import { computeNotesTotalDurationByIndex, computeNotesTotalDurationByScalar, Note } from '../../../src/indexForTest'
 
 describe('notes utilities', () => {
@@ -7,17 +7,17 @@ describe('notes utilities', () => {
             const notes: Note[] = [
                 {
                     duration: {
-                        scalar: to.Scalar(4),
+                        scalar: to.Scalar<Scalar>(4),
                     },
                 },
                 {
                     duration: {
-                        scalar: to.Scalar(7),
+                        scalar: to.Scalar<Scalar>(7),
                     },
                 },
                 {
                     duration: {
-                        scalar: to.Scalar(8),
+                        scalar: to.Scalar<Scalar>(8),
                     },
                 },
             ]
@@ -34,17 +34,17 @@ describe('notes utilities', () => {
             const notes: Note[] = [
                 {
                     duration: {
-                        index: to.Ordinal(4),
+                        index: to.Ordinal<Scalar>(4),
                     },
                 },
                 {
                     duration: {
-                        index: to.Ordinal(7),
+                        index: to.Ordinal<Scalar>(7),
                     },
                 },
                 {
                     duration: {
-                        index: to.Ordinal(8),
+                        index: to.Ordinal<Scalar>(8),
                     },
                 },
             ]

@@ -1,4 +1,4 @@
-import { Amplitude, to } from '@musical-patterns/utilities'
+import { Amplitude, Scalar, to } from '@musical-patterns/utilities'
 import {
     computeIndividualSoundsAndSectionInfos,
     Note,
@@ -10,8 +10,8 @@ import {
 
 describe('compute individual sounds and section infos', () => {
     it(`compiles each of the sections's notes and concatenates them, while reporting information about each of the sections as it goes`, () => {
-        const testNote: Note = { duration: { scalar: to.Scalar(3) } }
-        const otherTestNote: Note = { duration: { scalar: to.Scalar(9) } }
+        const testNote: Note = { duration: { scalar: to.Scalar<Scalar>(3) } }
+        const otherTestNote: Note = { duration: { scalar: to.Scalar<Scalar>(9) } }
 
         const sections: Section[] = [
             {

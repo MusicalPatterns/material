@@ -1,4 +1,4 @@
-import { Amplitude, to } from '@musical-patterns/utilities'
+import { Amplitude, Scalar, to } from '@musical-patterns/utilities'
 import { fillGap, Section, SectionInfo, Sound } from '../../../../../src/indexForTest'
 
 describe('fill gap', () => {
@@ -24,11 +24,11 @@ describe('fill gap', () => {
         ]
         const sections: Section[] = [
             {
-                notes: [ { duration: { scalar: to.Scalar(11) } } ],
+                notes: [ { duration: { scalar: to.Scalar<Scalar>(11) } } ],
                 repetitions: to.Cardinal(9),
             },
             {
-                notes: [ { duration: { scalar: to.Scalar(11) } } ],
+                notes: [ { duration: { scalar: to.Scalar<Scalar>(11) } } ],
             },
         ]
 
@@ -88,11 +88,11 @@ describe('fill gap', () => {
         ]
         const sections: Section[] = [
             {
-                notes: [ { duration: { scalar: to.Scalar(11) } } ],
+                notes: [ { duration: { scalar: to.Scalar<Scalar>(11) } } ],
                 repetitions: to.Cardinal(9),
             },
             {
-                notes: [ { duration: { scalar: to.Scalar(11) } } ],
+                notes: [ { duration: { scalar: to.Scalar<Scalar>(11) } } ],
                 repetitions: to.Cardinal(8),
             },
         ]

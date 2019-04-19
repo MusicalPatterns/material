@@ -1,4 +1,4 @@
-import { Amplitude, to } from '@musical-patterns/utilities'
+import { Amplitude, Scalar, to } from '@musical-patterns/utilities'
 import { compileSound, Note, Sound } from '../../../../src/indexForTest'
 
 describe('compile sound', () => {
@@ -39,7 +39,7 @@ describe('compile sound', () => {
         it('works when using a non-array position', () => {
             const note: Note = {
                 position: {
-                    scalar: to.Scalar(3),
+                    scalar: to.Scalar<Scalar>(3),
                 },
             }
             const sound: Sound = compileSound(note)
@@ -52,7 +52,7 @@ describe('compile sound', () => {
             const note: Note = {
                 position: [
                     {
-                        scalar: to.Scalar(3),
+                        scalar: to.Scalar<Scalar>(3),
                     },
                 ],
             }
@@ -66,10 +66,10 @@ describe('compile sound', () => {
             const note: Note = {
                 position: [
                     {
-                        scalar: to.Scalar(3),
+                        scalar: to.Scalar<Scalar>(3),
                     },
                     {
-                        scalar: to.Scalar(2),
+                        scalar: to.Scalar<Scalar>(2),
                     },
                 ],
             }
@@ -84,10 +84,10 @@ describe('compile sound', () => {
         it('caps sustain at slightly less than the duration', () => {
             const note: Note = {
                 duration: {
-                    scalar: to.Scalar(3),
+                    scalar: to.Scalar<Scalar>(3),
                 },
                 sustain: {
-                    scalar: to.Scalar(8),
+                    scalar: to.Scalar<Scalar>(8),
                 },
             }
             const sound: Sound = compileSound(note)
@@ -101,7 +101,7 @@ describe('compile sound', () => {
         it('defaults sustain to slightly less than the duration', () => {
             const note: Note = {
                 duration: {
-                    scalar: to.Scalar(3),
+                    scalar: to.Scalar<Scalar>(3),
                 },
             }
 
@@ -116,10 +116,10 @@ describe('compile sound', () => {
         it('uses sustain if given and less than duration', () => {
             const note: Note = {
                 duration: {
-                    scalar: to.Scalar(3),
+                    scalar: to.Scalar<Scalar>(3),
                 },
                 sustain: {
-                    scalar: to.Scalar(2),
+                    scalar: to.Scalar<Scalar>(2),
                 },
             }
 
