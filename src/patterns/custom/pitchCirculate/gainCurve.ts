@@ -37,14 +37,14 @@ const applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount:
         const normalDistributionExponent: Exponent<Logarithm> =
             computeExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount(parameters)
 
-        const pitchCircularBase: Logarithm<NormalScalar<Amplitude>> = apply.Exponent(
+        const pitchCircularBase: Logarithm<Scalar<Amplitude>> = apply.Exponent(
             E,
             negative(apply.Scalar(normalDistributionExponent, ONE_HALF)),
         )
-        const pitchCircularScaling: Scalar<NormalScalar<Amplitude>> =
-            to.Scalar(from.Logarithm<NormalScalar<Amplitude>>(pitchCircularBase))
+        const pitchCircularScaling: Scalar<Scalar<Amplitude>> =
+            to.Scalar(from.Logarithm<Scalar<Amplitude>>(pitchCircularBase))
 
-        return apply.Scalar(originalGainScalar, pitchCircularScaling)
+        return to.NormalScalar<Amplitude>(from.Scalar(apply.Scalar(originalGainScalar, pitchCircularScaling)))
     }
 
 const applyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSize:
@@ -59,14 +59,14 @@ const applyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSize:
         const normalDistributionExponent: Exponent<Logarithm> =
             computeExponentOfNormalDistributionWithTechniqueScalarScalingByWindowSize(parameters)
 
-        const pitchCircularBase: Logarithm<NormalScalar<Amplitude>> = apply.Exponent(
+        const pitchCircularBase: Logarithm<Scalar<Amplitude>> = apply.Exponent(
             E,
             negative(apply.Scalar(normalDistributionExponent, ONE_HALF)),
         )
-        const pitchCircularScaling: Scalar<NormalScalar<Amplitude>> =
-            to.Scalar(from.Logarithm<NormalScalar<Amplitude>>(pitchCircularBase))
+        const pitchCircularScaling: Scalar<Scalar<Amplitude>> =
+            to.Scalar(from.Logarithm<Scalar<Amplitude>>(pitchCircularBase))
 
-        return apply.Scalar(originalGainScalar, pitchCircularScaling)
+        return to.NormalScalar<Amplitude>(from.Scalar(apply.Scalar(originalGainScalar, pitchCircularScaling)))
     }
 
 export {

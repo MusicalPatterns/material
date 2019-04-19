@@ -31,9 +31,9 @@ const computeNumeratorOfExponentOfNormalDistributionWithTechniqueIndexTranslatio
             circledPitchIndex,
         }: ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
     ): number => {
-        const maximumPitchAcrossAllTiers: Ordinal<Hz> = to.Ordinal<Hz>(from.Cardinal(apply.Scalar(
+        const maximumPitchAcrossAllTiers: Ordinal<Hz> = to.Ordinal<Hz>(from.Cardinal(apply.Multiple(
             pitchClassCount,
-            to.Scalar(ofFrom(PITCH_CIRCULAR_TIER_COUNT)),
+            to.Multiple(ofFrom(PITCH_CIRCULAR_TIER_COUNT)),
         )))
         const circledPitchIndexProportionOfTotalPitchCount: number =
             from.Ordinal<Hz>(quotient(circledPitchIndex, maximumPitchAcrossAllTiers))

@@ -22,15 +22,15 @@ const transposePitchIndexForTier: (
         { pitchClassCount, tierIndex }: ComputeCircledPitchIndexParameters,
     ): Ordinal<Hz> => {
         const pitchIndexWrappedWithinPitchClassCountToRemoveOriginalWindowLocationInformation: Ordinal<Hz> =
-            apply.Modulus(
+            apply.IntegerModulus(
                 originalPitchIndex,
-                to.Modulus<Ordinal<Hz>>(from.Cardinal(pitchClassCount)),
+                to.IntegerModulus<Ordinal<Hz>>(from.Cardinal(pitchClassCount)),
             )
 
         const baseTierTransposition: Translation<Ordinal<Hz>> =
-            to.Translation<Ordinal<Hz>>(from.Ordinal<Scalar<Scalar<Frequency>>>(apply.Scalar(
+            to.Translation<Ordinal<Hz>>(from.Ordinal<Scalar<Scalar<Frequency>>>(apply.Multiple(
                 tierIndex,
-                to.Scalar<Ordinal<Scalar<Scalar<Frequency>>>>(from.Cardinal(pitchClassCount)),
+                to.Multiple<Ordinal<Scalar<Scalar<Frequency>>>>(from.Cardinal(pitchClassCount)),
             )))
 
         return apply.Translation(
