@@ -1,4 +1,4 @@
-import { apply, Coordinate, from, Meters, X_AXIS, Y_AXIS, Z_AXIS } from '@musical-patterns/utilities'
+import { Coordinate, Meters, notAs, use, X_AXIS, Y_AXIS, Z_AXIS } from '@musical-patterns/utilities'
 import { Object3D, PositionalAudio } from 'three'
 import { Vrb } from 'vrb'
 import { SourceNode } from './source'
@@ -6,11 +6,11 @@ import { ComputePositionalAudioParameters } from './types'
 
 const setPosition: (positionNode: Object3D, position: Coordinate<Meters>) => void =
     (positionNode: Object3D, position: Coordinate<Meters>): void => {
-        const rawPosition: number[] = position.map(from.Meters)
+        const rawPosition: number[] = position.map(notAs.Meters)
         positionNode.position.set(
-            apply.Ordinal(rawPosition, X_AXIS) || 0,
-            apply.Ordinal(rawPosition, Y_AXIS) || 0,
-            apply.Ordinal(rawPosition, Z_AXIS) || 0,
+            use.Ordinal(rawPosition, X_AXIS) || 0,
+            use.Ordinal(rawPosition, Y_AXIS) || 0,
+            use.Ordinal(rawPosition, Z_AXIS) || 0,
         )
     }
 

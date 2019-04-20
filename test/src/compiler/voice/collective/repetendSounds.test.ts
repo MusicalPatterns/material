@@ -1,4 +1,4 @@
-import { Amplitude, Maybe, Scalar, to } from '@musical-patterns/utilities'
+import { Amplitude, as, Maybe, Scalar } from '@musical-patterns/utilities'
 import { computeRepetendSounds, Scale, Section, SectionInfo, Sound } from '../../../../../src/indexForTest'
 
 describe('compute repetend sounds', () => {
@@ -8,20 +8,20 @@ describe('compute repetend sounds', () => {
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: to.Ms(99),
+                totalDuration: as.Ms(99),
             },
             {
                 doesRepeatForever: true,
-                totalDuration: to.Ms(11),
+                totalDuration: as.Ms(11),
             },
         ]
         const sections: Section[] = [
             {
-                notes: [ { duration: { scalar: to.Scalar<Scalar>(11) } } ],
-                repetitions: to.Cardinal(9),
+                notes: [ { duration: { scalar: as.Scalar<Scalar>(11) } } ],
+                repetitions: as.Cardinal(9),
             },
             {
-                notes: [ { duration: { scalar: to.Scalar<Scalar>(11) } } ],
+                notes: [ { duration: { scalar: as.Scalar<Scalar>(11) } } ],
             },
         ]
 
@@ -30,11 +30,11 @@ describe('compute repetend sounds', () => {
         expect(actualSounds)
             .toEqual([
                 {
-                    duration: to.Ms(11),
-                    frequency: to.Hz(1),
-                    gain: to.NormalScalar<Amplitude>(1),
-                    position: [ 0, 0, 0 ].map(to.Meters),
-                    sustain: to.Ms(10.9),
+                    duration: as.Ms(11),
+                    frequency: as.Hz(1),
+                    gain: as.NormalScalar<Amplitude>(1),
+                    position: [ 0, 0, 0 ].map(as.Meters),
+                    sustain: as.Ms(10.9),
                 },
             ])
     })
@@ -43,21 +43,21 @@ describe('compute repetend sounds', () => {
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: to.Ms(99),
+                totalDuration: as.Ms(99),
             },
             {
                 doesRepeatForever: false,
-                totalDuration: to.Ms(88),
+                totalDuration: as.Ms(88),
             },
         ]
         const sections: Section[] = [
             {
-                notes: [ { duration: { scalar: to.Scalar<Scalar>(11) } } ],
-                repetitions: to.Cardinal(9),
+                notes: [ { duration: { scalar: as.Scalar<Scalar>(11) } } ],
+                repetitions: as.Cardinal(9),
             },
             {
-                notes: [ { duration: { scalar: to.Scalar<Scalar>(11) } } ],
-                repetitions: to.Cardinal(8),
+                notes: [ { duration: { scalar: as.Scalar<Scalar>(11) } } ],
+                repetitions: as.Cardinal(8),
             },
         ]
 

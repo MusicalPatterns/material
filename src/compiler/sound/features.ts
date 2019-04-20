@@ -1,6 +1,5 @@
 import {
     ADDITIVE_IDENTITY,
-    apply,
     INITIAL,
     insteadOf,
     isEmpty,
@@ -10,6 +9,7 @@ import {
     round,
     Scalar,
     Translation,
+    use,
 } from '@musical-patterns/utilities'
 import { Scale } from '../../types'
 import { SoundFeature } from '../nominals'
@@ -23,7 +23,7 @@ const computeScaleProperties: (scaleStuffParameters: {
 }) => ScaleProperties =
     ({ index, scaleIndex, options }: ComputeScalePropertiesParameters): ScaleProperties => {
         const { scales = [] } = options || {}
-        const scale: Scale = isEmpty(scales) ? { scalars: [] } : apply.Ordinal(scales, scaleIndex)
+        const scale: Scale = isEmpty(scales) ? { scalars: [] } : use.Ordinal(scales, scaleIndex)
         const {
             translation: scaleTranslation = ADDITIVE_IDENTITY,
             scalar: scaleScalar = MULTIPLICATIVE_IDENTITY,
@@ -32,7 +32,7 @@ const computeScaleProperties: (scaleStuffParameters: {
 
         const scaleElement: Maybe<SoundFeature> = isEmpty(scalars) ?
             undefined :
-            apply.Ordinal(scalars, index)
+            use.Ordinal(scalars, index)
 
         return { scaleTranslation, scaleScalar, scaleElement }
     }
@@ -55,11 +55,11 @@ const compileSoundFeature:
 
         let soundFeature: SoundFeature = scaleElement || MULTIPLICATIVE_IDENTITY
 
-        soundFeature = apply.Scalar(soundFeature, insteadOf<Scalar, SoundFeature>(noteScalar))
-        soundFeature = apply.Scalar(soundFeature, insteadOf<Scalar, SoundFeature>(scaleScalar))
+        soundFeature = use.Scalar(soundFeature, insteadOf<Scalar, SoundFeature>(noteScalar))
+        soundFeature = use.Scalar(soundFeature, insteadOf<Scalar, SoundFeature>(scaleScalar))
 
-        soundFeature = apply.Translation(soundFeature, insteadOf<Translation, SoundFeature>(noteTranslation))
-        soundFeature = apply.Translation(soundFeature, insteadOf<Translation, SoundFeature>(scaleTranslation))
+        soundFeature = use.Translation(soundFeature, insteadOf<Translation, SoundFeature>(noteTranslation))
+        soundFeature = use.Translation(soundFeature, insteadOf<Translation, SoundFeature>(scaleTranslation))
 
         return round(soundFeature, COMPILER_PRECISION) as SoundFeatureType
     }

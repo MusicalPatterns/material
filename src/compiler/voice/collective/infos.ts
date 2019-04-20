@@ -1,13 +1,13 @@
 import {
     allValuesAreTheSame,
+    as,
     computeLeastCommonMultiple,
-    from,
     max,
     Ms,
     NO_DURATION,
+    notAs,
     round,
     sum,
-    to,
 } from '@musical-patterns/utilities'
 import { NON_SEGNO_TIME } from '../../../performer'
 import { IndividualVoiceAndInfo, IndividualVoiceInfo } from '../individual'
@@ -49,13 +49,13 @@ const computeCollectiveInfosFromPluckedInfos: (parameters: {
         const collectiveSegnoTime: Ms = max(...individualSegnoTimes)
         const collectiveRepetendDuration: Ms = collectiveSegnoTime === NON_SEGNO_TIME ?
             NON_SEGNO_TIME :
-            to.Ms(computeLeastCommonMultiple(
+            as.Ms(computeLeastCommonMultiple(
                 ...individualRepetendDurations
                     .filter((individualRepetendDuration: Ms) => individualRepetendDuration !== NO_DURATION)
                     // tslint:disable-next-line no-unnecessary-callback-wrapper
                     .map((individualRepetendDuration: Ms) => round(individualRepetendDuration))
-                    .map(from.Ms)
-                    .map(to.Integer),
+                    .map(notAs.Ms)
+                    .map(as.Integer),
             ))
         const collectiveEndTime: Ms = collectiveSegnoTime === NON_SEGNO_TIME ?
             max(...individualEndTimes) :

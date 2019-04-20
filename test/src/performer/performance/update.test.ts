@@ -1,22 +1,22 @@
-import { Amplitude, BEGINNING, INITIAL, NO_DURATION, noop, to } from '@musical-patterns/utilities'
+import { Amplitude, as, BEGINNING, INITIAL, NO_DURATION, noop } from '@musical-patterns/utilities'
 import { NON_SEGNO_INDEX, PreparedVoice, Sound, update } from '../../../../src/indexForTest'
 import Spy = jasmine.Spy
 
 describe('update', () => {
     const testSoundDurationFive: Sound = {
-        duration: to.Ms(5),
-        frequency: to.Hz(1),
-        gain: to.NormalScalar<Amplitude>(1),
-        position: [ 1 ].map(to.Meters),
-        sustain: to.Ms(1),
+        duration: as.Ms(5),
+        frequency: as.Hz(1),
+        gain: as.NormalScalar<Amplitude>(1),
+        position: [ 1 ].map(as.Meters),
+        sustain: as.Ms(1),
     }
 
     const testSoundDurationThree: Sound = {
-        duration: to.Ms(3),
-        frequency: to.Hz(1),
-        gain: to.NormalScalar<Amplitude>(1),
-        position: [ 1 ].map(to.Meters),
-        sustain: to.Ms(1),
+        duration: as.Ms(3),
+        frequency: as.Hz(1),
+        gain: as.NormalScalar<Amplitude>(1),
+        position: [ 1 ].map(as.Meters),
+        sustain: as.Ms(1),
     }
 
     it('uses duration and sustain to determine the next sound stop and start', () => {
@@ -24,8 +24,8 @@ describe('update', () => {
             delay: NO_DURATION,
             nextStart: BEGINNING,
             nextStop: BEGINNING,
-            segnoIndex: to.Ordinal<Sound>(0),
-            soundIndex: to.Ordinal<Sound>(0),
+            segnoIndex: as.Ordinal<Sound>(0),
+            soundIndex: as.Ordinal<Sound>(0),
             sounds: [ testSoundDurationFive, testSoundDurationThree ],
             source: {
                 startSound: noop,
@@ -34,14 +34,14 @@ describe('update', () => {
             },
         }
 
-        update(preparedVoice, to.Ms(1))
+        update(preparedVoice, as.Ms(1))
 
         expect(preparedVoice.nextStart)
-            .toBe(to.Ms(5))
+            .toBe(as.Ms(5))
         expect(preparedVoice.nextStop)
-            .toBe(to.Ms(1))
+            .toBe(as.Ms(1))
         expect(preparedVoice.soundIndex)
-            .toBe(to.Ordinal<Sound>(1))
+            .toBe(as.Ordinal<Sound>(1))
     })
 
     describe('sound index', () => {
@@ -50,8 +50,8 @@ describe('update', () => {
                 delay: NO_DURATION,
                 nextStart: BEGINNING,
                 nextStop: BEGINNING,
-                segnoIndex: to.Ordinal<Sound>(0),
-                soundIndex: to.Ordinal<Sound>(0),
+                segnoIndex: as.Ordinal<Sound>(0),
+                soundIndex: as.Ordinal<Sound>(0),
                 sounds: [
                     testSoundDurationFive,
                     testSoundDurationThree,
@@ -62,19 +62,19 @@ describe('update', () => {
                 },
             }
 
-            update(preparedVoice, to.Ms(1))
+            update(preparedVoice, as.Ms(1))
 
             expect(preparedVoice.soundIndex)
-                .toBe(to.Ordinal<Sound>(1))
+                .toBe(as.Ordinal<Sound>(1))
         })
 
         it('repeats from the beginning if it has reached the final sound', () => {
             const preparedVoice: PreparedVoice = {
                 delay: NO_DURATION,
-                nextStart: to.Ms(5),
-                nextStop: to.Ms(1),
-                segnoIndex: to.Ordinal<Sound>(0),
-                soundIndex: to.Ordinal<Sound>(1),
+                nextStart: as.Ms(5),
+                nextStop: as.Ms(1),
+                segnoIndex: as.Ordinal<Sound>(0),
+                soundIndex: as.Ordinal<Sound>(1),
                 sounds: [
                     testSoundDurationFive,
                     testSoundDurationThree,
@@ -85,19 +85,19 @@ describe('update', () => {
                 },
             }
 
-            update(preparedVoice, to.Ms(6))
+            update(preparedVoice, as.Ms(6))
 
             expect(preparedVoice.soundIndex)
-                .toBe(to.Ordinal<Sound>(0))
+                .toBe(as.Ordinal<Sound>(0))
         })
 
         it('repeats from the segno index, even if it is not 0 the default', () => {
             const preparedVoice: PreparedVoice = {
                 delay: NO_DURATION,
-                nextStart: to.Ms(5),
-                nextStop: to.Ms(1),
-                segnoIndex: to.Ordinal<Sound>(1),
-                soundIndex: to.Ordinal<Sound>(1),
+                nextStart: as.Ms(5),
+                nextStop: as.Ms(1),
+                segnoIndex: as.Ordinal<Sound>(1),
+                soundIndex: as.Ordinal<Sound>(1),
                 sounds: [
                     testSoundDurationFive,
                     testSoundDurationThree,
@@ -108,19 +108,19 @@ describe('update', () => {
                 },
             }
 
-            update(preparedVoice, to.Ms(6))
+            update(preparedVoice, as.Ms(6))
 
             expect(preparedVoice.soundIndex)
-                .toBe(to.Ordinal<Sound>(1))
+                .toBe(as.Ordinal<Sound>(1))
         })
 
         it('when the segno index is -1 (the non-segno index) it stops playing when it reaches the end', () => {
             const preparedVoice: PreparedVoice = {
                 delay: NO_DURATION,
-                nextStart: to.Ms(5),
-                nextStop: to.Ms(1),
+                nextStart: as.Ms(5),
+                nextStop: as.Ms(1),
                 segnoIndex: NON_SEGNO_INDEX,
-                soundIndex: to.Ordinal<Sound>(1),
+                soundIndex: as.Ordinal<Sound>(1),
                 sounds: [
                     testSoundDurationFive,
                     testSoundDurationThree,
@@ -131,7 +131,7 @@ describe('update', () => {
                 },
             }
 
-            update(preparedVoice, to.Ms(6))
+            update(preparedVoice, as.Ms(6))
 
             expect(preparedVoice.soundIndex)
                 .toBe(NON_SEGNO_INDEX)
@@ -139,7 +139,7 @@ describe('update', () => {
 
         it('when there is a delay, the sounds are not reached until their time plus the delay', () => {
             const preparedVoice: PreparedVoice = {
-                delay: to.Ms(7),
+                delay: as.Ms(7),
                 nextStart: BEGINNING,
                 nextStop: BEGINNING,
                 segnoIndex: INITIAL,
@@ -154,25 +154,25 @@ describe('update', () => {
                 },
             }
 
-            update(preparedVoice, to.Ms(1))
+            update(preparedVoice, as.Ms(1))
             expect(preparedVoice.soundIndex)
                 .toBe(INITIAL)
 
-            update(preparedVoice, to.Ms(6))
+            update(preparedVoice, as.Ms(6))
             expect(preparedVoice.soundIndex)
                 .toBe(INITIAL)
 
-            update(preparedVoice, to.Ms(8))
+            update(preparedVoice, as.Ms(8))
             expect(preparedVoice.soundIndex)
-                .toBe(to.Ordinal<Sound>(1))
+                .toBe(as.Ordinal<Sound>(1))
 
-            update(preparedVoice, to.Ms(12))
+            update(preparedVoice, as.Ms(12))
             expect(preparedVoice.soundIndex)
-                .toBe(to.Ordinal<Sound>(1))
+                .toBe(as.Ordinal<Sound>(1))
 
-            update(preparedVoice, to.Ms(13))
+            update(preparedVoice, as.Ms(13))
             expect(preparedVoice.soundIndex)
-                .toBe(to.Ordinal<Sound>(0))
+                .toBe(as.Ordinal<Sound>(0))
         })
     })
 
@@ -181,10 +181,10 @@ describe('update', () => {
             const startSound: Spy = jasmine.createSpy()
             const preparedVoice: PreparedVoice = {
                 delay: NO_DURATION,
-                nextStart: to.Ms(8),
+                nextStart: as.Ms(8),
                 nextStop: BEGINNING,
-                segnoIndex: to.Ordinal<Sound>(0),
-                soundIndex: to.Ordinal<Sound>(0),
+                segnoIndex: as.Ordinal<Sound>(0),
+                soundIndex: as.Ordinal<Sound>(0),
                 sounds: [ testSoundDurationFive ],
                 source: {
                     startSound,
@@ -192,7 +192,7 @@ describe('update', () => {
                 },
             }
 
-            update(preparedVoice, to.Ms(9))
+            update(preparedVoice, as.Ms(9))
 
             expect(startSound)
                 .toHaveBeenCalled()
@@ -202,10 +202,10 @@ describe('update', () => {
             const startSound: Spy = jasmine.createSpy()
             const preparedVoice: PreparedVoice = {
                 delay: NO_DURATION,
-                nextStart: to.Ms(8),
+                nextStart: as.Ms(8),
                 nextStop: BEGINNING,
-                segnoIndex: to.Ordinal<Sound>(0),
-                soundIndex: to.Ordinal<Sound>(0),
+                segnoIndex: as.Ordinal<Sound>(0),
+                soundIndex: as.Ordinal<Sound>(0),
                 sounds: [ testSoundDurationFive ],
                 source: {
                     startSound,
@@ -213,7 +213,7 @@ describe('update', () => {
                 },
             }
 
-            update(preparedVoice, to.Ms(7))
+            update(preparedVoice, as.Ms(7))
 
             expect(startSound)
                 .not
@@ -225,9 +225,9 @@ describe('update', () => {
             const preparedVoice: PreparedVoice = {
                 delay: NO_DURATION,
                 nextStart: BEGINNING,
-                nextStop: to.Ms(8),
-                segnoIndex: to.Ordinal<Sound>(0),
-                soundIndex: to.Ordinal<Sound>(0),
+                nextStop: as.Ms(8),
+                segnoIndex: as.Ordinal<Sound>(0),
+                soundIndex: as.Ordinal<Sound>(0),
                 sounds: [ testSoundDurationFive ],
                 source: {
                     startSound: noop,
@@ -235,7 +235,7 @@ describe('update', () => {
                 },
             }
 
-            update(preparedVoice, to.Ms(9))
+            update(preparedVoice, as.Ms(9))
 
             expect(stopSound)
                 .toHaveBeenCalled()
@@ -246,9 +246,9 @@ describe('update', () => {
             const preparedVoice: PreparedVoice = {
                 delay: NO_DURATION,
                 nextStart: BEGINNING,
-                nextStop: to.Ms(8),
-                segnoIndex: to.Ordinal<Sound>(0),
-                soundIndex: to.Ordinal<Sound>(0),
+                nextStop: as.Ms(8),
+                segnoIndex: as.Ordinal<Sound>(0),
+                soundIndex: as.Ordinal<Sound>(0),
                 sounds: [ testSoundDurationFive ],
                 source: {
                     startSound: noop,
@@ -256,7 +256,7 @@ describe('update', () => {
                 },
             }
 
-            update(preparedVoice, to.Ms(7))
+            update(preparedVoice, as.Ms(7))
 
             expect(stopSound)
                 .not
@@ -267,7 +267,7 @@ describe('update', () => {
             const startSound: Spy = jasmine.createSpy()
             const preparedVoice: PreparedVoice = {
                 delay: NO_DURATION,
-                nextStart: to.Ms(8),
+                nextStart: as.Ms(8),
                 nextStop: BEGINNING,
                 segnoIndex: NON_SEGNO_INDEX,
                 soundIndex: NON_SEGNO_INDEX,
@@ -278,7 +278,7 @@ describe('update', () => {
                 },
             }
 
-            update(preparedVoice, to.Ms(9))
+            update(preparedVoice, as.Ms(9))
 
             expect(startSound)
                 .not
@@ -291,8 +291,8 @@ describe('update', () => {
             delay: NO_DURATION,
             nextStart: BEGINNING,
             nextStop: BEGINNING,
-            segnoIndex: to.Ordinal<Sound>(0),
-            soundIndex: to.Ordinal<Sound>(0),
+            segnoIndex: as.Ordinal<Sound>(0),
+            soundIndex: as.Ordinal<Sound>(0),
             sounds: [],
             source: {
                 startSound: noop,
@@ -300,6 +300,6 @@ describe('update', () => {
             },
         }
 
-        update(preparedVoice, to.Ms(1))
+        update(preparedVoice, as.Ms(1))
     })
 })

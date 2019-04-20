@@ -1,4 +1,4 @@
-import { Amplitude, BEGINNING, INITIAL, NO_DURATION, Scalar, to } from '@musical-patterns/utilities'
+import { Amplitude, as, BEGINNING, INITIAL, NO_DURATION, Scalar } from '@musical-patterns/utilities'
 import {
     CompiledPattern,
     compileVoices,
@@ -12,51 +12,51 @@ import {
 } from '../../../../src/indexForTest'
 
 describe('compile voices', () => {
-    const scales: Scale[] = [ { scalars: [ to.Scalar(3) ] } ]
+    const scales: Scale[] = [ { scalars: [ as.Scalar(3) ] } ]
 
     const testNote: Note = {
-        duration: { scalar: to.Scalar<Scalar>(3) },
-        gain: { scalar: to.Scalar<Scalar>(0.3) },
-        pitch: { scalar: to.Scalar<Scalar>(3) },
-        position: { scalar: to.Scalar<Scalar>(3) },
-        sustain: { scalar: to.Scalar<Scalar>(3) },
+        duration: { scalar: as.Scalar<Scalar>(3) },
+        gain: { scalar: as.Scalar<Scalar>(0.3) },
+        pitch: { scalar: as.Scalar<Scalar>(3) },
+        position: { scalar: as.Scalar<Scalar>(3) },
+        sustain: { scalar: as.Scalar<Scalar>(3) },
     }
     const expectedSound: Sound = {
-        duration: to.Ms(9),
-        frequency: to.Hz(9),
-        gain: to.NormalScalar<Amplitude>(0.9),
-        position: [ 9, 0, 0 ].map(to.Meters),
-        sustain: to.Ms(8.9),
+        duration: as.Ms(9),
+        frequency: as.Hz(9),
+        gain: as.NormalScalar<Amplitude>(0.9),
+        position: [ 9, 0, 0 ].map(as.Meters),
+        sustain: as.Ms(8.9),
     }
 
     const otherTestNote: Note = {
-        duration: { scalar: to.Scalar<Scalar>(3) },
-        gain: { scalar: to.Scalar<Scalar>(0) },
-        pitch: { scalar: to.Scalar<Scalar>(3) },
-        position: { scalar: to.Scalar<Scalar>(3) },
-        sustain: { scalar: to.Scalar<Scalar>(3) },
+        duration: { scalar: as.Scalar<Scalar>(3) },
+        gain: { scalar: as.Scalar<Scalar>(0) },
+        pitch: { scalar: as.Scalar<Scalar>(3) },
+        position: { scalar: as.Scalar<Scalar>(3) },
+        sustain: { scalar: as.Scalar<Scalar>(3) },
     }
     const otherExpectedSound: Sound = {
-        duration: to.Ms(9),
-        frequency: to.Hz(9),
-        gain: to.NormalScalar<Amplitude>(0),
-        position: [ 9, 0, 0 ].map(to.Meters),
-        sustain: to.Ms(8.9),
+        duration: as.Ms(9),
+        frequency: as.Hz(9),
+        gain: as.NormalScalar<Amplitude>(0),
+        position: [ 9, 0, 0 ].map(as.Meters),
+        sustain: as.Ms(8.9),
     }
 
     const otherOtherTestNote: Note = {
-        duration: { scalar: to.Scalar<Scalar>(3) },
-        gain: { scalar: to.Scalar<Scalar>(0.3) },
-        pitch: { scalar: to.Scalar<Scalar>(0) },
-        position: { scalar: to.Scalar<Scalar>(3) },
-        sustain: { scalar: to.Scalar<Scalar>(3) },
+        duration: { scalar: as.Scalar<Scalar>(3) },
+        gain: { scalar: as.Scalar<Scalar>(0.3) },
+        pitch: { scalar: as.Scalar<Scalar>(0) },
+        position: { scalar: as.Scalar<Scalar>(3) },
+        sustain: { scalar: as.Scalar<Scalar>(3) },
     }
     const otherOtherExpectedSound: Sound = {
-        duration: to.Ms(9),
-        frequency: to.Hz(0),
-        gain: to.NormalScalar<Amplitude>(0.9),
-        position: [ 9, 0, 0 ].map(to.Meters),
-        sustain: to.Ms(8.9),
+        duration: as.Ms(9),
+        frequency: as.Hz(0),
+        gain: as.NormalScalar<Amplitude>(0.9),
+        position: [ 9, 0, 0 ].map(as.Meters),
+        sustain: as.Ms(8.9),
     }
 
     describe('when all entities enumerate their repetitions i.e. the song ends instead of repeating forever', () => {
@@ -69,7 +69,7 @@ describe('compile voices', () => {
                                 otherTestNote,
                                 testNote,
                             ],
-                            repetitions: to.Cardinal(3),
+                            repetitions: as.Cardinal(3),
                         },
                     ],
                 },
@@ -80,7 +80,7 @@ describe('compile voices', () => {
                                 testNote,
                                 otherTestNote,
                             ],
-                            repetitions: to.Cardinal(2),
+                            repetitions: as.Cardinal(2),
                         },
                     ],
                 },
@@ -90,8 +90,8 @@ describe('compile voices', () => {
 
             expect(actualCompiledPattern)
                 .toEqual({
-                    segnoTime: to.Ms(-1),
-                    totalDuration: to.Ms(54),
+                    segnoTime: as.Ms(-1),
+                    totalDuration: as.Ms(54),
                     voices: [
                         {
                             delay: NO_DURATION,
@@ -137,7 +137,7 @@ describe('compile voices', () => {
                             notes: [
                                 testNote,
                             ],
-                            repetitions: to.Cardinal(4),
+                            repetitions: as.Cardinal(4),
                         },
                     ],
                 },
@@ -147,7 +147,7 @@ describe('compile voices', () => {
                             notes: [
                                 otherOtherTestNote,
                             ],
-                            repetitions: to.Cardinal(3),
+                            repetitions: as.Cardinal(3),
                         },
                         {
                             notes: [
@@ -173,8 +173,8 @@ describe('compile voices', () => {
 
             expect(actualCompiledPattern)
                 .toEqual({
-                    segnoTime: to.Ms(27),
-                    totalDuration: to.Ms(45),
+                    segnoTime: as.Ms(27),
+                    totalDuration: as.Ms(45),
                     voices: [
                         {
                             delay: NO_DURATION,
@@ -192,7 +192,7 @@ describe('compile voices', () => {
                         },
                         {
                             delay: NO_DURATION,
-                            segnoIndex: to.Ordinal<Sound>(3),
+                            segnoIndex: as.Ordinal<Sound>(3),
                             sounds: [
                                 otherOtherExpectedSound,
                                 otherOtherExpectedSound,
@@ -207,7 +207,7 @@ describe('compile voices', () => {
                         },
                         {
                             delay: NO_DURATION,
-                            segnoIndex: to.Ordinal<Sound>(3),
+                            segnoIndex: as.Ordinal<Sound>(3),
                             sounds: [
                                 expectedSound,
                                 otherExpectedSound,
@@ -234,7 +234,7 @@ describe('compile voices', () => {
                             notes: [
                                 testNote,
                             ],
-                            repetitions: to.Cardinal(1),
+                            repetitions: as.Cardinal(1),
                         },
                         {
                             notes: [
@@ -263,12 +263,12 @@ describe('compile voices', () => {
 
             expect(actualCompiledPattern)
                 .toEqual({
-                    segnoTime: to.Ms(9),
-                    totalDuration: to.Ms(99),
+                    segnoTime: as.Ms(9),
+                    totalDuration: as.Ms(99),
                     voices: [
                         {
                             delay: NO_DURATION,
-                            segnoIndex: to.Ordinal<Sound>(1),
+                            segnoIndex: as.Ordinal<Sound>(1),
                             sounds: [
                                 expectedSound,
                                 otherExpectedSound,
@@ -289,7 +289,7 @@ describe('compile voices', () => {
                         },
                         {
                             delay: NO_DURATION,
-                            segnoIndex: to.Ordinal<Sound>(1),
+                            segnoIndex: as.Ordinal<Sound>(1),
                             sounds: [
                                 otherExpectedSound,
                                 expectedSound,
@@ -322,7 +322,7 @@ describe('compile voices', () => {
                             notes: [
                                 otherOtherTestNote,
                             ],
-                            repetitions: to.Cardinal(3),
+                            repetitions: as.Cardinal(3),
                         },
                         {
                             notes: [
@@ -343,7 +343,7 @@ describe('compile voices', () => {
                                 testNote,
                                 otherOtherTestNote,
                             ],
-                            repetitions: to.Cardinal(1),
+                            repetitions: as.Cardinal(1),
                         },
                         {
                             notes: [
@@ -359,12 +359,12 @@ describe('compile voices', () => {
 
             expect(actualCompiledPattern)
                 .toEqual({
-                    segnoTime: to.Ms(27),
-                    totalDuration: to.Ms(117),
+                    segnoTime: as.Ms(27),
+                    totalDuration: as.Ms(117),
                     voices: [
                         {
                             delay: NO_DURATION,
-                            segnoIndex: to.Ordinal<Sound>(3),
+                            segnoIndex: as.Ordinal<Sound>(3),
                             sounds: [
                                 otherOtherExpectedSound,
                                 otherOtherExpectedSound,
@@ -387,7 +387,7 @@ describe('compile voices', () => {
                         },
                         {
                             delay: NO_DURATION,
-                            segnoIndex: to.Ordinal<Sound>(3),
+                            segnoIndex: as.Ordinal<Sound>(3),
                             sounds: [
                                 otherOtherExpectedSound,
                                 expectedSound,
@@ -442,7 +442,7 @@ describe('compile voices', () => {
             expect(actualCompiledPattern)
                 .toEqual({
                     segnoTime: BEGINNING,
-                    totalDuration: to.Ms(54),
+                    totalDuration: as.Ms(54),
                     voices: [
                         {
                             delay: NO_DURATION,

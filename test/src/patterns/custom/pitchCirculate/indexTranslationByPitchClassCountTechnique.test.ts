@@ -1,47 +1,47 @@
 // tslint:disable number-literal-format
 
-import { apply, insteadOf, Scalar, to } from '@musical-patterns/utilities'
+import { as, insteadOf, Scalar, use } from '@musical-patterns/utilities'
 import { Note, PitchCircularTechnique, pitchCirculate, Scale } from '../../../../../src/indexForTest'
 
 describe('pitch circulate, using the technique of index translation by pitch class count', () => {
     let outputSetOfNotes: Note[][]
 
-    const A: Scalar<Scalar> = to.Scalar<Scalar>(0.011)
-    const B: Scalar<Scalar> = to.Scalar<Scalar>(0.018)
-    const C: Scalar<Scalar> = to.Scalar<Scalar>(0.029)
-    const D: Scalar<Scalar> = to.Scalar<Scalar>(0.043)
-    const E: Scalar<Scalar> = to.Scalar<Scalar>(0.066)
-    const F: Scalar<Scalar> = to.Scalar<Scalar>(0.096)
-    const G: Scalar<Scalar> = to.Scalar<Scalar>(0.135)
-    const H: Scalar<Scalar> = to.Scalar<Scalar>(0.186)
-    const I: Scalar<Scalar> = to.Scalar<Scalar>(0.249)
-    const J: Scalar<Scalar> = to.Scalar<Scalar>(0.324)
-    const K: Scalar<Scalar> = to.Scalar<Scalar>(0.411)
-    const L: Scalar<Scalar> = to.Scalar<Scalar>(0.506)
-    const M: Scalar<Scalar> = to.Scalar<Scalar>(0.606)
-    const N: Scalar<Scalar> = to.Scalar<Scalar>(0.707)
-    const O: Scalar<Scalar> = to.Scalar<Scalar>(0.801)
-    const P: Scalar<Scalar> = to.Scalar<Scalar>(0.882)
-    const Q: Scalar<Scalar> = to.Scalar<Scalar>(0.945)
-    const R: Scalar<Scalar> = to.Scalar<Scalar>(0.986)
-    const S: Scalar<Scalar> = to.Scalar<Scalar>(1.000)
+    const A: Scalar<Scalar> = as.Scalar<Scalar>(0.011)
+    const B: Scalar<Scalar> = as.Scalar<Scalar>(0.018)
+    const C: Scalar<Scalar> = as.Scalar<Scalar>(0.029)
+    const D: Scalar<Scalar> = as.Scalar<Scalar>(0.043)
+    const E: Scalar<Scalar> = as.Scalar<Scalar>(0.066)
+    const F: Scalar<Scalar> = as.Scalar<Scalar>(0.096)
+    const G: Scalar<Scalar> = as.Scalar<Scalar>(0.135)
+    const H: Scalar<Scalar> = as.Scalar<Scalar>(0.186)
+    const I: Scalar<Scalar> = as.Scalar<Scalar>(0.249)
+    const J: Scalar<Scalar> = as.Scalar<Scalar>(0.324)
+    const K: Scalar<Scalar> = as.Scalar<Scalar>(0.411)
+    const L: Scalar<Scalar> = as.Scalar<Scalar>(0.506)
+    const M: Scalar<Scalar> = as.Scalar<Scalar>(0.606)
+    const N: Scalar<Scalar> = as.Scalar<Scalar>(0.707)
+    const O: Scalar<Scalar> = as.Scalar<Scalar>(0.801)
+    const P: Scalar<Scalar> = as.Scalar<Scalar>(0.882)
+    const Q: Scalar<Scalar> = as.Scalar<Scalar>(0.945)
+    const R: Scalar<Scalar> = as.Scalar<Scalar>(0.986)
+    const S: Scalar<Scalar> = as.Scalar<Scalar>(1.000)
 
     describe('given a set of notes, will return a set of sets of notes which together constitute the pitch circled version of it', () => {
-        const originalGain: Scalar<Scalar> = to.Scalar<Scalar>(0.5)
+        const originalGain: Scalar<Scalar> = as.Scalar<Scalar>(0.5)
         beforeEach(() => {
             const inputNotes: Note[] = [ {
                 gain: {
                     scalar: originalGain,
                 },
                 pitch: {
-                    index: to.Ordinal<Scalar>(45),
+                    index: as.Ordinal<Scalar>(45),
                 },
             } ]
 
             outputSetOfNotes = pitchCirculate(
                 inputNotes,
                 {
-                    pitchClassCount: to.Cardinal(12),
+                    pitchClassCount: as.Cardinal(12),
                     technique: PitchCircularTechnique.INDEX_TRANSLATION_BY_PITCH_CLASS_COUNT,
                 },
             )
@@ -49,24 +49,24 @@ describe('pitch circulate, using the technique of index translation by pitch cla
 
         it('translates the pitch indices so that each set of notes is separated from the next by the pitch class count (and for now always returning three sets of notes, starting with the lowest possible set of notes)', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].pitch!.index)
-                .toEqual(to.Ordinal<Scalar>(9))
+                .toEqual(as.Ordinal<Scalar>(9))
             expect(outputSetOfNotes[ 1 ][ 0 ].pitch!.index)
-                .toEqual(to.Ordinal<Scalar>(21))
+                .toEqual(as.Ordinal<Scalar>(21))
             expect(outputSetOfNotes[ 2 ][ 0 ].pitch!.index)
-                .toEqual(to.Ordinal<Scalar>(33))
+                .toEqual(as.Ordinal<Scalar>(33))
         })
 
         it('maps the gain to a normal distribution curve, so that the center set of notes is loud, and the outer sets of notes get quieter depending on how far from the center they are (treating each index as an equal step, irrespective to whether they give differently sized pitch changes)', () => {
-            const MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE: Scalar<Scalar> = to.Scalar<Scalar>(0.324)
-            const LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES: Scalar<Scalar> = to.Scalar<Scalar>(0.882)
-            const QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE: Scalar<Scalar> = to.Scalar<Scalar>(0.043)
+            const MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE: Scalar<Scalar> = as.Scalar<Scalar>(0.324)
+            const LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES: Scalar<Scalar> = as.Scalar<Scalar>(0.882)
+            const QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE: Scalar<Scalar> = as.Scalar<Scalar>(0.043)
 
             expect(outputSetOfNotes[ 0 ][ 0 ].gain!.scalar!)
-                .toBeCloseToTyped(apply.Scalar(MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE, insteadOf<Scalar, Scalar<Scalar>>(originalGain)))
+                .toBeCloseToTyped(use.Scalar(MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE, insteadOf<Scalar, Scalar<Scalar>>(originalGain)))
             expect(outputSetOfNotes[ 1 ][ 0 ].gain!.scalar!)
-                .toBeCloseToTyped(apply.Scalar(LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES, insteadOf<Scalar, Scalar<Scalar>>(originalGain)))
+                .toBeCloseToTyped(use.Scalar(LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES, insteadOf<Scalar, Scalar<Scalar>>(originalGain)))
             expect(outputSetOfNotes[ 2 ][ 0 ].gain!.scalar!)
-                .toBeCloseToTyped(apply.Scalar(QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE, insteadOf<Scalar, Scalar<Scalar>>(originalGain)))
+                .toBeCloseToTyped(use.Scalar(QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE, insteadOf<Scalar, Scalar<Scalar>>(originalGain)))
         })
     })
 
@@ -75,27 +75,27 @@ describe('pitch circulate, using the technique of index translation by pitch cla
             const inputNotes: Note[] = [
                 {
                     duration: {
-                        index: to.Ordinal<Scalar>(3),
-                        scalar: to.Scalar<Scalar>(4),
-                        scaleIndex: to.Ordinal<Scale>(5),
+                        index: as.Ordinal<Scalar>(3),
+                        scalar: as.Scalar<Scalar>(4),
+                        scaleIndex: as.Ordinal<Scale>(5),
                     },
                     gain: {
-                        index: to.Ordinal<Scalar>(9),
-                        scaleIndex: to.Ordinal<Scale>(5),
+                        index: as.Ordinal<Scalar>(9),
+                        scaleIndex: as.Ordinal<Scale>(5),
                     },
                     pitch: {
-                        scalar: to.Scalar<Scalar>(11),
-                        scaleIndex: to.Ordinal<Scale>(10),
+                        scalar: as.Scalar<Scalar>(11),
+                        scaleIndex: as.Ordinal<Scale>(10),
                     },
                     position: [ {
-                        index: to.Ordinal<Scalar>(2),
-                        scalar: to.Scalar<Scalar>(4),
-                        scaleIndex: to.Ordinal<Scale>(6),
+                        index: as.Ordinal<Scalar>(2),
+                        scalar: as.Scalar<Scalar>(4),
+                        scaleIndex: as.Ordinal<Scale>(6),
                     } ],
                     sustain: {
-                        index: to.Ordinal<Scalar>(6),
-                        scalar: to.Scalar<Scalar>(7),
-                        scaleIndex: to.Ordinal<Scale>(8),
+                        index: as.Ordinal<Scalar>(6),
+                        scalar: as.Scalar<Scalar>(7),
+                        scaleIndex: as.Ordinal<Scale>(8),
                     },
                 },
             ]
@@ -103,7 +103,7 @@ describe('pitch circulate, using the technique of index translation by pitch cla
             outputSetOfNotes = pitchCirculate(
                 inputNotes,
                 {
-                    pitchClassCount: to.Cardinal(12),
+                    pitchClassCount: as.Cardinal(12),
                     technique: PitchCircularTechnique.INDEX_TRANSLATION_BY_PITCH_CLASS_COUNT,
                 },
             )
@@ -112,125 +112,125 @@ describe('pitch circulate, using the technique of index translation by pitch cla
         it('copies the duration into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].duration)
                 .toEqual({
-                    index: to.Ordinal<Scalar>(3),
-                    scalar: to.Scalar<Scalar>(4),
-                    scaleIndex: to.Ordinal<Scale>(5),
+                    index: as.Ordinal<Scalar>(3),
+                    scalar: as.Scalar<Scalar>(4),
+                    scaleIndex: as.Ordinal<Scale>(5),
                 })
             expect(outputSetOfNotes[ 1 ][ 0 ].duration)
                 .toEqual({
-                    index: to.Ordinal<Scalar>(3),
-                    scalar: to.Scalar<Scalar>(4),
-                    scaleIndex: to.Ordinal<Scale>(5),
+                    index: as.Ordinal<Scalar>(3),
+                    scalar: as.Scalar<Scalar>(4),
+                    scaleIndex: as.Ordinal<Scale>(5),
                 })
             expect(outputSetOfNotes[ 2 ][ 0 ].duration)
                 .toEqual({
-                    index: to.Ordinal<Scalar>(3),
-                    scalar: to.Scalar<Scalar>(4),
-                    scaleIndex: to.Ordinal<Scale>(5),
+                    index: as.Ordinal<Scalar>(3),
+                    scalar: as.Scalar<Scalar>(4),
+                    scaleIndex: as.Ordinal<Scale>(5),
                 })
         })
 
         it('copies the sustain into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].sustain)
                 .toEqual({
-                    index: to.Ordinal<Scalar>(6),
-                    scalar: to.Scalar<Scalar>(7),
-                    scaleIndex: to.Ordinal<Scale>(8),
+                    index: as.Ordinal<Scalar>(6),
+                    scalar: as.Scalar<Scalar>(7),
+                    scaleIndex: as.Ordinal<Scale>(8),
                 })
             expect(outputSetOfNotes[ 1 ][ 0 ].sustain)
                 .toEqual({
-                    index: to.Ordinal<Scalar>(6),
-                    scalar: to.Scalar<Scalar>(7),
-                    scaleIndex: to.Ordinal<Scale>(8),
+                    index: as.Ordinal<Scalar>(6),
+                    scalar: as.Scalar<Scalar>(7),
+                    scaleIndex: as.Ordinal<Scale>(8),
                 })
             expect(outputSetOfNotes[ 2 ][ 0 ].sustain)
                 .toEqual({
-                    index: to.Ordinal<Scalar>(6),
-                    scalar: to.Scalar<Scalar>(7),
-                    scaleIndex: to.Ordinal<Scale>(8),
+                    index: as.Ordinal<Scalar>(6),
+                    scalar: as.Scalar<Scalar>(7),
+                    scaleIndex: as.Ordinal<Scale>(8),
                 })
         })
 
         it('copies the position into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].position)
                 .toEqual([ {
-                    index: to.Ordinal<Scalar>(2),
-                    scalar: to.Scalar<Scalar>(4),
-                    scaleIndex: to.Ordinal<Scale>(6),
+                    index: as.Ordinal<Scalar>(2),
+                    scalar: as.Scalar<Scalar>(4),
+                    scaleIndex: as.Ordinal<Scale>(6),
                 } ])
             expect(outputSetOfNotes[ 1 ][ 0 ].position)
                 .toEqual([ {
-                    index: to.Ordinal<Scalar>(2),
-                    scalar: to.Scalar<Scalar>(4),
-                    scaleIndex: to.Ordinal<Scale>(6),
+                    index: as.Ordinal<Scalar>(2),
+                    scalar: as.Scalar<Scalar>(4),
+                    scaleIndex: as.Ordinal<Scale>(6),
                 } ])
             expect(outputSetOfNotes[ 2 ][ 0 ].position)
                 .toEqual([ {
-                    index: to.Ordinal<Scalar>(2),
-                    scalar: to.Scalar<Scalar>(4),
-                    scaleIndex: to.Ordinal<Scale>(6),
+                    index: as.Ordinal<Scalar>(2),
+                    scalar: as.Scalar<Scalar>(4),
+                    scaleIndex: as.Ordinal<Scale>(6),
                 } ])
         })
 
         it('copies the pitch scale index into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].pitch!.scaleIndex)
-                .toEqual(to.Ordinal<Scale>(10))
+                .toEqual(as.Ordinal<Scale>(10))
             expect(outputSetOfNotes[ 1 ][ 0 ].pitch!.scaleIndex)
-                .toEqual(to.Ordinal<Scale>(10))
+                .toEqual(as.Ordinal<Scale>(10))
             expect(outputSetOfNotes[ 2 ][ 0 ].pitch!.scaleIndex)
-                .toEqual(to.Ordinal<Scale>(10))
+                .toEqual(as.Ordinal<Scale>(10))
         })
 
         it('copies the pitch scalar into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].pitch!.scalar)
-                .toEqual(to.Scalar<Scalar>(11))
+                .toEqual(as.Scalar<Scalar>(11))
             expect(outputSetOfNotes[ 1 ][ 0 ].pitch!.scalar)
-                .toEqual(to.Scalar<Scalar>(11))
+                .toEqual(as.Scalar<Scalar>(11))
             expect(outputSetOfNotes[ 2 ][ 0 ].pitch!.scalar)
-                .toEqual(to.Scalar<Scalar>(11))
+                .toEqual(as.Scalar<Scalar>(11))
         })
 
         it('copies the gain scale index into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].gain!.scaleIndex)
-                .toEqual(to.Ordinal<Scale>(5))
+                .toEqual(as.Ordinal<Scale>(5))
             expect(outputSetOfNotes[ 1 ][ 0 ].gain!.scaleIndex)
-                .toEqual(to.Ordinal<Scale>(5))
+                .toEqual(as.Ordinal<Scale>(5))
             expect(outputSetOfNotes[ 2 ][ 0 ].gain!.scaleIndex)
-                .toEqual(to.Ordinal<Scale>(5))
+                .toEqual(as.Ordinal<Scale>(5))
         })
 
         it('copies the gain index into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].gain!.index)
-                .toEqual(to.Ordinal<Scalar>(9))
+                .toEqual(as.Ordinal<Scalar>(9))
             expect(outputSetOfNotes[ 1 ][ 0 ].gain!.index)
-                .toEqual(to.Ordinal<Scalar>(9))
+                .toEqual(as.Ordinal<Scalar>(9))
             expect(outputSetOfNotes[ 2 ][ 0 ].gain!.index)
-                .toEqual(to.Ordinal<Scalar>(9))
+                .toEqual(as.Ordinal<Scalar>(9))
         })
     })
 
     describe('gain goes in a cycle', () => {
         beforeEach(() => {
             const inputNotes: Note[] = [
-                { pitch: { index: to.Ordinal<Scalar>(0) } },
-                { pitch: { index: to.Ordinal<Scalar>(1) } },
-                { pitch: { index: to.Ordinal<Scalar>(2) } },
-                { pitch: { index: to.Ordinal<Scalar>(3) } },
-                { pitch: { index: to.Ordinal<Scalar>(4) } },
-                { pitch: { index: to.Ordinal<Scalar>(5) } },
-                { pitch: { index: to.Ordinal<Scalar>(6) } },
-                { pitch: { index: to.Ordinal<Scalar>(7) } },
-                { pitch: { index: to.Ordinal<Scalar>(8) } },
-                { pitch: { index: to.Ordinal<Scalar>(9) } },
-                { pitch: { index: to.Ordinal<Scalar>(10) } },
-                { pitch: { index: to.Ordinal<Scalar>(11) } },
-                { pitch: { index: to.Ordinal<Scalar>(12) } },
+                { pitch: { index: as.Ordinal<Scalar>(0) } },
+                { pitch: { index: as.Ordinal<Scalar>(1) } },
+                { pitch: { index: as.Ordinal<Scalar>(2) } },
+                { pitch: { index: as.Ordinal<Scalar>(3) } },
+                { pitch: { index: as.Ordinal<Scalar>(4) } },
+                { pitch: { index: as.Ordinal<Scalar>(5) } },
+                { pitch: { index: as.Ordinal<Scalar>(6) } },
+                { pitch: { index: as.Ordinal<Scalar>(7) } },
+                { pitch: { index: as.Ordinal<Scalar>(8) } },
+                { pitch: { index: as.Ordinal<Scalar>(9) } },
+                { pitch: { index: as.Ordinal<Scalar>(10) } },
+                { pitch: { index: as.Ordinal<Scalar>(11) } },
+                { pitch: { index: as.Ordinal<Scalar>(12) } },
             ]
 
             outputSetOfNotes = pitchCirculate(
                 inputNotes,
                 {
-                    pitchClassCount: to.Cardinal(12),
+                    pitchClassCount: as.Cardinal(12),
                     technique: PitchCircularTechnique.INDEX_TRANSLATION_BY_PITCH_CLASS_COUNT,
                 },
             )
@@ -330,18 +330,18 @@ describe('pitch circulate, using the technique of index translation by pitch cla
     describe('gain curve is almost zero at the edges and slopes nicely up to a 1 in the middle, for other pitch class counts too', () => {
         beforeEach(() => {
             const inputNotes: Note[] = [
-                { pitch: { index: to.Ordinal<Scalar>(0) } },
-                { pitch: { index: to.Ordinal<Scalar>(1) } },
-                { pitch: { index: to.Ordinal<Scalar>(2) } },
-                { pitch: { index: to.Ordinal<Scalar>(3) } },
-                { pitch: { index: to.Ordinal<Scalar>(4) } },
-                { pitch: { index: to.Ordinal<Scalar>(5) } },
+                { pitch: { index: as.Ordinal<Scalar>(0) } },
+                { pitch: { index: as.Ordinal<Scalar>(1) } },
+                { pitch: { index: as.Ordinal<Scalar>(2) } },
+                { pitch: { index: as.Ordinal<Scalar>(3) } },
+                { pitch: { index: as.Ordinal<Scalar>(4) } },
+                { pitch: { index: as.Ordinal<Scalar>(5) } },
             ]
 
             outputSetOfNotes = pitchCirculate(
                 inputNotes,
                 {
-                    pitchClassCount: to.Cardinal(6),
+                    pitchClassCount: as.Cardinal(6),
                     technique: PitchCircularTechnique.INDEX_TRANSLATION_BY_PITCH_CLASS_COUNT,
                 },
             )

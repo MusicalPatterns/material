@@ -1,21 +1,20 @@
 // tslint:disable max-file-line-count
 
 import {
-    apply,
+    as,
     Cardinal,
     DOUBLE,
     Exponent,
     Frequency,
-    from,
     Hz,
     Logarithm,
-    of,
-    ofFrom,
+    notAs,
+    ofNotAs,
     Ordinal,
     quotient,
     Scalar,
     SQUARED,
-    to,
+    use,
 } from '@musical-patterns/utilities'
 import { KINDA_GUESSING_AT_A_GOOD_SIGMA, NEGATIVE_POINT_FIVE_TRANSLATION, PITCH_CIRCULAR_TIER_COUNT } from './constants'
 import {
@@ -32,20 +31,20 @@ const computeNumeratorOfExponentOfNormalDistributionWithTechniqueIndexTranslatio
             circledPitchIndex,
         }: ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
     ): number => {
-        const maximumPitchAcrossAllTiers: Ordinal<Hz> = to.Ordinal<Hz>(from.Cardinal(apply.Multiple(
+        const maximumPitchAcrossAllTiers: Ordinal<Hz> = as.Ordinal<Hz>(notAs.Cardinal(use.Multiple(
             pitchClassCount,
-            to.Multiple(ofFrom(PITCH_CIRCULAR_TIER_COUNT)),
+            as.Multiple(ofNotAs(PITCH_CIRCULAR_TIER_COUNT)),
         )))
         const circledPitchIndexProportionOfTotalPitchCount: number =
-            from.Ordinal<Hz>(quotient(circledPitchIndex, maximumPitchAcrossAllTiers))
+            notAs.Ordinal<Hz>(quotient(circledPitchIndex, maximumPitchAcrossAllTiers))
         const pitchProportionOfTotalTranslatedToBePositiveIfGreaterThanMedianAndNegativeIfLesser: number =
-            apply.Translation(circledPitchIndexProportionOfTotalPitchCount, NEGATIVE_POINT_FIVE_TRANSLATION)
-        const pitchProportionOfTotalScaledToBeBetweenNegativeAndPositiveOne: number = apply.Multiple(
+            use.Translation(circledPitchIndexProportionOfTotalPitchCount, NEGATIVE_POINT_FIVE_TRANSLATION)
+        const pitchProportionOfTotalScaledToBeBetweenNegativeAndPositiveOne: number = use.Multiple(
             pitchProportionOfTotalTranslatedToBePositiveIfGreaterThanMedianAndNegativeIfLesser,
             DOUBLE,
         )
 
-        return apply.Power(
+        return use.Power(
             pitchProportionOfTotalScaledToBeBetweenNegativeAndPositiveOne,
             SQUARED,
         )
@@ -59,23 +58,23 @@ const computeNumeratorOfExponentOfNormalDistributionWithTechniqueScalarScalingBy
             circledPitchScalar,
         }: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters,
     ): number => {
-        const maximumPitchAcrossAllTiers: WindowSize = apply.Exponent(
+        const maximumPitchAcrossAllTiers: WindowSize = use.Exponent(
             windowSize,
-            to.Exponent<Scalar<Scalar<Frequency>>>(from.Cardinal(PITCH_CIRCULAR_TIER_COUNT)),
+            as.Exponent<Scalar<Scalar<Frequency>>>(notAs.Cardinal(PITCH_CIRCULAR_TIER_COUNT)),
         )
         const circledPitchScalarProportionOfTotalPitchCount: number =
-            from.Scalar<Frequency>(apply.Base(
+            notAs.Scalar<Frequency>(use.Base(
                 circledPitchScalar,
-                to.Base<Scalar<Frequency>>(from.Scalar<Scalar<Frequency>>(maximumPitchAcrossAllTiers)),
+                as.Base<Scalar<Frequency>>(notAs.Scalar<Scalar<Frequency>>(maximumPitchAcrossAllTiers)),
             ))
         const pitchProportionOfTotalTranslatedToBePositiveIfGreaterThanMedianAndNegativeIfLesser: number =
-            apply.Translation(circledPitchScalarProportionOfTotalPitchCount, NEGATIVE_POINT_FIVE_TRANSLATION)
-        const pitchProportionOfTotalScaledToBeBetweenNegativeAndPositiveOne: number = apply.Multiple(
+            use.Translation(circledPitchScalarProportionOfTotalPitchCount, NEGATIVE_POINT_FIVE_TRANSLATION)
+        const pitchProportionOfTotalScaledToBeBetweenNegativeAndPositiveOne: number = use.Multiple(
             pitchProportionOfTotalTranslatedToBePositiveIfGreaterThanMedianAndNegativeIfLesser,
             DOUBLE,
         )
 
-        return apply.Power(
+        return use.Power(
             pitchProportionOfTotalScaledToBeBetweenNegativeAndPositiveOne,
             SQUARED,
         )
@@ -86,10 +85,10 @@ const computeExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchCla
     (
         parameters: ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
     ): Exponent<Logarithm> =>
-        to.Exponent<Logarithm>(
+        as.Exponent<Logarithm>(
             computeNumeratorOfExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount(parameters) /
-            from.Logarithm(apply.Multiple(
-                apply.Power(KINDA_GUESSING_AT_A_GOOD_SIGMA, SQUARED),
+            notAs.Logarithm(use.Multiple(
+                use.Power(KINDA_GUESSING_AT_A_GOOD_SIGMA, SQUARED),
                 DOUBLE,
             )),
         )
@@ -97,10 +96,10 @@ const computeExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchCla
 const computeExponentOfNormalDistributionWithTechniqueScalarScalingByWindowSize:
     (parameters: { circledPitchScalar: Scalar<Frequency>, windowSize: WindowSize }) => Exponent<Logarithm> =
     (parameters: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters): Exponent<Logarithm> =>
-        to.Exponent<Logarithm>(
+        as.Exponent<Logarithm>(
             computeNumeratorOfExponentOfNormalDistributionWithTechniqueScalarScalingByWindowSize(parameters) /
-            from.Logarithm(apply.Multiple(
-                apply.Power(KINDA_GUESSING_AT_A_GOOD_SIGMA, SQUARED),
+            notAs.Logarithm(use.Multiple(
+                use.Power(KINDA_GUESSING_AT_A_GOOD_SIGMA, SQUARED),
                 DOUBLE,
             )),
         )

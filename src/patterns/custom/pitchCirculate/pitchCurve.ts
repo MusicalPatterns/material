@@ -1,15 +1,14 @@
 import {
-    apply,
+    as,
     Cardinal,
     Frequency,
-    from,
     Hz,
     insteadOf,
-    of,
+    notAs,
     Ordinal,
     Scalar,
-    to,
     Translation,
+    use,
     windowReduce,
 } from '@musical-patterns/utilities'
 import { ComputeCircledPitchIndexParameters, ComputeCircledPitchScalarParameters, WindowSize } from './types'
@@ -23,18 +22,18 @@ const transposePitchIndexForTier: (
         { pitchClassCount, tierIndex }: ComputeCircledPitchIndexParameters,
     ): Ordinal<Hz> => {
         const pitchIndexWrappedWithinPitchClassCountToRemoveOriginalWindowLocationInformation: Ordinal<Hz> =
-            apply.IntegerModulus(
+            use.IntegerModulus(
                 originalPitchIndex,
-                to.IntegerModulus<Ordinal<Hz>>(from.Cardinal(pitchClassCount)),
+                as.IntegerModulus<Ordinal<Hz>>(notAs.Cardinal(pitchClassCount)),
             )
 
         const baseTierTransposition: Translation<Ordinal<Hz>> =
-            to.Translation<Ordinal<Hz>>(from.Ordinal<Scalar<Scalar<Frequency>>>(apply.Multiple(
+            as.Translation<Ordinal<Hz>>(notAs.Ordinal<Scalar<Scalar<Frequency>>>(use.Multiple(
                 tierIndex,
-                to.Multiple<Ordinal<Scalar<Scalar<Frequency>>>>(from.Cardinal(pitchClassCount)),
+                as.Multiple<Ordinal<Scalar<Scalar<Frequency>>>>(notAs.Cardinal(pitchClassCount)),
             )))
 
-        return apply.Translation(
+        return use.Translation(
             pitchIndexWrappedWithinPitchClassCountToRemoveOriginalWindowLocationInformation,
             insteadOf<Translation, Ordinal<Hz>>(baseTierTransposition),
         )
@@ -53,12 +52,12 @@ const scalePitchScalarForTier: (
             windowSize,
         )
 
-        const baseTierScaling: WindowSize = apply.Power(
+        const baseTierScaling: WindowSize = use.Power(
             windowSize,
-            to.Power<Scalar<Scalar<Frequency>>>(from.Ordinal<Scalar<Scalar<Frequency>>>(tierIndex)),
+            as.Power<Scalar<Scalar<Frequency>>>(notAs.Ordinal<Scalar<Scalar<Frequency>>>(tierIndex)),
         )
 
-        return apply.Scalar(
+        return use.Scalar(
             pitchScalarReducedWithinWindowSizeToRemoveWindowLocationInformation,
             baseTierScaling,
         )

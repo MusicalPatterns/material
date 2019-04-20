@@ -1,4 +1,4 @@
-import { Amplitude, apply, BEGINNING, insteadOf, NO_DURATION, ONE_TENTH, Scalar, to } from '@musical-patterns/utilities'
+import { Amplitude, as, BEGINNING, insteadOf, NO_DURATION, ONE_TENTH, Scalar, use } from '@musical-patterns/utilities'
 import {
     CompiledPattern,
     compilePattern,
@@ -14,23 +14,23 @@ import { TestSpecs } from '../../support'
 
 describe('compile pattern', () => {
     const specs: TestSpecs = {
-        testSpec: to.Scalar<Scalar>(3),
+        testSpec: as.Scalar<Scalar>(3),
     }
 
     const testNote: (testSpecs: TestSpecs) => Note =
         (testSpecs: TestSpecs): Note => ({
             duration: { scalar: testSpecs.testSpec },
-            gain: { scalar: apply.Scalar(testSpecs.testSpec, ONE_TENTH) },
+            gain: { scalar: use.Scalar(testSpecs.testSpec, ONE_TENTH) },
             pitch: { scalar: testSpecs.testSpec },
             position: { scalar: testSpecs.testSpec },
             sustain: { scalar: testSpecs.testSpec },
         })
     const expectedSound: Sound = {
-        duration: to.Ms(9),
-        frequency: to.Hz(9),
-        gain: to.NormalScalar<Amplitude>(0.9),
-        position: [ 9, 0, 0 ].map(to.Meters),
-        sustain: to.Ms(8.9),
+        duration: as.Ms(9),
+        frequency: as.Hz(9),
+        gain: as.NormalScalar<Amplitude>(0.9),
+        position: [ 9, 0, 0 ].map(as.Meters),
+        sustain: as.Ms(8.9),
     }
 
     const material: Material = {
@@ -62,11 +62,11 @@ describe('compile pattern', () => {
         expect(actualCompiledPattern)
             .toEqual({
                 segnoTime: BEGINNING,
-                totalDuration: to.Ms(9),
+                totalDuration: as.Ms(9),
                 voices: [
                     {
                         delay: NO_DURATION,
-                        segnoIndex: to.Ordinal<Sound>(0),
+                        segnoIndex: as.Ordinal<Sound>(0),
                         sounds: [ expectedSound ],
                         sourceRequest: {
                             sourceType: SourceType.OSCILLATOR,
@@ -92,11 +92,11 @@ describe('compile pattern', () => {
         expect(actualCompiledPattern)
             .toEqual({
                 segnoTime: BEGINNING,
-                totalDuration: to.Ms(9),
+                totalDuration: as.Ms(9),
                 voices: [
                     {
                         delay: NO_DURATION,
-                        segnoIndex: to.Ordinal<Sound>(0),
+                        segnoIndex: as.Ordinal<Sound>(0),
                         sounds: [ expectedSound ],
                         sourceRequest: {
                             sourceType: SourceType.OSCILLATOR,
@@ -114,7 +114,7 @@ describe('compile pattern', () => {
             material,
             spec: {
                 initialSpecs: {
-                    testSpec: to.Scalar<Scalar>(293587293873),
+                    testSpec: as.Scalar<Scalar>(293587293873),
                 },
             },
         }
@@ -124,11 +124,11 @@ describe('compile pattern', () => {
         expect(actualCompiledPattern)
             .toEqual({
                 segnoTime: BEGINNING,
-                totalDuration: to.Ms(9),
+                totalDuration: as.Ms(9),
                 voices: [
                     {
                         delay: NO_DURATION,
-                        segnoIndex: to.Ordinal<Sound>(0),
+                        segnoIndex: as.Ordinal<Sound>(0),
                         sounds: [ expectedSound ],
                         sourceRequest: {
                             sourceType: SourceType.OSCILLATOR,

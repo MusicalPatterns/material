@@ -1,4 +1,4 @@
-import { Amplitude, from, Maybe, NormalScalar } from '@musical-patterns/utilities'
+import { Amplitude, Maybe, NormalScalar, notAs } from '@musical-patterns/utilities'
 import { PositionalAudio } from 'three'
 import { context } from './context'
 import { SourceNode } from './source'
@@ -13,13 +13,13 @@ const computeGainNode: (parameters: {
         let gainNode: GainNode
         if (positionalAudio) {
             gainNode = positionalAudio.getOutput()
-            positionalAudio.setVolume(from.NormalScalar<Amplitude>(gain))
+            positionalAudio.setVolume(notAs.NormalScalar<Amplitude>(gain))
         }
         else {
             gainNode = context.createGain()
             sourceNode.connect(gainNode)
             gainNode.connect(context.destination)
-            gainNode.gain.value = from.NormalScalar<Amplitude>(gain)
+            gainNode.gain.value = notAs.NormalScalar<Amplitude>(gain)
         }
 
         return gainNode

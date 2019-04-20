@@ -1,4 +1,4 @@
-import { apply, forEach, insteadOf, isEmpty, isUndefined, Maybe, Ordinal } from '@musical-patterns/utilities'
+import { forEach, insteadOf, isEmpty, isUndefined, Maybe, Ordinal, use } from '@musical-patterns/utilities'
 import { Sound } from '../../../performer'
 import { compileSounds, Note } from '../../sound'
 import { NOT_FOUND } from '../constants'
@@ -26,7 +26,7 @@ const computeRepetendSounds:
             return undefined
         }
 
-        const repetend: Section = isEmpty(sections) ? {} : apply.Ordinal(sections, repetendIndex)
+        const repetend: Section = isEmpty(sections) ? {} : use.Ordinal(sections, repetendIndex)
         const repetendNotes: Maybe<Note[]> = repetend.notes
         if (isUndefined(repetendNotes) || isEmpty(repetendNotes)) {
             throw new Error('Repetend was empty or undefined')

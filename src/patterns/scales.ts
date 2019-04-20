@@ -1,21 +1,21 @@
 import { StandardSpec, StandardSpecs } from '@musical-patterns/spec'
 import {
     Amplitude,
-    apply,
+    as,
     Base,
     Frequency,
-    from,
     Hz,
     Integer,
     Ms,
     NO_TRANSLATION,
+    notAs,
     OCTAVE,
     POSITIVE_INTEGERS,
     Power,
     reciprocal,
     Scalar,
-    to,
     Translation,
+    use,
     ZERO_AND_POSITIVE_INTEGERS,
 } from '@musical-patterns/utilities'
 import { Scale } from '../types'
@@ -26,12 +26,12 @@ const computeNonScale: <NumericType extends Number = number>() => Scale<NumericT
 
 const computeHarmonicSeriesScale: <NumericType extends Number = Hz>() => Scale<NumericType> =
     <NumericType extends Number = Hz>(): Scale<NumericType> => ({
-        scalars: POSITIVE_INTEGERS.map((integer: Integer) => to.Scalar<NumericType>(integer)),
+        scalars: POSITIVE_INTEGERS.map((integer: Integer) => as.Scalar<NumericType>(integer)),
     })
 
 const computeSubharmonicSeriesScale: <NumericType extends Number = Hz>() => Scale<NumericType> =
     <NumericType extends Number = Hz>(): Scale<NumericType> => ({
-        scalars: POSITIVE_INTEGERS.map((integer: Integer) => to.Scalar<NumericType>(reciprocal(integer))),
+        scalars: POSITIVE_INTEGERS.map((integer: Integer) => as.Scalar<NumericType>(reciprocal(integer))),
     })
 
 const computeFlatDurationsScale: () => Scale<Ms> =
@@ -42,9 +42,9 @@ const computeFlatDurationsScale: () => Scale<Ms> =
 const computeOctaveSeriesScale: () => Scale<Hz> =
     (): Scale<Hz> => ({
         scalars: ZERO_AND_POSITIVE_INTEGERS
-            .map((integer: Integer) => to.Power<Base<Frequency>>(integer))
+            .map((integer: Integer) => as.Power<Base<Frequency>>(integer))
             .map((power: Power<Base<Frequency>>): Scalar<Hz> =>
-                to.Scalar<Hz>(from.Base<Frequency>(apply.Power(
+                as.Scalar<Hz>(notAs.Base<Frequency>(use.Power(
                     OCTAVE,
                     power,
                 ))),
@@ -63,14 +63,14 @@ const materializeStandardScales:
         // tslint:disable-next-line no-any
     ): [ Scale<Amplitude>, Scale<Ms>, Scale<Hz> ] & Array<Scale<any>> => {
         const gainScale: Scale<Amplitude> = computeNonScale()
-        const durationScalar: Scalar<Ms> = specs[ StandardSpec.BASE_DURATION ] || to.Scalar<Ms>(1)
+        const durationScalar: Scalar<Ms> = specs[ StandardSpec.BASE_DURATION ] || as.Scalar<Ms>(1)
         const durationTranslation: Translation<Ms> = specs[ StandardSpec.BASE_DURATION_TRANSLATION ] || NO_TRANSLATION
         const durationsScale: Scale<Ms> = {
             scalar: durationScalar,
             scalars: durationScalars,
             translation: durationTranslation,
         }
-        const pitchesScalar: Scalar<Hz> = specs[ StandardSpec.BASE_FREQUENCY ] || to.Scalar<Hz>(1)
+        const pitchesScalar: Scalar<Hz> = specs[ StandardSpec.BASE_FREQUENCY ] || as.Scalar<Hz>(1)
         const pitchesTranslation: Translation<Hz> = specs[ StandardSpec.BASE_FREQUENCY_TRANSLATION ] || NO_TRANSLATION
         const pitchesScale: Scale<Hz> = {
             scalar: pitchesScalar,

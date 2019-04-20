@@ -1,12 +1,12 @@
 import {
+    as,
     Frequency,
-    from,
     INITIAL,
     Integer,
+    notAs,
     Ordinal,
     Scalar,
     slice,
-    to,
     ZERO_AND_POSITIVE_INTEGERS,
 } from '@musical-patterns/utilities'
 import { Note } from '../../../compiler'
@@ -22,12 +22,12 @@ const pitchCirculate: (notes: Note[], options: PitchCirculateOptions) => Note[][
         notes: Note[],
         {
             technique,
-            pitchClassCount = to.Cardinal(0),
-            windowSize = to.Scalar<Scalar<Frequency>>(1),
+            pitchClassCount = as.Cardinal(0),
+            windowSize = as.Scalar<Scalar<Frequency>>(1),
         }: PitchCirculateOptions,
     ): Note[][] =>
-        slice(ZERO_AND_POSITIVE_INTEGERS, INITIAL, to.Ordinal(from.Cardinal(PITCH_CIRCULAR_TIER_COUNT)))
-            .map((integer: Integer) => to.Ordinal<WindowSize>(integer))
+        slice(ZERO_AND_POSITIVE_INTEGERS, INITIAL, as.Ordinal(notAs.Cardinal(PITCH_CIRCULAR_TIER_COUNT)))
+            .map((integer: Integer) => as.Ordinal<WindowSize>(integer))
             .map((tierIndex: Ordinal<WindowSize>): Note[] =>
                 technique === PitchCircularTechnique.INDEX_TRANSLATION_BY_PITCH_CLASS_COUNT ?
                     computeTierWithTechniqueIndexTranslationByPitchClassCount(notes, tierIndex, pitchClassCount) :

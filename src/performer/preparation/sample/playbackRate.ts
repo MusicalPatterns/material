@@ -1,14 +1,14 @@
 import {
-    apply,
+    as,
     Cents,
     centsTranslationToPitchScalar,
     Frequency,
     Hz,
     insteadOf,
-    ofFrom,
+    ofNotAs,
     reciprocal,
     Scalar,
-    to,
+    use,
 } from '@musical-patterns/utilities'
 import { STANDARDIZED_SAMPLE_PITCH_OF_C5 } from './constants'
 import { SampleData } from './types'
@@ -16,17 +16,17 @@ import { SampleData } from './types'
 const computePlaybackRate: (sampleData: SampleData, frequency: Hz) => Scalar<Hz> =
     (sampleData: SampleData, frequency: Hz): Scalar<Hz> => {
         if (sampleData.unpitched) {
-            return to.Scalar<Hz>(1)
+            return as.Scalar<Hz>(1)
         }
 
-        const pitch: Scalar<Hz> = to.Scalar(ofFrom(apply.Scalar(
+        const pitch: Scalar<Hz> = as.Scalar(ofNotAs(use.Scalar(
             frequency,
-            to.Scalar(ofFrom(reciprocal(STANDARDIZED_SAMPLE_PITCH_OF_C5))),
+            as.Scalar(ofNotAs(reciprocal(STANDARDIZED_SAMPLE_PITCH_OF_C5))),
         )))
         const samplePitchScalar: Scalar<Frequency> =
-            centsTranslationToPitchScalar(sampleData.centsTranslation || to.Translation<Cents>(0))
+            centsTranslationToPitchScalar(sampleData.centsTranslation || as.Translation<Cents>(0))
 
-        return apply.Scalar(
+        return use.Scalar(
             pitch,
             insteadOf<Scalar, Scalar<Hz>>(samplePitchScalar),
         )

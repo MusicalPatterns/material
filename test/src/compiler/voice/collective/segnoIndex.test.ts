@@ -1,4 +1,4 @@
-import { Amplitude, Ms, NO_DURATION, Ordinal, repeat, to } from '@musical-patterns/utilities'
+import { Amplitude, as, Ms, NO_DURATION, Ordinal, repeat } from '@musical-patterns/utilities'
 import {
     computeSegnoIndex,
     NON_SEGNO_INDEX,
@@ -10,21 +10,21 @@ import {
 } from '../../../../../src/indexForTest'
 
 describe('compute segno index', () => {
-    const collectiveSegnoTime: Ms = to.Ms(44)
+    const collectiveSegnoTime: Ms = as.Ms(44)
     const voice: Voice = {
         delay: NO_DURATION,
         segnoIndex: TEMPORARY_UNDEFINED_SEGNO_INDEX,
         sounds: repeat(
             [
                 {
-                    duration: to.Ms(20),
-                    frequency: to.Hz(1),
-                    gain: to.NormalScalar<Amplitude>(1),
-                    position: [ 0 ].map(to.Meters),
-                    sustain: to.Ms(9),
+                    duration: as.Ms(20),
+                    frequency: as.Hz(1),
+                    gain: as.NormalScalar<Amplitude>(1),
+                    position: [ 0 ].map(as.Meters),
+                    sustain: as.Ms(9),
                 },
             ],
-            to.Cardinal(5),
+            as.Cardinal(5),
         ),
         sourceRequest: {
             sourceType: SourceType.OSCILLATOR,
@@ -35,7 +35,7 @@ describe('compute segno index', () => {
 
     describe('when the voice has no repetend', () => {
         beforeEach(() => {
-            individualSegnoTime = to.Ms(-1)
+            individualSegnoTime = as.Ms(-1)
         })
 
         it('it returns the non-segno-index which will tell the performer not to repeat it', () => {
@@ -52,7 +52,7 @@ describe('compute segno index', () => {
 
     describe('when the voice does have a repetend', () => {
         beforeEach(() => {
-            const SOME_REALISTIC_BUT_MOSTLY_ARBITRARY_INDIVIDUAL_SEGNO_TIME: Ms = to.Ms(60)
+            const SOME_REALISTIC_BUT_MOSTLY_ARBITRARY_INDIVIDUAL_SEGNO_TIME: Ms = as.Ms(60)
             individualSegnoTime = SOME_REALISTIC_BUT_MOSTLY_ARBITRARY_INDIVIDUAL_SEGNO_TIME
         })
 
@@ -64,13 +64,13 @@ describe('compute segno index', () => {
             })
 
             expect(actualSegnoIndex)
-                .toBe(to.Ordinal<Sound>(3))
+                .toBe(as.Ordinal<Sound>(3))
         })
     })
 
     describe('when the voice has no sounds', () => {
         beforeEach(() => {
-            const ANY_SEGNO_TIME_OTHER_THAN_NON_SEGNO_TIME: Ms = to.Ms(35)
+            const ANY_SEGNO_TIME_OTHER_THAN_NON_SEGNO_TIME: Ms = as.Ms(35)
             individualSegnoTime = ANY_SEGNO_TIME_OTHER_THAN_NON_SEGNO_TIME
         })
 
@@ -90,7 +90,7 @@ describe('compute segno index', () => {
             })
 
             expect(actualSegnoIndex)
-                .toBe(to.Ordinal<Sound>(-1))
+                .toBe(as.Ordinal<Sound>(-1))
         })
     })
 })

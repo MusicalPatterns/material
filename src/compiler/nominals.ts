@@ -23,14 +23,14 @@ type SoundFeature =
         Meters
         ) & Number
 
-const { to, from } = computeNominalInterface({
+const { as, notAs } = computeNominalInterface({
     number: {
         SoundFeature: DUMMY_VALUE_FOR_COMPUTING_NOMINAL_INTERFACE as SoundFeature,
     },
 })
 
 export {
-    to,
-    from,
+    as,
+    notAs,
     SoundFeature,
 }

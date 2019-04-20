@@ -1,4 +1,4 @@
-import { BEGINNING, INITIAL, NO_DURATION, to } from '@musical-patterns/utilities'
+import { as, BEGINNING, INITIAL, NO_DURATION } from '@musical-patterns/utilities'
 import {
     CollectiveVoiceInfos,
     computeCollectiveInfos,
@@ -24,17 +24,17 @@ describe('compute collective infos', () => {
             {
                 voice: IRRELEVANT_VOICE,
                 voiceInfo: {
-                    individualEndTime: to.Ms(5),
-                    individualRepetendDuration: to.Ms(4),
-                    individualSegnoTime: to.Ms(1),
+                    individualEndTime: as.Ms(5),
+                    individualRepetendDuration: as.Ms(4),
+                    individualSegnoTime: as.Ms(1),
                     sectionInfos: [],
                 },
             },
             {
                 voice: IRRELEVANT_VOICE,
                 voiceInfo: {
-                    individualEndTime: to.Ms(3),
-                    individualRepetendDuration: to.Ms(3),
+                    individualEndTime: as.Ms(3),
+                    individualRepetendDuration: as.Ms(3),
                     individualSegnoTime: BEGINNING,
                     sectionInfos: [],
                 },
@@ -42,9 +42,9 @@ describe('compute collective infos', () => {
             {
                 voice: IRRELEVANT_VOICE,
                 voiceInfo: {
-                    individualEndTime: to.Ms(9),
+                    individualEndTime: as.Ms(9),
                     individualRepetendDuration: NO_DURATION,
-                    individualSegnoTime: to.Ms(-1),
+                    individualSegnoTime: as.Ms(-1),
                     sectionInfos: [],
                 },
             },
@@ -54,9 +54,9 @@ describe('compute collective infos', () => {
 
         expect(collectiveVoiceInfos)
             .toEqual({
-                collectiveEndTime: to.Ms(13),
-                collectiveRepetendDuration: to.Ms(12),
-                collectiveSegnoTime: to.Ms(1),
+                collectiveEndTime: as.Ms(13),
+                collectiveRepetendDuration: as.Ms(12),
+                collectiveSegnoTime: as.Ms(1),
                 collectiveShareSegnoTime: false,
             })
     })
@@ -66,18 +66,18 @@ describe('compute collective infos', () => {
             {
                 voice: IRRELEVANT_VOICE,
                 voiceInfo: {
-                    individualEndTime: to.Ms(5),
-                    individualRepetendDuration: to.Ms(4),
-                    individualSegnoTime: to.Ms(1),
+                    individualEndTime: as.Ms(5),
+                    individualRepetendDuration: as.Ms(4),
+                    individualSegnoTime: as.Ms(1),
                     sectionInfos: [],
                 },
             },
             {
                 voice: IRRELEVANT_VOICE,
                 voiceInfo: {
-                    individualEndTime: to.Ms(4),
-                    individualRepetendDuration: to.Ms(3),
-                    individualSegnoTime: to.Ms(1),
+                    individualEndTime: as.Ms(4),
+                    individualRepetendDuration: as.Ms(3),
+                    individualSegnoTime: as.Ms(1),
                     sectionInfos: [],
                 },
             },
@@ -87,9 +87,9 @@ describe('compute collective infos', () => {
 
         expect(collectiveVoiceInfos)
             .toEqual({
-                collectiveEndTime: to.Ms(13),
-                collectiveRepetendDuration: to.Ms(12),
-                collectiveSegnoTime: to.Ms(1),
+                collectiveEndTime: as.Ms(13),
+                collectiveRepetendDuration: as.Ms(12),
+                collectiveSegnoTime: as.Ms(1),
                 collectiveShareSegnoTime: true,
             })
     })
@@ -99,18 +99,18 @@ describe('compute collective infos', () => {
             {
                 voice: IRRELEVANT_VOICE,
                 voiceInfo: {
-                    individualEndTime: to.Ms(7),
-                    individualRepetendDuration: to.Ms(4),
-                    individualSegnoTime: to.Ms(3),
+                    individualEndTime: as.Ms(7),
+                    individualRepetendDuration: as.Ms(4),
+                    individualSegnoTime: as.Ms(3),
                     sectionInfos: [],
                 },
             },
             {
                 voice: IRRELEVANT_VOICE,
                 voiceInfo: {
-                    individualEndTime: to.Ms(5),
-                    individualRepetendDuration: to.Ms(3),
-                    individualSegnoTime: to.Ms(2),
+                    individualEndTime: as.Ms(5),
+                    individualRepetendDuration: as.Ms(3),
+                    individualSegnoTime: as.Ms(2),
                     sectionInfos: [],
                 },
             },
@@ -120,9 +120,9 @@ describe('compute collective infos', () => {
 
         expect(collectiveVoiceInfos)
             .toEqual({
-                collectiveEndTime: to.Ms(15),
-                collectiveRepetendDuration: to.Ms(12),
-                collectiveSegnoTime: to.Ms(3),
+                collectiveEndTime: as.Ms(15),
+                collectiveRepetendDuration: as.Ms(12),
+                collectiveSegnoTime: as.Ms(3),
                 collectiveShareSegnoTime: false,
             })
     })
@@ -132,18 +132,18 @@ describe('compute collective infos', () => {
             {
                 voice: IRRELEVANT_VOICE,
                 voiceInfo: {
-                    individualEndTime: to.Ms(3),
-                    individualRepetendDuration: to.Ms(3),
-                    individualSegnoTime: to.Ms(-1),
+                    individualEndTime: as.Ms(3),
+                    individualRepetendDuration: as.Ms(3),
+                    individualSegnoTime: as.Ms(-1),
                     sectionInfos: [],
                 },
             },
             {
                 voice: IRRELEVANT_VOICE,
                 voiceInfo: {
-                    individualEndTime: to.Ms(9),
+                    individualEndTime: as.Ms(9),
                     individualRepetendDuration: NO_DURATION,
-                    individualSegnoTime: to.Ms(-1),
+                    individualSegnoTime: as.Ms(-1),
                     sectionInfos: [],
                 },
             },
@@ -153,9 +153,9 @@ describe('compute collective infos', () => {
 
         expect(collectiveVoiceInfos)
             .toEqual({
-                collectiveEndTime: to.Ms(9),
-                collectiveRepetendDuration: to.Ms(-1),
-                collectiveSegnoTime: to.Ms(-1),
+                collectiveEndTime: as.Ms(9),
+                collectiveRepetendDuration: as.Ms(-1),
+                collectiveSegnoTime: as.Ms(-1),
                 collectiveShareSegnoTime: true,
             })
     })
@@ -165,8 +165,8 @@ describe('compute collective infos', () => {
             {
                 voice: IRRELEVANT_VOICE,
                 voiceInfo: {
-                    individualEndTime: to.Ms(12.999999),
-                    individualRepetendDuration: to.Ms(12.999999),
+                    individualEndTime: as.Ms(12.999999),
+                    individualRepetendDuration: as.Ms(12.999999),
                     individualSegnoTime: BEGINNING,
                     sectionInfos: [],
                 },
@@ -174,8 +174,8 @@ describe('compute collective infos', () => {
             {
                 voice: IRRELEVANT_VOICE,
                 voiceInfo: {
-                    individualEndTime: to.Ms(13.000001),
-                    individualRepetendDuration: to.Ms(13.000001),
+                    individualEndTime: as.Ms(13.000001),
+                    individualRepetendDuration: as.Ms(13.000001),
                     individualSegnoTime: BEGINNING,
                     sectionInfos: [],
                 },
@@ -186,8 +186,8 @@ describe('compute collective infos', () => {
 
         expect(collectiveVoiceInfos)
             .toEqual({
-                collectiveEndTime: to.Ms(13),
-                collectiveRepetendDuration: to.Ms(13),
+                collectiveEndTime: as.Ms(13),
+                collectiveRepetendDuration: as.Ms(13),
                 collectiveSegnoTime: BEGINNING,
                 collectiveShareSegnoTime: true,
             })

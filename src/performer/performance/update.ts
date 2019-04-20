@@ -1,4 +1,4 @@
-import { apply, INCREMENT, indexJustBeyondFinalElement, isEmpty, Ms, ofFrom, to } from '@musical-patterns/utilities'
+import { as, INCREMENT, indexJustBeyondFinalElement, isEmpty, Ms, ofNotAs, use } from '@musical-patterns/utilities'
 import { PreparedVoice, Sound } from '../types'
 import { NON_SEGNO_INDEX } from './constants'
 
@@ -6,19 +6,19 @@ const startPreparedVoiceSound: (preparedVoice: PreparedVoice, sound: Sound) => v
     (preparedVoice: PreparedVoice, sound: Sound): void => {
         preparedVoice.source.startSound({
             ...sound,
-            position: sound.position || [ 0, 0, 0 ].map(to.Meters),
+            position: sound.position || [ 0, 0, 0 ].map(as.Meters),
         })
 
-        preparedVoice.nextStop = apply.Translation(
+        preparedVoice.nextStop = use.Translation(
             preparedVoice.nextStart,
-            to.Translation(ofFrom(sound.sustain)),
+            as.Translation(ofNotAs(sound.sustain)),
         )
-        preparedVoice.nextStart = apply.Translation(
+        preparedVoice.nextStart = use.Translation(
             preparedVoice.nextStart,
-            to.Translation(ofFrom(sound.duration)),
+            as.Translation(ofNotAs(sound.duration)),
         )
 
-        preparedVoice.soundIndex = apply.Translation(preparedVoice.soundIndex, INCREMENT)
+        preparedVoice.soundIndex = use.Translation(preparedVoice.soundIndex, INCREMENT)
 
         if (preparedVoice.soundIndex === indexJustBeyondFinalElement(preparedVoice.sounds)) {
             preparedVoice.soundIndex = preparedVoice.segnoIndex
@@ -29,7 +29,7 @@ const update: (preparedVoice: PreparedVoice, timePosition: Ms) => void =
     (preparedVoice: PreparedVoice, timePosition: Ms): void => {
         const { delay, sounds, soundIndex, nextStart, nextStop, source } = preparedVoice
 
-        if (timePosition > apply.Translation(nextStop, to.Translation(ofFrom(delay)))) {
+        if (timePosition > use.Translation(nextStop, as.Translation(ofNotAs(delay)))) {
             source.stopSound()
         }
 
@@ -40,9 +40,9 @@ const update: (preparedVoice: PreparedVoice, timePosition: Ms) => void =
         if (isEmpty(sounds)) {
             return
         }
-        const sound: Sound = apply.Ordinal(sounds, soundIndex)
+        const sound: Sound = use.Ordinal(sounds, soundIndex)
 
-        if (timePosition > apply.Translation(nextStart, to.Translation(ofFrom(delay)))) {
+        if (timePosition > use.Translation(nextStart, as.Translation(ofNotAs(delay)))) {
             startPreparedVoiceSound(preparedVoice, sound)
         }
     }

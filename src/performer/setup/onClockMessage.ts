@@ -1,4 +1,4 @@
-import { apply, Ms, to, Translation } from '@musical-patterns/utilities'
+import { as, Ms, Translation, use } from '@musical-patterns/utilities'
 import { update } from '../performance'
 import { ImmutableState, StateKey, store } from '../state'
 import { PreparedVoice } from '../types'
@@ -11,8 +11,8 @@ const onClockMessage: (event: MessageEvent) => void =
         }
 
         const timePosition: Ms = state.get(StateKey.TIME_POSITION)
-        const clockTimeIncrement: Translation<Ms> = to.Translation<Ms>(event.data)
-        const newTimePosition: Ms = apply.Translation(timePosition, clockTimeIncrement)
+        const clockTimeIncrement: Translation<Ms> = as.Translation<Ms>(event.data)
+        const newTimePosition: Ms = use.Translation(timePosition, clockTimeIncrement)
         store.dispatch({ type: StateKey.TIME_POSITION, data: newTimePosition })
 
         const preparedVoices: PreparedVoice[] = state.get(StateKey.PREPARED_VOICES)

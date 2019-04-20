@@ -1,13 +1,13 @@
 // tslint:disable no-any
 
-import { Scalar, to } from '@musical-patterns/utilities'
+import { as, Scalar } from '@musical-patterns/utilities'
 import {
+    as as compilerTo,
     compileSoundFeature,
     CompileSoundsOptions,
     NoteFeature,
     Scale,
     SoundFeature,
-    to as compilerTo,
 } from '../../../../src/indexForTest'
 
 describe('compile sound feature', () => {
@@ -16,10 +16,10 @@ describe('compile sound feature', () => {
     beforeEach(() => {
         scales = [
             {
-                scalars: [ 2, 4, 8, 16 ].map(to.Scalar),
+                scalars: [ 2, 4, 8, 16 ].map(as.Scalar),
             },
             {
-                scalars: [ 3, 9, 27, 81 ].map(to.Scalar),
+                scalars: [ 3, 9, 27, 81 ].map(as.Scalar),
             },
         ]
         options = { scales }
@@ -35,7 +35,7 @@ describe('compile sound feature', () => {
 
     it('uses index to choose later notes in the scale', () => {
         const noteFeature: NoteFeature = {
-            index: to.Ordinal<Scalar>(2),
+            index: as.Ordinal<Scalar>(2),
         }
         const soundFeature: SoundFeature = compileSoundFeature(noteFeature, options)
 
@@ -45,7 +45,7 @@ describe('compile sound feature', () => {
 
     it('uses scale index to switch scales', () => {
         const noteFeature: NoteFeature = {
-            scaleIndex: to.Ordinal<Scale>(1),
+            scaleIndex: as.Ordinal<Scale>(1),
         }
         const soundFeature: SoundFeature = compileSoundFeature(noteFeature, options)
 
@@ -55,7 +55,7 @@ describe('compile sound feature', () => {
 
     it('uses scalar to stretch arbitrarily', () => {
         const noteFeature: NoteFeature = {
-            scalar: to.Scalar<Scalar>(1.25),
+            scalar: as.Scalar<Scalar>(1.25),
         }
         const soundFeature: SoundFeature = compileSoundFeature(noteFeature, options)
 
@@ -65,7 +65,7 @@ describe('compile sound feature', () => {
 
     it('uses translation to shift around arbitrarily', () => {
         const noteFeature: NoteFeature = {
-            translation: to.Translation<Scalar>(0.1),
+            translation: as.Translation<Scalar>(0.1),
         }
         const soundFeature: SoundFeature = compileSoundFeature(noteFeature, options)
 
@@ -83,8 +83,8 @@ describe('compile sound feature', () => {
 
     it('applies translation from the scale, too', () => {
         const scaleWithTranslation: Scale = {
-            scalars: [ 2, 4, 6, 8 ].map(to.Scalar),
-            translation: to.Translation(3),
+            scalars: [ 2, 4, 6, 8 ].map(as.Scalar),
+            translation: as.Translation(3),
         }
         const noteFeature: NoteFeature = {}
         const soundFeature: SoundFeature = compileSoundFeature(noteFeature, { scales: [ scaleWithTranslation ] })
@@ -95,8 +95,8 @@ describe('compile sound feature', () => {
 
     it('applies scalar from the scale, too', () => {
         const scaleWithScalar: Scale = {
-            scalar: to.Scalar(7),
-            scalars: [ 2, 4, 6, 8 ].map(to.Scalar),
+            scalar: as.Scalar(7),
+            scalars: [ 2, 4, 6, 8 ].map(as.Scalar),
         }
         const noteFeature: NoteFeature = {}
         const soundFeature: SoundFeature = compileSoundFeature(noteFeature, { scales: [ scaleWithScalar ] })
@@ -107,8 +107,8 @@ describe('compile sound feature', () => {
 
     it('applies scalar first, then translation', () => {
         const noteFeature: NoteFeature = {
-            scalar: to.Scalar<Scalar>(1.25),
-            translation: to.Translation<Scalar>(0.1),
+            scalar: as.Scalar<Scalar>(1.25),
+            translation: as.Translation<Scalar>(0.1),
         }
         const soundFeature: SoundFeature = compileSoundFeature(noteFeature, options)
 
@@ -119,9 +119,9 @@ describe('compile sound feature', () => {
     it('applies scalar from the scale first, then translation from the scale', () => {
         const noteFeature: NoteFeature = {}
         const scaleWithScalarAndTranslation: Scale = {
-            scalar: to.Scalar(7),
-            scalars: [ 2, 4, 6, 8 ].map(to.Scalar),
-            translation: to.Translation(3),
+            scalar: as.Scalar(7),
+            scalars: [ 2, 4, 6, 8 ].map(as.Scalar),
+            translation: as.Translation(3),
         }
         const soundFeature: SoundFeature = compileSoundFeature(noteFeature, { scales: [ scaleWithScalarAndTranslation ] })
 
@@ -131,13 +131,13 @@ describe('compile sound feature', () => {
 
     it('can apply translations and scalars from both scale and the note, scalars first', () => {
         const noteFeature: NoteFeature = {
-            scalar: to.Scalar<Scalar>(1.25),
-            translation: to.Translation<Scalar>(0.1),
+            scalar: as.Scalar<Scalar>(1.25),
+            translation: as.Translation<Scalar>(0.1),
         }
         const scaleWithScalarAndTranslation: Scale = {
-            scalar: to.Scalar(7),
-            scalars: [ 2, 4, 6, 8 ].map(to.Scalar),
-            translation: to.Translation(3),
+            scalar: as.Scalar(7),
+            scalars: [ 2, 4, 6, 8 ].map(as.Scalar),
+            translation: as.Translation(3),
         }
         const soundFeature: SoundFeature = compileSoundFeature(noteFeature, { scales: [ scaleWithScalarAndTranslation ] })
 
@@ -161,7 +161,7 @@ describe('compile sound feature', () => {
 
     it('rounds, to avoid off by 0.000000000001 errors when comparing patterns compiled on different systems', () => {
         const noteFeature: NoteFeature = {
-            translation: to.Translation<Scalar>(0.1239147293578729037982375),
+            translation: as.Translation<Scalar>(0.1239147293578729037982375),
         }
         const soundFeature: SoundFeature = compileSoundFeature(noteFeature, options)
 
@@ -171,7 +171,7 @@ describe('compile sound feature', () => {
 
     it('does not crash when given super tiny numbers', () => {
         const noteFeature: NoteFeature = {
-            scalar: to.Scalar<Scalar>(1.000000001e-9),
+            scalar: as.Scalar<Scalar>(1.000000001e-9),
         }
         const soundFeature: SoundFeature = compileSoundFeature(noteFeature, options)
 

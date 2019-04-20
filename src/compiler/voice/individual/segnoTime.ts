@@ -1,4 +1,4 @@
-import { apply, BEGINNING, INITIAL, Ms, ofFrom, Ordinal, slice, to } from '@musical-patterns/utilities'
+import { as, BEGINNING, INITIAL, Ms, ofNotAs, Ordinal, slice, use } from '@musical-patterns/utilities'
 import { NON_SEGNO_TIME } from '../../../performer'
 import { NOT_FOUND } from '../constants'
 import { ComputeIndividualSegnoTimeParameters, SectionInfo } from './types'
@@ -9,7 +9,7 @@ const computeIndividualSegnoTimeWhenVoiceHasRepetend:
         slice(sectionInfos, INITIAL, individualRepetendIndex)
             .reduce(
                 (accumulator: Ms, sectionInfo: SectionInfo) =>
-                    apply.Translation(accumulator, to.Translation(ofFrom(sectionInfo.totalDuration))),
+                    use.Translation(accumulator, as.Translation(ofNotAs(sectionInfo.totalDuration))),
                 BEGINNING,
             )
 

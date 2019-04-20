@@ -1,4 +1,4 @@
-import { Amplitude, INITIAL, Ms, NO_DURATION, Ordinal, repeat, Scalar, to } from '@musical-patterns/utilities'
+import { Amplitude, as, INITIAL, Ms, NO_DURATION, Ordinal, repeat, Scalar } from '@musical-patterns/utilities'
 import {
     applyCollectiveInfos,
     Entity,
@@ -15,14 +15,14 @@ describe('apply collective infos', () => {
         const originalSounds: Sound[] = repeat(
             [
                 {
-                    duration: to.Ms(20),
-                    frequency: to.Hz(1),
-                    gain: to.NormalScalar<Amplitude>(1),
-                    position: [ 0 ].map(to.Meters),
-                    sustain: to.Ms(9),
+                    duration: as.Ms(20),
+                    frequency: as.Hz(1),
+                    gain: as.NormalScalar<Amplitude>(1),
+                    position: [ 0 ].map(as.Meters),
+                    sustain: as.Ms(9),
                 },
             ],
-            to.Cardinal(5),
+            as.Cardinal(5),
         )
         const voice: Voice = {
             delay: NO_DURATION,
@@ -34,16 +34,16 @@ describe('apply collective infos', () => {
             },
         }
 
-        const entityIndex: Ordinal<Entity> = to.Ordinal<Entity>(2)
+        const entityIndex: Ordinal<Entity> = as.Ordinal<Entity>(2)
 
         const entities: Entity[] = [ {}, {}, {
             sections: [
                 {
-                    notes: [ { duration: { scalar: to.Scalar<Scalar>(11) } } ],
-                    repetitions: to.Cardinal(9),
+                    notes: [ { duration: { scalar: as.Scalar<Scalar>(11) } } ],
+                    repetitions: as.Cardinal(9),
                 },
                 {
-                    notes: [ { duration: { scalar: to.Scalar<Scalar>(11) } } ],
+                    notes: [ { duration: { scalar: as.Scalar<Scalar>(11) } } ],
                 },
             ],
         } ]
@@ -53,19 +53,19 @@ describe('apply collective infos', () => {
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: to.Ms(99),
+                totalDuration: as.Ms(99),
             },
             {
                 doesRepeatForever: true,
-                totalDuration: to.Ms(11),
+                totalDuration: as.Ms(11),
             },
         ]
 
-        const individualSegnoTime: Ms = to.Ms(60)
+        const individualSegnoTime: Ms = as.Ms(60)
 
-        const collectiveSegnoTime: Ms = to.Ms(44)
+        const collectiveSegnoTime: Ms = as.Ms(44)
 
-        const collectiveEndTime: Ms = to.Ms(133)
+        const collectiveEndTime: Ms = as.Ms(133)
 
         const collectiveShareSegnoTime: boolean = false
 
@@ -84,28 +84,28 @@ describe('apply collective infos', () => {
         expect(actualVoice)
             .toEqual({
                 delay: NO_DURATION,
-                segnoIndex: to.Ordinal<Sound>(3),
+                segnoIndex: as.Ordinal<Sound>(3),
                 sounds: originalSounds.concat([
                     {
-                        duration: to.Ms(11),
-                        frequency: to.Hz(1),
-                        gain: to.NormalScalar<Amplitude>(1),
-                        position: [ 0, 0, 0 ].map(to.Meters),
-                        sustain: to.Ms(10.9),
+                        duration: as.Ms(11),
+                        frequency: as.Hz(1),
+                        gain: as.NormalScalar<Amplitude>(1),
+                        position: [ 0, 0, 0 ].map(as.Meters),
+                        sustain: as.Ms(10.9),
                     },
                     {
-                        duration: to.Ms(11),
-                        frequency: to.Hz(1),
-                        gain: to.NormalScalar<Amplitude>(1),
-                        position: [ 0, 0, 0 ].map(to.Meters),
-                        sustain: to.Ms(10.9),
+                        duration: as.Ms(11),
+                        frequency: as.Hz(1),
+                        gain: as.NormalScalar<Amplitude>(1),
+                        position: [ 0, 0, 0 ].map(as.Meters),
+                        sustain: as.Ms(10.9),
                     },
                     {
-                        duration: to.Ms(11),
-                        frequency: to.Hz(1),
-                        gain: to.NormalScalar<Amplitude>(1),
-                        position: [ 0, 0, 0 ].map(to.Meters),
-                        sustain: to.Ms(10.9),
+                        duration: as.Ms(11),
+                        frequency: as.Hz(1),
+                        gain: as.NormalScalar<Amplitude>(1),
+                        position: [ 0, 0, 0 ].map(as.Meters),
+                        sustain: as.Ms(10.9),
                     },
                 ]),
                 sourceRequest: {

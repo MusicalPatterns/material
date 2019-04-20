@@ -1,10 +1,10 @@
-import { BEGINNING, Ms, to } from '@musical-patterns/utilities'
+import { as, BEGINNING, Ms } from '@musical-patterns/utilities'
 import { computePatternTime, NON_SEGNO_TIME } from '../../../../src/indexForTest'
 
 describe('pattern time', () => {
     it('keeps repeating from the segno time', () => {
-        const segnoTime: Ms = to.Ms(5)
-        const totalDuration: Ms = to.Ms(10)
+        const segnoTime: Ms = as.Ms(5)
+        const totalDuration: Ms = as.Ms(10)
         expect(computePatternTime({
             segnoTime,
             timePosition: BEGINNING,
@@ -14,43 +14,43 @@ describe('pattern time', () => {
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: to.Ms(5),
+            timePosition: as.Ms(5),
             totalDuration,
         }))
-            .toBe(to.Ms(5))
+            .toBe(as.Ms(5))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: to.Ms(9),
+            timePosition: as.Ms(9),
             totalDuration,
         }))
-            .toBe(to.Ms(9))
+            .toBe(as.Ms(9))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: to.Ms(10),
+            timePosition: as.Ms(10),
             totalDuration,
         }))
-            .toBe(to.Ms(5))
+            .toBe(as.Ms(5))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: to.Ms(14),
+            timePosition: as.Ms(14),
             totalDuration,
         }))
-            .toBe(to.Ms(9))
+            .toBe(as.Ms(9))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: to.Ms(20),
+            timePosition: as.Ms(20),
             totalDuration,
         }))
-            .toBe(to.Ms(5))
+            .toBe(as.Ms(5))
     })
 
     it('when segno time is -1 (has no repetend), time sticks at the end', () => {
         const segnoTime: Ms = NON_SEGNO_TIME
-        const totalDuration: Ms = to.Ms(10)
+        const totalDuration: Ms = as.Ms(10)
         expect(computePatternTime({
             segnoTime,
             timePosition: BEGINNING,
@@ -60,37 +60,37 @@ describe('pattern time', () => {
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: to.Ms(5),
+            timePosition: as.Ms(5),
             totalDuration,
         }))
-            .toBe(to.Ms(5))
+            .toBe(as.Ms(5))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: to.Ms(9),
+            timePosition: as.Ms(9),
             totalDuration,
         }))
-            .toBe(to.Ms(9))
+            .toBe(as.Ms(9))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: to.Ms(10),
+            timePosition: as.Ms(10),
             totalDuration,
         }))
-            .toBe(to.Ms(10))
+            .toBe(as.Ms(10))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: to.Ms(14),
+            timePosition: as.Ms(14),
             totalDuration,
         }))
-            .toBe(to.Ms(10))
+            .toBe(as.Ms(10))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: to.Ms(20),
+            timePosition: as.Ms(20),
             totalDuration,
         }))
-            .toBe(to.Ms(10))
+            .toBe(as.Ms(10))
     })
 })

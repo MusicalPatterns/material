@@ -1,4 +1,4 @@
-import { ofFrom, semitonesToCents, to } from '@musical-patterns/utilities'
+import { as, ofNotAs, semitonesToCents } from '@musical-patterns/utilities'
 import { StateKey, store } from '../../state'
 import {
     DOWN_ONE_SEMITONE,
@@ -14,20 +14,20 @@ const computeSampleData: VoidFunction =
         const sampleData: SampleDatas = {
             [ SampleName.CELLO ]: {},
             [ SampleName.DOUBLE_BASS ]: {
-                centsTranslation: to.Translation(ofFrom(semitonesToCents(UP_TWO_OCTAVES_IN_SEMITONES))),
+                centsTranslation: as.Translation(ofNotAs(semitonesToCents(UP_TWO_OCTAVES_IN_SEMITONES))),
             },
             [ SampleName.FLUTE ]: {},
             [ SampleName.PIANO ]: {
-                centsTranslation: to.Translation(ofFrom(semitonesToCents(DOWN_TWO_OCTAVES_IN_SEMITONES))),
+                centsTranslation: as.Translation(ofNotAs(semitonesToCents(DOWN_TWO_OCTAVES_IN_SEMITONES))),
             },
             [ SampleName.TROMBONE ]: {
-                centsTranslation: to.Translation(ofFrom(semitonesToCents(UP_TWO_SEMITONES))),
+                centsTranslation: as.Translation(ofNotAs(semitonesToCents(UP_TWO_SEMITONES))),
             },
             [ SampleName.TRUMPET ]: {
-                centsTranslation: to.Translation(ofFrom(semitonesToCents(DOWN_ONE_SEMITONE))),
+                centsTranslation: as.Translation(ofNotAs(semitonesToCents(DOWN_ONE_SEMITONE))),
             },
             [ SampleName.TUBA ]: {
-                centsTranslation: to.Translation(ofFrom(semitonesToCents(UP_ONE_OCTAVE_IN_SEMITONES))),
+                centsTranslation: as.Translation(ofNotAs(semitonesToCents(UP_ONE_OCTAVE_IN_SEMITONES))),
             },
             [ SampleName.VIOLIN ]: {},
             [ SampleName.SNARE ]: {

@@ -1,21 +1,21 @@
-import { Ms, NO_DURATION, NOT_FOUND, Ordinal, to } from '@musical-patterns/utilities'
+import { as, Ms, NO_DURATION, NOT_FOUND, Ordinal } from '@musical-patterns/utilities'
 import { computeIndividualRepetendDuration, SectionInfo } from '../../../../../src/indexForTest'
 
 describe('compute individual repetend duration', () => {
     it('gives the total duration for the section which is the repetend', () => {
-        const individualRepetendIndex: Ordinal<SectionInfo> = to.Ordinal<SectionInfo>(2)
+        const individualRepetendIndex: Ordinal<SectionInfo> = as.Ordinal<SectionInfo>(2)
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: to.Ms(45),
+                totalDuration: as.Ms(45),
             },
             {
                 doesRepeatForever: false,
-                totalDuration: to.Ms(643),
+                totalDuration: as.Ms(643),
             },
             {
                 doesRepeatForever: true,
-                totalDuration: to.Ms(7),
+                totalDuration: as.Ms(7),
             },
         ]
 
@@ -25,7 +25,7 @@ describe('compute individual repetend duration', () => {
         })
 
         expect(actualIndividualRepetendDuration)
-            .toBe(to.Ms(7))
+            .toBe(as.Ms(7))
     })
 
     it('when the voice has no repetend, is zero', () => {
@@ -33,15 +33,15 @@ describe('compute individual repetend duration', () => {
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: to.Ms(45),
+                totalDuration: as.Ms(45),
             },
             {
                 doesRepeatForever: false,
-                totalDuration: to.Ms(643),
+                totalDuration: as.Ms(643),
             },
             {
                 doesRepeatForever: false,
-                totalDuration: to.Ms(7),
+                totalDuration: as.Ms(7),
             },
         ]
 
@@ -55,7 +55,7 @@ describe('compute individual repetend duration', () => {
     })
 
     it('when the section infos are empty, is zero', () => {
-        const individualRepetendIndex: Ordinal<SectionInfo> = to.Ordinal<SectionInfo>(2)
+        const individualRepetendIndex: Ordinal<SectionInfo> = as.Ordinal<SectionInfo>(2)
         const sectionInfos: SectionInfo[] = []
 
         const actualIndividualRepetendDuration: Ms = computeIndividualRepetendDuration({

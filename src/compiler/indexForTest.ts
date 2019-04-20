@@ -1,7 +1,7 @@
 // tslint:disable no-reaching-imports
 
 export { compilePattern } from './patterns'
-export { SoundFeature, to } from './nominals'
+export { SoundFeature, as } from './nominals'
 
 export {
     compileSound,

@@ -3,7 +3,7 @@
 export {
     compilePattern,
     SoundFeature,
-    to,
+    as,
     compileSound,
     compileSoundFeature,
     NoteFeature,

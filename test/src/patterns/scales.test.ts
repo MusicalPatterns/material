@@ -1,4 +1,4 @@
-import { Hz, Scalar, to } from '@musical-patterns/utilities'
+import { as, Hz, Scalar } from '@musical-patterns/utilities'
 import { computeOctaveSeriesScale, Scale } from '../../../src/indexForTest'
 
 describe('scales utilities', () => {
@@ -8,17 +8,17 @@ describe('scales utilities', () => {
 
             const scalars: Array<Scalar<Hz>> = octaveSeriesScale.scalars!
             expect(scalars[ 0 ])
-                .toEqual(to.Scalar<Hz>(1))
+                .toEqual(as.Scalar<Hz>(1))
             expect(scalars[ 1 ])
-                .toEqual(to.Scalar<Hz>(2))
+                .toEqual(as.Scalar<Hz>(2))
             expect(scalars[ 2 ])
-                .toEqual(to.Scalar<Hz>(4))
+                .toEqual(as.Scalar<Hz>(4))
             expect(scalars[ 3 ])
-                .toEqual(to.Scalar<Hz>(8))
+                .toEqual(as.Scalar<Hz>(8))
             expect(scalars[ 4 ])
-                .toEqual(to.Scalar<Hz>(16))
+                .toEqual(as.Scalar<Hz>(16))
             expect(scalars[ 5 ])
-                .toEqual(to.Scalar<Hz>(32))
+                .toEqual(as.Scalar<Hz>(32))
         })
     })
 })

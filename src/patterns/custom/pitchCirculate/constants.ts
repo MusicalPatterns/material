@@ -1,21 +1,21 @@
 // tslint:disable no-magic-numbers
 
 import {
-    apply,
+    as,
     Cardinal,
     Logarithm,
     negative,
     reciprocal,
     SQUARE_ROOT_OF_TWO,
-    to,
     Translation,
+    use,
 } from '@musical-patterns/utilities'
 
-const PITCH_CIRCULAR_TIER_COUNT: Cardinal = to.Cardinal(3)
-const NEGATIVE_POINT_FIVE_TRANSLATION: Translation = negative(to.Translation(0.5))
-const KINDA_GUESSING_AT_A_GOOD_SIGMA: Logarithm = to.Logarithm(apply.Scalar(
+const PITCH_CIRCULAR_TIER_COUNT: Cardinal = as.Cardinal(3)
+const NEGATIVE_POINT_FIVE_TRANSLATION: Translation = negative(as.Translation(0.5))
+const KINDA_GUESSING_AT_A_GOOD_SIGMA: Logarithm = as.Logarithm(use.Scalar(
     reciprocal(SQUARE_ROOT_OF_TWO),
-    to.Scalar(reciprocal(PITCH_CIRCULAR_TIER_COUNT)),
+    as.Scalar(reciprocal(PITCH_CIRCULAR_TIER_COUNT)),
 ))
 
 export {

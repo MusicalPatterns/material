@@ -1,17 +1,17 @@
 import {
     ADDITIVE_IDENTITY,
     Amplitude,
-    apply,
+    as,
     Coordinate,
-    from,
     Hz,
     INITIAL,
     Meters,
     Ms,
     MULTIPLICATIVE_IDENTITY,
     NormalScalar,
+    notAs,
     THREE_DIMENSIONAL,
-    to,
+    use,
 } from '@musical-patterns/utilities'
 import { Sound } from '../../performer'
 import { DEFAULT_TRANSLATION_FOR_ALMOST_FULL_SUSTAIN } from './constants'
@@ -37,8 +37,8 @@ const compilePosition:
                 [ compileSoundFeature(notePosition, options) ]
             :
             []
-        while (position.length < from.Cardinal(THREE_DIMENSIONAL)) {
-            position.push(to.Meters(0))
+        while (position.length < notAs.Cardinal(THREE_DIMENSIONAL)) {
+            position.push(as.Meters(0))
         }
 
         return position
@@ -51,7 +51,7 @@ const compileSustain: (note: Note, duration: Ms, options?: CompileSoundsOptions)
 
         return sustain < duration ?
             sustain :
-            apply.Translation(duration, DEFAULT_TRANSLATION_FOR_ALMOST_FULL_SUSTAIN)
+            use.Translation(duration, DEFAULT_TRANSLATION_FOR_ALMOST_FULL_SUSTAIN)
     }
 
 const compileSound: (note: Note, options?: CompileSoundsOptions) => Sound =

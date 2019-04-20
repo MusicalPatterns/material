@@ -1,4 +1,4 @@
-import { Amplitude, Scalar, to } from '@musical-patterns/utilities'
+import { Amplitude, as, Scalar } from '@musical-patterns/utilities'
 import {
     computeIndividualSoundsAndSectionInfos,
     Note,
@@ -10,13 +10,13 @@ import {
 
 describe('compute individual sounds and section infos', () => {
     it(`compiles each of the sections's notes and concatenates them, while reporting information about each of the sections as it goes`, () => {
-        const testNote: Note = { duration: { scalar: to.Scalar<Scalar>(3) } }
-        const otherTestNote: Note = { duration: { scalar: to.Scalar<Scalar>(9) } }
+        const testNote: Note = { duration: { scalar: as.Scalar<Scalar>(3) } }
+        const otherTestNote: Note = { duration: { scalar: as.Scalar<Scalar>(9) } }
 
         const sections: Section[] = [
             {
                 notes: [ testNote ],
-                repetitions: to.Cardinal(4),
+                repetitions: as.Cardinal(4),
             },
             {
                 notes: [ otherTestNote ],
@@ -27,29 +27,29 @@ describe('compute individual sounds and section infos', () => {
         const actualSoundsAndSectionInfos: SoundsAndSectionInfos = computeIndividualSoundsAndSectionInfos(sections, { scales })
 
         const expectedSound: Sound = {
-            duration: to.Ms(3),
-            frequency: to.Hz(1),
-            gain: to.NormalScalar<Amplitude>(1),
-            position: [ 0, 0, 0 ].map(to.Meters),
-            sustain: to.Ms(2.9),
+            duration: as.Ms(3),
+            frequency: as.Hz(1),
+            gain: as.NormalScalar<Amplitude>(1),
+            position: [ 0, 0, 0 ].map(as.Meters),
+            sustain: as.Ms(2.9),
         }
         const otherExpectedSound: Sound = {
-            duration: to.Ms(9),
-            frequency: to.Hz(1),
-            gain: to.NormalScalar<Amplitude>(1),
-            position: [ 0, 0, 0 ].map(to.Meters),
-            sustain: to.Ms(8.9),
+            duration: as.Ms(9),
+            frequency: as.Hz(1),
+            gain: as.NormalScalar<Amplitude>(1),
+            position: [ 0, 0, 0 ].map(as.Meters),
+            sustain: as.Ms(8.9),
         }
         expect(actualSoundsAndSectionInfos)
             .toEqual({
                 sectionInfos: [
                     {
                         doesRepeatForever: false,
-                        totalDuration: to.Ms(12),
+                        totalDuration: as.Ms(12),
                     },
                     {
                         doesRepeatForever: true,
-                        totalDuration: to.Ms(9),
+                        totalDuration: as.Ms(9),
                     },
                 ],
                 sounds: [

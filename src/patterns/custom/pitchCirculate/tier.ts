@@ -1,14 +1,14 @@
 import {
     Amplitude,
+    as,
     Cardinal,
     Frequency,
-    from,
     Hz,
     insteadOf,
     NormalScalar,
+    notAs,
     Ordinal,
     Scalar,
-    to,
 } from '@musical-patterns/utilities'
 import { Note } from '../../../compiler'
 import {
@@ -23,9 +23,9 @@ const computeTierWithTechniqueIndexTranslationByPitchClassCount:
     (notes: Note[], tierIndex: Ordinal<WindowSize>, pitchClassCount: Cardinal): Note[] =>
         notes.map((note: Note): Note => {
             const originalPitchIndex: Ordinal<Hz> =
-                insteadOf<Ordinal, Hz>(note.pitch && note.pitch.index || to.Ordinal(0))
+                insteadOf<Ordinal, Hz>(note.pitch && note.pitch.index || as.Ordinal(0))
             const originalGainScalar: NormalScalar<Amplitude> =
-                to.NormalScalar<Amplitude>(from.Scalar<Scalar>(note.gain && note.gain.scalar || to.Scalar<Scalar>(1)))
+                as.NormalScalar<Amplitude>(notAs.Scalar<Scalar>(note.gain && note.gain.scalar || as.Scalar<Scalar>(1)))
 
             const circledPitchIndex: Ordinal<Hz> = transposePitchIndexForTier(
                 originalPitchIndex,
@@ -42,7 +42,7 @@ const computeTierWithTechniqueIndexTranslationByPitchClassCount:
                 ...note,
                 gain: {
                     ...note.gain,
-                    scalar: to.Scalar<Scalar>(from.NormalScalar<Amplitude>(pitchCircledGainScalar)),
+                    scalar: as.Scalar<Scalar>(notAs.NormalScalar<Amplitude>(pitchCircledGainScalar)),
                 },
                 pitch: {
                     ...note.pitch,
@@ -56,9 +56,9 @@ const computeTierWithTechniqueScalarScalingByWindowSize:
     (notes: Note[], tierIndex: Ordinal<Scalar<Scalar<Frequency>>>, windowSize: WindowSize): Note[] =>
         notes.map((note: Note): Note => {
             const originalPitchScalar: Scalar<Frequency> =
-                insteadOf<Scalar, Frequency>(note.pitch && note.pitch.scalar || to.Scalar(1))
+                insteadOf<Scalar, Frequency>(note.pitch && note.pitch.scalar || as.Scalar(1))
             const originalGainScalar: NormalScalar<Amplitude> =
-                to.NormalScalar<Amplitude>(from.Scalar<Scalar>(note.gain && note.gain.scalar || to.Scalar<Scalar>(1)))
+                as.NormalScalar<Amplitude>(notAs.Scalar<Scalar>(note.gain && note.gain.scalar || as.Scalar<Scalar>(1)))
 
             const circledPitchScalar: Scalar<Frequency> = scalePitchScalarForTier(
                 originalPitchScalar,
@@ -75,7 +75,7 @@ const computeTierWithTechniqueScalarScalingByWindowSize:
                 ...note,
                 gain: {
                     ...note.gain,
-                    scalar: to.Scalar<Scalar>(from.NormalScalar<Amplitude>(pitchCircledGainScalar)),
+                    scalar: as.Scalar<Scalar>(notAs.NormalScalar<Amplitude>(pitchCircledGainScalar)),
                 },
                 pitch: {
                     ...note.pitch,

@@ -1,21 +1,21 @@
-import { Ms, NOT_FOUND, Ordinal, to } from '@musical-patterns/utilities'
+import { as, Ms, NOT_FOUND, Ordinal } from '@musical-patterns/utilities'
 import { computeIndividualSegnoTime, SectionInfo } from '../../../../../src/indexForTest'
 
 describe('compute individual segno time', () => {
     it('sums the durations of the sections leading up to the repetend', () => {
-        const individualRepetendIndex: Ordinal<SectionInfo> = to.Ordinal<SectionInfo>(2)
+        const individualRepetendIndex: Ordinal<SectionInfo> = as.Ordinal<SectionInfo>(2)
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: to.Ms(99),
+                totalDuration: as.Ms(99),
             },
             {
                 doesRepeatForever: false,
-                totalDuration: to.Ms(33),
+                totalDuration: as.Ms(33),
             },
             {
                 doesRepeatForever: true,
-                totalDuration: to.Ms(4236),
+                totalDuration: as.Ms(4236),
             },
         ]
 
@@ -25,7 +25,7 @@ describe('compute individual segno time', () => {
         })
 
         expect(actualIndividualSegnoTime)
-            .toEqual(to.Ms(132))
+            .toEqual(as.Ms(132))
     })
 
     it('gives -1 if voice has no repetend', () => {
@@ -33,11 +33,11 @@ describe('compute individual segno time', () => {
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: to.Ms(99),
+                totalDuration: as.Ms(99),
             },
             {
                 doesRepeatForever: false,
-                totalDuration: to.Ms(33),
+                totalDuration: as.Ms(33),
             },
         ]
 
@@ -47,6 +47,6 @@ describe('compute individual segno time', () => {
         })
 
         expect(actualIndividualSegnoTime)
-            .toEqual(to.Ms(-1))
+            .toEqual(as.Ms(-1))
     })
 })
