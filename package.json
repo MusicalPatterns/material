@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@mohayonao/wave-tables": "^0.2.0",
-    "@musical-patterns/cli": "^1.0.552",
+    "@musical-patterns/cli": "^1.0.553",
     "@musical-patterns/id": "^1.0.5",
     "@musical-patterns/pattern-material-qa": "^1.0.135",
     "@musical-patterns/spec": "^1.0.15",
