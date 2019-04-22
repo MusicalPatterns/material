@@ -6,15 +6,15 @@ interface PreparedVoice {
     delay: Ms,
     nextStart: Ms,
     nextStop: Ms,
-    segnoIndex: Ordinal<Sound>,
-    soundIndex: Ordinal<Sound>,
+    segnoIndex: Ordinal<Sound[]>,
+    soundIndex: Ordinal<Sound[]>,
     sounds: Sound[],
     source: Source,
 }
 
 interface Voice {
     delay: Ms,
-    segnoIndex: Ordinal<Sound>,
+    segnoIndex: Ordinal<Sound[]>,
     sounds: Sound[],
     sourceRequest: SourceRequest,
 }

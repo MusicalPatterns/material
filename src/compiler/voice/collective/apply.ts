@@ -7,8 +7,8 @@ import { fillGap } from './fillGap'
 import { computeSegnoIndex } from './segnoIndex'
 import { ApplyCollectiveInfosParameters } from './types'
 
-const computeSections: (entities: Entity[], index: Ordinal<Entity>) => Section[] =
-    (entities: Entity[], index: Ordinal<Entity>): Section[] =>
+const computeSections: (entities: Entity[], index: Ordinal<Entity[]>) => Section[] =
+    (entities: Entity[], index: Ordinal<Entity[]>): Section[] =>
         isEmpty(entities) ?
             [] :
             use.Ordinal(entities, index).sections || []
@@ -18,7 +18,7 @@ const applyCollectiveInfos: (parameters: {
     collectiveSegnoTime: Ms,
     collectiveShareSegnoTime: boolean,
     entities: Entity[],
-    entityIndex: Ordinal<Entity>,
+    entityIndex: Ordinal<Entity[]>,
     individualSegnoTime: Ms,
     scales: Maybe<Scale[]>,
     sectionInfos: SectionInfo[],
@@ -47,7 +47,7 @@ const applyCollectiveInfos: (parameters: {
             })
         }
 
-        const segnoIndex: Ordinal<Sound> = computeSegnoIndex({ collectiveSegnoTime, individualSegnoTime, voice })
+        const segnoIndex: Ordinal<Sound[]> = computeSegnoIndex({ collectiveSegnoTime, individualSegnoTime, voice })
 
         return { ...voice, segnoIndex }
     }

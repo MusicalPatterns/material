@@ -3,14 +3,14 @@ import { Adjustable, Scale } from '../../types'
 import { SoundFeature } from '../nominals'
 
 interface NoteFeature extends Adjustable<Scalar> {
-    index?: Ordinal<Scalar>,
-    scaleIndex?: Ordinal<Scale>,
+    index?: Ordinal<Scalar[]>,
+    scaleIndex?: Ordinal<Scale[]>,
 }
 
 interface ComputeScalePropertiesParameters {
-    index: Ordinal<Scalar>,
+    index: Ordinal<Scalar[]>,
     options?: CompileSoundsOptions,
-    scaleIndex: Ordinal<Scale>,
+    scaleIndex: Ordinal<Scale[]>,
 }
 
 interface ScaleProperties {

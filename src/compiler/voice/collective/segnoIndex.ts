@@ -14,9 +14,9 @@ import {
 import { NON_SEGNO_INDEX, NON_SEGNO_TIME, Sound, Voice } from '../../../performer'
 import { ComputeSegnoIndexParameters } from './types'
 
-const computeFirstSoundIndexAfterTime: (sounds: Sound[], timePosition: Ms) => Ordinal<Sound> =
-    (sounds: Sound[], timePosition: Ms): Ordinal<Sound> => {
-        let soundIndex: Ordinal<Sound> = INITIAL
+const computeFirstSoundIndexAfterTime: (sounds: Sound[], timePosition: Ms) => Ordinal<Sound[]> =
+    (sounds: Sound[], timePosition: Ms): Ordinal<Sound[]> => {
+        let soundIndex: Ordinal<Sound[]> = INITIAL
         let nextStart: Ms = BEGINNING
         while (nextStart < timePosition) {
             const nextSound: Sound = use.Ordinal(sounds, soundIndex)
@@ -36,14 +36,14 @@ const computeSegnoIndex: (parameters: {
     collectiveSegnoTime: Ms
     individualSegnoTime: Ms,
     voice: Voice,
-}) => Ordinal<Sound> =
+}) => Ordinal<Sound[]> =
     (
         {
             collectiveSegnoTime,
             individualSegnoTime,
             voice,
         }: ComputeSegnoIndexParameters,
-    ): Ordinal<Sound> =>
+    ): Ordinal<Sound[]> =>
         individualSegnoTime === NON_SEGNO_TIME || isUndefined(voice.sounds) || isEmpty(voice.sounds) ?
             NON_SEGNO_INDEX :
             computeFirstSoundIndexAfterTime(

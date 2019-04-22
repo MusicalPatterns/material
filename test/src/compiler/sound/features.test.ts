@@ -35,7 +35,7 @@ describe('compile sound feature', () => {
 
     it('uses index to choose later notes in the scale', () => {
         const noteFeature: NoteFeature = {
-            index: as.Ordinal<Scalar>(2),
+            index: as.Ordinal<Scalar[]>(2),
         }
         const soundFeature: SoundFeature = compileSoundFeature(noteFeature, options)
 
@@ -45,7 +45,7 @@ describe('compile sound feature', () => {
 
     it('uses scale index to switch scales', () => {
         const noteFeature: NoteFeature = {
-            scaleIndex: as.Ordinal<Scale>(1),
+            scaleIndex: as.Ordinal<Scale[]>(1),
         }
         const soundFeature: SoundFeature = compileSoundFeature(noteFeature, options)
 

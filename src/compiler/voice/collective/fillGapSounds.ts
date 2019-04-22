@@ -19,9 +19,8 @@ const computeFillGapSounds: (repetendSounds: Sound[], gapToBeFilled: Ms) => Soun
         }
 
         const fillGapSounds: Sound[] = []
-        const initialSoundIndex: Ordinal<Sound> = INITIAL
         let gapFilled: Ms = NO_DURATION
-        let soundIndex: Ordinal<Sound> = initialSoundIndex
+        let soundIndex: Ordinal<Sound[]> = INITIAL
         while (gapFilled < gapToBeFilled) {
             const nextSound: Sound = use.Ordinal(repetendSounds, soundIndex)
             const duration: Ms = nextSound.duration
@@ -29,7 +28,7 @@ const computeFillGapSounds: (repetendSounds: Sound[], gapToBeFilled: Ms) => Soun
             fillGapSounds.push(nextSound)
             soundIndex = use.Translation(soundIndex, INCREMENT)
             if (soundIndex > indexOfFinalElement(repetendSounds)) {
-                soundIndex = initialSoundIndex
+                soundIndex = INITIAL
             }
         }
 

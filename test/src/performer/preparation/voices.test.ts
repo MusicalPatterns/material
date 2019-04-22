@@ -58,7 +58,7 @@ describe('prepare voices', () => {
             expect(preparedVoice.nextStart)
                 .toBe(as.Ms(5))
             expect(preparedVoice.soundIndex)
-                .toBe(as.Ordinal<Sound>(1))
+                .toBe(as.Ordinal<Sound[]>(1))
 
             done()
         })
@@ -100,7 +100,7 @@ describe('prepare voices', () => {
             expect(preparedVoice.nextStart)
                 .toBe(as.Ms(16))
             expect(preparedVoice.soundIndex)
-                .toBe(as.Ordinal<Sound>(0))
+                .toBe(as.Ordinal<Sound[]>(0))
 
             done()
         })
@@ -109,7 +109,7 @@ describe('prepare voices', () => {
             const voices: Voice[] = [
                 {
                     delay: NO_DURATION,
-                    segnoIndex: as.Ordinal<Sound>(1),
+                    segnoIndex: as.Ordinal<Sound[]>(1),
                     sounds: [
                         {
                             duration: as.Ms(5),
@@ -149,7 +149,7 @@ describe('prepare voices', () => {
             expect(preparedVoice.nextStart)
                 .toBe(as.Ms(14))
             expect(preparedVoice.soundIndex)
-                .toBe(as.Ordinal<Sound>(2))
+                .toBe(as.Ordinal<Sound[]>(2))
 
             done()
         })

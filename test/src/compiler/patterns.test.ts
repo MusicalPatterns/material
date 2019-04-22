@@ -66,7 +66,7 @@ describe('compile pattern', () => {
                 voices: [
                     {
                         delay: NO_DURATION,
-                        segnoIndex: as.Ordinal<Sound>(0),
+                        segnoIndex: as.Ordinal<Sound[]>(0),
                         sounds: [ expectedSound ],
                         sourceRequest: {
                             sourceType: SourceType.OSCILLATOR,
@@ -96,7 +96,7 @@ describe('compile pattern', () => {
                 voices: [
                     {
                         delay: NO_DURATION,
-                        segnoIndex: as.Ordinal<Sound>(0),
+                        segnoIndex: as.Ordinal<Sound[]>(0),
                         sounds: [ expectedSound ],
                         sourceRequest: {
                             sourceType: SourceType.OSCILLATOR,
@@ -128,7 +128,7 @@ describe('compile pattern', () => {
                 voices: [
                     {
                         delay: NO_DURATION,
-                        segnoIndex: as.Ordinal<Sound>(0),
+                        segnoIndex: as.Ordinal<Sound[]>(0),
                         sounds: [ expectedSound ],
                         sourceRequest: {
                             sourceType: SourceType.OSCILLATOR,

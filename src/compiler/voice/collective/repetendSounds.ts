@@ -6,12 +6,12 @@ import { SectionInfo } from '../individual'
 import { Section } from '../types'
 import { ComputeRepetendSoundsParameters } from './types'
 
-const computeRepetendIndex: (sectionInfos: SectionInfo[]) => Ordinal<Section> =
-    (sectionInfos: SectionInfo[]): Ordinal<Section> => {
-        let repetendIndex: Ordinal<Section> = NOT_FOUND
-        forEach(sectionInfos, (sectionInfo: SectionInfo, index: Ordinal<SectionInfo>) => {
+const computeRepetendIndex: (sectionInfos: SectionInfo[]) => Ordinal<Section[]> =
+    (sectionInfos: SectionInfo[]): Ordinal<Section[]> => {
+        let repetendIndex: Ordinal<Section[]> = NOT_FOUND
+        forEach(sectionInfos, (sectionInfo: SectionInfo, index: Ordinal<SectionInfo[]>) => {
             if (sectionInfo.doesRepeatForever) {
-                repetendIndex = insteadOf<Ordinal, Section>(index)
+                repetendIndex = insteadOf<Ordinal, Section[]>(index)
             }
         })
 
@@ -21,7 +21,7 @@ const computeRepetendIndex: (sectionInfos: SectionInfo[]) => Ordinal<Section> =
 const computeRepetendSounds:
     (parameters: ComputeRepetendSoundsParameters) => Maybe<Sound[]> =
     ({ sectionInfos, scales, sections }: ComputeRepetendSoundsParameters): Maybe<Sound[]> => {
-        const repetendIndex: Ordinal<Section> = computeRepetendIndex(sectionInfos)
+        const repetendIndex: Ordinal<Section[]> = computeRepetendIndex(sectionInfos)
         if (repetendIndex === NOT_FOUND) {
             return undefined
         }

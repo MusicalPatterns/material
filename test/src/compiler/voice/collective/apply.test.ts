@@ -22,7 +22,7 @@ describe('apply collective infos', () => {
                     sustain: as.Ms(9),
                 },
             ],
-            as.Cardinal(5),
+            as.Cardinal<Sound[]>(5),
         )
         const voice: Voice = {
             delay: NO_DURATION,
@@ -34,7 +34,7 @@ describe('apply collective infos', () => {
             },
         }
 
-        const entityIndex: Ordinal<Entity> = as.Ordinal<Entity>(2)
+        const entityIndex: Ordinal<Entity[]> = as.Ordinal<Entity[]>(2)
 
         const entities: Entity[] = [ {}, {}, {
             sections: [
@@ -84,7 +84,7 @@ describe('apply collective infos', () => {
         expect(actualVoice)
             .toEqual({
                 delay: NO_DURATION,
-                segnoIndex: as.Ordinal<Sound>(3),
+                segnoIndex: as.Ordinal<Sound[]>(3),
                 sounds: originalSounds.concat([
                     {
                         duration: as.Ms(11),

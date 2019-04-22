@@ -72,27 +72,27 @@ describe('pitch circulate, using the technique of scalar scaling by window size'
             const inputNotes: Note[] = [
                 {
                     duration: {
-                        index: as.Ordinal<Scalar>(3),
+                        index: as.Ordinal<Scalar[]>(3),
                         scalar: as.Scalar<Scalar>(4),
-                        scaleIndex: as.Ordinal<Scale>(5),
+                        scaleIndex: as.Ordinal<Scale[]>(5),
                     },
                     gain: {
-                        index: as.Ordinal<Scalar>(9),
-                        scaleIndex: as.Ordinal<Scale>(5),
+                        index: as.Ordinal<Scalar[]>(9),
+                        scaleIndex: as.Ordinal<Scale[]>(5),
                     },
                     pitch: {
-                        index: as.Ordinal<Scalar>(11),
-                        scaleIndex: as.Ordinal<Scale>(10),
+                        index: as.Ordinal<Scalar[]>(11),
+                        scaleIndex: as.Ordinal<Scale[]>(10),
                     },
                     position: [ {
-                        index: as.Ordinal<Scalar>(2),
+                        index: as.Ordinal<Scalar[]>(2),
                         scalar: as.Scalar<Scalar>(4),
-                        scaleIndex: as.Ordinal<Scale>(6),
+                        scaleIndex: as.Ordinal<Scale[]>(6),
                     } ],
                     sustain: {
-                        index: as.Ordinal<Scalar>(6),
+                        index: as.Ordinal<Scalar[]>(6),
                         scalar: as.Scalar<Scalar>(7),
-                        scaleIndex: as.Ordinal<Scale>(8),
+                        scaleIndex: as.Ordinal<Scale[]>(8),
                     },
                 },
             ]
@@ -109,100 +109,100 @@ describe('pitch circulate, using the technique of scalar scaling by window size'
         it('copies the duration into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].duration)
                 .toEqual({
-                    index: as.Ordinal<Scalar>(3),
+                    index: as.Ordinal<Scalar[]>(3),
                     scalar: as.Scalar<Scalar>(4),
-                    scaleIndex: as.Ordinal<Scale>(5),
+                    scaleIndex: as.Ordinal<Scale[]>(5),
                 })
             expect(outputSetOfNotes[ 1 ][ 0 ].duration)
                 .toEqual({
-                    index: as.Ordinal<Scalar>(3),
+                    index: as.Ordinal<Scalar[]>(3),
                     scalar: as.Scalar<Scalar>(4),
-                    scaleIndex: as.Ordinal<Scale>(5),
+                    scaleIndex: as.Ordinal<Scale[]>(5),
                 })
             expect(outputSetOfNotes[ 2 ][ 0 ].duration)
                 .toEqual({
-                    index: as.Ordinal<Scalar>(3),
+                    index: as.Ordinal<Scalar[]>(3),
                     scalar: as.Scalar<Scalar>(4),
-                    scaleIndex: as.Ordinal<Scale>(5),
+                    scaleIndex: as.Ordinal<Scale[]>(5),
                 })
         })
 
         it('copies the sustain into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].sustain)
                 .toEqual({
-                    index: as.Ordinal<Scalar>(6),
+                    index: as.Ordinal<Scalar[]>(6),
                     scalar: as.Scalar<Scalar>(7),
-                    scaleIndex: as.Ordinal<Scale>(8),
+                    scaleIndex: as.Ordinal<Scale[]>(8),
                 })
             expect(outputSetOfNotes[ 1 ][ 0 ].sustain)
                 .toEqual({
-                    index: as.Ordinal<Scalar>(6),
+                    index: as.Ordinal<Scalar[]>(6),
                     scalar: as.Scalar<Scalar>(7),
-                    scaleIndex: as.Ordinal<Scale>(8),
+                    scaleIndex: as.Ordinal<Scale[]>(8),
                 })
             expect(outputSetOfNotes[ 2 ][ 0 ].sustain)
                 .toEqual({
-                    index: as.Ordinal<Scalar>(6),
+                    index: as.Ordinal<Scalar[]>(6),
                     scalar: as.Scalar<Scalar>(7),
-                    scaleIndex: as.Ordinal<Scale>(8),
+                    scaleIndex: as.Ordinal<Scale[]>(8),
                 })
         })
 
         it('copies the position into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].position)
                 .toEqual([ {
-                    index: as.Ordinal<Scalar>(2),
+                    index: as.Ordinal<Scalar[]>(2),
                     scalar: as.Scalar<Scalar>(4),
-                    scaleIndex: as.Ordinal<Scale>(6),
+                    scaleIndex: as.Ordinal<Scale[]>(6),
                 } ])
             expect(outputSetOfNotes[ 1 ][ 0 ].position)
                 .toEqual([ {
-                    index: as.Ordinal<Scalar>(2),
+                    index: as.Ordinal<Scalar[]>(2),
                     scalar: as.Scalar<Scalar>(4),
-                    scaleIndex: as.Ordinal<Scale>(6),
+                    scaleIndex: as.Ordinal<Scale[]>(6),
                 } ])
             expect(outputSetOfNotes[ 2 ][ 0 ].position)
                 .toEqual([ {
-                    index: as.Ordinal<Scalar>(2),
+                    index: as.Ordinal<Scalar[]>(2),
                     scalar: as.Scalar<Scalar>(4),
-                    scaleIndex: as.Ordinal<Scale>(6),
+                    scaleIndex: as.Ordinal<Scale[]>(6),
                 } ])
         })
 
         it('copies the pitch scale index into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].pitch!.scaleIndex)
-                .toEqual(as.Ordinal<Scale>(10))
+                .toEqual(as.Ordinal<Scale[]>(10))
             expect(outputSetOfNotes[ 1 ][ 0 ].pitch!.scaleIndex)
-                .toEqual(as.Ordinal<Scale>(10))
+                .toEqual(as.Ordinal<Scale[]>(10))
             expect(outputSetOfNotes[ 2 ][ 0 ].pitch!.scaleIndex)
-                .toEqual(as.Ordinal<Scale>(10))
+                .toEqual(as.Ordinal<Scale[]>(10))
         })
 
         it('copies the pitch index into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].pitch!.index)
-                .toEqual(as.Ordinal<Scalar>(11))
+                .toEqual(as.Ordinal<Scalar[]>(11))
             expect(outputSetOfNotes[ 1 ][ 0 ].pitch!.index)
-                .toEqual(as.Ordinal<Scalar>(11))
+                .toEqual(as.Ordinal<Scalar[]>(11))
             expect(outputSetOfNotes[ 2 ][ 0 ].pitch!.index)
-                .toEqual(as.Ordinal<Scalar>(11))
+                .toEqual(as.Ordinal<Scalar[]>(11))
         })
 
         it('copies the gain scale index into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].gain!.scaleIndex)
-                .toEqual(as.Ordinal<Scale>(5))
+                .toEqual(as.Ordinal<Scale[]>(5))
             expect(outputSetOfNotes[ 1 ][ 0 ].gain!.scaleIndex)
-                .toEqual(as.Ordinal<Scale>(5))
+                .toEqual(as.Ordinal<Scale[]>(5))
             expect(outputSetOfNotes[ 2 ][ 0 ].gain!.scaleIndex)
-                .toEqual(as.Ordinal<Scale>(5))
+                .toEqual(as.Ordinal<Scale[]>(5))
         })
 
         it('copies the gain index into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].gain!.index)
-                .toEqual(as.Ordinal<Scalar>(9))
+                .toEqual(as.Ordinal<Scalar[]>(9))
             expect(outputSetOfNotes[ 1 ][ 0 ].gain!.index)
-                .toEqual(as.Ordinal<Scalar>(9))
+                .toEqual(as.Ordinal<Scalar[]>(9))
             expect(outputSetOfNotes[ 2 ][ 0 ].gain!.index)
-                .toEqual(as.Ordinal<Scalar>(9))
+                .toEqual(as.Ordinal<Scalar[]>(9))
         })
     })
 

@@ -17,9 +17,9 @@ import { COMPILER_PRECISION } from './constants'
 import { CompileSoundsOptions, ComputeScalePropertiesParameters, NoteFeature, ScaleProperties } from './types'
 
 const computeScaleProperties: (scaleStuffParameters: {
-    index: Ordinal<Scalar>,
+    index: Ordinal<Scalar[]>,
     options?: CompileSoundsOptions,
-    scaleIndex: Ordinal<Scale>,
+    scaleIndex: Ordinal<Scale[]>,
 }) => ScaleProperties =
     ({ index, scaleIndex, options }: ComputeScalePropertiesParameters): ScaleProperties => {
         const { scales = [] } = options || {}

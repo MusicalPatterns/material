@@ -24,19 +24,19 @@ import {
 } from './types'
 
 const computeNumeratorOfExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount:
-    (parameters: { circledPitchIndex: Ordinal<Hz>, pitchClassCount: Cardinal }) => number =
+    (parameters: { circledPitchIndex: Ordinal<Hz[]>, pitchClassCount: Cardinal }) => number =
     (
         {
             pitchClassCount,
             circledPitchIndex,
         }: ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
     ): number => {
-        const maximumPitchAcrossAllTiers: Ordinal<Hz> = as.Ordinal<Hz>(notAs.Cardinal(use.Multiple(
+        const maximumPitchAcrossAllTiers: Ordinal<Hz[]> = as.Ordinal<Hz[]>(notAs.Cardinal(use.Multiple(
             pitchClassCount,
             as.Multiple(ofNotAs(PITCH_CIRCULAR_TIER_COUNT)),
         )))
         const circledPitchIndexProportionOfTotalPitchCount: number =
-            notAs.Ordinal<Hz>(quotient(circledPitchIndex, maximumPitchAcrossAllTiers))
+            notAs.Multiple<Hz[]>(quotient(circledPitchIndex, maximumPitchAcrossAllTiers))
         const pitchProportionOfTotalTranslatedToBePositiveIfGreaterThanMedianAndNegativeIfLesser: number =
             use.Translation(circledPitchIndexProportionOfTotalPitchCount, NEGATIVE_POINT_FIVE_TRANSLATION)
         const pitchProportionOfTotalScaledToBeBetweenNegativeAndPositiveOne: number = use.Multiple(
@@ -81,7 +81,7 @@ const computeNumeratorOfExponentOfNormalDistributionWithTechniqueScalarScalingBy
     }
 
 const computeExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount:
-    (parameters: { circledPitchIndex: Ordinal<Hz>, pitchClassCount: Cardinal }) => Exponent<Logarithm> =
+    (parameters: { circledPitchIndex: Ordinal<Hz[]>, pitchClassCount: Cardinal }) => Exponent<Logarithm> =
     (
         parameters: ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
     ): Exponent<Logarithm> =>

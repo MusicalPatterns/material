@@ -7,7 +7,7 @@ import {
     Hz,
     Integer,
     Ms,
-    NO_TRANSLATION,
+    NO_SHIFT,
     notAs,
     OCTAVE,
     POSITIVE_INTEGERS,
@@ -64,14 +64,14 @@ const materializeStandardScales:
     ): [ Scale<Amplitude>, Scale<Ms>, Scale<Hz> ] & Array<Scale<any>> => {
         const gainScale: Scale<Amplitude> = computeNonScale()
         const durationScalar: Scalar<Ms> = specs[ StandardSpec.BASE_DURATION ] || as.Scalar<Ms>(1)
-        const durationTranslation: Translation<Ms> = specs[ StandardSpec.BASE_DURATION_TRANSLATION ] || NO_TRANSLATION
+        const durationTranslation: Translation<Ms> = specs[ StandardSpec.BASE_DURATION_TRANSLATION ] || NO_SHIFT
         const durationsScale: Scale<Ms> = {
             scalar: durationScalar,
             scalars: durationScalars,
             translation: durationTranslation,
         }
         const pitchesScalar: Scalar<Hz> = specs[ StandardSpec.BASE_FREQUENCY ] || as.Scalar<Hz>(1)
-        const pitchesTranslation: Translation<Hz> = specs[ StandardSpec.BASE_FREQUENCY_TRANSLATION ] || NO_TRANSLATION
+        const pitchesTranslation: Translation<Hz> = specs[ StandardSpec.BASE_FREQUENCY_TRANSLATION ] || NO_SHIFT
         const pitchesScale: Scale<Hz> = {
             scalar: pitchesScalar,
             scalars: pitchScalars,

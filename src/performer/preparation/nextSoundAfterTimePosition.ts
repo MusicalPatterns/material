@@ -14,13 +14,13 @@ import { Sound } from '../types'
 import { ComputeNextSoundAfterTimePositionParameters, NextSound } from './types'
 
 const computeNextSoundAfterTimePosition:
-    (parameters: { segnoIndex: Ordinal<Sound>, sounds: Sound[], timePosition: Ms }) => NextSound =
+    (parameters: { segnoIndex: Ordinal<Sound[]>, sounds: Sound[], timePosition: Ms }) => NextSound =
     ({ sounds, timePosition, segnoIndex }: ComputeNextSoundAfterTimePositionParameters): NextSound => {
         if (isEmpty(sounds)) {
             return { soundIndex: INITIAL, nextStart: BEGINNING }
         }
 
-        let soundIndex: Ordinal<Sound> = INITIAL
+        let soundIndex: Ordinal<Sound[]> = INITIAL
         let nextStart: Ms = BEGINNING
         while (nextStart < timePosition) {
             const nextSound: Sound = use.Ordinal(sounds, soundIndex)

@@ -13,16 +13,16 @@ interface PitchCirculateOptions {
 
 interface ComputeCircledPitchIndexParameters {
     pitchClassCount: Cardinal,
-    tierIndex: Ordinal<Scalar<Scalar<Frequency>>>,
+    tierIndex: Ordinal<WindowSize[]>,
 }
 
 interface ComputeCircledPitchScalarParameters {
-    tierIndex: Ordinal<Scalar<Scalar<Frequency>>>,
+    tierIndex: Ordinal<WindowSize[]>,
     windowSize: WindowSize,
 }
 
 interface ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters {
-    circledPitchIndex: Ordinal<Hz>,
+    circledPitchIndex: Ordinal<Hz[]>,
     pitchClassCount: Cardinal,
 }
 

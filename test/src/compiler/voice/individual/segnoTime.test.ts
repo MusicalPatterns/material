@@ -3,7 +3,7 @@ import { computeIndividualSegnoTime, SectionInfo } from '../../../../../src/inde
 
 describe('compute individual segno time', () => {
     it('sums the durations of the sections leading up to the repetend', () => {
-        const individualRepetendIndex: Ordinal<SectionInfo> = as.Ordinal<SectionInfo>(2)
+        const individualRepetendIndex: Ordinal<SectionInfo[]> = as.Ordinal<SectionInfo[]>(2)
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
@@ -29,7 +29,7 @@ describe('compute individual segno time', () => {
     })
 
     it('gives -1 if voice has no repetend', () => {
-        const individualRepetendIndex: Ordinal<SectionInfo> = NOT_FOUND
+        const individualRepetendIndex: Ordinal<SectionInfo[]> = NOT_FOUND
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,

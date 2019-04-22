@@ -7,41 +7,40 @@ import {
     notAs,
     Ordinal,
     Scalar,
-    Translation,
     use,
     windowReduce,
 } from '@musical-patterns/utilities'
 import { ComputeCircledPitchIndexParameters, ComputeCircledPitchScalarParameters, WindowSize } from './types'
 
 const transposePitchIndexForTier: (
-    originalPitchIndex: Ordinal<Hz>,
-    parameters: { pitchClassCount: Cardinal, tierIndex: Ordinal<Scalar<Scalar<Frequency>>> },
-) => Ordinal<Hz> =
+    originalPitchIndex: Ordinal<Hz[]>,
+    parameters: { pitchClassCount: Cardinal, tierIndex: Ordinal<WindowSize[]> },
+) => Ordinal<Hz[]> =
     (
-        originalPitchIndex: Ordinal<Hz>,
+        originalPitchIndex: Ordinal<Hz[]>,
         { pitchClassCount, tierIndex }: ComputeCircledPitchIndexParameters,
-    ): Ordinal<Hz> => {
-        const pitchIndexWrappedWithinPitchClassCountToRemoveOriginalWindowLocationInformation: Ordinal<Hz> =
+    ): Ordinal<Hz[]> => {
+        const pitchIndexWrappedWithinPitchClassCountToRemoveOriginalWindowLocationInformation: Ordinal<Hz[]> =
             use.IntegerModulus(
                 originalPitchIndex,
-                as.IntegerModulus<Ordinal<Hz>>(notAs.Cardinal(pitchClassCount)),
+                as.IntegerModulus<Ordinal<Hz[]>>(notAs.Cardinal(pitchClassCount)),
             )
 
-        const baseTierTransposition: Translation<Ordinal<Hz>> =
-            as.Translation<Ordinal<Hz>>(notAs.Ordinal<Scalar<Scalar<Frequency>>>(use.Multiple(
+        const baseTierTransposition: Cardinal<Ordinal<Hz>> =
+            as.Cardinal<Ordinal<Hz>>(notAs.Ordinal<WindowSize[]>(use.Multiple(
                 tierIndex,
-                as.Multiple<Ordinal<Scalar<Scalar<Frequency>>>>(notAs.Cardinal(pitchClassCount)),
+                as.Multiple<Ordinal<WindowSize[]>>(notAs.Cardinal(pitchClassCount)),
             )))
 
-        return use.Translation(
+        return use.Cardinal(
             pitchIndexWrappedWithinPitchClassCountToRemoveOriginalWindowLocationInformation,
-            insteadOf<Translation, Ordinal<Hz>>(baseTierTransposition),
+            insteadOf<Cardinal, Ordinal<Hz[]>>(baseTierTransposition),
         )
     }
 
 const scalePitchScalarForTier: (
     originalPitchScalar: Scalar<Frequency>,
-    parameters: { tierIndex: Ordinal<Scalar<Scalar<Frequency>>>, windowSize: WindowSize },
+    parameters: { tierIndex: Ordinal<WindowSize[]>, windowSize: WindowSize },
 ) => Scalar<Frequency> =
     (
         originalPitchScalar: Scalar<Frequency>,
@@ -54,7 +53,7 @@ const scalePitchScalarForTier: (
 
         const baseTierScaling: WindowSize = use.Power(
             windowSize,
-            as.Power<Scalar<Scalar<Frequency>>>(notAs.Ordinal<Scalar<Scalar<Frequency>>>(tierIndex)),
+            as.Power<WindowSize>(notAs.Ordinal<WindowSize[]>(tierIndex)),
         )
 
         return use.Scalar(

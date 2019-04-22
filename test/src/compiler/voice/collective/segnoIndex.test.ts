@@ -24,7 +24,7 @@ describe('compute segno index', () => {
                     sustain: as.Ms(9),
                 },
             ],
-            as.Cardinal(5),
+            as.Cardinal<Sound[]>(5),
         ),
         sourceRequest: {
             sourceType: SourceType.OSCILLATOR,
@@ -39,7 +39,7 @@ describe('compute segno index', () => {
         })
 
         it('it returns the non-segno-index which will tell the performer not to repeat it', () => {
-            const actualSegnoIndex: Ordinal<Sound> = computeSegnoIndex({
+            const actualSegnoIndex: Ordinal<Sound[]> = computeSegnoIndex({
                 collectiveSegnoTime,
                 individualSegnoTime,
                 voice,
@@ -57,14 +57,14 @@ describe('compute segno index', () => {
         })
 
         it('returns the first index of the voice sounds after the collective segno time', () => {
-            const actualSegnoIndex: Ordinal<Sound> = computeSegnoIndex({
+            const actualSegnoIndex: Ordinal<Sound[]> = computeSegnoIndex({
                 collectiveSegnoTime,
                 individualSegnoTime,
                 voice,
             })
 
             expect(actualSegnoIndex)
-                .toBe(as.Ordinal<Sound>(3))
+                .toBe(as.Ordinal<Sound[]>(3))
         })
     })
 
@@ -75,7 +75,7 @@ describe('compute segno index', () => {
         })
 
         it('returns the non segno index', () => {
-            const actualSegnoIndex: Ordinal<Sound> = computeSegnoIndex({
+            const actualSegnoIndex: Ordinal<Sound[]> = computeSegnoIndex({
                 collectiveSegnoTime,
                 individualSegnoTime,
                 voice: {
@@ -90,7 +90,7 @@ describe('compute segno index', () => {
             })
 
             expect(actualSegnoIndex)
-                .toBe(as.Ordinal<Sound>(-1))
+                .toBe(as.Ordinal<Sound[]>(-1))
         })
     })
 })

@@ -4,10 +4,10 @@ import { Sound } from '../types'
 const applyHomePosition: (sound: Sound, homePosition: Coordinate<Meters>) => Sound =
     (sound: Sound, homePosition: Coordinate<Meters>): Sound => ({
         ...sound,
-        position: map(sound.position, (meters: Meters, index: Ordinal<Meters>) =>
-            use.Translation(
+        position: map(sound.position, (meters: Meters, index: Ordinal<Meters[]>) =>
+            use.Cardinal(
                 meters,
-                as.Translation(ofNotAs(use.Ordinal(homePosition, index))),
+                as.Cardinal(ofNotAs(use.Ordinal(homePosition, index))),
             ),
         ),
     })

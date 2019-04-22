@@ -19,11 +19,11 @@ const computeNotesTotalDurationByIndex: (notes: Note[]) => number =
     (notes: Note[]): number =>
         notes.reduce(
             (accumulator: number, { duration }: Note): number => {
-                const durationIndex: Ordinal<Scalar> = duration && duration.index || as.Ordinal<Scalar>(0)
+                const durationIndex: Ordinal<Scalar[]> = duration && duration.index || as.Ordinal<Scalar[]>(0)
 
                 return use.Translation(
                     accumulator,
-                    insteadOf<Translation>(as.Translation(notAs.Ordinal<Scalar>(durationIndex))),
+                    insteadOf<Translation>(as.Translation(notAs.Ordinal<Scalar[]>(durationIndex))),
                 )
             },
             0,

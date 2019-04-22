@@ -4,8 +4,8 @@ import { NOT_FOUND } from '../constants'
 import { ComputeIndividualSegnoTimeParameters, SectionInfo } from './types'
 
 const computeIndividualSegnoTimeWhenVoiceHasRepetend:
-    (sectionInfos: SectionInfo[], individualRepetendIndex: Ordinal<SectionInfo>) => Ms =
-    (sectionInfos: SectionInfo[], individualRepetendIndex: Ordinal<SectionInfo>): Ms =>
+    (sectionInfos: SectionInfo[], individualRepetendIndex: Ordinal<SectionInfo[]>) => Ms =
+    (sectionInfos: SectionInfo[], individualRepetendIndex: Ordinal<SectionInfo[]>): Ms =>
         slice(sectionInfos, INITIAL, individualRepetendIndex)
             .reduce(
                 (accumulator: Ms, sectionInfo: SectionInfo) =>
@@ -14,7 +14,7 @@ const computeIndividualSegnoTimeWhenVoiceHasRepetend:
             )
 
 const computeIndividualSegnoTime:
-    (parameters: { individualRepetendIndex: Ordinal<SectionInfo>, sectionInfos: SectionInfo[] }) => Ms =
+    (parameters: { individualRepetendIndex: Ordinal<SectionInfo[]>, sectionInfos: SectionInfo[] }) => Ms =
     ({ individualRepetendIndex, sectionInfos }: ComputeIndividualSegnoTimeParameters): Ms =>
         individualRepetendIndex === NOT_FOUND ?
             NON_SEGNO_TIME :

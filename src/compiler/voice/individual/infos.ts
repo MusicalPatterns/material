@@ -5,7 +5,7 @@ import { IndividualVoiceInfo, SectionInfo } from './types'
 
 const computeIndividualVoiceInfo: (sectionInfos: SectionInfo[]) => IndividualVoiceInfo =
     (sectionInfos: SectionInfo[]): IndividualVoiceInfo => {
-        const individualRepetendIndex: Ordinal<SectionInfo> = findIndex(
+        const individualRepetendIndex: Ordinal<SectionInfo[]> = findIndex(
             sectionInfos,
             (sectionInfo: SectionInfo) => sectionInfo.doesRepeatForever,
         )

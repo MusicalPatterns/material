@@ -41,14 +41,10 @@ interface ApplyCollectiveInfosParameters extends CompileVoicesParameters {
     collectiveEndTime: Ms,
     collectiveSegnoTime: Ms,
     collectiveShareSegnoTime: boolean,
-    entityIndex: Ordinal<Entity>,
+    entityIndex: Ordinal<Entity[]>,
     individualSegnoTime: Ms,
     sectionInfos: SectionInfo[],
     voice: Voice,
-}
-
-interface ComputeCollectiveVoicesFromIndividualVoicesAndInfosParameters extends CompileVoicesParameters {
-    individualVoicesAndInfos: IndividualVoiceAndInfo[],
 }
 
 export {
@@ -58,5 +54,4 @@ export {
     PluckedVoiceInfos,
     CollectiveVoiceInfos,
     ApplyCollectiveInfosParameters,
-    ComputeCollectiveVoicesFromIndividualVoicesAndInfosParameters,
 }

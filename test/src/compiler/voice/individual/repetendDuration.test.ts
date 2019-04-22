@@ -3,7 +3,7 @@ import { computeIndividualRepetendDuration, SectionInfo } from '../../../../../s
 
 describe('compute individual repetend duration', () => {
     it('gives the total duration for the section which is the repetend', () => {
-        const individualRepetendIndex: Ordinal<SectionInfo> = as.Ordinal<SectionInfo>(2)
+        const individualRepetendIndex: Ordinal<SectionInfo[]> = as.Ordinal<SectionInfo[]>(2)
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
@@ -29,7 +29,7 @@ describe('compute individual repetend duration', () => {
     })
 
     it('when the voice has no repetend, is zero', () => {
-        const individualRepetendIndex: Ordinal<SectionInfo> = NOT_FOUND
+        const individualRepetendIndex: Ordinal<SectionInfo[]> = NOT_FOUND
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
@@ -55,7 +55,7 @@ describe('compute individual repetend duration', () => {
     })
 
     it('when the section infos are empty, is zero', () => {
-        const individualRepetendIndex: Ordinal<SectionInfo> = as.Ordinal<SectionInfo>(2)
+        const individualRepetendIndex: Ordinal<SectionInfo[]> = as.Ordinal<SectionInfo[]>(2)
         const sectionInfos: SectionInfo[] = []
 
         const actualIndividualRepetendDuration: Ms = computeIndividualRepetendDuration({

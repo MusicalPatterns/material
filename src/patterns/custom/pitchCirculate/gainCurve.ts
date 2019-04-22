@@ -28,7 +28,7 @@ import {
 const applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount:
     (
         originalGainScalar: NormalScalar<Amplitude>,
-        parameters: { circledPitchIndex: Ordinal<Hz>, pitchClassCount: Cardinal },
+        parameters: { circledPitchIndex: Ordinal<Hz[]>, pitchClassCount: Cardinal },
     ) => NormalScalar<Amplitude> =
     (
         originalGainScalar: NormalScalar<Amplitude>,

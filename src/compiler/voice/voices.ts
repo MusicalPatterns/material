@@ -22,14 +22,14 @@ const compileVoices: (parameters: { entities: Entity[], scales?: Scale[] }) => C
             individualVoicesAndInfos,
             (
                 { voice, voiceInfo: { sectionInfos, individualSegnoTime } }: IndividualVoiceAndInfo,
-                index: Ordinal<IndividualVoiceAndInfo>,
+                index: Ordinal<IndividualVoiceAndInfo[]>,
             ) =>
                 applyCollectiveInfos({
                     collectiveEndTime,
                     collectiveSegnoTime,
                     collectiveShareSegnoTime,
                     entities,
-                    entityIndex: insteadOf<Ordinal, Entity, IndividualVoiceAndInfo>(index),
+                    entityIndex: insteadOf<Ordinal, Entity[], IndividualVoiceAndInfo[]>(index),
                     individualSegnoTime,
                     scales,
                     sectionInfos,

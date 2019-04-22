@@ -24,8 +24,8 @@ describe('update', () => {
             delay: NO_DURATION,
             nextStart: BEGINNING,
             nextStop: BEGINNING,
-            segnoIndex: as.Ordinal<Sound>(0),
-            soundIndex: as.Ordinal<Sound>(0),
+            segnoIndex: as.Ordinal<Sound[]>(0),
+            soundIndex: as.Ordinal<Sound[]>(0),
             sounds: [ testSoundDurationFive, testSoundDurationThree ],
             source: {
                 startSound: noop,
@@ -41,7 +41,7 @@ describe('update', () => {
         expect(preparedVoice.nextStop)
             .toBe(as.Ms(1))
         expect(preparedVoice.soundIndex)
-            .toBe(as.Ordinal<Sound>(1))
+            .toBe(as.Ordinal<Sound[]>(1))
     })
 
     describe('sound index', () => {
@@ -50,8 +50,8 @@ describe('update', () => {
                 delay: NO_DURATION,
                 nextStart: BEGINNING,
                 nextStop: BEGINNING,
-                segnoIndex: as.Ordinal<Sound>(0),
-                soundIndex: as.Ordinal<Sound>(0),
+                segnoIndex: as.Ordinal<Sound[]>(0),
+                soundIndex: as.Ordinal<Sound[]>(0),
                 sounds: [
                     testSoundDurationFive,
                     testSoundDurationThree,
@@ -65,7 +65,7 @@ describe('update', () => {
             update(preparedVoice, as.Ms(1))
 
             expect(preparedVoice.soundIndex)
-                .toBe(as.Ordinal<Sound>(1))
+                .toBe(as.Ordinal<Sound[]>(1))
         })
 
         it('repeats from the beginning if it has reached the final sound', () => {
@@ -73,8 +73,8 @@ describe('update', () => {
                 delay: NO_DURATION,
                 nextStart: as.Ms(5),
                 nextStop: as.Ms(1),
-                segnoIndex: as.Ordinal<Sound>(0),
-                soundIndex: as.Ordinal<Sound>(1),
+                segnoIndex: as.Ordinal<Sound[]>(0),
+                soundIndex: as.Ordinal<Sound[]>(1),
                 sounds: [
                     testSoundDurationFive,
                     testSoundDurationThree,
@@ -88,7 +88,7 @@ describe('update', () => {
             update(preparedVoice, as.Ms(6))
 
             expect(preparedVoice.soundIndex)
-                .toBe(as.Ordinal<Sound>(0))
+                .toBe(as.Ordinal<Sound[]>(0))
         })
 
         it('repeats from the segno index, even if it is not 0 the default', () => {
@@ -96,8 +96,8 @@ describe('update', () => {
                 delay: NO_DURATION,
                 nextStart: as.Ms(5),
                 nextStop: as.Ms(1),
-                segnoIndex: as.Ordinal<Sound>(1),
-                soundIndex: as.Ordinal<Sound>(1),
+                segnoIndex: as.Ordinal<Sound[]>(1),
+                soundIndex: as.Ordinal<Sound[]>(1),
                 sounds: [
                     testSoundDurationFive,
                     testSoundDurationThree,
@@ -111,7 +111,7 @@ describe('update', () => {
             update(preparedVoice, as.Ms(6))
 
             expect(preparedVoice.soundIndex)
-                .toBe(as.Ordinal<Sound>(1))
+                .toBe(as.Ordinal<Sound[]>(1))
         })
 
         it('when the segno index is -1 (the non-segno index) it stops playing when it reaches the end', () => {
@@ -120,7 +120,7 @@ describe('update', () => {
                 nextStart: as.Ms(5),
                 nextStop: as.Ms(1),
                 segnoIndex: NON_SEGNO_INDEX,
-                soundIndex: as.Ordinal<Sound>(1),
+                soundIndex: as.Ordinal<Sound[]>(1),
                 sounds: [
                     testSoundDurationFive,
                     testSoundDurationThree,
@@ -164,15 +164,15 @@ describe('update', () => {
 
             update(preparedVoice, as.Ms(8))
             expect(preparedVoice.soundIndex)
-                .toBe(as.Ordinal<Sound>(1))
+                .toBe(as.Ordinal<Sound[]>(1))
 
             update(preparedVoice, as.Ms(12))
             expect(preparedVoice.soundIndex)
-                .toBe(as.Ordinal<Sound>(1))
+                .toBe(as.Ordinal<Sound[]>(1))
 
             update(preparedVoice, as.Ms(13))
             expect(preparedVoice.soundIndex)
-                .toBe(as.Ordinal<Sound>(0))
+                .toBe(as.Ordinal<Sound[]>(0))
         })
     })
 
@@ -183,8 +183,8 @@ describe('update', () => {
                 delay: NO_DURATION,
                 nextStart: as.Ms(8),
                 nextStop: BEGINNING,
-                segnoIndex: as.Ordinal<Sound>(0),
-                soundIndex: as.Ordinal<Sound>(0),
+                segnoIndex: as.Ordinal<Sound[]>(0),
+                soundIndex: as.Ordinal<Sound[]>(0),
                 sounds: [ testSoundDurationFive ],
                 source: {
                     startSound,
@@ -204,8 +204,8 @@ describe('update', () => {
                 delay: NO_DURATION,
                 nextStart: as.Ms(8),
                 nextStop: BEGINNING,
-                segnoIndex: as.Ordinal<Sound>(0),
-                soundIndex: as.Ordinal<Sound>(0),
+                segnoIndex: as.Ordinal<Sound[]>(0),
+                soundIndex: as.Ordinal<Sound[]>(0),
                 sounds: [ testSoundDurationFive ],
                 source: {
                     startSound,
@@ -226,8 +226,8 @@ describe('update', () => {
                 delay: NO_DURATION,
                 nextStart: BEGINNING,
                 nextStop: as.Ms(8),
-                segnoIndex: as.Ordinal<Sound>(0),
-                soundIndex: as.Ordinal<Sound>(0),
+                segnoIndex: as.Ordinal<Sound[]>(0),
+                soundIndex: as.Ordinal<Sound[]>(0),
                 sounds: [ testSoundDurationFive ],
                 source: {
                     startSound: noop,
@@ -247,8 +247,8 @@ describe('update', () => {
                 delay: NO_DURATION,
                 nextStart: BEGINNING,
                 nextStop: as.Ms(8),
-                segnoIndex: as.Ordinal<Sound>(0),
-                soundIndex: as.Ordinal<Sound>(0),
+                segnoIndex: as.Ordinal<Sound[]>(0),
+                soundIndex: as.Ordinal<Sound[]>(0),
                 sounds: [ testSoundDurationFive ],
                 source: {
                     startSound: noop,
@@ -291,8 +291,8 @@ describe('update', () => {
             delay: NO_DURATION,
             nextStart: BEGINNING,
             nextStop: BEGINNING,
-            segnoIndex: as.Ordinal<Sound>(0),
-            soundIndex: as.Ordinal<Sound>(0),
+            segnoIndex: as.Ordinal<Sound[]>(0),
+            soundIndex: as.Ordinal<Sound[]>(0),
             sounds: [],
             source: {
                 startSound: noop,

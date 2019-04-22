@@ -3,7 +3,7 @@ import { NOT_FOUND } from '../constants'
 import { ComputeIndividualRepetendDurationParameters, SectionInfo } from './types'
 
 const computeIndividualRepetendDuration:
-    (parameters: { individualRepetendIndex: Ordinal<SectionInfo>, sectionInfos: SectionInfo[] }) => Ms =
+    (parameters: { individualRepetendIndex: Ordinal<SectionInfo[]>, sectionInfos: SectionInfo[] }) => Ms =
     ({ individualRepetendIndex, sectionInfos }: ComputeIndividualRepetendDurationParameters): Ms =>
         individualRepetendIndex === NOT_FOUND || isEmpty(sectionInfos) ?
             NO_DURATION :

@@ -26,9 +26,9 @@ const pitchCirculate: (notes: Note[], options: PitchCirculateOptions) => Note[][
             windowSize = as.Scalar<Scalar<Frequency>>(1),
         }: PitchCirculateOptions,
     ): Note[][] =>
-        slice(ZERO_AND_POSITIVE_INTEGERS, INITIAL, as.Ordinal(notAs.Cardinal(PITCH_CIRCULAR_TIER_COUNT)))
-            .map((integer: Integer) => as.Ordinal<WindowSize>(integer))
-            .map((tierIndex: Ordinal<WindowSize>): Note[] =>
+        slice(ZERO_AND_POSITIVE_INTEGERS, INITIAL, as.Ordinal<Integer[]>(notAs.Cardinal(PITCH_CIRCULAR_TIER_COUNT)))
+            .map((integer: Integer) => as.Ordinal<WindowSize[]>(integer))
+            .map((tierIndex: Ordinal<WindowSize[]>): Note[] =>
                 technique === PitchCircularTechnique.INDEX_TRANSLATION_BY_PITCH_CLASS_COUNT ?
                     computeTierWithTechniqueIndexTranslationByPitchClassCount(notes, tierIndex, pitchClassCount) :
                     computeTierWithTechniqueScalarScalingByWindowSize(notes, tierIndex, windowSize),
