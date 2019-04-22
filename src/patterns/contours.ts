@@ -17,7 +17,7 @@ const computeTotalPitchDurationContourDuration: (contour: ContourPiece<PitchDura
 
 const pitchDurationRest: (duration: number) => ContourPiece<PitchDuration> =
     (duration: number): ContourPiece<PitchDuration> =>
-        as.ContourPiece<PitchDuration>([ [ notAs.Ordinal<Scalar>(STANDARD_PITCH_INDEX_INDICATING_REST), duration ] ])
+        as.ContourPiece<PitchDuration>([ [ notAs.Ordinal<Scalar[]>(STANDARD_PITCH_INDEX_INDICATING_REST), duration ] ])
 
 export {
     computeTotalPitchDurationContourDuration,
