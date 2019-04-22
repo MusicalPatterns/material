@@ -26,8 +26,8 @@ const transposePitchIndexForTier: (
                 as.IntegerModulus<Ordinal<Hz[]>>(notAs.Cardinal(pitchClassCount)),
             )
 
-        const baseTierTransposition: Cardinal<Ordinal<Hz>> =
-            as.Cardinal<Ordinal<Hz>>(notAs.Ordinal<WindowSize[]>(use.Multiple(
+        const baseTierTransposition: Cardinal<Ordinal<Hz[]>> =
+            as.Cardinal<Ordinal<Hz[]>>(notAs.Ordinal<WindowSize[]>(use.Multiple(
                 tierIndex,
                 as.Multiple<Ordinal<WindowSize[]>>(notAs.Cardinal(pitchClassCount)),
             )))
