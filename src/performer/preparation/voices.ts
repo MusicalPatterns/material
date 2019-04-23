@@ -1,13 +1,13 @@
-import { BEGINNING, isUndefined, Ms } from '@musical-patterns/utilities'
+import { BEGINNING, isUndefined, Ms, Point } from '@musical-patterns/utilities'
 import { StateKey, store } from '../state'
 import { PreparedVoice, Sound, Voice } from '../types'
 import { computeNextSoundAfterTimePosition } from './nextSoundAfterTimePosition'
 import { applySoundAdjustmentsForPerformer } from './sounds'
 import { getSource } from './sources'
 
-const prepareVoices: (voices: Voice[], timePosition?: Ms) => Promise<PreparedVoice[]> =
-    async (voices: Voice[], timePosition?: Ms): Promise<PreparedVoice[]> => {
-        let timePositionToStartAt: Ms = timePosition || BEGINNING
+const prepareVoices: (voices: Voice[], timePosition?: Point<Ms>) => Promise<PreparedVoice[]> =
+    async (voices: Voice[], timePosition?: Point<Ms>): Promise<PreparedVoice[]> => {
+        let timePositionToStartAt: Point<Ms> = timePosition || BEGINNING
         if (isUndefined(timePosition)) {
             timePositionToStartAt = store.getState()
                 .get(StateKey.TIME_POSITION)

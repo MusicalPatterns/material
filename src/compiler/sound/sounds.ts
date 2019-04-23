@@ -10,7 +10,7 @@ import {
     MULTIPLICATIVE_IDENTITY,
     NormalScalar,
     notAs,
-    THREE_DIMENSIONAL,
+    THREE_DIMENSIONAL, Translation,
     use,
 } from '@musical-patterns/utilities'
 import { Sound } from '../../performer'
@@ -44,10 +44,10 @@ const compilePosition:
         return position
     }
 
-const compileSustain: (note: Note, duration: Ms, options?: CompileSoundsOptions) => Ms =
-    (note: Note, duration: Ms, options?: CompileSoundsOptions): Ms => {
+const compileSustain: (note: Note, duration: Translation<Ms>, options?: CompileSoundsOptions) => Translation<Ms> =
+    (note: Note, duration: Translation<Ms>, options?: CompileSoundsOptions): Translation<Ms> => {
         const noteSustain: NoteFeature = note.sustain || note.duration || defaultNoteFeature
-        const sustain: Ms = compileSoundFeature(noteSustain, options)
+        const sustain: Translation<Ms> = compileSoundFeature(noteSustain, options)
 
         return sustain < duration ?
             sustain :
@@ -62,12 +62,12 @@ const compileSound: (note: Note, options?: CompileSoundsOptions) => Sound =
             pitch: notePitch = defaultNoteFeature,
         } = note
 
-        const duration: Ms = compileSoundFeature(noteDuration, options)
+        const duration: Translation<Ms> = compileSoundFeature(noteDuration, options)
         const gain: NormalScalar<Amplitude> = compileSoundFeature(noteGain, options)
         const frequency: Hz = compileSoundFeature(notePitch, options)
 
         const position: Coordinate<Meters> = compilePosition(note.position, options)
-        const sustain: Ms = compileSustain(note, duration, options)
+        const sustain: Translation<Ms> = compileSustain(note, duration, options)
 
         return { duration, gain, frequency, position, sustain }
     }

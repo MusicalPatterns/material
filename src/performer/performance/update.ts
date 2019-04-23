@@ -1,4 +1,4 @@
-import { as, INCREMENT, indexJustBeyondFinalElement, isEmpty, Ms, ofNotAs, use } from '@musical-patterns/utilities'
+import { as, INCREMENT, indexJustBeyondFinalElement, isEmpty, Ms, Point, use } from '@musical-patterns/utilities'
 import { PreparedVoice, Sound } from '../types'
 import { NON_SEGNO_INDEX } from './constants'
 
@@ -11,25 +11,25 @@ const startPreparedVoiceSound: (preparedVoice: PreparedVoice, sound: Sound) => v
 
         preparedVoice.nextStop = use.Translation(
             preparedVoice.nextStart,
-            as.Translation(ofNotAs(sound.sustain)),
+            sound.sustain,
         )
         preparedVoice.nextStart = use.Translation(
             preparedVoice.nextStart,
-            as.Translation(ofNotAs(sound.duration)),
+            sound.duration,
         )
 
-        preparedVoice.soundIndex = use.Translation(preparedVoice.soundIndex, INCREMENT)
+        preparedVoice.soundIndex = use.Cardinal(preparedVoice.soundIndex, INCREMENT)
 
         if (preparedVoice.soundIndex === indexJustBeyondFinalElement(preparedVoice.sounds)) {
             preparedVoice.soundIndex = preparedVoice.segnoIndex
         }
     }
 
-const update: (preparedVoice: PreparedVoice, timePosition: Ms) => void =
-    (preparedVoice: PreparedVoice, timePosition: Ms): void => {
+const update: (preparedVoice: PreparedVoice, timePosition: Point<Ms>) => void =
+    (preparedVoice: PreparedVoice, timePosition: Point<Ms>): void => {
         const { delay, sounds, soundIndex, nextStart, nextStop, source } = preparedVoice
 
-        if (timePosition > use.Translation(nextStop, as.Translation(ofNotAs(delay)))) {
+        if (timePosition > use.Translation(nextStop, delay)) {
             source.stopSound()
         }
 
@@ -42,7 +42,7 @@ const update: (preparedVoice: PreparedVoice, timePosition: Ms) => void =
         }
         const sound: Sound = use.Ordinal(sounds, soundIndex)
 
-        if (timePosition > use.Translation(nextStart, as.Translation(ofNotAs(delay)))) {
+        if (timePosition > use.Translation(nextStart, delay)) {
             startPreparedVoiceSound(preparedVoice, sound)
         }
     }

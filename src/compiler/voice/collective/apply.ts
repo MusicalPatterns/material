@@ -1,4 +1,4 @@
-import { isEmpty, Maybe, Ms, Ordinal, use } from '@musical-patterns/utilities'
+import { isEmpty, Maybe, Ms, Ordinal, Point, use } from '@musical-patterns/utilities'
 import { Sound, Voice } from '../../../performer'
 import { Entity, Scale } from '../../../types'
 import { SectionInfo } from '../individual'
@@ -14,12 +14,12 @@ const computeSections: (entities: Entity[], index: Ordinal<Entity[]>) => Section
             use.Ordinal(entities, index).sections || []
 
 const applyCollectiveInfos: (parameters: {
-    collectiveEndTime: Ms,
-    collectiveSegnoTime: Ms,
+    collectiveEndTime: Point<Ms>,
+    collectiveSegnoTime: Point<Ms>,
     collectiveShareSegnoTime: boolean,
     entities: Entity[],
     entityIndex: Ordinal<Entity[]>,
-    individualSegnoTime: Ms,
+    individualSegnoTime: Point<Ms>,
     scales: Maybe<Scale[]>,
     sectionInfos: SectionInfo[],
     voice: Voice,

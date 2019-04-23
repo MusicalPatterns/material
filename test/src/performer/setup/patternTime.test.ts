@@ -3,8 +3,8 @@ import { computePatternTime, NON_SEGNO_TIME } from '../../../../src/indexForTest
 
 describe('pattern time', () => {
     it('keeps repeating from the segno time', () => {
-        const segnoTime: Ms = as.Ms(5)
-        const totalDuration: Ms = as.Ms(10)
+        const segnoTime: Point<Ms> = as.Ms(5)
+        const totalDuration: Translation<Ms> = as.Ms(10)
         expect(computePatternTime({
             segnoTime,
             timePosition: BEGINNING,
@@ -49,8 +49,8 @@ describe('pattern time', () => {
     })
 
     it('when segno time is -1 (has no repetend), time sticks at the end', () => {
-        const segnoTime: Ms = NON_SEGNO_TIME
-        const totalDuration: Ms = as.Ms(10)
+        const segnoTime: Point<Ms> = NON_SEGNO_TIME
+        const totalDuration: Translation<Ms> = as.Ms(10)
         expect(computePatternTime({
             segnoTime,
             timePosition: BEGINNING,

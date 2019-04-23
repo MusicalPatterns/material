@@ -1,31 +1,31 @@
 import {
-    as,
     BEGINNING,
     INCREMENT,
     indexOfFinalElement,
     INITIAL,
     isEmpty,
     Ms,
-    ofNotAs,
     Ordinal,
+    Point,
+    Translation,
     use,
 } from '@musical-patterns/utilities'
 import { Sound } from '../types'
 import { ComputeNextSoundAfterTimePositionParameters, NextSound } from './types'
 
 const computeNextSoundAfterTimePosition:
-    (parameters: { segnoIndex: Ordinal<Sound[]>, sounds: Sound[], timePosition: Ms }) => NextSound =
+    (parameters: { segnoIndex: Ordinal<Sound[]>, sounds: Sound[], timePosition: Point<Ms> }) => NextSound =
     ({ sounds, timePosition, segnoIndex }: ComputeNextSoundAfterTimePositionParameters): NextSound => {
         if (isEmpty(sounds)) {
             return { soundIndex: INITIAL, nextStart: BEGINNING }
         }
 
         let soundIndex: Ordinal<Sound[]> = INITIAL
-        let nextStart: Ms = BEGINNING
+        let nextStart: Point<Ms> = BEGINNING
         while (nextStart < timePosition) {
             const nextSound: Sound = use.Ordinal(sounds, soundIndex)
-            const duration: Ms = nextSound.duration
-            nextStart = use.Translation(nextStart, as.Translation(ofNotAs(duration)))
+            const duration: Translation<Ms> = nextSound.duration
+            nextStart = use.Translation(nextStart, duration)
             soundIndex = use.Cardinal(soundIndex, INCREMENT)
 
             if (soundIndex > indexOfFinalElement(sounds)) {

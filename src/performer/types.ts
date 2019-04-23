@@ -1,11 +1,11 @@
-import { Ms, Ordinal } from '@musical-patterns/utilities'
+import { Ms, Ordinal, Point, Translation } from '@musical-patterns/utilities'
 import { SoundToPlay, StartSound, StopSound } from './performance'
 import { SourceRequest } from './preparation'
 
 interface PreparedVoice {
-    delay: Ms,
-    nextStart: Ms,
-    nextStop: Ms,
+    delay: Translation<Ms>,
+    nextStart: Point<Ms>,
+    nextStop: Point<Ms>,
     segnoIndex: Ordinal<Sound[]>,
     soundIndex: Ordinal<Sound[]>,
     sounds: Sound[],
@@ -13,15 +13,15 @@ interface PreparedVoice {
 }
 
 interface Voice {
-    delay: Ms,
+    delay: Translation<Ms>,
     segnoIndex: Ordinal<Sound[]>,
     sounds: Sound[],
     sourceRequest: SourceRequest,
 }
 
 interface Sound extends SoundToPlay {
-    duration: Ms,
-    sustain: Ms,
+    duration: Translation<Ms>,
+    sustain: Translation<Ms>,
 }
 
 interface Source {

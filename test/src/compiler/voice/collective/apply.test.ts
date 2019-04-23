@@ -61,9 +61,9 @@ describe('apply collective infos', () => {
             },
         ]
 
-        const individualSegnoTime: Ms = as.Ms(60)
+        const individualSegnoTime: Point<Ms> = as.Ms(60)
 
-        const collectiveSegnoTime: Ms = as.Ms(44)
+        const collectiveSegnoTime: Point<Ms> = as.Ms(44)
 
         const collectiveEndTime: Ms = as.Ms(133)
 

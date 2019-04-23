@@ -1,4 +1,4 @@
-import { as } from '@musical-patterns/utilities'
+import { as, Ms } from '@musical-patterns/utilities'
 import { SourceRequest, Voice } from '../../../performer'
 import { Entity, Scale } from '../../../types'
 import { compileSourceRequest } from '../../source'
@@ -11,7 +11,7 @@ import { IndividualVoiceAndInfo, IndividualVoiceInfo, SoundsAndSectionInfos } fr
 const computeIndividualVoiceAndInfo:
     (parameters: { entity: Entity, scales?: Scale[] }) => IndividualVoiceAndInfo =
     ({ entity, scales }: CompileVoiceParameters): IndividualVoiceAndInfo => {
-        const { delay = as.Ms(0), sections = [], timbreName } = entity
+        const { delay = as.Translation<Ms>(0), sections = [], timbreName } = entity
 
         const sourceRequest: SourceRequest = compileSourceRequest(timbreName)
         const { sounds, sectionInfos }: SoundsAndSectionInfos =

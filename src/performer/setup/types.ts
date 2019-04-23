@@ -1,11 +1,11 @@
-import { Ms } from '@musical-patterns/utilities'
+import { Ms, Point, Translation } from '@musical-patterns/utilities'
 
-type OnUpdate = (timePosition: Ms) => void
+type OnUpdate = (timePosition: Point<Ms>) => void
 
 interface ComputePatternTimeParameters {
-    segnoTime: Ms,
-    timePosition: Ms,
-    totalDuration: Ms,
+    segnoTime: Point<Ms>,
+    timePosition: Point<Ms>,
+    totalDuration: Translation<Ms>,
 }
 
 export {

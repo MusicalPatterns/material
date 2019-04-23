@@ -6,8 +6,10 @@ import {
     Ms,
     NO_DURATION,
     notAs,
+    Point,
     round,
     sum,
+    Translation,
 } from '@musical-patterns/utilities'
 import { NON_SEGNO_TIME } from '../../../performer'
 import { IndividualVoiceAndInfo, IndividualVoiceInfo } from '../individual'
@@ -19,13 +21,15 @@ const pluckInfos: (individualVoicesAndInfos: IndividualVoiceAndInfo[]) => Plucke
             (voiceAndInfo: IndividualVoiceAndInfo) => voiceAndInfo.voiceInfo,
         )
 
-        const individualSegnoTimes: Ms[] = individualVoiceInfos.map((voiceInfo: IndividualVoiceInfo) =>
-            voiceInfo.individualSegnoTime,
-        )
-        const individualRepetendDurations: Ms[] = individualVoiceInfos.map((individualVoiceInfo: IndividualVoiceInfo) =>
-            individualVoiceInfo.individualRepetendDuration,
-        )
-        const individualEndTimes: Ms[] =
+        const individualSegnoTimes: Array<Point<Ms>> =
+            individualVoiceInfos.map((voiceInfo: IndividualVoiceInfo) =>
+                voiceInfo.individualSegnoTime,
+            )
+        const individualRepetendDurations: Array<Translation<Ms>> =
+            individualVoiceInfos.map((individualVoiceInfo: IndividualVoiceInfo) =>
+                individualVoiceInfo.individualRepetendDuration,
+            )
+        const individualEndTimes: Array<Point<Ms>> =
             individualVoiceInfos.map((individualVoiceInfo: IndividualVoiceInfo) =>
                 individualVoiceInfo.individualEndTime,
             )
@@ -38,28 +42,28 @@ const pluckInfos: (individualVoicesAndInfos: IndividualVoiceAndInfo[]) => Plucke
     }
 
 const computeCollectiveInfosFromPluckedInfos: (parameters: {
-    individualEndTimes: Ms[],
-    individualRepetendDurations: Ms[],
-    individualSegnoTimes: Ms[],
+    individualEndTimes: Array<Point<Ms>>,
+    individualRepetendDurations: Array<Translation<Ms>>,
+    individualSegnoTimes: Array<Point<Ms>>,
 }) => CollectiveVoiceInfos =
     (
         { individualEndTimes, individualRepetendDurations, individualSegnoTimes }: PluckedVoiceInfos,
     ): CollectiveVoiceInfos => {
         const collectiveShareSegnoTime: boolean = allValuesAreTheSame(individualSegnoTimes)
-        const collectiveSegnoTime: Ms = max(...individualSegnoTimes)
-        const collectiveRepetendDuration: Ms = collectiveSegnoTime === NON_SEGNO_TIME ?
-            NON_SEGNO_TIME :
-            as.Ms(computeLeastCommonMultiple(
+        const collectiveSegnoTime: Point<Ms> = max(...individualSegnoTimes)
+        const collectiveRepetendDuration: Translation<Ms> = as.Translation<Ms>(collectiveSegnoTime === NON_SEGNO_TIME ?
+            notAs.Point(NON_SEGNO_TIME) :
+            computeLeastCommonMultiple(
                 ...individualRepetendDurations
-                    .filter((individualRepetendDuration: Ms) => individualRepetendDuration !== NO_DURATION)
+                    .filter((individualRepetendDuration: Translation<Ms>) => individualRepetendDuration !== NO_DURATION)
                     // tslint:disable-next-line no-unnecessary-callback-wrapper
-                    .map((individualRepetendDuration: Ms) => round(individualRepetendDuration))
-                    .map(notAs.Ms)
+                    .map((individualRepetendDuration: Translation<Ms>) => round(individualRepetendDuration))
                     .map(as.Integer),
-            ))
-        const collectiveEndTime: Ms = collectiveSegnoTime === NON_SEGNO_TIME ?
+            ),
+        )
+        const collectiveEndTime: Point<Ms> = collectiveSegnoTime === NON_SEGNO_TIME ?
             max(...individualEndTimes) :
-            sum(collectiveSegnoTime, collectiveRepetendDuration)
+            sum(collectiveSegnoTime, as.Point<Ms>(notAs.Translation(collectiveRepetendDuration)))
 
         return {
             collectiveEndTime,

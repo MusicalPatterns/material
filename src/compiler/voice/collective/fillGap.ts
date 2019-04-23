@@ -1,4 +1,4 @@
-import { difference, isUndefined, Maybe, Ms } from '@musical-patterns/utilities'
+import { as, difference, isUndefined, Maybe, Ms, notAs, Point, Translation } from '@musical-patterns/utilities'
 import { Sound } from '../../../performer'
 import { Scale } from '../../../types'
 import { SectionInfo } from '../individual'
@@ -9,7 +9,7 @@ import { computeRepetendSounds } from './repetendSounds'
 import { FillGapParameters } from './types'
 
 const fillGap: (parameters: {
-    collectiveEndTime: Ms,
+    collectiveEndTime: Point<Ms>,
     scales: Scale[],
     sectionInfos: SectionInfo[],
     sections: Section[],
@@ -22,7 +22,10 @@ const fillGap: (parameters: {
             return sounds
         }
 
-        const gapToBeFilled: Ms = difference(collectiveEndTime, computeSoundsDuration(sounds))
+        const gapToBeFilled: Translation<Ms> = difference(
+            as.Translation<Ms>(notAs.Point(collectiveEndTime)),
+            computeSoundsDuration(sounds),
+        )
 
         return sounds.concat(computeFillGapSounds(repetendSounds, gapToBeFilled))
     }

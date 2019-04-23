@@ -10,7 +10,7 @@ import {
 } from '../../../../../src/indexForTest'
 
 describe('compute segno index', () => {
-    const collectiveSegnoTime: Ms = as.Ms(44)
+    const collectiveSegnoTime: Point<Ms> = as.Ms(44)
     const voice: Voice = {
         delay: NO_DURATION,
         segnoIndex: TEMPORARY_UNDEFINED_SEGNO_INDEX,
@@ -31,7 +31,7 @@ describe('compute segno index', () => {
             timbreName: OscillatorName.SINE,
         },
     }
-    let individualSegnoTime: Ms
+    let individualSegnoTime: Point<Ms>
 
     describe('when the voice has no repetend', () => {
         beforeEach(() => {

@@ -1,6 +1,16 @@
 // tslint:disable no-type-definitions-outside-types-modules
 
-import { ActionForState, Coordinate, Maybe, Meters, Ms, ThreeDimensional, TypedMap } from '@musical-patterns/utilities'
+import {
+    ActionForState,
+    Coordinate,
+    Maybe,
+    Meters,
+    Ms,
+    Point,
+    ThreeDimensional,
+    Translation,
+    TypedMap,
+} from '@musical-patterns/utilities'
 import { Vrb } from 'vrb'
 import { SampleDatas } from '../preparation'
 import { PreparedVoice, Voice } from '../types'
@@ -26,9 +36,9 @@ interface State {
     [ StateKey.PAUSED ]: boolean,
     [ StateKey.PREPARED_VOICES ]: PreparedVoice[],
     [ StateKey.VOICES ]: Voice[],
-    [ StateKey.TOTAL_DURATION ]: Ms,
-    [ StateKey.SEGNO_TIME ]: Ms,
-    [ StateKey.TIME_POSITION ]: Ms,
+    [ StateKey.TOTAL_DURATION ]: Translation<Ms>,
+    [ StateKey.SEGNO_TIME ]: Point<Ms>,
+    [ StateKey.TIME_POSITION ]: Point<Ms>,
     [ StateKey.IMMERSIVE_AUDIO_READY ]: boolean,
     [ StateKey.WEB_VR ]: Maybe<Vrb>,
     [ StateKey.HOME_POSITION ]: Maybe<Coordinate<Meters, ThreeDimensional>>,

@@ -2,7 +2,8 @@
 
 import { as, Integer, Ms, negative, Translation } from '@musical-patterns/utilities'
 
-const DEFAULT_TRANSLATION_FOR_ALMOST_FULL_SUSTAIN: Translation<Ms> = as.Translation<Ms>(negative(0.1))
+const DEFAULT_TRANSLATION_FOR_ALMOST_FULL_SUSTAIN: Translation<Translation<Ms>> =
+    as.Translation<Translation<Ms>>(negative(0.1))
 
 const COMPILER_PRECISION: Integer = as.Integer(5)
 

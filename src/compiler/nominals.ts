@@ -9,13 +9,13 @@ import {
     Meters,
     Ms,
     NormalScalar,
-    Scalar,
+    Scalar, Translation,
 } from '@musical-patterns/utilities'
 
 type SoundFeature =
     (
         // tslint:disable-next-line max-union-size
-        Ms |
+        Translation<Ms> |
         NormalScalar<Amplitude> |
         Scalar |
         Hz |
