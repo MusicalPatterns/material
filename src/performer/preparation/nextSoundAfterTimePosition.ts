@@ -26,7 +26,7 @@ const computeNextSoundAfterTimePosition:
             const nextSound: Sound = use.Ordinal(sounds, soundIndex)
             const duration: Ms = nextSound.duration
             nextStart = use.Translation(nextStart, as.Translation(ofNotAs(duration)))
-            soundIndex = use.Translation(soundIndex, INCREMENT)
+            soundIndex = use.Cardinal(soundIndex, INCREMENT)
 
             if (soundIndex > indexOfFinalElement(sounds)) {
                 soundIndex = segnoIndex

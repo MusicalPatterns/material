@@ -9,7 +9,7 @@ const computeNotesTotalDurationByScalar: (notes: Note[]) => number =
 
                 return use.Translation(
                     accumulator,
-                    insteadOf<Translation>(as.Translation(notAs.Scalar<Scalar>(durationScalar))),
+                    as.Translation(notAs.Scalar<Scalar>(durationScalar)),
                 )
             },
             0,
@@ -23,7 +23,7 @@ const computeNotesTotalDurationByIndex: (notes: Note[]) => number =
 
                 return use.Translation(
                     accumulator,
-                    insteadOf<Translation>(as.Translation(notAs.Ordinal<Scalar[]>(durationIndex))),
+                    as.Translation(notAs.Ordinal<Scalar[]>(durationIndex)),
                 )
             },
             0,

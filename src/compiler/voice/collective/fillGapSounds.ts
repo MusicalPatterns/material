@@ -26,7 +26,7 @@ const computeFillGapSounds: (repetendSounds: Sound[], gapToBeFilled: Ms) => Soun
             const duration: Ms = nextSound.duration
             gapFilled = use.Translation(gapFilled, as.Translation(ofNotAs(duration)))
             fillGapSounds.push(nextSound)
-            soundIndex = use.Translation(soundIndex, INCREMENT)
+            soundIndex = use.Cardinal(soundIndex, INCREMENT)
             if (soundIndex > indexOfFinalElement(repetendSounds)) {
                 soundIndex = INITIAL
             }
