@@ -1,4 +1,4 @@
-import { as, Ms, NOT_FOUND, Ordinal } from '@musical-patterns/utilities'
+import { as, Ms, NOT_FOUND, Ordinal, Point } from '@musical-patterns/utilities'
 import { computeIndividualSegnoTime, SectionInfo } from '../../../../../src/indexForTest'
 
 describe('compute individual segno time', () => {
@@ -7,25 +7,25 @@ describe('compute individual segno time', () => {
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: as.Ms(99),
+                totalDuration: as.Translation<Ms>(99),
             },
             {
                 doesRepeatForever: false,
-                totalDuration: as.Ms(33),
+                totalDuration: as.Translation<Ms>(33),
             },
             {
                 doesRepeatForever: true,
-                totalDuration: as.Ms(4236),
+                totalDuration: as.Translation<Ms>(4236),
             },
         ]
 
-        const actualIndividualSegnoTime: Ms = computeIndividualSegnoTime({
+        const actualIndividualSegnoTime: Point<Ms> = computeIndividualSegnoTime({
             individualRepetendIndex,
             sectionInfos,
         })
 
         expect(actualIndividualSegnoTime)
-            .toEqual(as.Ms(132))
+            .toEqual(as.Point<Ms>(132))
     })
 
     it('gives -1 if voice has no repetend', () => {
@@ -33,20 +33,20 @@ describe('compute individual segno time', () => {
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: as.Ms(99),
+                totalDuration: as.Translation<Ms>(99),
             },
             {
                 doesRepeatForever: false,
-                totalDuration: as.Ms(33),
+                totalDuration: as.Translation<Ms>(33),
             },
         ]
 
-        const actualIndividualSegnoTime: Ms = computeIndividualSegnoTime({
+        const actualIndividualSegnoTime: Point<Ms> = computeIndividualSegnoTime({
             individualRepetendIndex,
             sectionInfos,
         })
 
         expect(actualIndividualSegnoTime)
-            .toEqual(as.Ms(-1))
+            .toEqual(as.Point<Ms>(-1))
     })
 })

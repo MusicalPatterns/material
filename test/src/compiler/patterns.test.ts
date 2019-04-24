@@ -1,4 +1,14 @@
-import { Amplitude, as, BEGINNING, insteadOf, NO_DURATION, ONE_TENTH, Scalar, use } from '@musical-patterns/utilities'
+import {
+    Amplitude,
+    as,
+    BEGINNING,
+    insteadOf,
+    Ms,
+    NO_DURATION,
+    ONE_TENTH,
+    Scalar,
+    use,
+} from '@musical-patterns/utilities'
 import {
     CompiledPattern,
     compilePattern,
@@ -26,11 +36,11 @@ describe('compile pattern', () => {
             sustain: { scalar: testSpecs.testSpec },
         })
     const expectedSound: Sound = {
-        duration: as.Ms(9),
+        duration: as.Translation<Ms>(9),
         frequency: as.Hz(9),
         gain: as.NormalScalar<Amplitude>(0.9),
         position: [ 9, 0, 0 ].map(as.Meters),
-        sustain: as.Ms(8.9),
+        sustain: as.Translation<Ms>(8.9),
     }
 
     const material: Material = {
@@ -62,7 +72,7 @@ describe('compile pattern', () => {
         expect(actualCompiledPattern)
             .toEqual({
                 segnoTime: BEGINNING,
-                totalDuration: as.Ms(9),
+                totalDuration: as.Translation<Ms>(9),
                 voices: [
                     {
                         delay: NO_DURATION,
@@ -92,7 +102,7 @@ describe('compile pattern', () => {
         expect(actualCompiledPattern)
             .toEqual({
                 segnoTime: BEGINNING,
-                totalDuration: as.Ms(9),
+                totalDuration: as.Translation<Ms>(9),
                 voices: [
                     {
                         delay: NO_DURATION,
@@ -124,7 +134,7 @@ describe('compile pattern', () => {
         expect(actualCompiledPattern)
             .toEqual({
                 segnoTime: BEGINNING,
-                totalDuration: as.Ms(9),
+                totalDuration: as.Translation<Ms>(9),
                 voices: [
                     {
                         delay: NO_DURATION,

@@ -1,10 +1,10 @@
-import { as, BEGINNING, Ms } from '@musical-patterns/utilities'
+import { as, BEGINNING, Ms, Point, Translation } from '@musical-patterns/utilities'
 import { computePatternTime, NON_SEGNO_TIME } from '../../../../src/indexForTest'
 
 describe('pattern time', () => {
     it('keeps repeating from the segno time', () => {
-        const segnoTime: Point<Ms> = as.Ms(5)
-        const totalDuration: Translation<Ms> = as.Ms(10)
+        const segnoTime: Point<Ms> = as.Point<Ms>(5)
+        const totalDuration: Translation<Ms> = as.Translation<Ms>(10)
         expect(computePatternTime({
             segnoTime,
             timePosition: BEGINNING,
@@ -14,43 +14,43 @@ describe('pattern time', () => {
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: as.Ms(5),
+            timePosition: as.Point<Ms>(5),
             totalDuration,
         }))
-            .toBe(as.Ms(5))
+            .toBe(as.Point<Ms>(5))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: as.Ms(9),
+            timePosition: as.Point<Ms>(9),
             totalDuration,
         }))
-            .toBe(as.Ms(9))
+            .toBe(as.Point<Ms>(9))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: as.Ms(10),
+            timePosition: as.Point<Ms>(10),
             totalDuration,
         }))
-            .toBe(as.Ms(5))
+            .toBe(as.Point<Ms>(5))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: as.Ms(14),
+            timePosition: as.Point<Ms>(14),
             totalDuration,
         }))
-            .toBe(as.Ms(9))
+            .toBe(as.Point<Ms>(9))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: as.Ms(20),
+            timePosition: as.Point<Ms>(20),
             totalDuration,
         }))
-            .toBe(as.Ms(5))
+            .toBe(as.Point<Ms>(5))
     })
 
     it('when segno time is -1 (has no repetend), time sticks at the end', () => {
         const segnoTime: Point<Ms> = NON_SEGNO_TIME
-        const totalDuration: Translation<Ms> = as.Ms(10)
+        const totalDuration: Translation<Ms> = as.Translation<Ms>(10)
         expect(computePatternTime({
             segnoTime,
             timePosition: BEGINNING,
@@ -60,37 +60,37 @@ describe('pattern time', () => {
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: as.Ms(5),
+            timePosition: as.Point<Ms>(5),
             totalDuration,
         }))
-            .toBe(as.Ms(5))
+            .toBe(as.Point<Ms>(5))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: as.Ms(9),
+            timePosition: as.Point<Ms>(9),
             totalDuration,
         }))
-            .toBe(as.Ms(9))
+            .toBe(as.Point<Ms>(9))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: as.Ms(10),
+            timePosition: as.Point<Ms>(10),
             totalDuration,
         }))
-            .toBe(as.Ms(10))
+            .toBe(as.Point<Ms>(10))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: as.Ms(14),
+            timePosition: as.Point<Ms>(14),
             totalDuration,
         }))
-            .toBe(as.Ms(10))
+            .toBe(as.Point<Ms>(10))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: as.Ms(20),
+            timePosition: as.Point<Ms>(20),
             totalDuration,
         }))
-            .toBe(as.Ms(10))
+            .toBe(as.Point<Ms>(10))
     })
 })

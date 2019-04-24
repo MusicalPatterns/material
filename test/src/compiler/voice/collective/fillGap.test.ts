@@ -1,25 +1,25 @@
-import { Amplitude, as, Scalar } from '@musical-patterns/utilities'
+import { Amplitude, as, Ms, Scalar } from '@musical-patterns/utilities'
 import { fillGap, Section, SectionInfo, Sound } from '../../../../../src/indexForTest'
 
 describe('fill gap', () => {
     it('fills the gap from the individual end time to the collective end time with repetend sounds', () => {
         const originalSounds: Sound[] = [
             {
-                duration: as.Ms(8),
+                duration: as.Translation<Ms>(8),
                 frequency: as.Hz(1),
                 gain: as.NormalScalar<Amplitude>(1),
                 position: [ 0, 0, 0 ].map(as.Meters),
-                sustain: as.Ms(7.9),
+                sustain: as.Translation<Ms>(7.9),
             },
         ]
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: as.Ms(99),
+                totalDuration: as.Translation<Ms>(99),
             },
             {
                 doesRepeatForever: true,
-                totalDuration: as.Ms(11),
+                totalDuration: as.Translation<Ms>(11),
             },
         ]
         const sections: Section[] = [
@@ -33,7 +33,7 @@ describe('fill gap', () => {
         ]
 
         const actualFilledGapSounds: Sound[] = fillGap({
-            collectiveEndTime: as.Ms(30),
+            collectiveEndTime: as.Point<Ms>(30),
             scales: [],
             sectionInfos,
             sections,
@@ -43,25 +43,25 @@ describe('fill gap', () => {
         expect(actualFilledGapSounds)
             .toEqual([
                 {
-                    duration: as.Ms(8),
+                    duration: as.Translation<Ms>(8),
                     frequency: as.Hz(1),
                     gain: as.NormalScalar<Amplitude>(1),
                     position: [ 0, 0, 0 ].map(as.Meters),
-                    sustain: as.Ms(7.9),
+                    sustain: as.Translation<Ms>(7.9),
                 },
                 {
-                    duration: as.Ms(11),
+                    duration: as.Translation<Ms>(11),
                     frequency: as.Hz(1),
                     gain: as.NormalScalar<Amplitude>(1),
                     position: [ 0, 0, 0 ].map(as.Meters),
-                    sustain: as.Ms(10.9),
+                    sustain: as.Translation<Ms>(10.9),
                 },
                 {
-                    duration: as.Ms(11),
+                    duration: as.Translation<Ms>(11),
                     frequency: as.Hz(1),
                     gain: as.NormalScalar<Amplitude>(1),
                     position: [ 0, 0, 0 ].map(as.Meters),
-                    sustain: as.Ms(10.9),
+                    sustain: as.Translation<Ms>(10.9),
                 },
             ])
     })
@@ -69,21 +69,21 @@ describe('fill gap', () => {
     it('if this voice has no repetend, return the sounds as is', () => {
         const originalSounds: Sound[] = [
             {
-                duration: as.Ms(11),
+                duration: as.Translation<Ms>(11),
                 frequency: as.Hz(1),
                 gain: as.NormalScalar<Amplitude>(1),
                 position: [ 0, 0, 0 ].map(as.Meters),
-                sustain: as.Ms(10.9),
+                sustain: as.Translation<Ms>(10.9),
             },
         ]
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: as.Ms(99),
+                totalDuration: as.Translation<Ms>(99),
             },
             {
                 doesRepeatForever: false,
-                totalDuration: as.Ms(88),
+                totalDuration: as.Translation<Ms>(88),
             },
         ]
         const sections: Section[] = [
@@ -98,7 +98,7 @@ describe('fill gap', () => {
         ]
 
         const actualFilledGapSounds: Sound[] = fillGap({
-            collectiveEndTime: as.Ms(100),
+            collectiveEndTime: as.Point<Ms>(100),
             scales: [],
             sectionInfos,
             sections,
@@ -108,11 +108,11 @@ describe('fill gap', () => {
         expect(actualFilledGapSounds)
             .toEqual([
                 {
-                    duration: as.Ms(11),
+                    duration: as.Translation<Ms>(11),
                     frequency: as.Hz(1),
                     gain: as.NormalScalar<Amplitude>(1),
                     position: [ 0, 0, 0 ].map(as.Meters),
-                    sustain: as.Ms(10.9),
+                    sustain: as.Translation<Ms>(10.9),
                 },
             ])
     })

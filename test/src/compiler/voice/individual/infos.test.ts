@@ -1,4 +1,4 @@
-import { as } from '@musical-patterns/utilities'
+import { as, Ms } from '@musical-patterns/utilities'
 import { computeIndividualVoiceInfo, IndividualVoiceInfo, SectionInfo } from '../../../../../src/indexForTest'
 
 describe('compute individual voice info', () => {
@@ -6,11 +6,11 @@ describe('compute individual voice info', () => {
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: as.Ms(99),
+                totalDuration: as.Translation<Ms>(99),
             },
             {
                 doesRepeatForever: true,
-                totalDuration: as.Ms(11),
+                totalDuration: as.Translation<Ms>(11),
             },
         ]
 
@@ -18,9 +18,9 @@ describe('compute individual voice info', () => {
 
         expect(actualIndividualVoiceInfo)
             .toEqual({
-                individualEndTime: as.Ms(110),
-                individualRepetendDuration: as.Ms(11),
-                individualSegnoTime: as.Ms(99),
+                individualEndTime: as.Point<Ms>(110),
+                individualRepetendDuration: as.Translation<Ms>(11),
+                individualSegnoTime: as.Point<Ms>(99),
                 sectionInfos,
             })
     })

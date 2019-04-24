@@ -1,4 +1,4 @@
-import { as, Ms, NO_DURATION, NOT_FOUND, Ordinal } from '@musical-patterns/utilities'
+import { as, Ms, NO_DURATION, NOT_FOUND, Ordinal, Translation } from '@musical-patterns/utilities'
 import { computeIndividualRepetendDuration, SectionInfo } from '../../../../../src/indexForTest'
 
 describe('compute individual repetend duration', () => {
@@ -7,25 +7,25 @@ describe('compute individual repetend duration', () => {
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: as.Ms(45),
+                totalDuration: as.Translation<Ms>(45),
             },
             {
                 doesRepeatForever: false,
-                totalDuration: as.Ms(643),
+                totalDuration: as.Translation<Ms>(643),
             },
             {
                 doesRepeatForever: true,
-                totalDuration: as.Ms(7),
+                totalDuration: as.Translation<Ms>(7),
             },
         ]
 
-        const actualIndividualRepetendDuration: Ms = computeIndividualRepetendDuration({
+        const actualIndividualRepetendDuration: Translation<Ms> = computeIndividualRepetendDuration({
             individualRepetendIndex,
             sectionInfos,
         })
 
         expect(actualIndividualRepetendDuration)
-            .toBe(as.Ms(7))
+            .toBe(as.Translation<Ms>(7))
     })
 
     it('when the voice has no repetend, is zero', () => {
@@ -33,19 +33,19 @@ describe('compute individual repetend duration', () => {
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: as.Ms(45),
+                totalDuration: as.Translation<Ms>(45),
             },
             {
                 doesRepeatForever: false,
-                totalDuration: as.Ms(643),
+                totalDuration: as.Translation<Ms>(643),
             },
             {
                 doesRepeatForever: false,
-                totalDuration: as.Ms(7),
+                totalDuration: as.Translation<Ms>(7),
             },
         ]
 
-        const actualIndividualRepetendDuration: Ms = computeIndividualRepetendDuration({
+        const actualIndividualRepetendDuration: Translation<Ms> = computeIndividualRepetendDuration({
             individualRepetendIndex,
             sectionInfos,
         })
@@ -58,7 +58,7 @@ describe('compute individual repetend duration', () => {
         const individualRepetendIndex: Ordinal<SectionInfo[]> = as.Ordinal<SectionInfo[]>(2)
         const sectionInfos: SectionInfo[] = []
 
-        const actualIndividualRepetendDuration: Ms = computeIndividualRepetendDuration({
+        const actualIndividualRepetendDuration: Translation<Ms> = computeIndividualRepetendDuration({
             individualRepetendIndex,
             sectionInfos,
         })
