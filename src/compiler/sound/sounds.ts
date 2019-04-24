@@ -3,14 +3,15 @@ import {
     Amplitude,
     as,
     Coordinate,
+    Duration,
     Hz,
     INITIAL,
     Meters,
-    Ms,
     MULTIPLICATIVE_IDENTITY,
-    NormalScalar,
     notAs,
-    THREE_DIMENSIONAL, Translation,
+    Pitch,
+    Point,
+    THREE_DIMENSIONAL,
     use,
 } from '@musical-patterns/utilities'
 import { Sound } from '../../performer'
@@ -18,36 +19,42 @@ import { DEFAULT_TRANSLATION_FOR_ALMOST_FULL_SUSTAIN } from './constants'
 import { compileSoundFeature } from './features'
 import { CompileSoundsOptions, Note, NoteFeature } from './types'
 
-const defaultNoteFeature: NoteFeature = {
-    index: INITIAL,
-    scalar: MULTIPLICATIVE_IDENTITY,
-    scaleIndex: INITIAL,
-    translation: ADDITIVE_IDENTITY,
-}
+const computeDefaultNoteFeature: <FeatureType extends Number = number>() => NoteFeature<FeatureType> =
+    <FeatureType extends Number = number>(): NoteFeature<FeatureType> => ({
+        index: INITIAL,
+        scalar: MULTIPLICATIVE_IDENTITY,
+        scaleIndex: INITIAL,
+        translation: ADDITIVE_IDENTITY,
+    })
 
-const compilePosition:
-    (notePosition?: NoteFeature | NoteFeature[], options?: CompileSoundsOptions) => Coordinate<Meters> =
-    (notePosition?: NoteFeature | NoteFeature[], options?: CompileSoundsOptions): Coordinate<Meters> => {
-        const position: Coordinate<Meters> = notePosition ?
+const compilePosition: (
+    notePosition?: NoteFeature<Point<Meters>> | Array<NoteFeature<Point<Meters>>>,
+    options?: CompileSoundsOptions,
+) => Coordinate<Point<Meters>> =
+    (
+        notePosition?: NoteFeature<Point<Meters>> | Array<NoteFeature<Point<Meters>>>,
+        options?: CompileSoundsOptions,
+    ): Coordinate<Point<Meters>> => {
+        const position: Coordinate<Point<Meters>> = notePosition ?
             notePosition instanceof Array ?
                 notePosition.map(
-                    (positionElement: NoteFeature): Meters =>
-                        compileSoundFeature(positionElement, options))
+                    (positionElement: NoteFeature<Point<Meters>>): Point<Meters> =>
+                        compileSoundFeature(positionElement, options as CompileSoundsOptions<Point<Meters>>))
                 :
-                [ compileSoundFeature(notePosition, options) ]
+                [ compileSoundFeature(notePosition, options as CompileSoundsOptions<Point<Meters>>) ]
             :
             []
         while (position.length < notAs.Cardinal(THREE_DIMENSIONAL)) {
-            position.push(as.Meters(0))
+            position.push(as.Point<Meters>(0))
         }
 
         return position
     }
 
-const compileSustain: (note: Note, duration: Translation<Ms>, options?: CompileSoundsOptions) => Translation<Ms> =
-    (note: Note, duration: Translation<Ms>, options?: CompileSoundsOptions): Translation<Ms> => {
-        const noteSustain: NoteFeature = note.sustain || note.duration || defaultNoteFeature
-        const sustain: Translation<Ms> = compileSoundFeature(noteSustain, options)
+const compileSustain: (note: Note, duration: Duration, options?: CompileSoundsOptions) => Duration =
+    (note: Note, duration: Duration, options?: CompileSoundsOptions): Duration => {
+        const noteSustain: NoteFeature<Duration> = note.sustain || note.duration || computeDefaultNoteFeature()
+        const sustain: Duration = compileSoundFeature(noteSustain, options as CompileSoundsOptions<Duration>)
 
         return sustain < duration ?
             sustain :
@@ -57,17 +64,17 @@ const compileSustain: (note: Note, duration: Translation<Ms>, options?: CompileS
 const compileSound: (note: Note, options?: CompileSoundsOptions) => Sound =
     (note: Note, options?: CompileSoundsOptions): Sound => {
         const {
-            duration: noteDuration = defaultNoteFeature,
-            gain: noteGain = defaultNoteFeature,
-            pitch: notePitch = defaultNoteFeature,
+            duration: noteDuration = computeDefaultNoteFeature<Duration>(),
+            gain: noteGain = computeDefaultNoteFeature<Amplitude>(),
+            pitch: notePitch = computeDefaultNoteFeature<Pitch>(),
         } = note
 
-        const duration: Translation<Ms> = compileSoundFeature(noteDuration, options)
-        const gain: NormalScalar<Amplitude> = compileSoundFeature(noteGain, options)
-        const frequency: Hz = compileSoundFeature(notePitch, options)
+        const duration: Duration = compileSoundFeature(noteDuration, options as CompileSoundsOptions<Duration>)
+        const gain: Amplitude = compileSoundFeature(noteGain, options as CompileSoundsOptions<Amplitude>)
+        const frequency: Point<Hz> = compileSoundFeature(notePitch, options as CompileSoundsOptions<Pitch>)
 
-        const position: Coordinate<Meters> = compilePosition(note.position, options)
-        const sustain: Translation<Ms> = compileSustain(note, duration, options)
+        const position: Coordinate<Point<Meters>> = compilePosition(note.position, options)
+        const sustain: Duration = compileSustain(note, duration, options)
 
         return { duration, gain, frequency, position, sustain }
     }

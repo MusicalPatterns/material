@@ -1,24 +1,25 @@
-import { Ms, NO_DURATION, sum, Translation } from '@musical-patterns/utilities'
+import { Duration, NO_DURATION, sum } from '@musical-patterns/utilities'
 import { Sound } from '../../performer'
 import { Scale } from '../../types'
-import { compileSoundFeature, Note, NoteFeature } from '../sound'
+import { compileSoundFeature, CompileSoundsOptions, Note, NoteFeature } from '../sound'
 
-const computeNotesTotalCompiledDuration: (notes: Note[], scales?: Scale[]) => Translation<Ms> =
-    (notes: Note[], scales?: Scale[]): Translation<Ms> =>
+const computeNotesTotalCompiledDuration: (notes: Note[], scales?: Scale[]) => Duration =
+    (notes: Note[], scales?: Scale[]): Duration =>
         notes.reduce(
-            (totalDuration: Translation<Ms>, note: Note): Translation<Ms> => {
-                const noteDuration: NoteFeature = note.duration || {}
-                const duration: Translation<Ms> = compileSoundFeature(noteDuration, { scales })
+            (totalDuration: Duration, note: Note): Duration => {
+                const noteDuration: NoteFeature<Duration> = note.duration || {}
+                const options: CompileSoundsOptions<Duration> = { scales: scales as Array<Scale<Duration>> }
+                const duration: Duration = compileSoundFeature(noteDuration, options)
 
                 return sum(totalDuration, duration)
             },
             NO_DURATION,
         )
 
-const computeSoundsDuration: (sounds: Sound[]) => Translation<Ms> =
-    (sounds: Sound[]): Translation<Ms> =>
+const computeSoundsDuration: (sounds: Sound[]) => Duration =
+    (sounds: Sound[]): Duration =>
         sounds.reduce(
-            (accumulator: Translation<Ms>, sound: Sound): Translation<Ms> =>
+            (accumulator: Duration, sound: Sound): Duration =>
                 sum(accumulator, sound.duration),
             NO_DURATION,
         )

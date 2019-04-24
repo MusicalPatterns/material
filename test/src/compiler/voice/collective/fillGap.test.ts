@@ -1,34 +1,34 @@
-import { Amplitude, as, Ms, Scalar } from '@musical-patterns/utilities'
+import { as, Duration, Hz, Meters, Ms, Point } from '@musical-patterns/utilities'
 import { fillGap, Section, SectionInfo, Sound } from '../../../../../src/indexForTest'
 
 describe('fill gap', () => {
     it('fills the gap from the individual end time to the collective end time with repetend sounds', () => {
         const originalSounds: Sound[] = [
             {
-                duration: as.Translation<Ms>(8),
-                frequency: as.Hz(1),
-                gain: as.NormalScalar<Amplitude>(1),
-                position: [ 0, 0, 0 ].map(as.Meters),
-                sustain: as.Translation<Ms>(7.9),
+                duration: as.Translation<Point<Ms>>(8),
+                frequency: as.Point<Hz>(1),
+                gain: as.Amplitude(1),
+                position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
+                sustain: as.Translation<Point<Ms>>(7.9),
             },
         ]
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: as.Translation<Ms>(99),
+                totalDuration: as.Translation<Point<Ms>>(99),
             },
             {
                 doesRepeatForever: true,
-                totalDuration: as.Translation<Ms>(11),
+                totalDuration: as.Translation<Point<Ms>>(11),
             },
         ]
         const sections: Section[] = [
             {
-                notes: [ { duration: { scalar: as.Scalar<Scalar>(11) } } ],
+                notes: [ { duration: { scalar: as.Scalar<Duration>(11) } } ],
                 repetitions: as.Cardinal(9),
             },
             {
-                notes: [ { duration: { scalar: as.Scalar<Scalar>(11) } } ],
+                notes: [ { duration: { scalar: as.Scalar<Duration>(11) } } ],
             },
         ]
 
@@ -43,25 +43,25 @@ describe('fill gap', () => {
         expect(actualFilledGapSounds)
             .toEqual([
                 {
-                    duration: as.Translation<Ms>(8),
-                    frequency: as.Hz(1),
-                    gain: as.NormalScalar<Amplitude>(1),
-                    position: [ 0, 0, 0 ].map(as.Meters),
-                    sustain: as.Translation<Ms>(7.9),
+                    duration: as.Translation<Point<Ms>>(8),
+                    frequency: as.Point<Hz>(1),
+                    gain: as.Amplitude(1),
+                    position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
+                    sustain: as.Translation<Point<Ms>>(7.9),
                 },
                 {
-                    duration: as.Translation<Ms>(11),
-                    frequency: as.Hz(1),
-                    gain: as.NormalScalar<Amplitude>(1),
-                    position: [ 0, 0, 0 ].map(as.Meters),
-                    sustain: as.Translation<Ms>(10.9),
+                    duration: as.Translation<Point<Ms>>(11),
+                    frequency: as.Point<Hz>(1),
+                    gain: as.Amplitude(1),
+                    position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
+                    sustain: as.Translation<Point<Ms>>(10.9),
                 },
                 {
-                    duration: as.Translation<Ms>(11),
-                    frequency: as.Hz(1),
-                    gain: as.NormalScalar<Amplitude>(1),
-                    position: [ 0, 0, 0 ].map(as.Meters),
-                    sustain: as.Translation<Ms>(10.9),
+                    duration: as.Translation<Point<Ms>>(11),
+                    frequency: as.Point<Hz>(1),
+                    gain: as.Amplitude(1),
+                    position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
+                    sustain: as.Translation<Point<Ms>>(10.9),
                 },
             ])
     })
@@ -69,30 +69,30 @@ describe('fill gap', () => {
     it('if this voice has no repetend, return the sounds as is', () => {
         const originalSounds: Sound[] = [
             {
-                duration: as.Translation<Ms>(11),
-                frequency: as.Hz(1),
-                gain: as.NormalScalar<Amplitude>(1),
-                position: [ 0, 0, 0 ].map(as.Meters),
-                sustain: as.Translation<Ms>(10.9),
+                duration: as.Translation<Point<Ms>>(11),
+                frequency: as.Point<Hz>(1),
+                gain: as.Amplitude(1),
+                position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
+                sustain: as.Translation<Point<Ms>>(10.9),
             },
         ]
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: as.Translation<Ms>(99),
+                totalDuration: as.Translation<Point<Ms>>(99),
             },
             {
                 doesRepeatForever: false,
-                totalDuration: as.Translation<Ms>(88),
+                totalDuration: as.Translation<Point<Ms>>(88),
             },
         ]
         const sections: Section[] = [
             {
-                notes: [ { duration: { scalar: as.Scalar<Scalar>(11) } } ],
+                notes: [ { duration: { scalar: as.Scalar<Duration>(11) } } ],
                 repetitions: as.Cardinal(9),
             },
             {
-                notes: [ { duration: { scalar: as.Scalar<Scalar>(11) } } ],
+                notes: [ { duration: { scalar: as.Scalar<Duration>(11) } } ],
                 repetitions: as.Cardinal(8),
             },
         ]
@@ -108,11 +108,11 @@ describe('fill gap', () => {
         expect(actualFilledGapSounds)
             .toEqual([
                 {
-                    duration: as.Translation<Ms>(11),
-                    frequency: as.Hz(1),
-                    gain: as.NormalScalar<Amplitude>(1),
-                    position: [ 0, 0, 0 ].map(as.Meters),
-                    sustain: as.Translation<Ms>(10.9),
+                    duration: as.Translation<Point<Ms>>(11),
+                    frequency: as.Point<Hz>(1),
+                    gain: as.Amplitude(1),
+                    position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
+                    sustain: as.Translation<Point<Ms>>(10.9),
                 },
             ])
     })

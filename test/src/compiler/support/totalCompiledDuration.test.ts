@@ -1,4 +1,4 @@
-import { as, Ms, Scalar, Translation } from '@musical-patterns/utilities'
+import { as, Duration, Ms, Point, Scalar } from '@musical-patterns/utilities'
 import { computeNotesTotalCompiledDuration, Note, Scale } from '../../../../src/indexForTest'
 
 describe('total compiled duration', () => {
@@ -7,12 +7,12 @@ describe('total compiled duration', () => {
             const notes: Note[] = [
                 {
                     duration: {
-                        scalar: as.Scalar<Scalar>(2),
+                        scalar: as.Scalar<Duration>(2),
                     },
                 },
                 {
                     duration: {
-                        index: as.Ordinal<Scalar[]>(1),
+                        index: as.Ordinal<Array<Scalar<Duration>>>(1),
                     },
                 },
             ]
@@ -20,10 +20,10 @@ describe('total compiled duration', () => {
                 { scalars: [ 5, 7 ].map(as.Scalar) },
             ]
 
-            const actual: Translation<Ms> = computeNotesTotalCompiledDuration(notes, scales)
+            const actual: Duration = computeNotesTotalCompiledDuration(notes, scales)
 
             expect(actual)
-                .toBe(as.Translation<Ms>(17))
+                .toBe(as.Translation<Point<Ms>>(17))
         })
     })
 })

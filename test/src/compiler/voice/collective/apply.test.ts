@@ -1,4 +1,15 @@
-import { Amplitude, as, INITIAL, Ms, NO_DURATION, Ordinal, Point, repeat, Scalar } from '@musical-patterns/utilities'
+import {
+    as,
+    Duration,
+    Hz,
+    INITIAL,
+    Meters,
+    Ms,
+    NO_DURATION,
+    Ordinal,
+    Point,
+    repeat,
+} from '@musical-patterns/utilities'
 import {
     applyCollectiveInfos,
     Entity,
@@ -15,11 +26,11 @@ describe('apply collective infos', () => {
         const originalSounds: Sound[] = repeat(
             [
                 {
-                    duration: as.Translation<Ms>(20),
-                    frequency: as.Hz(1),
-                    gain: as.NormalScalar<Amplitude>(1),
-                    position: [ 0 ].map(as.Meters),
-                    sustain: as.Translation<Ms>(9),
+                    duration: as.Translation<Point<Ms>>(20),
+                    frequency: as.Point<Hz>(1),
+                    gain: as.Amplitude(1),
+                    position: [ 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
+                    sustain: as.Translation<Point<Ms>>(9),
                 },
             ],
             as.Cardinal<Sound[]>(5),
@@ -39,11 +50,11 @@ describe('apply collective infos', () => {
         const entities: Entity[] = [ {}, {}, {
             sections: [
                 {
-                    notes: [ { duration: { scalar: as.Scalar<Scalar>(11) } } ],
+                    notes: [ { duration: { scalar: as.Scalar<Duration>(11) } } ],
                     repetitions: as.Cardinal(9),
                 },
                 {
-                    notes: [ { duration: { scalar: as.Scalar<Scalar>(11) } } ],
+                    notes: [ { duration: { scalar: as.Scalar<Duration>(11) } } ],
                 },
             ],
         } ]
@@ -53,11 +64,11 @@ describe('apply collective infos', () => {
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: as.Translation<Ms>(99),
+                totalDuration: as.Translation<Point<Ms>>(99),
             },
             {
                 doesRepeatForever: true,
-                totalDuration: as.Translation<Ms>(11),
+                totalDuration: as.Translation<Point<Ms>>(11),
             },
         ]
 
@@ -87,25 +98,25 @@ describe('apply collective infos', () => {
                 segnoIndex: as.Ordinal<Sound[]>(3),
                 sounds: originalSounds.concat([
                     {
-                        duration: as.Translation<Ms>(11),
-                        frequency: as.Hz(1),
-                        gain: as.NormalScalar<Amplitude>(1),
-                        position: [ 0, 0, 0 ].map(as.Meters),
-                        sustain: as.Translation<Ms>(10.9),
+                        duration: as.Translation<Point<Ms>>(11),
+                        frequency: as.Point<Hz>(1),
+                        gain: as.Amplitude(1),
+                        position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
+                        sustain: as.Translation<Point<Ms>>(10.9),
                     },
                     {
-                        duration: as.Translation<Ms>(11),
-                        frequency: as.Hz(1),
-                        gain: as.NormalScalar<Amplitude>(1),
-                        position: [ 0, 0, 0 ].map(as.Meters),
-                        sustain: as.Translation<Ms>(10.9),
+                        duration: as.Translation<Point<Ms>>(11),
+                        frequency: as.Point<Hz>(1),
+                        gain: as.Amplitude(1),
+                        position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
+                        sustain: as.Translation<Point<Ms>>(10.9),
                     },
                     {
-                        duration: as.Translation<Ms>(11),
-                        frequency: as.Hz(1),
-                        gain: as.NormalScalar<Amplitude>(1),
-                        position: [ 0, 0, 0 ].map(as.Meters),
-                        sustain: as.Translation<Ms>(10.9),
+                        duration: as.Translation<Point<Ms>>(11),
+                        frequency: as.Point<Hz>(1),
+                        gain: as.Amplitude(1),
+                        position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
+                        sustain: as.Translation<Point<Ms>>(10.9),
                     },
                 ]),
                 sourceRequest: {

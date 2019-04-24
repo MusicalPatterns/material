@@ -1,4 +1,4 @@
-import { Amplitude, as, INITIAL, Ms, NO_DURATION, Point } from '@musical-patterns/utilities'
+import { as, Hz, INITIAL, Meters, Ms, NO_DURATION, Point } from '@musical-patterns/utilities'
 import { OscillatorName, PreparedVoice, prepareVoices, Sound, SourceType, Voice } from '../../../../src/indexForTest'
 
 describe('prepare voices', () => {
@@ -28,18 +28,18 @@ describe('prepare voices', () => {
                     segnoIndex: INITIAL,
                     sounds: [
                         {
-                            duration: as.Translation<Ms>(5),
-                            frequency: as.Hz(1),
-                            gain: as.NormalScalar<Amplitude>(1),
-                            position: [ 1 ].map(as.Meters),
-                            sustain: as.Translation<Ms>(4),
+                            duration: as.Translation<Point<Ms>>(5),
+                            frequency: as.Point<Hz>(1),
+                            gain: as.Amplitude(1),
+                            position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
+                            sustain: as.Translation<Point<Ms>>(4),
                         },
                         {
-                            duration: as.Translation<Ms>(3),
-                            frequency: as.Hz(1),
-                            gain: as.NormalScalar<Amplitude>(1),
-                            position: [ 1 ].map(as.Meters),
-                            sustain: as.Translation<Ms>(1),
+                            duration: as.Translation<Point<Ms>>(3),
+                            frequency: as.Point<Hz>(1),
+                            gain: as.Amplitude(1),
+                            position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
+                            sustain: as.Translation<Point<Ms>>(1),
                         },
                     ],
                     sourceRequest: {
@@ -70,18 +70,18 @@ describe('prepare voices', () => {
                     segnoIndex: INITIAL,
                     sounds: [
                         {
-                            duration: as.Translation<Ms>(5),
-                            frequency: as.Hz(1),
-                            gain: as.NormalScalar<Amplitude>(1),
-                            position: [ 1 ].map(as.Meters),
-                            sustain: as.Translation<Ms>(4),
+                            duration: as.Translation<Point<Ms>>(5),
+                            frequency: as.Point<Hz>(1),
+                            gain: as.Amplitude(1),
+                            position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
+                            sustain: as.Translation<Point<Ms>>(4),
                         },
                         {
-                            duration: as.Translation<Ms>(3),
-                            frequency: as.Hz(1),
-                            gain: as.NormalScalar<Amplitude>(1),
-                            position: [ 1 ].map(as.Meters),
-                            sustain: as.Translation<Ms>(1),
+                            duration: as.Translation<Point<Ms>>(3),
+                            frequency: as.Point<Hz>(1),
+                            gain: as.Amplitude(1),
+                            position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
+                            sustain: as.Translation<Point<Ms>>(1),
                         },
                     ],
                     sourceRequest: {
@@ -112,25 +112,25 @@ describe('prepare voices', () => {
                     segnoIndex: as.Ordinal<Sound[]>(1),
                     sounds: [
                         {
-                            duration: as.Translation<Ms>(5),
-                            frequency: as.Hz(1),
-                            gain: as.NormalScalar<Amplitude>(1),
-                            position: [ 1 ].map(as.Meters),
-                            sustain: as.Translation<Ms>(4),
+                            duration: as.Translation<Point<Ms>>(5),
+                            frequency: as.Point<Hz>(1),
+                            gain: as.Amplitude(1),
+                            position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
+                            sustain: as.Translation<Point<Ms>>(4),
                         },
                         {
-                            duration: as.Translation<Ms>(1),
-                            frequency: as.Hz(1),
-                            gain: as.NormalScalar<Amplitude>(1),
-                            position: [ 1 ].map(as.Meters),
-                            sustain: as.Translation<Ms>(1),
+                            duration: as.Translation<Point<Ms>>(1),
+                            frequency: as.Point<Hz>(1),
+                            gain: as.Amplitude(1),
+                            position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
+                            sustain: as.Translation<Point<Ms>>(1),
                         },
                         {
-                            duration: as.Translation<Ms>(3),
-                            frequency: as.Hz(1),
-                            gain: as.NormalScalar<Amplitude>(1),
-                            position: [ 1 ].map(as.Meters),
-                            sustain: as.Translation<Ms>(1),
+                            duration: as.Translation<Point<Ms>>(3),
+                            frequency: as.Point<Hz>(1),
+                            gain: as.Amplitude(1),
+                            position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
+                            sustain: as.Translation<Point<Ms>>(1),
                         },
                     ],
                     sourceRequest: {

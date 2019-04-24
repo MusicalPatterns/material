@@ -1,4 +1,4 @@
-import { Hz, keyExistsOnObject, Maybe, Scalar } from '@musical-patterns/utilities'
+import { Hz, keyExistsOnObject, Point } from '@musical-patterns/utilities'
 import { Vrb } from 'vrb'
 import { context } from '../context'
 import { SourceType, Timbre } from '../types'
@@ -30,9 +30,9 @@ const setPitchObjectValue: (setupPitchObjectParameters: {
     }
 
 const computeSourceNode: (parameters: {
-    frequency: Hz,
+    frequency: Point<Hz>,
     immersiveAudioEnabled: boolean,
-    playbackRate?: Maybe<Scalar<Hz>>,
+    playbackRate?: Point<Hz>,
     sourceType: SourceType,
     timbre: Timbre,
     webVr?: Vrb,

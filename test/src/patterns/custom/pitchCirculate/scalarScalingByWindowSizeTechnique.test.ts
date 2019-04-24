@@ -1,37 +1,49 @@
 // tslint:disable number-literal-format
 
-import { as, computeEqualDivisionScalars, Frequency, Hz, insteadOf, Scalar, use } from '@musical-patterns/utilities'
+import {
+    Amplitude,
+    as,
+    computeEqualDivisionPitches,
+    Duration,
+    Frequency,
+    Meters,
+    ofNotAs,
+    Pitch,
+    Point,
+    Scalar,
+    use,
+} from '@musical-patterns/utilities'
 import { Note, PitchCircularTechnique, pitchCirculate, Scale } from '../../../../../src/indexForTest'
 
 describe('pitch circulate, using the technique of scalar scaling by window size', () => {
     let outputSetOfNotes: Note[][]
 
-    const A: Scalar<Scalar> = as.Scalar<Scalar>(0.011)
-    const B: Scalar<Scalar> = as.Scalar<Scalar>(0.020)
-    const C: Scalar<Scalar> = as.Scalar<Scalar>(0.034)
-    const D: Scalar<Scalar> = as.Scalar<Scalar>(0.056)
-    const E: Scalar<Scalar> = as.Scalar<Scalar>(0.089)
-    const F: Scalar<Scalar> = as.Scalar<Scalar>(0.135)
-    const G: Scalar<Scalar> = as.Scalar<Scalar>(0.198)
-    const H: Scalar<Scalar> = as.Scalar<Scalar>(0.278)
-    const I: Scalar<Scalar> = as.Scalar<Scalar>(0.375)
-    const J: Scalar<Scalar> = as.Scalar<Scalar>(0.487)
-    const K: Scalar<Scalar> = as.Scalar<Scalar>(0.607)
-    const L: Scalar<Scalar> = as.Scalar<Scalar>(0.726)
-    const M: Scalar<Scalar> = as.Scalar<Scalar>(0.835)
-    const N: Scalar<Scalar> = as.Scalar<Scalar>(0.923)
-    const O: Scalar<Scalar> = as.Scalar<Scalar>(0.980)
-    const P: Scalar<Scalar> = as.Scalar<Scalar>(1.000)
+    const A: Scalar<Amplitude> = as.Scalar<Amplitude>(0.011)
+    const B: Scalar<Amplitude> = as.Scalar<Amplitude>(0.020)
+    const C: Scalar<Amplitude> = as.Scalar<Amplitude>(0.034)
+    const D: Scalar<Amplitude> = as.Scalar<Amplitude>(0.056)
+    const E: Scalar<Amplitude> = as.Scalar<Amplitude>(0.089)
+    const F: Scalar<Amplitude> = as.Scalar<Amplitude>(0.135)
+    const G: Scalar<Amplitude> = as.Scalar<Amplitude>(0.198)
+    const H: Scalar<Amplitude> = as.Scalar<Amplitude>(0.278)
+    const I: Scalar<Amplitude> = as.Scalar<Amplitude>(0.375)
+    const J: Scalar<Amplitude> = as.Scalar<Amplitude>(0.487)
+    const K: Scalar<Amplitude> = as.Scalar<Amplitude>(0.607)
+    const L: Scalar<Amplitude> = as.Scalar<Amplitude>(0.726)
+    const M: Scalar<Amplitude> = as.Scalar<Amplitude>(0.835)
+    const N: Scalar<Amplitude> = as.Scalar<Amplitude>(0.923)
+    const O: Scalar<Amplitude> = as.Scalar<Amplitude>(0.980)
+    const P: Scalar<Amplitude> = as.Scalar<Amplitude>(1.000)
 
     describe('given some notes, will return a set of version of those notes which together constitute the pitch circled version of it', () => {
-        const originalGain: Scalar<Scalar> = as.Scalar<Scalar>(0.5)
+        const originalGain: Scalar<Amplitude> = as.Scalar<Amplitude>(0.5)
         beforeEach(() => {
             const inputNotes: Note[] = [ {
                 gain: {
                     scalar: originalGain,
                 },
                 pitch: {
-                    scalar: as.Scalar<Scalar>(57),
+                    scalar: as.Scalar<Pitch>(57),
                 },
             } ]
 
@@ -46,24 +58,24 @@ describe('pitch circulate, using the technique of scalar scaling by window size'
 
         it('scales the pitches so that each set of notes is off from the next by the window size (and for now always returning three sets of notes, starting with the lowest possible set of notes)', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].pitch!.scalar)
-                .toEqual(as.Scalar<Scalar>(57 / 32))
+                .toEqual(as.Scalar<Pitch>(57 / 32))
             expect(outputSetOfNotes[ 1 ][ 0 ].pitch!.scalar)
-                .toEqual(as.Scalar<Scalar>(57 / 16))
+                .toEqual(as.Scalar<Pitch>(57 / 16))
             expect(outputSetOfNotes[ 2 ][ 0 ].pitch!.scalar)
-                .toEqual(as.Scalar<Scalar>(57 / 8))
+                .toEqual(as.Scalar<Pitch>(57 / 8))
         })
 
         it('maps the gain to a normal distribution curve, so that the center set of notes is loud, and the outer sets of notes get quieter depending on how far from the center they are', () => {
-            const MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE: Scalar<Scalar> = as.Scalar<Scalar>(0.410)
-            const LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES: Scalar<Scalar> = as.Scalar<Scalar>(0.800)
-            const QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE: Scalar<Scalar> = as.Scalar<Scalar>(0.028)
+            const MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE: Scalar<Scalar<Amplitude>> = as.Scalar<Scalar<Amplitude>>(0.410)
+            const LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES: Scalar<Scalar<Amplitude>> = as.Scalar<Scalar<Amplitude>>(0.800)
+            const QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE: Scalar<Scalar<Amplitude>> = as.Scalar<Scalar<Amplitude>>(0.028)
 
             expect(outputSetOfNotes[ 0 ][ 0 ].gain!.scalar!)
-                .toBeCloseToTyped(use.Scalar(MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE, insteadOf<Scalar, Scalar<Scalar>>(originalGain)))
+                .toBeCloseToTyped(use.Scalar(originalGain, MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE))
             expect(outputSetOfNotes[ 1 ][ 0 ].gain!.scalar!)
-                .toBeCloseToTyped(use.Scalar(LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES, insteadOf<Scalar, Scalar<Scalar>>(originalGain)))
+                .toBeCloseToTyped(use.Scalar(originalGain, LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES))
             expect(outputSetOfNotes[ 2 ][ 0 ].gain!.scalar!)
-                .toBeCloseToTyped(use.Scalar(QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE, insteadOf<Scalar, Scalar<Scalar>>(originalGain)))
+                .toBeCloseToTyped(use.Scalar(originalGain, QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE))
         })
     })
 
@@ -72,27 +84,27 @@ describe('pitch circulate, using the technique of scalar scaling by window size'
             const inputNotes: Note[] = [
                 {
                     duration: {
-                        index: as.Ordinal<Scalar[]>(3),
-                        scalar: as.Scalar<Scalar>(4),
-                        scaleIndex: as.Ordinal<Scale[]>(5),
+                        index: as.Ordinal<Array<Scalar<Duration>>>(3),
+                        scalar: as.Scalar<Duration>(4),
+                        scaleIndex: as.Ordinal<Array<Scale<Duration>>>(5),
                     },
                     gain: {
-                        index: as.Ordinal<Scalar[]>(9),
-                        scaleIndex: as.Ordinal<Scale[]>(5),
+                        index: as.Ordinal<Array<Scalar<Amplitude>>>(9),
+                        scaleIndex: as.Ordinal<Array<Scale<Amplitude>>>(5),
                     },
                     pitch: {
-                        index: as.Ordinal<Scalar[]>(11),
-                        scaleIndex: as.Ordinal<Scale[]>(10),
+                        index: as.Ordinal<Array<Scalar<Pitch>>>(11),
+                        scaleIndex: as.Ordinal<Array<Scale<Pitch>>>(10),
                     },
                     position: [ {
-                        index: as.Ordinal<Scalar[]>(2),
-                        scalar: as.Scalar<Scalar>(4),
-                        scaleIndex: as.Ordinal<Scale[]>(6),
+                        index: as.Ordinal<Array<Scalar<Point<Meters>>>>(2),
+                        scalar: as.Scalar<Point<Meters>>(4),
+                        scaleIndex: as.Ordinal<Array<Scale<Point<Meters>>>>(6),
                     } ],
                     sustain: {
-                        index: as.Ordinal<Scalar[]>(6),
-                        scalar: as.Scalar<Scalar>(7),
-                        scaleIndex: as.Ordinal<Scale[]>(8),
+                        index: as.Ordinal<Array<Scalar<Duration>>>(6),
+                        scalar: as.Scalar<Duration>(7),
+                        scaleIndex: as.Ordinal<Array<Scale<Duration>>>(8),
                     },
                 },
             ]
@@ -109,118 +121,118 @@ describe('pitch circulate, using the technique of scalar scaling by window size'
         it('copies the duration into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].duration)
                 .toEqual({
-                    index: as.Ordinal<Scalar[]>(3),
-                    scalar: as.Scalar<Scalar>(4),
-                    scaleIndex: as.Ordinal<Scale[]>(5),
+                    index: as.Ordinal<Array<Scalar<Duration>>>(3),
+                    scalar: as.Scalar<Duration>(4),
+                    scaleIndex: as.Ordinal<Array<Scale<Duration>>>(5),
                 })
             expect(outputSetOfNotes[ 1 ][ 0 ].duration)
                 .toEqual({
-                    index: as.Ordinal<Scalar[]>(3),
-                    scalar: as.Scalar<Scalar>(4),
-                    scaleIndex: as.Ordinal<Scale[]>(5),
+                    index: as.Ordinal<Array<Scalar<Duration>>>(3),
+                    scalar: as.Scalar<Duration>(4),
+                    scaleIndex: as.Ordinal<Array<Scale<Duration>>>(5),
                 })
             expect(outputSetOfNotes[ 2 ][ 0 ].duration)
                 .toEqual({
-                    index: as.Ordinal<Scalar[]>(3),
-                    scalar: as.Scalar<Scalar>(4),
-                    scaleIndex: as.Ordinal<Scale[]>(5),
+                    index: as.Ordinal<Array<Scalar<Duration>>>(3),
+                    scalar: as.Scalar<Duration>(4),
+                    scaleIndex: as.Ordinal<Array<Scale<Duration>>>(5),
                 })
         })
 
         it('copies the sustain into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].sustain)
                 .toEqual({
-                    index: as.Ordinal<Scalar[]>(6),
-                    scalar: as.Scalar<Scalar>(7),
-                    scaleIndex: as.Ordinal<Scale[]>(8),
+                    index: as.Ordinal<Array<Scalar<Duration>>>(6),
+                    scalar: as.Scalar<Duration>(7),
+                    scaleIndex: as.Ordinal<Array<Scale<Duration>>>(8),
                 })
             expect(outputSetOfNotes[ 1 ][ 0 ].sustain)
                 .toEqual({
-                    index: as.Ordinal<Scalar[]>(6),
-                    scalar: as.Scalar<Scalar>(7),
-                    scaleIndex: as.Ordinal<Scale[]>(8),
+                    index: as.Ordinal<Array<Scalar<Duration>>>(6),
+                    scalar: as.Scalar<Duration>(7),
+                    scaleIndex: as.Ordinal<Array<Scale<Duration>>>(8),
                 })
             expect(outputSetOfNotes[ 2 ][ 0 ].sustain)
                 .toEqual({
-                    index: as.Ordinal<Scalar[]>(6),
-                    scalar: as.Scalar<Scalar>(7),
-                    scaleIndex: as.Ordinal<Scale[]>(8),
+                    index: as.Ordinal<Array<Scalar<Duration>>>(6),
+                    scalar: as.Scalar<Duration>(7),
+                    scaleIndex: as.Ordinal<Array<Scale<Duration>>>(8),
                 })
         })
 
         it('copies the position into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].position)
                 .toEqual([ {
-                    index: as.Ordinal<Scalar[]>(2),
-                    scalar: as.Scalar<Scalar>(4),
-                    scaleIndex: as.Ordinal<Scale[]>(6),
+                    index: as.Ordinal<Array<Scalar<Point<Meters>>>>(2),
+                    scalar: as.Scalar<Point<Meters>>(4),
+                    scaleIndex: as.Ordinal<Array<Scale<Point<Meters>>>>(6),
                 } ])
             expect(outputSetOfNotes[ 1 ][ 0 ].position)
                 .toEqual([ {
-                    index: as.Ordinal<Scalar[]>(2),
-                    scalar: as.Scalar<Scalar>(4),
-                    scaleIndex: as.Ordinal<Scale[]>(6),
+                    index: as.Ordinal<Array<Scalar<Point<Meters>>>>(2),
+                    scalar: as.Scalar<Point<Meters>>(4),
+                    scaleIndex: as.Ordinal<Array<Scale<Point<Meters>>>>(6),
                 } ])
             expect(outputSetOfNotes[ 2 ][ 0 ].position)
                 .toEqual([ {
-                    index: as.Ordinal<Scalar[]>(2),
-                    scalar: as.Scalar<Scalar>(4),
-                    scaleIndex: as.Ordinal<Scale[]>(6),
+                    index: as.Ordinal<Array<Scalar<Point<Meters>>>>(2),
+                    scalar: as.Scalar<Point<Meters>>(4),
+                    scaleIndex: as.Ordinal<Array<Scale<Point<Meters>>>>(6),
                 } ])
         })
 
         it('copies the pitch scale index into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].pitch!.scaleIndex)
-                .toEqual(as.Ordinal<Scale[]>(10))
+                .toEqual(as.Ordinal<Array<Scale<Pitch>>>(10))
             expect(outputSetOfNotes[ 1 ][ 0 ].pitch!.scaleIndex)
-                .toEqual(as.Ordinal<Scale[]>(10))
+                .toEqual(as.Ordinal<Array<Scale<Pitch>>>(10))
             expect(outputSetOfNotes[ 2 ][ 0 ].pitch!.scaleIndex)
-                .toEqual(as.Ordinal<Scale[]>(10))
+                .toEqual(as.Ordinal<Array<Scale<Pitch>>>(10))
         })
 
         it('copies the pitch index into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].pitch!.index)
-                .toEqual(as.Ordinal<Scalar[]>(11))
+                .toEqual(as.Ordinal<Array<Scalar<Pitch>>>(11))
             expect(outputSetOfNotes[ 1 ][ 0 ].pitch!.index)
-                .toEqual(as.Ordinal<Scalar[]>(11))
+                .toEqual(as.Ordinal<Array<Scalar<Pitch>>>(11))
             expect(outputSetOfNotes[ 2 ][ 0 ].pitch!.index)
-                .toEqual(as.Ordinal<Scalar[]>(11))
+                .toEqual(as.Ordinal<Array<Scalar<Pitch>>>(11))
         })
 
         it('copies the gain scale index into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].gain!.scaleIndex)
-                .toEqual(as.Ordinal<Scale[]>(5))
+                .toEqual(as.Ordinal<Array<Scale<Amplitude>>>(5))
             expect(outputSetOfNotes[ 1 ][ 0 ].gain!.scaleIndex)
-                .toEqual(as.Ordinal<Scale[]>(5))
+                .toEqual(as.Ordinal<Array<Scale<Amplitude>>>(5))
             expect(outputSetOfNotes[ 2 ][ 0 ].gain!.scaleIndex)
-                .toEqual(as.Ordinal<Scale[]>(5))
+                .toEqual(as.Ordinal<Array<Scale<Amplitude>>>(5))
         })
 
         it('copies the gain index into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].gain!.index)
-                .toEqual(as.Ordinal<Scalar[]>(9))
+                .toEqual(as.Ordinal<Array<Scalar<Amplitude>>>(9))
             expect(outputSetOfNotes[ 1 ][ 0 ].gain!.index)
-                .toEqual(as.Ordinal<Scalar[]>(9))
+                .toEqual(as.Ordinal<Array<Scalar<Amplitude>>>(9))
             expect(outputSetOfNotes[ 2 ][ 0 ].gain!.index)
-                .toEqual(as.Ordinal<Scalar[]>(9))
+                .toEqual(as.Ordinal<Array<Scalar<Amplitude>>>(9))
         })
     })
 
     describe('gain goes in a cycle', () => {
         beforeEach(() => {
-            const tenEdScalars: Array<Scalar<Hz>> = computeEqualDivisionScalars(as.Denominator(10))
+            const tenEdScalars: Pitch[] = computeEqualDivisionPitches(as.Denominator(10))
             const inputNotes: Note[] = [
-                { pitch: { scalar: insteadOf<Scalar, Scalar>(tenEdScalars[ 0 ]) } },
-                { pitch: { scalar: insteadOf<Scalar, Scalar>(tenEdScalars[ 1 ]) } },
-                { pitch: { scalar: insteadOf<Scalar, Scalar>(tenEdScalars[ 2 ]) } },
-                { pitch: { scalar: insteadOf<Scalar, Scalar>(tenEdScalars[ 3 ]) } },
-                { pitch: { scalar: insteadOf<Scalar, Scalar>(tenEdScalars[ 4 ]) } },
-                { pitch: { scalar: insteadOf<Scalar, Scalar>(tenEdScalars[ 5 ]) } },
-                { pitch: { scalar: insteadOf<Scalar, Scalar>(tenEdScalars[ 6 ]) } },
-                { pitch: { scalar: insteadOf<Scalar, Scalar>(tenEdScalars[ 7 ]) } },
-                { pitch: { scalar: insteadOf<Scalar, Scalar>(tenEdScalars[ 8 ]) } },
-                { pitch: { scalar: insteadOf<Scalar, Scalar>(tenEdScalars[ 9 ]) } },
-                { pitch: { scalar: as.Scalar<Scalar>(2) } },
+                { pitch: { scalar: as.Scalar(ofNotAs(tenEdScalars[ 0 ])) } },
+                { pitch: { scalar: as.Scalar(ofNotAs(tenEdScalars[ 1 ])) } },
+                { pitch: { scalar: as.Scalar(ofNotAs(tenEdScalars[ 2 ])) } },
+                { pitch: { scalar: as.Scalar(ofNotAs(tenEdScalars[ 3 ])) } },
+                { pitch: { scalar: as.Scalar(ofNotAs(tenEdScalars[ 4 ])) } },
+                { pitch: { scalar: as.Scalar(ofNotAs(tenEdScalars[ 5 ])) } },
+                { pitch: { scalar: as.Scalar(ofNotAs(tenEdScalars[ 6 ])) } },
+                { pitch: { scalar: as.Scalar(ofNotAs(tenEdScalars[ 7 ])) } },
+                { pitch: { scalar: as.Scalar(ofNotAs(tenEdScalars[ 8 ])) } },
+                { pitch: { scalar: as.Scalar(ofNotAs(tenEdScalars[ 9 ])) } },
+                { pitch: { scalar: as.Scalar<Pitch>(2) } },
             ]
 
             outputSetOfNotes = pitchCirculate(
@@ -313,13 +325,13 @@ describe('pitch circulate, using the technique of scalar scaling by window size'
 
     describe('gain curve is almost zero at the edges and slopes nicely up to a 1 in the middle, for other pitch class counts too', () => {
         beforeEach(() => {
-            const fiveEdScalars: Array<Scalar<Hz>> = computeEqualDivisionScalars(as.Denominator(5))
+            const fiveEdScalars: Pitch[] = computeEqualDivisionPitches(as.Denominator(5))
             const inputNotes: Note[] = [
-                { pitch: { scalar: insteadOf<Scalar, Scalar>(fiveEdScalars[ 0 ]) } },
-                { pitch: { scalar: insteadOf<Scalar, Scalar>(fiveEdScalars[ 1 ]) } },
-                { pitch: { scalar: insteadOf<Scalar, Scalar>(fiveEdScalars[ 2 ]) } },
-                { pitch: { scalar: insteadOf<Scalar, Scalar>(fiveEdScalars[ 3 ]) } },
-                { pitch: { scalar: insteadOf<Scalar, Scalar>(fiveEdScalars[ 4 ]) } },
+                { pitch: { scalar: as.Scalar(ofNotAs(fiveEdScalars[ 0 ])) } },
+                { pitch: { scalar: as.Scalar(ofNotAs(fiveEdScalars[ 1 ])) } },
+                { pitch: { scalar: as.Scalar(ofNotAs(fiveEdScalars[ 2 ])) } },
+                { pitch: { scalar: as.Scalar(ofNotAs(fiveEdScalars[ 3 ])) } },
+                { pitch: { scalar: as.Scalar(ofNotAs(fiveEdScalars[ 4 ])) } },
             ]
 
             outputSetOfNotes = pitchCirculate(

@@ -2,8 +2,6 @@
 
 export {
     compilePattern,
-    SoundFeature,
-    as,
     compileSound,
     compileSoundFeature,
     NoteFeature,

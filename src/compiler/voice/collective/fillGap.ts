@@ -1,4 +1,4 @@
-import { as, difference, isUndefined, Maybe, Ms, notAs, Point, Translation } from '@musical-patterns/utilities'
+import { as, difference, Duration, isUndefined, Maybe, Ms, notAs, Point } from '@musical-patterns/utilities'
 import { Sound } from '../../../performer'
 import { Scale } from '../../../types'
 import { SectionInfo } from '../individual'
@@ -22,8 +22,8 @@ const fillGap: (parameters: {
             return sounds
         }
 
-        const gapToBeFilled: Translation<Ms> = difference(
-            as.Translation<Ms>(notAs.Point(collectiveEndTime)),
+        const gapToBeFilled: Duration = difference(
+            as.Translation<Point<Ms>>(notAs.Point(collectiveEndTime)),
             computeSoundsDuration(sounds),
         )
 

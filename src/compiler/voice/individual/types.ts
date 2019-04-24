@@ -1,4 +1,4 @@
-import { Ms, Ordinal, Point, Translation } from '@musical-patterns/utilities'
+import { Duration, Ms, Ordinal, Point } from '@musical-patterns/utilities'
 import { Sound, Voice } from '../../../performer'
 
 interface ComputeIndividualRepetendDurationParameters {
@@ -13,7 +13,7 @@ interface ComputeIndividualSegnoTimeParameters {
 
 interface IndividualVoiceInfo {
     individualEndTime: Point<Ms>,
-    individualRepetendDuration: Translation<Ms>,
+    individualRepetendDuration: Duration,
     individualSegnoTime: Point<Ms>,
     sectionInfos: SectionInfo[],
 }
@@ -30,7 +30,7 @@ interface SoundsAndSectionInfos {
 
 interface SectionInfo {
     doesRepeatForever: boolean,
-    totalDuration: Translation<Ms>,
+    totalDuration: Duration,
 }
 
 export {

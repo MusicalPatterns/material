@@ -1,4 +1,4 @@
-import { as, findIndex, Ms, notAs, Ordinal, Point, sum, Translation } from '@musical-patterns/utilities'
+import { as, Duration, findIndex, Ms, notAs, Ordinal, Point, sum } from '@musical-patterns/utilities'
 import { computeIndividualRepetendDuration } from './repetendDuration'
 import { computeIndividualSegnoTime } from './segnoTime'
 import { IndividualVoiceInfo, SectionInfo } from './types'
@@ -14,7 +14,7 @@ const computeIndividualVoiceInfo: (sectionInfos: SectionInfo[]) => IndividualVoi
             individualRepetendIndex,
             sectionInfos,
         })
-        const individualRepetendDuration: Translation<Ms> = computeIndividualRepetendDuration({
+        const individualRepetendDuration: Duration = computeIndividualRepetendDuration({
             individualRepetendIndex,
             sectionInfos,
         })

@@ -1,15 +1,15 @@
-import { as, insteadOf, notAs, Ordinal, Scalar, Translation, use } from '@musical-patterns/utilities'
+import { as, Duration, notAs, Ordinal, Scalar, use } from '@musical-patterns/utilities'
 import { Note } from '../compiler'
 
 const computeNotesTotalDurationByScalar: (notes: Note[]) => number =
     (notes: Note[]): number =>
         notes.reduce(
             (accumulator: number, { duration }: Note): number => {
-                const durationScalar: Scalar<Scalar> = duration && duration.scalar || as.Scalar<Scalar>(0)
+                const durationScalar: Scalar<Duration> = duration && duration.scalar || as.Scalar<Duration>(0)
 
                 return use.Translation(
                     accumulator,
-                    as.Translation(notAs.Scalar<Scalar>(durationScalar)),
+                    as.Translation(notAs.Scalar<Duration>(durationScalar)),
                 )
             },
             0,
@@ -19,11 +19,12 @@ const computeNotesTotalDurationByIndex: (notes: Note[]) => number =
     (notes: Note[]): number =>
         notes.reduce(
             (accumulator: number, { duration }: Note): number => {
-                const durationIndex: Ordinal<Scalar[]> = duration && duration.index || as.Ordinal<Scalar[]>(0)
+                const durationIndex: Ordinal<Array<Scalar<Duration>>> =
+                    duration && duration.index || as.Ordinal<Array<Scalar<Duration>>>(0)
 
                 return use.Translation(
                     accumulator,
-                    as.Translation(notAs.Ordinal<Scalar[]>(durationIndex)),
+                    as.Translation(notAs.Ordinal<Array<Scalar<Duration>>>(durationIndex)),
                 )
             },
             0,

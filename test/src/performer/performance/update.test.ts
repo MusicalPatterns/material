@@ -1,22 +1,22 @@
-import { Amplitude, as, BEGINNING, INITIAL, Ms, NO_DURATION, noop } from '@musical-patterns/utilities'
+import { as, BEGINNING, Hz, INITIAL, Meters, Ms, NO_DURATION, noop, Point } from '@musical-patterns/utilities'
 import { NON_SEGNO_INDEX, PreparedVoice, Sound, update } from '../../../../src/indexForTest'
 import Spy = jasmine.Spy
 
 describe('update', () => {
     const testSoundDurationFive: Sound = {
-        duration: as.Translation<Ms>(5),
-        frequency: as.Hz(1),
-        gain: as.NormalScalar<Amplitude>(1),
-        position: [ 1 ].map(as.Meters),
-        sustain: as.Translation<Ms>(1),
+        duration: as.Translation<Point<Ms>>(5),
+        frequency: as.Point<Hz>(1),
+        gain: as.Amplitude(1),
+        position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
+        sustain: as.Translation<Point<Ms>>(1),
     }
 
     const testSoundDurationThree: Sound = {
-        duration: as.Translation<Ms>(3),
-        frequency: as.Hz(1),
-        gain: as.NormalScalar<Amplitude>(1),
-        position: [ 1 ].map(as.Meters),
-        sustain: as.Translation<Ms>(1),
+        duration: as.Translation<Point<Ms>>(3),
+        frequency: as.Point<Hz>(1),
+        gain: as.Amplitude(1),
+        position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
+        sustain: as.Translation<Point<Ms>>(1),
     }
 
     it('uses duration and sustain to determine the next sound stop and start', () => {
@@ -139,7 +139,7 @@ describe('update', () => {
 
         it('when there is a delay, the sounds are not reached until their time plus the delay', () => {
             const preparedVoice: PreparedVoice = {
-                delay: as.Translation<Ms>(7),
+                delay: as.Translation<Point<Ms>>(7),
                 nextStart: BEGINNING,
                 nextStop: BEGINNING,
                 segnoIndex: INITIAL,

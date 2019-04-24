@@ -1,4 +1,4 @@
-import { isUndefined, Ms, ONCE, repeat, Translation } from '@musical-patterns/utilities'
+import { Duration, isUndefined, ONCE, repeat } from '@musical-patterns/utilities'
 import { Sound } from '../../../performer'
 import { compileSounds, CompileSoundsOptions } from '../../sound'
 import { computeSoundsDuration } from '../totalCompiledDuration'
@@ -17,7 +17,7 @@ const computeIndividualSoundsAndSectionInfos:
                     repetitions || ONCE,
                 )
 
-                const totalDuration: Translation<Ms> = computeSoundsDuration(sectionSounds)
+                const totalDuration: Duration = computeSoundsDuration(sectionSounds)
 
                 const sectionInfo: SectionInfo = {
                     doesRepeatForever: isUndefined(repetitions),

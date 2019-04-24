@@ -1,34 +1,45 @@
-import { Maybe, Ordinal, Scalar, Translation } from '@musical-patterns/utilities'
-import { Adjustable, Scale } from '../../types'
-import { SoundFeature } from '../nominals'
+import {
+    Amplitude,
+    Duration,
+    Maybe,
+    Meters,
+    Ordinal,
+    Pitch,
+    Point,
+    Scalar,
+    Translation,
+} from '@musical-patterns/utilities'
+import { Scale } from '../../types'
 
-interface NoteFeature extends Adjustable<Scalar> {
-    index?: Ordinal<Scalar[]>,
-    scaleIndex?: Ordinal<Scale[]>,
+interface NoteFeature<FeatureType extends Number = number> {
+    index?: Ordinal<Array<Scalar<FeatureType>>>,
+    scalar?: Scalar<FeatureType>,
+    scaleIndex?: Ordinal<Array<Scale<FeatureType>>>,
+    translation?: Translation<FeatureType>,
 }
 
-interface ComputeScalePropertiesParameters {
-    index: Ordinal<Scalar[]>,
-    options?: CompileSoundsOptions,
-    scaleIndex: Ordinal<Scale[]>,
+interface ComputeScalePropertiesParameters<FeatureType extends Number = number> {
+    index: Ordinal<Array<Scalar<FeatureType>>>,
+    options?: CompileSoundsOptions<FeatureType>,
+    scaleIndex: Ordinal<Array<Scale<FeatureType>>>,
 }
 
-interface ScaleProperties {
-    scaleElement: Maybe<SoundFeature>,
-    scaleScalar: Scalar,
-    scaleTranslation: Translation,
+interface ScaleProperties<FeatureType extends Number = number> {
+    scaleBasis: FeatureType,
+    scaleScalar: Maybe<Scalar<FeatureType>>,
+    scaleTranslation: Translation<FeatureType>,
 }
 
 interface Note {
-    duration?: NoteFeature,
-    gain?: NoteFeature,
-    pitch?: NoteFeature,
-    position?: NoteFeature | NoteFeature[],
-    sustain?: NoteFeature,
+    duration?: NoteFeature<Duration>,
+    gain?: NoteFeature<Amplitude>,
+    pitch?: NoteFeature<Pitch>,
+    position?: NoteFeature<Point<Meters>> | Array<NoteFeature<Point<Meters>>>,
+    sustain?: NoteFeature<Duration>,
 }
 
-interface CompileSoundsOptions {
-    scales?: Scale[],
+interface CompileSoundsOptions<FeatureType extends Number = number> {
+    scales?: Array<Scale<FeatureType>>,
 }
 
 export {

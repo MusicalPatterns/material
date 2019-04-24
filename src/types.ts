@@ -1,6 +1,6 @@
 // tslint:disable no-any
 
-import { Ms, Scalar, Translation } from '@musical-patterns/utilities'
+import { Duration, Scalar, Translation } from '@musical-patterns/utilities'
 import { Section, TimbreName } from './compiler'
 
 interface Material {
@@ -12,17 +12,14 @@ type MaterializeEntities = (specs?: any) => Entity[]
 type MaterializeScales = (specs?: any) => Scale[]
 
 interface Entity {
-    delay?: Translation<Ms>,
+    delay?: Duration,
     sections?: Section[],
     timbreName?: TimbreName,
 }
 
-interface Scale<NumericType extends Number = number> extends Adjustable<NumericType> {
+interface Scale<NumericType extends Number = number> {
+    basis?: NumericType,
     scalars?: Array<Scalar<NumericType>>,
-}
-
-interface Adjustable<NumericType extends Number = number> {
-    scalar?: Scalar<NumericType>,
     translation?: Translation<NumericType>,
 }
 
@@ -32,5 +29,4 @@ export {
     MaterializeScales,
     Entity,
     Scale,
-    Adjustable,
 }

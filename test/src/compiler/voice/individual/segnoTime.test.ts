@@ -7,15 +7,15 @@ describe('compute individual segno time', () => {
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: as.Translation<Ms>(99),
+                totalDuration: as.Translation<Point<Ms>>(99),
             },
             {
                 doesRepeatForever: false,
-                totalDuration: as.Translation<Ms>(33),
+                totalDuration: as.Translation<Point<Ms>>(33),
             },
             {
                 doesRepeatForever: true,
-                totalDuration: as.Translation<Ms>(4236),
+                totalDuration: as.Translation<Point<Ms>>(4236),
             },
         ]
 
@@ -33,11 +33,11 @@ describe('compute individual segno time', () => {
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: as.Translation<Ms>(99),
+                totalDuration: as.Translation<Point<Ms>>(99),
             },
             {
                 doesRepeatForever: false,
-                totalDuration: as.Translation<Ms>(33),
+                totalDuration: as.Translation<Point<Ms>>(33),
             },
         ]
 

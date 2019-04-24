@@ -1,5 +1,6 @@
 import {
     BEGINNING,
+    Duration,
     INCREMENT,
     indexOfFinalElement,
     INITIAL,
@@ -7,7 +8,6 @@ import {
     Ms,
     Ordinal,
     Point,
-    Translation,
     use,
 } from '@musical-patterns/utilities'
 import { Sound } from '../types'
@@ -24,7 +24,7 @@ const computeNextSoundAfterTimePosition:
         let nextStart: Point<Ms> = BEGINNING
         while (nextStart < timePosition) {
             const nextSound: Sound = use.Ordinal(sounds, soundIndex)
-            const duration: Translation<Ms> = nextSound.duration
+            const duration: Duration = nextSound.duration
             nextStart = use.Translation(nextStart, duration)
             soundIndex = use.Cardinal(soundIndex, INCREMENT)
 

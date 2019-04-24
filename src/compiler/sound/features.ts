@@ -12,56 +12,60 @@ import {
     use,
 } from '@musical-patterns/utilities'
 import { Scale } from '../../types'
-import { SoundFeature } from '../nominals'
 import { COMPILER_PRECISION } from './constants'
 import { CompileSoundsOptions, ComputeScalePropertiesParameters, NoteFeature, ScaleProperties } from './types'
 
-const computeScaleProperties: (scaleStuffParameters: {
-    index: Ordinal<Scalar[]>,
-    options?: CompileSoundsOptions,
-    scaleIndex: Ordinal<Scale[]>,
-}) => ScaleProperties =
-    ({ index, scaleIndex, options }: ComputeScalePropertiesParameters): ScaleProperties => {
+const computeScaleProperties: <FeatureType extends Number = number>(scaleStuffParameters: {
+    index: Ordinal<Array<Scalar<FeatureType>>>,
+    options?: CompileSoundsOptions<FeatureType>,
+    scaleIndex: Ordinal<Array<Scale<FeatureType>>>,
+}) => ScaleProperties<FeatureType> =
+    <FeatureType extends Number = number>(
+        {
+            index,
+            scaleIndex,
+            options,
+        }: ComputeScalePropertiesParameters<FeatureType>,
+    ): ScaleProperties<FeatureType> => {
         const { scales = [] } = options || {}
-        const scale: Scale = isEmpty(scales) ? { scalars: [] } : use.Ordinal(scales, scaleIndex)
+        const scale: Scale<FeatureType> = isEmpty(scales) ? { scalars: [] } : use.Ordinal(scales, scaleIndex)
         const {
             translation: scaleTranslation = ADDITIVE_IDENTITY,
-            scalar: scaleScalar = MULTIPLICATIVE_IDENTITY,
+            basis: scaleBasis = 1 as unknown as FeatureType,
             scalars = [],
-        }: Scale = scale
+        } = scale
 
-        const scaleElement: Maybe<SoundFeature> = isEmpty(scalars) ?
+        const scaleScalar: Maybe<Scalar<FeatureType>> = isEmpty(scalars) ?
             undefined :
             use.Ordinal(scalars, index)
 
-        return { scaleTranslation, scaleScalar, scaleElement }
+        return { scaleTranslation, scaleBasis, scaleScalar }
     }
 
-const compileSoundFeature:
-    <SoundFeatureType extends SoundFeature>(
-        noteFeature: NoteFeature, options?: { scales?: Scale[] },
-    ) => SoundFeatureType =
-    <SoundFeatureType extends SoundFeature>(
-        noteFeature: NoteFeature, options?: CompileSoundsOptions,
-    ): SoundFeatureType => {
+const compileSoundFeature: <FeatureType extends Number = number>(
+    noteFeature: NoteFeature<FeatureType>, options?: { scales?: Array<Scale<FeatureType>> },
+) => FeatureType =
+    <FeatureType extends Number = number>(
+        noteFeature: NoteFeature<FeatureType>, options?: CompileSoundsOptions<FeatureType>,
+    ): FeatureType => {
         const {
             index = INITIAL,
             translation: noteTranslation = ADDITIVE_IDENTITY,
             scalar: noteScalar = MULTIPLICATIVE_IDENTITY,
             scaleIndex = INITIAL,
-        }: NoteFeature = noteFeature
+        } = noteFeature
 
-        const { scaleElement, scaleScalar, scaleTranslation } = computeScaleProperties({ index, scaleIndex, options })
+        const { scaleBasis, scaleScalar, scaleTranslation } = computeScaleProperties({ index, scaleIndex, options })
 
-        let soundFeature: SoundFeature = scaleElement || MULTIPLICATIVE_IDENTITY
+        let soundFeature: FeatureType = scaleBasis
 
-        soundFeature = use.Scalar(soundFeature, insteadOf<Scalar, SoundFeature>(noteScalar))
-        soundFeature = use.Scalar(soundFeature, insteadOf<Scalar, SoundFeature>(scaleScalar))
+        soundFeature = use.Scalar(soundFeature, insteadOf<Scalar, FeatureType>(noteScalar))
+        soundFeature = use.Scalar(soundFeature, insteadOf<Scalar, FeatureType>(scaleScalar || MULTIPLICATIVE_IDENTITY))
 
-        soundFeature = use.Translation(soundFeature, insteadOf<Translation, SoundFeature>(noteTranslation))
-        soundFeature = use.Translation(soundFeature, insteadOf<Translation, SoundFeature>(scaleTranslation))
+        soundFeature = use.Translation(soundFeature, insteadOf<Translation, FeatureType>(noteTranslation))
+        soundFeature = use.Translation(soundFeature, insteadOf<Translation, FeatureType>(scaleTranslation))
 
-        return round(soundFeature, COMPILER_PRECISION) as SoundFeatureType
+        return round(soundFeature, COMPILER_PRECISION)
     }
 
 export {

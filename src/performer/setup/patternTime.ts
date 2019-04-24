@@ -1,14 +1,14 @@
-import { as, difference, Ms, notAs, ofNotAs, Point, sum, Translation, use } from '@musical-patterns/utilities'
+import { as, difference, Duration, Ms, notAs, ofNotAs, Point, sum, use } from '@musical-patterns/utilities'
 import { NON_SEGNO_TIME } from '../performance'
 import { ComputePatternTimeParameters } from './types'
 
 const computePatternTime: (parameters: {
     segnoTime: Point<Ms>,
     timePosition: Point<Ms>,
-    totalDuration: Translation<Ms>,
+    totalDuration: Duration,
 }) => Point<Ms> =
     ({ timePosition, totalDuration, segnoTime }: ComputePatternTimeParameters): Point<Ms> => {
-        const repetendDuration: Translation<Ms> = difference(totalDuration, as.Translation<Ms>(notAs.Point(segnoTime)))
+        const repetendDuration: Duration = difference(totalDuration, as.Translation(ofNotAs(segnoTime)))
 
         if (notAs.Point(timePosition) < notAs.Translation(totalDuration)) {
             return timePosition
@@ -18,9 +18,9 @@ const computePatternTime: (parameters: {
             return as.Point<Ms>(notAs.Translation(totalDuration))
         }
 
-        const introDuration: Translation<Ms> = difference(totalDuration, repetendDuration)
-        const timeWithinRepetend: Translation<Ms> = use.Modulus(
-            difference(as.Translation<Ms>(notAs.Point(timePosition)), introDuration),
+        const introDuration: Duration = difference(totalDuration, repetendDuration)
+        const timeWithinRepetend: Duration = use.Modulus(
+            difference(as.Translation<Point<Ms>>(notAs.Point(timePosition)), introDuration),
             as.Modulus(ofNotAs(repetendDuration)),
         )
 

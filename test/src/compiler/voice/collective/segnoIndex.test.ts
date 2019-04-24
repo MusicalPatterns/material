@@ -1,4 +1,4 @@
-import { Amplitude, as, Ms, NO_DURATION, Ordinal, Point, repeat } from '@musical-patterns/utilities'
+import { as, Hz, Meters, Ms, NO_DURATION, Ordinal, Point, repeat } from '@musical-patterns/utilities'
 import {
     computeSegnoIndex,
     NON_SEGNO_INDEX,
@@ -17,11 +17,11 @@ describe('compute segno index', () => {
         sounds: repeat(
             [
                 {
-                    duration: as.Translation<Ms>(20),
-                    frequency: as.Hz(1),
-                    gain: as.NormalScalar<Amplitude>(1),
-                    position: [ 0 ].map(as.Meters),
-                    sustain: as.Translation<Ms>(9),
+                    duration: as.Translation<Point<Ms>>(20),
+                    frequency: as.Point<Hz>(1),
+                    gain: as.Amplitude(1),
+                    position: [ 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
+                    sustain: as.Translation<Point<Ms>>(9),
                 },
             ],
             as.Cardinal<Sound[]>(5),

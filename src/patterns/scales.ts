@@ -3,13 +3,15 @@ import {
     Amplitude,
     as,
     Base,
+    Duration,
     Frequency,
     Hz,
     Integer,
     Ms,
-    NO_SHIFT,
     notAs,
     OCTAVE,
+    Pitch,
+    Point,
     POSITIVE_INTEGERS,
     Power,
     reciprocal,
@@ -39,12 +41,12 @@ const computeFlatDurationsScale: () => Scale<Ms> =
     (): Scale<Ms> =>
         computeHarmonicSeriesScale()
 
-const computeOctaveSeriesScale: () => Scale<Hz> =
-    (): Scale<Hz> => ({
+const computeOctaveSeriesScale: () => Scale<Pitch> =
+    (): Scale<Pitch> => ({
         scalars: ZERO_AND_POSITIVE_INTEGERS
             .map((integer: Integer) => as.Power<Base<Frequency>>(integer))
-            .map((power: Power<Base<Frequency>>): Scalar<Hz> =>
-                as.Scalar<Hz>(notAs.Base<Frequency>(use.Power(
+            .map((power: Power<Base<Frequency>>): Scalar<Pitch> =>
+                as.Scalar<Pitch>(notAs.Base<Frequency>(use.Power(
                     OCTAVE,
                     power,
                 ))),
@@ -56,26 +58,28 @@ const materializeStandardScales:
         specs: SpecsType,
         options?: MaterializeStandardScalesOptions,
         // tslint:disable-next-line no-any
-    ) => [ Scale<Amplitude>, Scale<Ms>, Scale<Hz> ] & Array<Scale<any>> =
+    ) => [ Scale<Amplitude>, Scale<Duration>, Scale<Pitch> ] & Array<Scale<any>> =
     <SpecsType extends StandardSpecs>(
         specs: SpecsType,
         { durationScalars, pitchScalars }: MaterializeStandardScalesOptions = {},
         // tslint:disable-next-line no-any
-    ): [ Scale<Amplitude>, Scale<Ms>, Scale<Hz> ] & Array<Scale<any>> => {
+    ): [ Scale<Amplitude>, Scale<Duration>, Scale<Pitch> ] & Array<Scale<any>> => {
         const gainScale: Scale<Amplitude> = computeNonScale()
-        const durationScalar: Scalar<Ms> = specs[ StandardSpec.BASE_DURATION ] || as.Scalar<Ms>(1)
-        const durationTranslation: Translation<Ms> = specs[ StandardSpec.BASE_DURATION_TRANSLATION ] || NO_SHIFT
-        const durationsScale: Scale<Ms> = {
-            scalar: durationScalar,
+        const basisDuration: Duration = specs[ StandardSpec.BASIS_DURATION ] || as.Translation<Point<Ms>>(1)
+        const basisDurationTranslation: Translation<Duration> =
+            specs[ StandardSpec.BASIS_DURATION_TRANSLATION ] || as.Translation<Duration>(0)
+        const durationsScale: Scale<Duration> = {
+            basis: basisDuration,
             scalars: durationScalars,
-            translation: durationTranslation,
+            translation: basisDurationTranslation,
         }
-        const pitchesScalar: Scalar<Hz> = specs[ StandardSpec.BASE_FREQUENCY ] || as.Scalar<Hz>(1)
-        const pitchesTranslation: Translation<Hz> = specs[ StandardSpec.BASE_FREQUENCY_TRANSLATION ] || NO_SHIFT
-        const pitchesScale: Scale<Hz> = {
-            scalar: pitchesScalar,
+        const basisFrequency: Point<Hz> = specs[ StandardSpec.BASIS_FREQUENCY ] || as.Point<Hz>(1)
+        const basisFrequencyTranslation: Translation<Point<Hz>> =
+            specs[ StandardSpec.BASIS_FREQUENCY_TRANSLATION ] || as.Translation<Point<Hz>>(0)
+        const pitchesScale: Scale<Point<Hz>> = {
+            basis: basisFrequency,
             scalars: pitchScalars,
-            translation: pitchesTranslation,
+            translation: basisFrequencyTranslation,
         }
 
         return [

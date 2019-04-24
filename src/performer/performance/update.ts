@@ -1,4 +1,13 @@
-import { as, INCREMENT, indexJustBeyondFinalElement, isEmpty, Ms, Point, use } from '@musical-patterns/utilities'
+import {
+    as,
+    INCREMENT,
+    indexJustBeyondFinalElement,
+    isEmpty,
+    Meters,
+    Ms,
+    Point,
+    use,
+} from '@musical-patterns/utilities'
 import { PreparedVoice, Sound } from '../types'
 import { NON_SEGNO_INDEX } from './constants'
 
@@ -6,7 +15,7 @@ const startPreparedVoiceSound: (preparedVoice: PreparedVoice, sound: Sound) => v
     (preparedVoice: PreparedVoice, sound: Sound): void => {
         preparedVoice.source.startSound({
             ...sound,
-            position: sound.position || [ 0, 0, 0 ].map(as.Meters),
+            position: sound.position || [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
         })
 
         preparedVoice.nextStop = use.Translation(

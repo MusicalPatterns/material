@@ -1,4 +1,4 @@
-import { as, insteadOf, map, Ms, notAs, Ordinal } from '@musical-patterns/utilities'
+import { as, insteadOf, map, ofNotAs, Ordinal } from '@musical-patterns/utilities'
 import { CompiledPattern } from '../../interface'
 import { Voice } from '../../performer'
 import { Entity, Scale } from '../../types'
@@ -39,7 +39,7 @@ const compileVoices: (parameters: { entities: Entity[], scales?: Scale[] }) => C
 
         return {
             segnoTime: collectiveSegnoTime,
-            totalDuration: as.Translation<Ms>(notAs.Point(collectiveEndTime)),
+            totalDuration: as.Translation(ofNotAs(collectiveEndTime)),
             voices,
         }
     }

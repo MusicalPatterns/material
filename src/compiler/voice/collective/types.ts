@@ -1,7 +1,7 @@
-import { Ms, Ordinal, Point, Translation } from '@musical-patterns/utilities'
+import { Duration, Ms, Ordinal, Point } from '@musical-patterns/utilities'
 import { Sound, Voice } from '../../../performer'
 import { Entity, Scale } from '../../../types'
-import { IndividualVoiceAndInfo, SectionInfo } from '../individual'
+import { SectionInfo } from '../individual'
 import { CompileVoicesParameters, Section } from '../types'
 
 interface ComputeRepetendSoundsParameters {
@@ -26,13 +26,13 @@ interface ComputeSegnoIndexParameters {
 
 interface PluckedVoiceInfos {
     individualEndTimes: Array<Point<Ms>>,
-    individualRepetendDurations: Array<Translation<Ms>>,
+    individualRepetendDurations: Duration[],
     individualSegnoTimes: Array<Point<Ms>>,
 }
 
 interface CollectiveVoiceInfos {
     collectiveEndTime: Point<Ms>,
-    collectiveRepetendDuration: Translation<Ms>,
+    collectiveRepetendDuration: Duration,
     collectiveSegnoTime: Point<Ms>,
     collectiveShareSegnoTime: boolean,
 }

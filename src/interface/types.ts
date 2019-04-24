@@ -1,4 +1,4 @@
-import { Coordinate, Ms, Point, Translation } from '@musical-patterns/utilities'
+import { Coordinate, Duration, Ms, Point } from '@musical-patterns/utilities'
 import { Vrb } from 'vrb'
 import { CompilePatternParameters } from '../compiler'
 import { OnUpdate, Voice } from '../performer'
@@ -26,7 +26,7 @@ interface ToggleImmersiveAudioHandlers {
 
 interface CompiledPattern {
     segnoTime: Point<Ms>,
-    totalDuration: Translation<Ms>,
+    totalDuration: Duration,
     voices: Voice[],
 }
 

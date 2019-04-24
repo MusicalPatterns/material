@@ -3,12 +3,12 @@
 import {
     ActionForState,
     Coordinate,
+    Duration,
     Maybe,
     Meters,
     Ms,
     Point,
     ThreeDimensional,
-    Translation,
     TypedMap,
 } from '@musical-patterns/utilities'
 import { Vrb } from 'vrb'
@@ -36,12 +36,12 @@ interface State {
     [ StateKey.PAUSED ]: boolean,
     [ StateKey.PREPARED_VOICES ]: PreparedVoice[],
     [ StateKey.VOICES ]: Voice[],
-    [ StateKey.TOTAL_DURATION ]: Translation<Ms>,
+    [ StateKey.TOTAL_DURATION ]: Duration,
     [ StateKey.SEGNO_TIME ]: Point<Ms>,
     [ StateKey.TIME_POSITION ]: Point<Ms>,
     [ StateKey.IMMERSIVE_AUDIO_READY ]: boolean,
     [ StateKey.WEB_VR ]: Maybe<Vrb>,
-    [ StateKey.HOME_POSITION ]: Maybe<Coordinate<Meters, ThreeDimensional>>,
+    [ StateKey.HOME_POSITION ]: Maybe<Coordinate<Point<Meters>, ThreeDimensional>>,
     [ StateKey.SAMPLE_DATA ]: Maybe<SampleDatas>,
     [ StateKey.IMMERSIVE_AUDIO_ENABLED ]: boolean,
     [ StateKey.IMMERSIVE_AUDIO_ON ]: boolean,

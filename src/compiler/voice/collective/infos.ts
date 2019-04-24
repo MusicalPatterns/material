@@ -2,6 +2,7 @@ import {
     allValuesAreTheSame,
     as,
     computeLeastCommonMultiple,
+    Duration,
     max,
     Ms,
     NO_DURATION,
@@ -9,7 +10,6 @@ import {
     Point,
     round,
     sum,
-    Translation,
 } from '@musical-patterns/utilities'
 import { NON_SEGNO_TIME } from '../../../performer'
 import { IndividualVoiceAndInfo, IndividualVoiceInfo } from '../individual'
@@ -25,7 +25,7 @@ const pluckInfos: (individualVoicesAndInfos: IndividualVoiceAndInfo[]) => Plucke
             individualVoiceInfos.map((voiceInfo: IndividualVoiceInfo) =>
                 voiceInfo.individualSegnoTime,
             )
-        const individualRepetendDurations: Array<Translation<Ms>> =
+        const individualRepetendDurations: Duration[] =
             individualVoiceInfos.map((individualVoiceInfo: IndividualVoiceInfo) =>
                 individualVoiceInfo.individualRepetendDuration,
             )
@@ -43,7 +43,7 @@ const pluckInfos: (individualVoicesAndInfos: IndividualVoiceAndInfo[]) => Plucke
 
 const computeCollectiveInfosFromPluckedInfos: (parameters: {
     individualEndTimes: Array<Point<Ms>>,
-    individualRepetendDurations: Array<Translation<Ms>>,
+    individualRepetendDurations: Duration[],
     individualSegnoTimes: Array<Point<Ms>>,
 }) => CollectiveVoiceInfos =
     (
@@ -51,13 +51,13 @@ const computeCollectiveInfosFromPluckedInfos: (parameters: {
     ): CollectiveVoiceInfos => {
         const collectiveShareSegnoTime: boolean = allValuesAreTheSame(individualSegnoTimes)
         const collectiveSegnoTime: Point<Ms> = max(...individualSegnoTimes)
-        const collectiveRepetendDuration: Translation<Ms> = as.Translation<Ms>(collectiveSegnoTime === NON_SEGNO_TIME ?
+        const collectiveRepetendDuration: Duration = as.Translation<Point<Ms>>(collectiveSegnoTime === NON_SEGNO_TIME ?
             notAs.Point(NON_SEGNO_TIME) :
             computeLeastCommonMultiple(
                 ...individualRepetendDurations
-                    .filter((individualRepetendDuration: Translation<Ms>) => individualRepetendDuration !== NO_DURATION)
+                    .filter((individualRepetendDuration: Duration) => individualRepetendDuration !== NO_DURATION)
                     // tslint:disable-next-line no-unnecessary-callback-wrapper
-                    .map((individualRepetendDuration: Translation<Ms>) => round(individualRepetendDuration))
+                    .map((individualRepetendDuration: Duration) => round(individualRepetendDuration))
                     .map(as.Integer),
             ),
         )

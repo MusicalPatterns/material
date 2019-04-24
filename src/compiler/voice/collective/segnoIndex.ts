@@ -1,5 +1,6 @@
 import {
     BEGINNING,
+    Duration,
     INCREMENT,
     indexOfFinalElement,
     INITIAL,
@@ -8,7 +9,6 @@ import {
     Ms,
     Ordinal,
     Point,
-    Translation,
     use,
 } from '@musical-patterns/utilities'
 import { NON_SEGNO_INDEX, NON_SEGNO_TIME, Sound, Voice } from '../../../performer'
@@ -20,7 +20,7 @@ const computeFirstSoundIndexAfterTime: (sounds: Sound[], timePosition: Point<Ms>
         let nextStart: Point<Ms> = BEGINNING
         while (nextStart < timePosition) {
             const nextSound: Sound = use.Ordinal(sounds, soundIndex)
-            const duration: Translation<Ms> = nextSound.duration
+            const duration: Duration = nextSound.duration
             nextStart = use.Translation(nextStart, duration)
             soundIndex = use.Cardinal(soundIndex, INCREMENT)
 

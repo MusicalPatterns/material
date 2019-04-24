@@ -1,4 +1,16 @@
-import { Amplitude, as, BEGINNING, INITIAL, Ms, NO_DURATION, Scalar } from '@musical-patterns/utilities'
+import {
+    Amplitude,
+    as,
+    BEGINNING,
+    Duration,
+    Hz,
+    INITIAL,
+    Meters,
+    Ms,
+    NO_DURATION,
+    Pitch,
+    Point,
+} from '@musical-patterns/utilities'
 import {
     CompiledPattern,
     compileVoices,
@@ -15,48 +27,48 @@ describe('compile voices', () => {
     const scales: Scale[] = [ { scalars: [ as.Scalar(3) ] } ]
 
     const testNote: Note = {
-        duration: { scalar: as.Scalar<Scalar>(3) },
-        gain: { scalar: as.Scalar<Scalar>(0.3) },
-        pitch: { scalar: as.Scalar<Scalar>(3) },
-        position: { scalar: as.Scalar<Scalar>(3) },
-        sustain: { scalar: as.Scalar<Scalar>(3) },
+        duration: { scalar: as.Scalar<Duration>(3) },
+        gain: { scalar: as.Scalar<Amplitude>(0.3) },
+        pitch: { scalar: as.Scalar<Pitch>(3) },
+        position: { scalar: as.Scalar<Point<Meters>>(3) },
+        sustain: { scalar: as.Scalar<Duration>(3) },
     }
     const expectedSound: Sound = {
-        duration: as.Translation<Ms>(9),
-        frequency: as.Hz(9),
-        gain: as.NormalScalar<Amplitude>(0.9),
-        position: [ 9, 0, 0 ].map(as.Meters),
-        sustain: as.Translation<Ms>(8.9),
+        duration: as.Translation<Point<Ms>>(9),
+        frequency: as.Point<Hz>(9),
+        gain: as.Amplitude(0.9),
+        position: [ 9, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
+        sustain: as.Translation<Point<Ms>>(8.9),
     }
 
     const otherTestNote: Note = {
-        duration: { scalar: as.Scalar<Scalar>(3) },
-        gain: { scalar: as.Scalar<Scalar>(0) },
-        pitch: { scalar: as.Scalar<Scalar>(3) },
-        position: { scalar: as.Scalar<Scalar>(3) },
-        sustain: { scalar: as.Scalar<Scalar>(3) },
+        duration: { scalar: as.Scalar<Duration>(3) },
+        gain: { scalar: as.Scalar<Amplitude>(0) },
+        pitch: { scalar: as.Scalar<Pitch>(3) },
+        position: { scalar: as.Scalar<Point<Meters>>(3) },
+        sustain: { scalar: as.Scalar<Duration>(3) },
     }
     const otherExpectedSound: Sound = {
-        duration: as.Translation<Ms>(9),
-        frequency: as.Hz(9),
-        gain: as.NormalScalar<Amplitude>(0),
-        position: [ 9, 0, 0 ].map(as.Meters),
-        sustain: as.Translation<Ms>(8.9),
+        duration: as.Translation<Point<Ms>>(9),
+        frequency: as.Point<Hz>(9),
+        gain: as.Amplitude(0),
+        position: [ 9, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
+        sustain: as.Translation<Point<Ms>>(8.9),
     }
 
     const otherOtherTestNote: Note = {
-        duration: { scalar: as.Scalar<Scalar>(3) },
-        gain: { scalar: as.Scalar<Scalar>(0.3) },
-        pitch: { scalar: as.Scalar<Scalar>(0) },
-        position: { scalar: as.Scalar<Scalar>(3) },
-        sustain: { scalar: as.Scalar<Scalar>(3) },
+        duration: { scalar: as.Scalar<Duration>(3) },
+        gain: { scalar: as.Scalar<Amplitude>(0.3) },
+        pitch: { scalar: as.Scalar<Pitch>(0) },
+        position: { scalar: as.Scalar<Point<Meters>>(3) },
+        sustain: { scalar: as.Scalar<Duration>(3) },
     }
     const otherOtherExpectedSound: Sound = {
-        duration: as.Translation<Ms>(9),
-        frequency: as.Hz(0),
-        gain: as.NormalScalar<Amplitude>(0.9),
-        position: [ 9, 0, 0 ].map(as.Meters),
-        sustain: as.Translation<Ms>(8.9),
+        duration: as.Translation<Point<Ms>>(9),
+        frequency: as.Point<Hz>(0),
+        gain: as.Amplitude(0.9),
+        position: [ 9, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
+        sustain: as.Translation<Point<Ms>>(8.9),
     }
 
     describe('when all entities enumerate their repetitions i.e. the song ends instead of repeating forever', () => {
@@ -91,7 +103,7 @@ describe('compile voices', () => {
             expect(actualCompiledPattern)
                 .toEqual({
                     segnoTime: as.Point<Ms>(-1),
-                    totalDuration: as.Translation<Ms>(54),
+                    totalDuration: as.Translation<Point<Ms>>(54),
                     voices: [
                         {
                             delay: NO_DURATION,
@@ -174,7 +186,7 @@ describe('compile voices', () => {
             expect(actualCompiledPattern)
                 .toEqual({
                     segnoTime: as.Point<Ms>(27),
-                    totalDuration: as.Translation<Ms>(45),
+                    totalDuration: as.Translation<Point<Ms>>(45),
                     voices: [
                         {
                             delay: NO_DURATION,
@@ -264,7 +276,7 @@ describe('compile voices', () => {
             expect(actualCompiledPattern)
                 .toEqual({
                     segnoTime: as.Point<Ms>(9),
-                    totalDuration: as.Translation<Ms>(99),
+                    totalDuration: as.Translation<Point<Ms>>(99),
                     voices: [
                         {
                             delay: NO_DURATION,
@@ -360,7 +372,7 @@ describe('compile voices', () => {
             expect(actualCompiledPattern)
                 .toEqual({
                     segnoTime: as.Point<Ms>(27),
-                    totalDuration: as.Translation<Ms>(117),
+                    totalDuration: as.Translation<Point<Ms>>(117),
                     voices: [
                         {
                             delay: NO_DURATION,
@@ -442,7 +454,7 @@ describe('compile voices', () => {
             expect(actualCompiledPattern)
                 .toEqual({
                     segnoTime: BEGINNING,
-                    totalDuration: as.Translation<Ms>(54),
+                    totalDuration: as.Translation<Point<Ms>>(54),
                     voices: [
                         {
                             delay: NO_DURATION,
