@@ -138,7 +138,7 @@ export {
     PitchDurationGainSustainXScale,
     PitchDurationGainSustainXYScale,
     PitchDurationGainSustainXYZScale,
-    STANDARD_DURATIONS_SCALE_INDEX,
+    STANDARD_DURATION_SCALE_INDEX,
     STANDARD_PITCH_SCALE_INDEX,
     FULL_GAIN,
     SILENT,
