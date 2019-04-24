@@ -26,19 +26,19 @@ import { MaterializeStandardScalesOptions } from './types'
 const computeNonScale: <NumericType extends Number = number>() => Scale<NumericType> =
     <NumericType extends Number = number>(): Scale<NumericType> => ({})
 
-const computeHarmonicSeriesScale: <NumericType extends Number = Hz>() => Scale<NumericType> =
-    <NumericType extends Number = Hz>(): Scale<NumericType> => ({
+const computeHarmonicSeriesScale: <NumericType extends Number = Pitch>() => Scale<NumericType> =
+    <NumericType extends Number = Pitch>(): Scale<NumericType> => ({
         scalars: POSITIVE_INTEGERS.map((integer: Integer) => as.Scalar<NumericType>(integer)),
     })
 
-const computeSubharmonicSeriesScale: <NumericType extends Number = Hz>() => Scale<NumericType> =
-    <NumericType extends Number = Hz>(): Scale<NumericType> => ({
+const computeSubharmonicSeriesScale: <NumericType extends Number = Pitch>() => Scale<NumericType> =
+    <NumericType extends Number = Pitch>(): Scale<NumericType> => ({
         scalars: POSITIVE_INTEGERS.map((integer: Integer) => as.Scalar<NumericType>(reciprocal(integer))),
     })
 
-const computeFlatDurationsScale: () => Scale<Ms> =
+const computeFlatDurationsScale: () => Scale<Duration> =
     // tslint:disable-next-line no-unnecessary-callback-wrapper
-    (): Scale<Ms> =>
+    (): Scale<Duration> =>
         computeHarmonicSeriesScale()
 
 const computeOctaveSeriesScale: () => Scale<Pitch> =
