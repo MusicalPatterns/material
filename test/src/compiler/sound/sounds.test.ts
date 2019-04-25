@@ -1,4 +1,4 @@
-import { as, Duration, Hz, Meters, Ms, Point } from '@musical-patterns/utilities'
+import { as, Duration, Hz, Meters, Ms, Point, Position } from '@musical-patterns/utilities'
 import { compileSound, Note, Sound } from '../../../../src/indexForTest'
 
 describe('compile sound', () => {
@@ -39,7 +39,7 @@ describe('compile sound', () => {
         it('works when using a non-array position', () => {
             const note: Note = {
                 position: {
-                    scalar: as.Scalar<Point<Meters>>(3),
+                    scalar: as.Scalar<Position>(3),
                 },
             }
             const sound: Sound = compileSound(note)
@@ -52,7 +52,7 @@ describe('compile sound', () => {
             const note: Note = {
                 position: [
                     {
-                        scalar: as.Scalar<Point<Meters>>(3),
+                        scalar: as.Scalar<Position>(3),
                     },
                 ],
             }
@@ -66,10 +66,10 @@ describe('compile sound', () => {
             const note: Note = {
                 position: [
                     {
-                        scalar: as.Scalar<Point<Meters>>(3),
+                        scalar: as.Scalar<Position>(3),
                     },
                     {
-                        scalar: as.Scalar<Point<Meters>>(2),
+                        scalar: as.Scalar<Position>(2),
                     },
                 ],
             }

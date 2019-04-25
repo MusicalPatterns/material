@@ -1,6 +1,6 @@
 // tslint:disable number-literal-format
 
-import { Amplitude, as, Duration, Meters, Pitch, Point, Scalar, use } from '@musical-patterns/utilities'
+import { Amplitude, as, Duration, Pitch, Position, Scalar, use } from '@musical-patterns/utilities'
 import { Note, PitchCircularTechnique, pitchCirculate, Scale } from '../../../../../src/indexForTest'
 
 describe('pitch circulate, using the technique of index translation by pitch class count', () => {
@@ -88,9 +88,9 @@ describe('pitch circulate, using the technique of index translation by pitch cla
                         scaleIndex: as.Ordinal<Array<Scale<Pitch>>>(10),
                     },
                     position: [ {
-                        index: as.Ordinal<Array<Scalar<Point<Meters>>>>(2),
-                        scalar: as.Scalar<Point<Meters>>(4),
-                        scaleIndex: as.Ordinal<Array<Scale<Point<Meters>>>>(6),
+                        index: as.Ordinal<Array<Scalar<Position>>>(2),
+                        scalar: as.Scalar<Position>(4),
+                        scaleIndex: as.Ordinal<Array<Scale<Position>>>(6),
                     } ],
                     sustain: {
                         index: as.Ordinal<Array<Scalar<Duration>>>(6),
@@ -154,21 +154,21 @@ describe('pitch circulate, using the technique of index translation by pitch cla
         it('copies the position into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].position)
                 .toEqual([ {
-                    index: as.Ordinal<Array<Scalar<Point<Meters>>>>(2),
-                    scalar: as.Scalar<Point<Meters>>(4),
-                    scaleIndex: as.Ordinal<Array<Scale<Point<Meters>>>>(6),
+                    index: as.Ordinal<Array<Scalar<Position>>>(2),
+                    scalar: as.Scalar<Position>(4),
+                    scaleIndex: as.Ordinal<Array<Scale<Position>>>(6),
                 } ])
             expect(outputSetOfNotes[ 1 ][ 0 ].position)
                 .toEqual([ {
-                    index: as.Ordinal<Array<Scalar<Point<Meters>>>>(2),
-                    scalar: as.Scalar<Point<Meters>>(4),
-                    scaleIndex: as.Ordinal<Array<Scale<Point<Meters>>>>(6),
+                    index: as.Ordinal<Array<Scalar<Position>>>(2),
+                    scalar: as.Scalar<Position>(4),
+                    scaleIndex: as.Ordinal<Array<Scale<Position>>>(6),
                 } ])
             expect(outputSetOfNotes[ 2 ][ 0 ].position)
                 .toEqual([ {
-                    index: as.Ordinal<Array<Scalar<Point<Meters>>>>(2),
-                    scalar: as.Scalar<Point<Meters>>(4),
-                    scaleIndex: as.Ordinal<Array<Scale<Point<Meters>>>>(6),
+                    index: as.Ordinal<Array<Scalar<Position>>>(2),
+                    scalar: as.Scalar<Position>(4),
+                    scaleIndex: as.Ordinal<Array<Scale<Position>>>(6),
                 } ])
         })
 

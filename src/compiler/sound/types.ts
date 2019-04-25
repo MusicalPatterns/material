@@ -1,14 +1,4 @@
-import {
-    Amplitude,
-    Duration,
-    Maybe,
-    Meters,
-    Ordinal,
-    Pitch,
-    Point,
-    Scalar,
-    Translation,
-} from '@musical-patterns/utilities'
+import { Amplitude, Duration, Maybe, Ordinal, Pitch, Position, Scalar, Translation } from '@musical-patterns/utilities'
 import { Scale } from '../../types'
 
 interface NoteFeature<FeatureType extends Number = number> {
@@ -34,7 +24,7 @@ interface Note {
     duration?: NoteFeature<Duration>,
     gain?: NoteFeature<Amplitude>,
     pitch?: NoteFeature<Pitch>,
-    position?: NoteFeature<Point<Meters>> | Array<NoteFeature<Point<Meters>>>,
+    position?: NoteFeature<Position> | Array<NoteFeature<Position>>,
     sustain?: NoteFeature<Duration>,
 }
 

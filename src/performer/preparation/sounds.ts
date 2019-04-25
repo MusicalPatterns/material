@@ -1,4 +1,4 @@
-import { Coordinate, Maybe, Meters, Point, ThreeDimensional } from '@musical-patterns/utilities'
+import { Coordinate, Maybe, Position, ThreeDimensional } from '@musical-patterns/utilities'
 import { Vrb } from 'vrb'
 import { ImmutableState, StateKey, store } from '../state'
 import { Sound } from '../types'
@@ -21,7 +21,7 @@ const applySoundAdjustmentsForPerformer: (sounds: Sound[], options: SourceReques
 
         const state: ImmutableState = store.getState()
         const webVr: Maybe<Vrb> = state.get(StateKey.WEB_VR)
-        const homePosition: Maybe<Coordinate<Point<Meters>, ThreeDimensional>> = state.get(StateKey.HOME_POSITION)
+        const homePosition: Maybe<Coordinate<Position, ThreeDimensional>> = state.get(StateKey.HOME_POSITION)
         if (webVr && homePosition) {
             outputSounds = outputSounds.map((sound: Sound): Sound =>
                 applyHomePosition(sound, homePosition))

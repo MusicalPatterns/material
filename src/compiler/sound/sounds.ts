@@ -11,6 +11,7 @@ import {
     notAs,
     Pitch,
     Point,
+    Position,
     THREE_DIMENSIONAL,
     use,
 } from '@musical-patterns/utilities'
@@ -28,20 +29,20 @@ const computeDefaultNoteFeature: <FeatureType extends Number = number>() => Note
     })
 
 const compilePosition: (
-    notePosition?: NoteFeature<Point<Meters>> | Array<NoteFeature<Point<Meters>>>,
+    notePosition?: NoteFeature<Position> | Array<NoteFeature<Position>>,
     options?: CompileSoundsOptions,
-) => Coordinate<Point<Meters>> =
+) => Coordinate<Position> =
     (
-        notePosition?: NoteFeature<Point<Meters>> | Array<NoteFeature<Point<Meters>>>,
+        notePosition?: NoteFeature<Position> | Array<NoteFeature<Position>>,
         options?: CompileSoundsOptions,
-    ): Coordinate<Point<Meters>> => {
-        const position: Coordinate<Point<Meters>> = notePosition ?
+    ): Coordinate<Position> => {
+        const position: Coordinate<Position> = notePosition ?
             notePosition instanceof Array ?
                 notePosition.map(
-                    (positionElement: NoteFeature<Point<Meters>>): Point<Meters> =>
-                        compileSoundFeature(positionElement, options as CompileSoundsOptions<Point<Meters>>))
+                    (positionElement: NoteFeature<Position>): Position =>
+                        compileSoundFeature(positionElement, options as CompileSoundsOptions<Position>))
                 :
-                [ compileSoundFeature(notePosition, options as CompileSoundsOptions<Point<Meters>>) ]
+                [ compileSoundFeature(notePosition, options as CompileSoundsOptions<Position>) ]
             :
             []
         while (position.length < notAs.Cardinal(THREE_DIMENSIONAL)) {
@@ -73,7 +74,7 @@ const compileSound: (note: Note, options?: CompileSoundsOptions) => Sound =
         const gain: Amplitude = compileSoundFeature(noteGain, options as CompileSoundsOptions<Amplitude>)
         const frequency: Point<Hz> = compileSoundFeature(notePitch, options as CompileSoundsOptions<Pitch>)
 
-        const position: Coordinate<Point<Meters>> = compilePosition(note.position, options)
+        const position: Coordinate<Position> = compilePosition(note.position, options)
         const sustain: Duration = compileSustain(note, duration, options)
 
         return { duration, gain, frequency, position, sustain }

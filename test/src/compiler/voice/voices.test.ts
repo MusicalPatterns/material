@@ -10,6 +10,7 @@ import {
     NO_DURATION,
     Pitch,
     Point,
+    Position,
 } from '@musical-patterns/utilities'
 import {
     CompiledPattern,
@@ -30,7 +31,7 @@ describe('compile voices', () => {
         duration: { scalar: as.Scalar<Duration>(3) },
         gain: { scalar: as.Scalar<Amplitude>(0.3) },
         pitch: { scalar: as.Scalar<Pitch>(3) },
-        position: { scalar: as.Scalar<Point<Meters>>(3) },
+        position: { scalar: as.Scalar<Position>(3) },
         sustain: { scalar: as.Scalar<Duration>(3) },
     }
     const expectedSound: Sound = {
@@ -45,7 +46,7 @@ describe('compile voices', () => {
         duration: { scalar: as.Scalar<Duration>(3) },
         gain: { scalar: as.Scalar<Amplitude>(0) },
         pitch: { scalar: as.Scalar<Pitch>(3) },
-        position: { scalar: as.Scalar<Point<Meters>>(3) },
+        position: { scalar: as.Scalar<Position>(3) },
         sustain: { scalar: as.Scalar<Duration>(3) },
     }
     const otherExpectedSound: Sound = {
@@ -60,7 +61,7 @@ describe('compile voices', () => {
         duration: { scalar: as.Scalar<Duration>(3) },
         gain: { scalar: as.Scalar<Amplitude>(0.3) },
         pitch: { scalar: as.Scalar<Pitch>(0) },
-        position: { scalar: as.Scalar<Point<Meters>>(3) },
+        position: { scalar: as.Scalar<Position>(3) },
         sustain: { scalar: as.Scalar<Duration>(3) },
     }
     const otherOtherExpectedSound: Sound = {
