@@ -159,6 +159,7 @@ export {
     OnUpdate,
     Voice,
     Sound,
+    REDUCE_GAIN_BECAUSE_SAMPLES_ARE_SUPER_LOUD,
 } from './performer'
 export {
     enableImmersiveAudio,

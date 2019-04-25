@@ -24,6 +24,9 @@ export {
 } from './state'
 
 export {
+    REDUCE_GAIN_BECAUSE_SAMPLES_ARE_SUPER_LOUD,
+} from './constants'
+export {
     Voice,
     Sound,
     PreparedVoice,
