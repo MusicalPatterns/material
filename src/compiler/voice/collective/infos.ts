@@ -51,7 +51,7 @@ const computeCollectiveInfosFromPluckedInfos: (parameters: {
     ): CollectiveVoiceInfos => {
         const collectiveShareSegnoTime: boolean = allValuesAreTheSame(individualSegnoTimes)
         const collectiveSegnoTime: Point<Ms> = max(...individualSegnoTimes)
-        const collectiveRepetendDuration: Duration = as.Translation<Point<Ms>>(collectiveSegnoTime === NON_SEGNO_TIME ?
+        const collectiveRepetendDuration: Duration = as.Delta<Ms>(collectiveSegnoTime === NON_SEGNO_TIME ?
             notAs.Point(NON_SEGNO_TIME) :
             computeLeastCommonMultiple(
                 ...individualRepetendDurations

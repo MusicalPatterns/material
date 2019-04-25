@@ -7,7 +7,6 @@ import {
     Ms,
     NO_DURATION,
     ONE_TENTH,
-    Point,
     Scalar,
     use,
 } from '@musical-patterns/utilities'
@@ -38,11 +37,11 @@ describe('compile pattern', () => {
             sustain: { scalar: testSpecs.testSpec },
         })
     const expectedSound: Sound = {
-        duration: as.Translation<Point<Ms>>(9),
+        duration: as.Delta<Ms>(9),
         frequency: as.Point<Hz>(9),
         gain: as.Gain(0.9),
         position: [ 9, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
-        sustain: as.Translation<Point<Ms>>(8.9),
+        sustain: as.Delta<Ms>(8.9),
     }
 
     const material: Material = {
@@ -74,7 +73,7 @@ describe('compile pattern', () => {
         expect(actualCompiledPattern)
             .toEqual({
                 segnoTime: BEGINNING,
-                totalDuration: as.Translation<Point<Ms>>(9),
+                totalDuration: as.Delta<Ms>(9),
                 voices: [
                     {
                         delay: NO_DURATION,
@@ -104,7 +103,7 @@ describe('compile pattern', () => {
         expect(actualCompiledPattern)
             .toEqual({
                 segnoTime: BEGINNING,
-                totalDuration: as.Translation<Point<Ms>>(9),
+                totalDuration: as.Delta<Ms>(9),
                 voices: [
                     {
                         delay: NO_DURATION,
@@ -136,7 +135,7 @@ describe('compile pattern', () => {
         expect(actualCompiledPattern)
             .toEqual({
                 segnoTime: BEGINNING,
-                totalDuration: as.Translation<Point<Ms>>(9),
+                totalDuration: as.Delta<Ms>(9),
                 voices: [
                     {
                         delay: NO_DURATION,

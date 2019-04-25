@@ -11,7 +11,6 @@ import {
     notAs,
     OCTAVE,
     Pitch,
-    Point,
     POSITIVE_INTEGERS,
     Power,
     reciprocal,
@@ -65,7 +64,7 @@ const materializeStandardScales:
         // tslint:disable-next-line no-any
     ): [ Scale<Gain>, Scale<Duration>, Scale<Pitch> ] & Array<Scale<any>> => {
         const gainScale: Scale<Gain> = computeNonScale()
-        const basisDuration: Duration = specs[ StandardSpec.BASIS_DURATION ] || as.Translation<Point<Ms>>(1)
+        const basisDuration: Duration = specs[ StandardSpec.BASIS_DURATION ] || as.Delta<Ms>(1)
         const basisDurationTranslation: Translation<Duration> =
             specs[ StandardSpec.BASIS_DURATION_TRANSLATION ] || as.Translation<Duration>(0)
         const durationsScale: Scale<Duration> = {
@@ -73,10 +72,10 @@ const materializeStandardScales:
             scalars: durationScalars,
             translation: basisDurationTranslation,
         }
-        const basisFrequency: Point<Hz> = specs[ StandardSpec.BASIS_FREQUENCY ] || as.Point<Hz>(1)
-        const basisFrequencyTranslation: Translation<Point<Hz>> =
-            specs[ StandardSpec.BASIS_FREQUENCY_TRANSLATION ] || as.Translation<Point<Hz>>(0)
-        const pitchesScale: Scale<Point<Hz>> = {
+        const basisFrequency: Pitch = specs[ StandardSpec.BASIS_FREQUENCY ] || as.Point<Hz>(1)
+        const basisFrequencyTranslation: Translation<Pitch> =
+            specs[ StandardSpec.BASIS_FREQUENCY_TRANSLATION ] || as.Translation<Pitch>(0)
+        const pitchesScale: Scale<Pitch> = {
             basis: basisFrequency,
             scalars: pitchScalars,
             translation: basisFrequencyTranslation,

@@ -1,4 +1,4 @@
-import { as, BEGINNING, INITIAL, Ms, NO_DURATION, Point } from '@musical-patterns/utilities'
+import { as, BEGINNING, INITIAL, Ms, NO_DURATION } from '@musical-patterns/utilities'
 import {
     CollectiveVoiceInfos,
     computeCollectiveInfos,
@@ -25,7 +25,7 @@ describe('compute collective infos', () => {
                 voice: IRRELEVANT_VOICE,
                 voiceInfo: {
                     individualEndTime: as.Point<Ms>(5),
-                    individualRepetendDuration: as.Translation<Point<Ms>>(4),
+                    individualRepetendDuration: as.Delta<Ms>(4),
                     individualSegnoTime: as.Point<Ms>(1),
                     sectionInfos: [],
                 },
@@ -34,7 +34,7 @@ describe('compute collective infos', () => {
                 voice: IRRELEVANT_VOICE,
                 voiceInfo: {
                     individualEndTime: as.Point<Ms>(3),
-                    individualRepetendDuration: as.Translation<Point<Ms>>(3),
+                    individualRepetendDuration: as.Delta<Ms>(3),
                     individualSegnoTime: BEGINNING,
                     sectionInfos: [],
                 },
@@ -55,7 +55,7 @@ describe('compute collective infos', () => {
         expect(collectiveVoiceInfos)
             .toEqual({
                 collectiveEndTime: as.Point<Ms>(13),
-                collectiveRepetendDuration: as.Translation<Point<Ms>>(12),
+                collectiveRepetendDuration: as.Delta<Ms>(12),
                 collectiveSegnoTime: as.Point<Ms>(1),
                 collectiveShareSegnoTime: false,
             })
@@ -67,7 +67,7 @@ describe('compute collective infos', () => {
                 voice: IRRELEVANT_VOICE,
                 voiceInfo: {
                     individualEndTime: as.Point<Ms>(5),
-                    individualRepetendDuration: as.Translation<Point<Ms>>(4),
+                    individualRepetendDuration: as.Delta<Ms>(4),
                     individualSegnoTime: as.Point<Ms>(1),
                     sectionInfos: [],
                 },
@@ -76,7 +76,7 @@ describe('compute collective infos', () => {
                 voice: IRRELEVANT_VOICE,
                 voiceInfo: {
                     individualEndTime: as.Point<Ms>(4),
-                    individualRepetendDuration: as.Translation<Point<Ms>>(3),
+                    individualRepetendDuration: as.Delta<Ms>(3),
                     individualSegnoTime: as.Point<Ms>(1),
                     sectionInfos: [],
                 },
@@ -88,7 +88,7 @@ describe('compute collective infos', () => {
         expect(collectiveVoiceInfos)
             .toEqual({
                 collectiveEndTime: as.Point<Ms>(13),
-                collectiveRepetendDuration: as.Translation<Point<Ms>>(12),
+                collectiveRepetendDuration: as.Delta<Ms>(12),
                 collectiveSegnoTime: as.Point<Ms>(1),
                 collectiveShareSegnoTime: true,
             })
@@ -100,7 +100,7 @@ describe('compute collective infos', () => {
                 voice: IRRELEVANT_VOICE,
                 voiceInfo: {
                     individualEndTime: as.Point<Ms>(7),
-                    individualRepetendDuration: as.Translation<Point<Ms>>(4),
+                    individualRepetendDuration: as.Delta<Ms>(4),
                     individualSegnoTime: as.Point<Ms>(3),
                     sectionInfos: [],
                 },
@@ -109,7 +109,7 @@ describe('compute collective infos', () => {
                 voice: IRRELEVANT_VOICE,
                 voiceInfo: {
                     individualEndTime: as.Point<Ms>(5),
-                    individualRepetendDuration: as.Translation<Point<Ms>>(3),
+                    individualRepetendDuration: as.Delta<Ms>(3),
                     individualSegnoTime: as.Point<Ms>(2),
                     sectionInfos: [],
                 },
@@ -121,7 +121,7 @@ describe('compute collective infos', () => {
         expect(collectiveVoiceInfos)
             .toEqual({
                 collectiveEndTime: as.Point<Ms>(15),
-                collectiveRepetendDuration: as.Translation<Point<Ms>>(12),
+                collectiveRepetendDuration: as.Delta<Ms>(12),
                 collectiveSegnoTime: as.Point<Ms>(3),
                 collectiveShareSegnoTime: false,
             })
@@ -133,7 +133,7 @@ describe('compute collective infos', () => {
                 voice: IRRELEVANT_VOICE,
                 voiceInfo: {
                     individualEndTime: as.Point<Ms>(3),
-                    individualRepetendDuration: as.Translation<Point<Ms>>(3),
+                    individualRepetendDuration: as.Delta<Ms>(3),
                     individualSegnoTime: as.Point<Ms>(-1),
                     sectionInfos: [],
                 },
@@ -154,7 +154,7 @@ describe('compute collective infos', () => {
         expect(collectiveVoiceInfos)
             .toEqual({
                 collectiveEndTime: as.Point<Ms>(9),
-                collectiveRepetendDuration: as.Translation<Point<Ms>>(-1),
+                collectiveRepetendDuration: as.Delta<Ms>(-1),
                 collectiveSegnoTime: as.Point<Ms>(-1),
                 collectiveShareSegnoTime: true,
             })
@@ -166,7 +166,7 @@ describe('compute collective infos', () => {
                 voice: IRRELEVANT_VOICE,
                 voiceInfo: {
                     individualEndTime: as.Point<Ms>(12.999999),
-                    individualRepetendDuration: as.Translation<Point<Ms>>(12.999999),
+                    individualRepetendDuration: as.Delta<Ms>(12.999999),
                     individualSegnoTime: BEGINNING,
                     sectionInfos: [],
                 },
@@ -175,7 +175,7 @@ describe('compute collective infos', () => {
                 voice: IRRELEVANT_VOICE,
                 voiceInfo: {
                     individualEndTime: as.Point<Ms>(13.000001),
-                    individualRepetendDuration: as.Translation<Point<Ms>>(13.000001),
+                    individualRepetendDuration: as.Delta<Ms>(13.000001),
                     individualSegnoTime: BEGINNING,
                     sectionInfos: [],
                 },
@@ -187,7 +187,7 @@ describe('compute collective infos', () => {
         expect(collectiveVoiceInfos)
             .toEqual({
                 collectiveEndTime: as.Point<Ms>(13),
-                collectiveRepetendDuration: as.Translation<Point<Ms>>(13),
+                collectiveRepetendDuration: as.Delta<Ms>(13),
                 collectiveSegnoTime: BEGINNING,
                 collectiveShareSegnoTime: true,
             })

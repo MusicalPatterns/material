@@ -9,7 +9,6 @@ import {
     Ms,
     NO_DURATION,
     Pitch,
-    Point,
     Position,
 } from '@musical-patterns/utilities'
 import {
@@ -35,11 +34,11 @@ describe('compile voices', () => {
         sustain: { scalar: as.Scalar<Duration>(3) },
     }
     const expectedSound: Sound = {
-        duration: as.Translation<Point<Ms>>(9),
+        duration: as.Delta<Ms>(9),
         frequency: as.Point<Hz>(9),
         gain: as.Gain(0.9),
         position: [ 9, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
-        sustain: as.Translation<Point<Ms>>(8.9),
+        sustain: as.Delta<Ms>(8.9),
     }
 
     const otherTestNote: Note = {
@@ -50,11 +49,11 @@ describe('compile voices', () => {
         sustain: { scalar: as.Scalar<Duration>(3) },
     }
     const otherExpectedSound: Sound = {
-        duration: as.Translation<Point<Ms>>(9),
+        duration: as.Delta<Ms>(9),
         frequency: as.Point<Hz>(9),
         gain: as.Gain(0),
         position: [ 9, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
-        sustain: as.Translation<Point<Ms>>(8.9),
+        sustain: as.Delta<Ms>(8.9),
     }
 
     const otherOtherTestNote: Note = {
@@ -65,11 +64,11 @@ describe('compile voices', () => {
         sustain: { scalar: as.Scalar<Duration>(3) },
     }
     const otherOtherExpectedSound: Sound = {
-        duration: as.Translation<Point<Ms>>(9),
+        duration: as.Delta<Ms>(9),
         frequency: as.Point<Hz>(0),
         gain: as.Gain(0.9),
         position: [ 9, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
-        sustain: as.Translation<Point<Ms>>(8.9),
+        sustain: as.Delta<Ms>(8.9),
     }
 
     describe('when all entities enumerate their repetitions i.e. the song ends instead of repeating forever', () => {
@@ -104,7 +103,7 @@ describe('compile voices', () => {
             expect(actualCompiledPattern)
                 .toEqual({
                     segnoTime: as.Point<Ms>(-1),
-                    totalDuration: as.Translation<Point<Ms>>(54),
+                    totalDuration: as.Delta<Ms>(54),
                     voices: [
                         {
                             delay: NO_DURATION,
@@ -187,7 +186,7 @@ describe('compile voices', () => {
             expect(actualCompiledPattern)
                 .toEqual({
                     segnoTime: as.Point<Ms>(27),
-                    totalDuration: as.Translation<Point<Ms>>(45),
+                    totalDuration: as.Delta<Ms>(45),
                     voices: [
                         {
                             delay: NO_DURATION,
@@ -277,7 +276,7 @@ describe('compile voices', () => {
             expect(actualCompiledPattern)
                 .toEqual({
                     segnoTime: as.Point<Ms>(9),
-                    totalDuration: as.Translation<Point<Ms>>(99),
+                    totalDuration: as.Delta<Ms>(99),
                     voices: [
                         {
                             delay: NO_DURATION,
@@ -373,7 +372,7 @@ describe('compile voices', () => {
             expect(actualCompiledPattern)
                 .toEqual({
                     segnoTime: as.Point<Ms>(27),
-                    totalDuration: as.Translation<Point<Ms>>(117),
+                    totalDuration: as.Delta<Ms>(117),
                     voices: [
                         {
                             delay: NO_DURATION,
@@ -455,7 +454,7 @@ describe('compile voices', () => {
             expect(actualCompiledPattern)
                 .toEqual({
                     segnoTime: BEGINNING,
-                    totalDuration: as.Translation<Point<Ms>>(54),
+                    totalDuration: as.Delta<Ms>(54),
                     voices: [
                         {
                             delay: NO_DURATION,

@@ -7,7 +7,6 @@ import {
     insteadOf,
     ofNotAs,
     Pitch,
-    Point,
     reciprocal,
     Scalar,
     use,
@@ -15,13 +14,13 @@ import {
 import { STANDARDIZED_SAMPLE_PITCH_OF_C5 } from './constants'
 import { SampleData } from './types'
 
-const computePlaybackRate: (sampleData: SampleData, frequency: Point<Hz>) => Pitch =
-    (sampleData: SampleData, frequency: Point<Hz>): Pitch => {
+const computePlaybackRate: (sampleData: SampleData, frequency: Pitch) => Pitch =
+    (sampleData: SampleData, frequency: Pitch): Pitch => {
         if (sampleData.unpitched) {
             return as.Point<Hz>(1)
         }
 
-        const pitch: Point<Hz> = use.Scalar(
+        const pitch: Pitch = use.Scalar(
             frequency,
             as.Scalar(ofNotAs(reciprocal(STANDARDIZED_SAMPLE_PITCH_OF_C5))),
         )
@@ -30,7 +29,7 @@ const computePlaybackRate: (sampleData: SampleData, frequency: Point<Hz>) => Pit
 
         return use.Scalar(
             pitch,
-            insteadOf<Scalar, Point<Hz>>(samplePitchScalar),
+            insteadOf<Scalar, Pitch>(samplePitchScalar),
         )
     }
 

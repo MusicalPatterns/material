@@ -28,18 +28,18 @@ describe('prepare voices', () => {
                     segnoIndex: INITIAL,
                     sounds: [
                         {
-                            duration: as.Translation<Point<Ms>>(5),
+                            duration: as.Delta<Ms>(5),
                             frequency: as.Point<Hz>(1),
                             gain: as.Gain(1),
                             position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
-                            sustain: as.Translation<Point<Ms>>(4),
+                            sustain: as.Delta<Ms>(4),
                         },
                         {
-                            duration: as.Translation<Point<Ms>>(3),
+                            duration: as.Delta<Ms>(3),
                             frequency: as.Point<Hz>(1),
                             gain: as.Gain(1),
                             position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
-                            sustain: as.Translation<Point<Ms>>(1),
+                            sustain: as.Delta<Ms>(1),
                         },
                     ],
                     sourceRequest: {
@@ -70,18 +70,18 @@ describe('prepare voices', () => {
                     segnoIndex: INITIAL,
                     sounds: [
                         {
-                            duration: as.Translation<Point<Ms>>(5),
+                            duration: as.Delta<Ms>(5),
                             frequency: as.Point<Hz>(1),
                             gain: as.Gain(1),
                             position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
-                            sustain: as.Translation<Point<Ms>>(4),
+                            sustain: as.Delta<Ms>(4),
                         },
                         {
-                            duration: as.Translation<Point<Ms>>(3),
+                            duration: as.Delta<Ms>(3),
                             frequency: as.Point<Hz>(1),
                             gain: as.Gain(1),
                             position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
-                            sustain: as.Translation<Point<Ms>>(1),
+                            sustain: as.Delta<Ms>(1),
                         },
                     ],
                     sourceRequest: {
@@ -112,25 +112,25 @@ describe('prepare voices', () => {
                     segnoIndex: as.Ordinal<Sound[]>(1),
                     sounds: [
                         {
-                            duration: as.Translation<Point<Ms>>(5),
+                            duration: as.Delta<Ms>(5),
                             frequency: as.Point<Hz>(1),
                             gain: as.Gain(1),
                             position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
-                            sustain: as.Translation<Point<Ms>>(4),
+                            sustain: as.Delta<Ms>(4),
                         },
                         {
-                            duration: as.Translation<Point<Ms>>(1),
+                            duration: as.Delta<Ms>(1),
                             frequency: as.Point<Hz>(1),
                             gain: as.Gain(1),
                             position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
-                            sustain: as.Translation<Point<Ms>>(1),
+                            sustain: as.Delta<Ms>(1),
                         },
                         {
-                            duration: as.Translation<Point<Ms>>(3),
+                            duration: as.Delta<Ms>(3),
                             frequency: as.Point<Hz>(1),
                             gain: as.Gain(1),
                             position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
-                            sustain: as.Translation<Point<Ms>>(1),
+                            sustain: as.Delta<Ms>(1),
                         },
                     ],
                     sourceRequest: {

@@ -2,9 +2,8 @@
 
 import {
     as,
-    Hz,
     negative,
-    Point,
+    Pitch,
     SCIENTIFIC_PITCHES,
     ScientificPitchNoteName,
     ScientificPitchOctaveNumber,
@@ -17,7 +16,7 @@ const UP_ONE_OCTAVE_IN_SEMITONES: Semitones = as.Semitones(12)
 const UP_TWO_OCTAVES_IN_SEMITONES: Semitones = as.Semitones(24)
 const DOWN_TWO_OCTAVES_IN_SEMITONES: Semitones = as.Semitones(negative(24))
 
-const STANDARDIZED_SAMPLE_PITCH_OF_C5: Point<Hz> =
+const STANDARDIZED_SAMPLE_PITCH_OF_C5: Pitch =
     SCIENTIFIC_PITCHES[ ScientificPitchNoteName.C ][ ScientificPitchOctaveNumber._5 ]
 
 export {

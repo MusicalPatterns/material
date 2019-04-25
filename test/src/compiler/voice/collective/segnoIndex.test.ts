@@ -17,11 +17,11 @@ describe('compute segno index', () => {
         sounds: repeat(
             [
                 {
-                    duration: as.Translation<Point<Ms>>(20),
+                    duration: as.Delta<Ms>(20),
                     frequency: as.Point<Hz>(1),
                     gain: as.Gain(1),
                     position: [ 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
-                    sustain: as.Translation<Point<Ms>>(9),
+                    sustain: as.Delta<Ms>(9),
                 },
             ],
             as.Cardinal<Sound[]>(5),

@@ -1,4 +1,4 @@
-import { as, Duration, Ms, NO_DURATION, NOT_FOUND, Ordinal, Point } from '@musical-patterns/utilities'
+import { as, Duration, Ms, NO_DURATION, NOT_FOUND, Ordinal } from '@musical-patterns/utilities'
 import { computeIndividualRepetendDuration, SectionInfo } from '../../../../../src/indexForTest'
 
 describe('compute individual repetend duration', () => {
@@ -7,15 +7,15 @@ describe('compute individual repetend duration', () => {
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: as.Translation<Point<Ms>>(45),
+                totalDuration: as.Delta<Ms>(45),
             },
             {
                 doesRepeatForever: false,
-                totalDuration: as.Translation<Point<Ms>>(643),
+                totalDuration: as.Delta<Ms>(643),
             },
             {
                 doesRepeatForever: true,
-                totalDuration: as.Translation<Point<Ms>>(7),
+                totalDuration: as.Delta<Ms>(7),
             },
         ]
 
@@ -25,7 +25,7 @@ describe('compute individual repetend duration', () => {
         })
 
         expect(actualIndividualRepetendDuration)
-            .toBe(as.Translation<Point<Ms>>(7))
+            .toBe(as.Delta<Ms>(7))
     })
 
     it('when the voice has no repetend, is zero', () => {
@@ -33,15 +33,15 @@ describe('compute individual repetend duration', () => {
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: as.Translation<Point<Ms>>(45),
+                totalDuration: as.Delta<Ms>(45),
             },
             {
                 doesRepeatForever: false,
-                totalDuration: as.Translation<Point<Ms>>(643),
+                totalDuration: as.Delta<Ms>(643),
             },
             {
                 doesRepeatForever: false,
-                totalDuration: as.Translation<Point<Ms>>(7),
+                totalDuration: as.Delta<Ms>(7),
             },
         ]
 

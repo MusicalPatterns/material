@@ -1,12 +1,12 @@
-import { Hz, ObjectOf, Point } from '@musical-patterns/utilities'
+import { ObjectOf, Pitch } from '@musical-patterns/utilities'
 import { Vrb } from 'vrb'
 import { SourceType, Timbre } from '../types'
 
 // tslint:disable-next-line no-any
 interface ComputeSourceNodeParameters extends ObjectOf<any> {
-    frequency: Point<Hz>,
+    frequency: Pitch,
     immersiveAudioEnabled: boolean,
-    playbackRate?: Point<Hz>,
+    playbackRate?: Pitch,
     sourceType: SourceType,
     timbre: Timbre,
     webVr?: Vrb,

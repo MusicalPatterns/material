@@ -1,4 +1,4 @@
-import { as, Duration, Hz, Meters, Ms, Point } from '@musical-patterns/utilities'
+import { as, Duration, Hz, Meters, Ms } from '@musical-patterns/utilities'
 import {
     computeIndividualSoundsAndSectionInfos,
     Note,
@@ -27,29 +27,29 @@ describe('compute individual sounds and section infos', () => {
         const actualSoundsAndSectionInfos: SoundsAndSectionInfos = computeIndividualSoundsAndSectionInfos(sections, { scales })
 
         const expectedSound: Sound = {
-            duration: as.Translation<Point<Ms>>(3),
+            duration: as.Delta<Ms>(3),
             frequency: as.Point<Hz>(1),
             gain: as.Gain(1),
             position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
-            sustain: as.Translation<Point<Ms>>(2.9),
+            sustain: as.Delta<Ms>(2.9),
         }
         const otherExpectedSound: Sound = {
-            duration: as.Translation<Point<Ms>>(9),
+            duration: as.Delta<Ms>(9),
             frequency: as.Point<Hz>(1),
             gain: as.Gain(1),
             position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
-            sustain: as.Translation<Point<Ms>>(8.9),
+            sustain: as.Delta<Ms>(8.9),
         }
         expect(actualSoundsAndSectionInfos)
             .toEqual({
                 sectionInfos: [
                     {
                         doesRepeatForever: false,
-                        totalDuration: as.Translation<Point<Ms>>(12),
+                        totalDuration: as.Delta<Ms>(12),
                     },
                     {
                         doesRepeatForever: true,
-                        totalDuration: as.Translation<Point<Ms>>(9),
+                        totalDuration: as.Delta<Ms>(9),
                     },
                 ],
                 sounds: [

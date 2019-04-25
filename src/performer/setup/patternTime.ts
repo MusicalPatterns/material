@@ -20,7 +20,7 @@ const computePatternTime: (parameters: {
 
         const introDuration: Duration = difference(totalDuration, repetendDuration)
         const timeWithinRepetend: Duration = use.Modulus(
-            difference(as.Translation<Point<Ms>>(notAs.Point(timePosition)), introDuration),
+            difference(as.Delta<Ms>(notAs.Point(timePosition)), introDuration),
             as.Modulus(ofNotAs(repetendDuration)),
         )
 

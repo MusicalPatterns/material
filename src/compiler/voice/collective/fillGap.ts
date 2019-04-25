@@ -23,7 +23,7 @@ const fillGap: (parameters: {
         }
 
         const gapToBeFilled: Duration = difference(
-            as.Translation<Point<Ms>>(notAs.Point(collectiveEndTime)),
+            as.Delta<Ms>(notAs.Point(collectiveEndTime)),
             computeSoundsDuration(sounds),
         )
 

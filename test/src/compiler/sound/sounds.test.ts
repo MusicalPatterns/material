@@ -1,4 +1,4 @@
-import { as, Duration, Hz, Meters, Ms, Point, Position } from '@musical-patterns/utilities'
+import { as, Duration, Hz, Meters, Ms, Position } from '@musical-patterns/utilities'
 import { compileSound, Note, Sound } from '../../../../src/indexForTest'
 
 describe('compile sound', () => {
@@ -11,7 +11,7 @@ describe('compile sound', () => {
 
         it('duration to 1', () => {
             expect(sound.duration)
-                .toBe(as.Translation<Point<Ms>>(1))
+                .toBe(as.Delta<Ms>(1))
         })
 
         it('gain to 1', () => {
@@ -31,7 +31,7 @@ describe('compile sound', () => {
 
         it('sustain to 0.9', () => {
             expect(sound.sustain)
-                .toBe(as.Translation<Point<Ms>>(0.9))
+                .toBe(as.Delta<Ms>(0.9))
         })
     })
 
@@ -93,9 +93,9 @@ describe('compile sound', () => {
             const sound: Sound = compileSound(note)
 
             expect(sound.duration)
-                .toEqual(as.Translation<Point<Ms>>(3))
+                .toEqual(as.Delta<Ms>(3))
             expect(sound.sustain)
-                .toEqual(as.Translation<Point<Ms>>(2.9))
+                .toEqual(as.Delta<Ms>(2.9))
         })
 
         it('defaults sustain to slightly less than the duration', () => {
@@ -108,9 +108,9 @@ describe('compile sound', () => {
             const sound: Sound = compileSound(note)
 
             expect(sound.duration)
-                .toEqual(as.Translation<Point<Ms>>(3))
+                .toEqual(as.Delta<Ms>(3))
             expect(sound.sustain)
-                .toEqual(as.Translation<Point<Ms>>(2.9))
+                .toEqual(as.Delta<Ms>(2.9))
         })
 
         it('uses sustain if given and less than duration', () => {
@@ -126,9 +126,9 @@ describe('compile sound', () => {
             const sound: Sound = compileSound(note)
 
             expect(sound.duration)
-                .toEqual(as.Translation<Point<Ms>>(3))
+                .toEqual(as.Delta<Ms>(3))
             expect(sound.sustain)
-                .toEqual(as.Translation<Point<Ms>>(2))
+                .toEqual(as.Delta<Ms>(2))
         })
     })
 })

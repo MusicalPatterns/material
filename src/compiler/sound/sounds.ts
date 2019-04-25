@@ -4,13 +4,11 @@ import {
     Coordinate,
     Duration,
     Gain,
-    Hz,
     INITIAL,
     Meters,
     MULTIPLICATIVE_IDENTITY,
     notAs,
     Pitch,
-    Point,
     Position,
     THREE_DIMENSIONAL,
     use,
@@ -66,7 +64,7 @@ const compileSound: (note: Note, options?: CompileSoundsOptions) => Sound =
 
         const duration: Duration = compileSoundFeature(noteDuration, options as CompileSoundsOptions<Duration>)
         const gain: Gain = compileSoundFeature(noteGain, options as CompileSoundsOptions<Gain>)
-        const frequency: Point<Hz> = compileSoundFeature(notePitch, options as CompileSoundsOptions<Pitch>)
+        const frequency: Pitch = compileSoundFeature(notePitch, options as CompileSoundsOptions<Pitch>)
 
         const position: Coordinate<Position> = compilePosition(note.position, options)
         const sustain: Duration = compileSustain(note, duration, options)

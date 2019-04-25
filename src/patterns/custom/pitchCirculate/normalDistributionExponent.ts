@@ -36,7 +36,7 @@ const computeNumeratorOfExponentOfNormalDistributionWithTechniqueIndexTranslatio
             as.Multiple(ofNotAs(PITCH_CIRCULAR_TIER_COUNT)),
         )))
         const circledPitchIndexProportionOfTotalPitchCount: number =
-            notAs.Multiple<Hz[]>(quotient(circledPitchIndex, maximumPitchAcrossAllTiers))
+            notAs.Factor<Hz[]>(quotient(circledPitchIndex, maximumPitchAcrossAllTiers))
         const pitchProportionOfTotalTranslatedToBePositiveIfGreaterThanMedianAndNegativeIfLesser: number =
             use.Translation(circledPitchIndexProportionOfTotalPitchCount, NEGATIVE_POINT_FIVE_TRANSLATION)
         const pitchProportionOfTotalScaledToBeBetweenNegativeAndPositiveOne: number = use.Multiple(
