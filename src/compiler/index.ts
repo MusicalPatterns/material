@@ -3,6 +3,7 @@ export { compilePattern } from './patterns'
 export {
     NoteFeature,
     Note,
+    PositionFeature,
 } from './sound'
 export {
     TimbreNameEnum,

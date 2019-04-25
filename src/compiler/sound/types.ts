@@ -20,11 +20,13 @@ interface ScaleProperties<FeatureType extends Number = number> {
     scaleTranslation: Translation<FeatureType>,
 }
 
+type PositionFeature = NoteFeature<Position> | Array<NoteFeature<Position>>
+
 interface Note {
     duration?: NoteFeature<Duration>,
     gain?: NoteFeature<Gain>,
     pitch?: NoteFeature<Pitch>,
-    position?: NoteFeature<Position> | Array<NoteFeature<Position>>,
+    position?: PositionFeature,
     sustain?: NoteFeature<Duration>,
 }
 
@@ -38,4 +40,5 @@ export {
     ScaleProperties,
     ComputeScalePropertiesParameters,
     CompileSoundsOptions,
+    PositionFeature,
 }

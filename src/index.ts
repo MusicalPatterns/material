@@ -154,6 +154,7 @@ export {
     NoteFeature,
     Section,
     TimbreName,
+    PositionFeature,
 } from './compiler'
 export {
     OnUpdate,

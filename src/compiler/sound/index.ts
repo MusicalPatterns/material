@@ -5,4 +5,5 @@ export {
     Note,
     NoteFeature,
     CompileSoundsOptions,
+    PositionFeature,
 } from './types'

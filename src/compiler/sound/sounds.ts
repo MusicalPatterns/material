@@ -18,7 +18,7 @@ import {
 import { Sound } from '../../performer'
 import { DEFAULT_TRANSLATION_FOR_ALMOST_FULL_SUSTAIN } from './constants'
 import { compileSoundFeature } from './features'
-import { CompileSoundsOptions, Note, NoteFeature } from './types'
+import { CompileSoundsOptions, Note, NoteFeature, PositionFeature } from './types'
 
 const computeDefaultNoteFeature: <FeatureType extends Number = number>() => NoteFeature<FeatureType> =
     <FeatureType extends Number = number>(): NoteFeature<FeatureType> => ({
@@ -28,14 +28,8 @@ const computeDefaultNoteFeature: <FeatureType extends Number = number>() => Note
         translation: ADDITIVE_IDENTITY,
     })
 
-const compilePosition: (
-    notePosition?: NoteFeature<Position> | Array<NoteFeature<Position>>,
-    options?: CompileSoundsOptions,
-) => Coordinate<Position> =
-    (
-        notePosition?: NoteFeature<Position> | Array<NoteFeature<Position>>,
-        options?: CompileSoundsOptions,
-    ): Coordinate<Position> => {
+const compilePosition: (notePosition?: PositionFeature, options?: CompileSoundsOptions) => Coordinate<Position> =
+    (notePosition?: PositionFeature, options?: CompileSoundsOptions): Coordinate<Position> => {
         const position: Coordinate<Position> = notePosition ?
             notePosition instanceof Array ?
                 notePosition.map(
