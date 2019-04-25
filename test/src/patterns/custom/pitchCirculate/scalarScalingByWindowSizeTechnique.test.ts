@@ -3,7 +3,7 @@
 import {
     Amplitude,
     as,
-    computeEqualDivisionPitches,
+    computeEqualDivisionPitchScalars,
     Duration,
     Frequency,
     Meters,
@@ -220,18 +220,18 @@ describe('pitch circulate, using the technique of scalar scaling by window size'
 
     describe('gain goes in a cycle', () => {
         beforeEach(() => {
-            const tenEdScalars: Pitch[] = computeEqualDivisionPitches(as.Denominator(10))
+            const tenEdScalars: Array<Scalar<Pitch>> = computeEqualDivisionPitchScalars(as.Denominator(10))
             const inputNotes: Note[] = [
-                { pitch: { scalar: as.Scalar(ofNotAs(tenEdScalars[ 0 ])) } },
-                { pitch: { scalar: as.Scalar(ofNotAs(tenEdScalars[ 1 ])) } },
-                { pitch: { scalar: as.Scalar(ofNotAs(tenEdScalars[ 2 ])) } },
-                { pitch: { scalar: as.Scalar(ofNotAs(tenEdScalars[ 3 ])) } },
-                { pitch: { scalar: as.Scalar(ofNotAs(tenEdScalars[ 4 ])) } },
-                { pitch: { scalar: as.Scalar(ofNotAs(tenEdScalars[ 5 ])) } },
-                { pitch: { scalar: as.Scalar(ofNotAs(tenEdScalars[ 6 ])) } },
-                { pitch: { scalar: as.Scalar(ofNotAs(tenEdScalars[ 7 ])) } },
-                { pitch: { scalar: as.Scalar(ofNotAs(tenEdScalars[ 8 ])) } },
-                { pitch: { scalar: as.Scalar(ofNotAs(tenEdScalars[ 9 ])) } },
+                { pitch: { scalar: tenEdScalars[ 0 ] } },
+                { pitch: { scalar: tenEdScalars[ 1 ] } },
+                { pitch: { scalar: tenEdScalars[ 2 ] } },
+                { pitch: { scalar: tenEdScalars[ 3 ] } },
+                { pitch: { scalar: tenEdScalars[ 4 ] } },
+                { pitch: { scalar: tenEdScalars[ 5 ] } },
+                { pitch: { scalar: tenEdScalars[ 6 ] } },
+                { pitch: { scalar: tenEdScalars[ 7 ] } },
+                { pitch: { scalar: tenEdScalars[ 8 ] } },
+                { pitch: { scalar: tenEdScalars[ 9 ] } },
                 { pitch: { scalar: as.Scalar<Pitch>(2) } },
             ]
 
@@ -325,13 +325,13 @@ describe('pitch circulate, using the technique of scalar scaling by window size'
 
     describe('gain curve is almost zero at the edges and slopes nicely up to a 1 in the middle, for other pitch class counts too', () => {
         beforeEach(() => {
-            const fiveEdScalars: Pitch[] = computeEqualDivisionPitches(as.Denominator(5))
+            const fiveEdScalars: Array<Scalar<Pitch>> = computeEqualDivisionPitchScalars(as.Denominator(5))
             const inputNotes: Note[] = [
-                { pitch: { scalar: as.Scalar(ofNotAs(fiveEdScalars[ 0 ])) } },
-                { pitch: { scalar: as.Scalar(ofNotAs(fiveEdScalars[ 1 ])) } },
-                { pitch: { scalar: as.Scalar(ofNotAs(fiveEdScalars[ 2 ])) } },
-                { pitch: { scalar: as.Scalar(ofNotAs(fiveEdScalars[ 3 ])) } },
-                { pitch: { scalar: as.Scalar(ofNotAs(fiveEdScalars[ 4 ])) } },
+                { pitch: { scalar: fiveEdScalars[ 0 ] } },
+                { pitch: { scalar: fiveEdScalars[ 1 ] } },
+                { pitch: { scalar: fiveEdScalars[ 2 ] } },
+                { pitch: { scalar: fiveEdScalars[ 3 ] } },
+                { pitch: { scalar: fiveEdScalars[ 4 ] } },
             ]
 
             outputSetOfNotes = pitchCirculate(
