@@ -1,4 +1,4 @@
-import { Gain, Maybe, as } from '@musical-patterns/utilities'
+import { as, Gain, Maybe } from '@musical-patterns/utilities'
 import { PositionalAudio } from 'three'
 import { context } from './context'
 import { SourceNode } from './source'

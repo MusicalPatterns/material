@@ -7,7 +7,7 @@ import {
     INITIAL,
     Meters,
     MULTIPLICATIVE_IDENTITY,
-    
+
     Pitch,
     Position,
     THREE_DIMENSIONAL,

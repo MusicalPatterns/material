@@ -3,7 +3,7 @@ import {
     Frequency,
     INITIAL,
     Integer,
-    
+
     Ordinal,
     Scalar,
     slice,
