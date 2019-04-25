@@ -7,7 +7,7 @@ import {
     INITIAL,
     Meters,
     MULTIPLICATIVE_IDENTITY,
-    notAs,
+    
     Pitch,
     Position,
     THREE_DIMENSIONAL,
@@ -37,7 +37,7 @@ const compilePosition: (notePosition?: PositionFeature, options?: CompileSoundsO
                 [ compileSoundFeature(notePosition, options as CompileSoundsOptions<Position>) ]
             :
             []
-        while (position.length < notAs.Cardinal(THREE_DIMENSIONAL)) {
+        while (position.length < as.number(THREE_DIMENSIONAL)) {
             position.push(as.Point<Meters>(0))
         }
 

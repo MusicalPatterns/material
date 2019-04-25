@@ -4,7 +4,7 @@ import {
     Frequency,
     Hz,
     insteadOf,
-    notAs,
+
     Ordinal,
     Scalar,
     Transition,
@@ -24,13 +24,13 @@ const transposePitchIndexForTier: (
         const pitchIndexWrappedWithinPitchClassCountToRemoveOriginalWindowLocationInformation: Ordinal<Hz[]> =
             use.IntegerModulus(
                 originalPitchIndex,
-                as.IntegerModulus<Ordinal<Hz[]>>(notAs.Cardinal(pitchClassCount)),
+                as.IntegerModulus<Ordinal<Hz[]>>(as.number(pitchClassCount)),
             )
 
         const baseTierTransposition: Transition<Hz[]> =
-            as.Transition<Hz[]>(notAs.Ordinal<WindowSize[]>(use.Multiple(
+            as.Transition<Hz[]>(as.number(use.Multiple(
                 tierIndex,
-                as.Factor<WindowSize[]>(notAs.Cardinal(pitchClassCount)),
+                as.Factor<WindowSize[]>(as.number(pitchClassCount)),
             )))
 
         return use.Cardinal(
@@ -54,7 +54,7 @@ const scalePitchScalarForTier: (
 
         const baseTierScaling: WindowSize = use.Power(
             windowSize,
-            as.Power<WindowSize>(notAs.Ordinal<WindowSize[]>(tierIndex)),
+            as.Power<WindowSize>(as.number(tierIndex)),
         )
 
         return use.Scalar(

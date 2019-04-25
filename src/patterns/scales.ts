@@ -8,7 +8,7 @@ import {
     Hz,
     Integer,
     Ms,
-    notAs,
+
     OCTAVE,
     Pitch,
     POSITIVE_INTEGERS,
@@ -45,7 +45,7 @@ const computeOctaveSeriesScale: () => Scale<Pitch> =
         scalars: ZERO_AND_POSITIVE_INTEGERS
             .map((integer: Integer) => as.Power<Base<Frequency>>(integer))
             .map((power: Power<Base<Frequency>>): Scalar<Pitch> =>
-                as.Scalar<Pitch>(notAs.Base<Frequency>(use.Power(
+                as.Scalar<Pitch>(as.number(use.Power(
                     OCTAVE,
                     power,
                 ))),

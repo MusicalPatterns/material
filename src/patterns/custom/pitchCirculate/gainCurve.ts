@@ -8,7 +8,7 @@ import {
     Hz,
     Logarithm,
     negative,
-    notAs,
+
     ONE_HALF,
     Ordinal,
     Scalar,
@@ -41,7 +41,7 @@ const applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount:
             negative(use.Scalar(normalDistributionExponent, ONE_HALF)),
         )
         const pitchCircularScaling: Scalar<Scalar<Gain>> =
-            as.Scalar<Scalar<Gain>>(notAs.Logarithm(pitchCircularBase))
+            as.Scalar<Scalar<Gain>>(as.number(pitchCircularBase))
 
         return use.Scalar(originalGainScalar, pitchCircularScaling)
     }
@@ -63,9 +63,9 @@ const applyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSize:
             negative(use.Scalar(normalDistributionExponent, ONE_HALF)),
         )
         const pitchCircularScaling: Scalar<Scalar<Gain>> =
-            as.Scalar<Scalar<Gain>>(notAs.Logarithm(pitchCircularBase))
+            as.Scalar<Scalar<Gain>>(as.number(pitchCircularBase))
 
-        return as.Scalar<Gain>(notAs.Scalar(use.Scalar(originalGainScalar, pitchCircularScaling)))
+        return as.Scalar<Gain>(as.number(use.Scalar(originalGainScalar, pitchCircularScaling)))
     }
 
 export {

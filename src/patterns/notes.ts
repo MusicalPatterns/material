@@ -1,4 +1,4 @@
-import { as, Duration, notAs, Ordinal, Scalar, use } from '@musical-patterns/utilities'
+import { as, Duration,  Ordinal, Scalar, use } from '@musical-patterns/utilities'
 import { Note } from '../compiler'
 
 const computeNotesTotalDurationByScalar: (notes: Note[]) => number =
@@ -9,7 +9,7 @@ const computeNotesTotalDurationByScalar: (notes: Note[]) => number =
 
                 return use.Translation(
                     accumulator,
-                    as.Translation(notAs.Scalar<Duration>(durationScalar)),
+                    as.Translation(as.number(durationScalar)),
                 )
             },
             0,
@@ -24,7 +24,7 @@ const computeNotesTotalDurationByIndex: (notes: Note[]) => number =
 
                 return use.Translation(
                     accumulator,
-                    as.Translation(notAs.Ordinal<Array<Scalar<Duration>>>(durationIndex)),
+                    as.Translation(as.number(durationIndex)),
                 )
             },
             0,

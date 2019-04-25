@@ -6,7 +6,7 @@ import {
     max,
     Ms,
     NO_DURATION,
-    notAs,
+
     Point,
     round,
     sum,
@@ -52,7 +52,7 @@ const computeCollectiveInfosFromPluckedInfos: (parameters: {
         const collectiveShareSegnoTime: boolean = allValuesAreTheSame(individualSegnoTimes)
         const collectiveSegnoTime: Point<Ms> = max(...individualSegnoTimes)
         const collectiveRepetendDuration: Duration = as.Delta<Ms>(collectiveSegnoTime === NON_SEGNO_TIME ?
-            notAs.Point(NON_SEGNO_TIME) :
+            as.number(NON_SEGNO_TIME) :
             computeLeastCommonMultiple(
                 ...individualRepetendDurations
                     .filter((individualRepetendDuration: Duration) => individualRepetendDuration !== NO_DURATION)
@@ -63,7 +63,7 @@ const computeCollectiveInfosFromPluckedInfos: (parameters: {
         )
         const collectiveEndTime: Point<Ms> = collectiveSegnoTime === NON_SEGNO_TIME ?
             max(...individualEndTimes) :
-            sum(collectiveSegnoTime, as.Point<Ms>(notAs.Translation(collectiveRepetendDuration)))
+            sum(collectiveSegnoTime, as.Point<Ms>(as.number(collectiveRepetendDuration)))
 
         return {
             collectiveEndTime,
