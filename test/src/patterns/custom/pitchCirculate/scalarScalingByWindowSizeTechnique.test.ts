@@ -1,11 +1,11 @@
 // tslint:disable number-literal-format
 
 import {
-    Amplitude,
     as,
     computeEqualDivisionPitchScalars,
     Duration,
     Frequency,
+    Gain,
     Pitch,
     Position,
     Scalar,
@@ -16,25 +16,25 @@ import { Note, PitchCircularTechnique, pitchCirculate, Scale } from '../../../..
 describe('pitch circulate, using the technique of scalar scaling by window size', () => {
     let outputSetOfNotes: Note[][]
 
-    const A: Scalar<Amplitude> = as.Scalar<Amplitude>(0.011)
-    const B: Scalar<Amplitude> = as.Scalar<Amplitude>(0.020)
-    const C: Scalar<Amplitude> = as.Scalar<Amplitude>(0.034)
-    const D: Scalar<Amplitude> = as.Scalar<Amplitude>(0.056)
-    const E: Scalar<Amplitude> = as.Scalar<Amplitude>(0.089)
-    const F: Scalar<Amplitude> = as.Scalar<Amplitude>(0.135)
-    const G: Scalar<Amplitude> = as.Scalar<Amplitude>(0.198)
-    const H: Scalar<Amplitude> = as.Scalar<Amplitude>(0.278)
-    const I: Scalar<Amplitude> = as.Scalar<Amplitude>(0.375)
-    const J: Scalar<Amplitude> = as.Scalar<Amplitude>(0.487)
-    const K: Scalar<Amplitude> = as.Scalar<Amplitude>(0.607)
-    const L: Scalar<Amplitude> = as.Scalar<Amplitude>(0.726)
-    const M: Scalar<Amplitude> = as.Scalar<Amplitude>(0.835)
-    const N: Scalar<Amplitude> = as.Scalar<Amplitude>(0.923)
-    const O: Scalar<Amplitude> = as.Scalar<Amplitude>(0.980)
-    const P: Scalar<Amplitude> = as.Scalar<Amplitude>(1.000)
+    const A: Scalar<Gain> = as.Scalar<Gain>(0.011)
+    const B: Scalar<Gain> = as.Scalar<Gain>(0.020)
+    const C: Scalar<Gain> = as.Scalar<Gain>(0.034)
+    const D: Scalar<Gain> = as.Scalar<Gain>(0.056)
+    const E: Scalar<Gain> = as.Scalar<Gain>(0.089)
+    const F: Scalar<Gain> = as.Scalar<Gain>(0.135)
+    const G: Scalar<Gain> = as.Scalar<Gain>(0.198)
+    const H: Scalar<Gain> = as.Scalar<Gain>(0.278)
+    const I: Scalar<Gain> = as.Scalar<Gain>(0.375)
+    const J: Scalar<Gain> = as.Scalar<Gain>(0.487)
+    const K: Scalar<Gain> = as.Scalar<Gain>(0.607)
+    const L: Scalar<Gain> = as.Scalar<Gain>(0.726)
+    const M: Scalar<Gain> = as.Scalar<Gain>(0.835)
+    const N: Scalar<Gain> = as.Scalar<Gain>(0.923)
+    const O: Scalar<Gain> = as.Scalar<Gain>(0.980)
+    const P: Scalar<Gain> = as.Scalar<Gain>(1.000)
 
     describe('given some notes, will return a set of version of those notes which together constitute the pitch circled version of it', () => {
-        const originalGain: Scalar<Amplitude> = as.Scalar<Amplitude>(0.5)
+        const originalGain: Scalar<Gain> = as.Scalar<Gain>(0.5)
         beforeEach(() => {
             const inputNotes: Note[] = [ {
                 gain: {
@@ -64,9 +64,9 @@ describe('pitch circulate, using the technique of scalar scaling by window size'
         })
 
         it('maps the gain to a normal distribution curve, so that the center set of notes is loud, and the outer sets of notes get quieter depending on how far from the center they are', () => {
-            const MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE: Scalar<Scalar<Amplitude>> = as.Scalar<Scalar<Amplitude>>(0.410)
-            const LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES: Scalar<Scalar<Amplitude>> = as.Scalar<Scalar<Amplitude>>(0.800)
-            const QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE: Scalar<Scalar<Amplitude>> = as.Scalar<Scalar<Amplitude>>(0.028)
+            const MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE: Scalar<Scalar<Gain>> = as.Scalar<Scalar<Gain>>(0.410)
+            const LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES: Scalar<Scalar<Gain>> = as.Scalar<Scalar<Gain>>(0.800)
+            const QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE: Scalar<Scalar<Gain>> = as.Scalar<Scalar<Gain>>(0.028)
 
             expect(outputSetOfNotes[ 0 ][ 0 ].gain!.scalar!)
                 .toBeCloseToTyped(use.Scalar(originalGain, MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE))
@@ -87,8 +87,8 @@ describe('pitch circulate, using the technique of scalar scaling by window size'
                         scaleIndex: as.Ordinal<Array<Scale<Duration>>>(5),
                     },
                     gain: {
-                        index: as.Ordinal<Array<Scalar<Amplitude>>>(9),
-                        scaleIndex: as.Ordinal<Array<Scale<Amplitude>>>(5),
+                        index: as.Ordinal<Array<Scalar<Gain>>>(9),
+                        scaleIndex: as.Ordinal<Array<Scale<Gain>>>(5),
                     },
                     pitch: {
                         index: as.Ordinal<Array<Scalar<Pitch>>>(11),
@@ -199,20 +199,20 @@ describe('pitch circulate, using the technique of scalar scaling by window size'
 
         it('copies the gain scale index into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].gain!.scaleIndex)
-                .toEqual(as.Ordinal<Array<Scale<Amplitude>>>(5))
+                .toEqual(as.Ordinal<Array<Scale<Gain>>>(5))
             expect(outputSetOfNotes[ 1 ][ 0 ].gain!.scaleIndex)
-                .toEqual(as.Ordinal<Array<Scale<Amplitude>>>(5))
+                .toEqual(as.Ordinal<Array<Scale<Gain>>>(5))
             expect(outputSetOfNotes[ 2 ][ 0 ].gain!.scaleIndex)
-                .toEqual(as.Ordinal<Array<Scale<Amplitude>>>(5))
+                .toEqual(as.Ordinal<Array<Scale<Gain>>>(5))
         })
 
         it('copies the gain index into each set of notes', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].gain!.index)
-                .toEqual(as.Ordinal<Array<Scalar<Amplitude>>>(9))
+                .toEqual(as.Ordinal<Array<Scalar<Gain>>>(9))
             expect(outputSetOfNotes[ 1 ][ 0 ].gain!.index)
-                .toEqual(as.Ordinal<Array<Scalar<Amplitude>>>(9))
+                .toEqual(as.Ordinal<Array<Scalar<Gain>>>(9))
             expect(outputSetOfNotes[ 2 ][ 0 ].gain!.index)
-                .toEqual(as.Ordinal<Array<Scalar<Amplitude>>>(9))
+                .toEqual(as.Ordinal<Array<Scalar<Gain>>>(9))
         })
     })
 

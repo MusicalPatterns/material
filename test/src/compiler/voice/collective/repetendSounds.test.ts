@@ -32,7 +32,7 @@ describe('compute repetend sounds', () => {
                 {
                     duration: as.Translation<Point<Ms>>(11),
                     frequency: as.Point<Hz>(1),
-                    gain: as.Amplitude(1),
+                    gain: as.Gain(1),
                     position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
                     sustain: as.Translation<Point<Ms>>(10.9),
                 },

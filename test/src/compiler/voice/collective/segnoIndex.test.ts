@@ -19,7 +19,7 @@ describe('compute segno index', () => {
                 {
                     duration: as.Translation<Point<Ms>>(20),
                     frequency: as.Point<Hz>(1),
-                    gain: as.Amplitude(1),
+                    gain: as.Gain(1),
                     position: [ 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
                     sustain: as.Translation<Point<Ms>>(9),
                 },

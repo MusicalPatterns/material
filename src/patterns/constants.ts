@@ -1,10 +1,10 @@
 // tslint:disable no-magic-numbers
 
-import { Amplitude, as, Duration, negative, Ordinal, Pitch, Scalar } from '@musical-patterns/utilities'
+import { as, Duration, Gain, negative, Ordinal, Pitch, Scalar } from '@musical-patterns/utilities'
 import { Scale } from '../types'
 
-const FULL_GAIN: Scalar<Amplitude> = as.Scalar<Amplitude>(1)
-const SILENT: Scalar<Amplitude> = as.Scalar<Amplitude>(0)
+const FULL_GAIN: Scalar<Gain> = as.Scalar<Gain>(1)
+const SILENT: Scalar<Gain> = as.Scalar<Gain>(0)
 
 // tslint:disable-next-line no-any
 const STANDARD_PITCH_INDEX_INDICATING_REST: Ordinal<Array<Scalar<any>>> = as.Ordinal<Array<Scalar<any>>>(negative(1))

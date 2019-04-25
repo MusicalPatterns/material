@@ -29,14 +29,14 @@ describe('compute individual sounds and section infos', () => {
         const expectedSound: Sound = {
             duration: as.Translation<Point<Ms>>(3),
             frequency: as.Point<Hz>(1),
-            gain: as.Amplitude(1),
+            gain: as.Gain(1),
             position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
             sustain: as.Translation<Point<Ms>>(2.9),
         }
         const otherExpectedSound: Sound = {
             duration: as.Translation<Point<Ms>>(9),
             frequency: as.Point<Hz>(1),
-            gain: as.Amplitude(1),
+            gain: as.Gain(1),
             position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
             sustain: as.Translation<Point<Ms>>(8.9),
         }

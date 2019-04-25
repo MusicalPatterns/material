@@ -6,7 +6,7 @@ describe('update', () => {
     const testSoundDurationFive: Sound = {
         duration: as.Translation<Point<Ms>>(5),
         frequency: as.Point<Hz>(1),
-        gain: as.Amplitude(1),
+        gain: as.Gain(1),
         position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
         sustain: as.Translation<Point<Ms>>(1),
     }
@@ -14,7 +14,7 @@ describe('update', () => {
     const testSoundDurationThree: Sound = {
         duration: as.Translation<Point<Ms>>(3),
         frequency: as.Point<Hz>(1),
-        gain: as.Amplitude(1),
+        gain: as.Gain(1),
         position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
         sustain: as.Translation<Point<Ms>>(1),
     }

@@ -1,4 +1,4 @@
-import { Amplitude, as, Cardinal, Frequency, Hz, insteadOf, Ordinal, Pitch, Scalar } from '@musical-patterns/utilities'
+import { as, Cardinal, Frequency, Gain, Hz, insteadOf, Ordinal, Pitch, Scalar } from '@musical-patterns/utilities'
 import { Note } from '../../../compiler'
 import {
     applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount,
@@ -13,14 +13,14 @@ const computeTierWithTechniqueIndexTranslationByPitchClassCount:
         notes.map((note: Note): Note => {
             const originalPitchIndex: Ordinal<Hz[]> =
                 insteadOf<Ordinal, Hz[]>(note.pitch && note.pitch.index || as.Ordinal<Hz[]>(0))
-            const originalGainScalar: Scalar<Amplitude> = note.gain && note.gain.scalar || as.Scalar<Amplitude>(1)
+            const originalGainScalar: Scalar<Gain> = note.gain && note.gain.scalar || as.Scalar<Gain>(1)
 
             const circledPitchIndex: Ordinal<Hz[]> = transposePitchIndexForTier(
                 originalPitchIndex,
                 { pitchClassCount, tierIndex },
             )
 
-            const pitchCircledGainScalar: Scalar<Amplitude> =
+            const pitchCircledGainScalar: Scalar<Gain> =
                 applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount(
                     originalGainScalar,
                     { circledPitchIndex, pitchClassCount },
@@ -45,14 +45,14 @@ const computeTierWithTechniqueScalarScalingByWindowSize:
         notes.map((note: Note): Note => {
             const originalPitchScalar: Scalar<Frequency> =
                 insteadOf<Scalar, Frequency>(note.pitch && note.pitch.scalar || as.Scalar(1))
-            const originalGainScalar: Scalar<Amplitude> = note.gain && note.gain.scalar || as.Scalar<Amplitude>(1)
+            const originalGainScalar: Scalar<Gain> = note.gain && note.gain.scalar || as.Scalar<Gain>(1)
 
             const circledPitchScalar: Scalar<Frequency> = scalePitchScalarForTier(
                 originalPitchScalar,
                 { windowSize, tierIndex },
             )
 
-            const pitchCircledGainScalar: Scalar<Amplitude> =
+            const pitchCircledGainScalar: Scalar<Gain> =
                 applyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSize(
                     originalGainScalar,
                     { circledPitchScalar, windowSize },

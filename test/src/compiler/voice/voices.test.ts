@@ -1,8 +1,8 @@
 import {
-    Amplitude,
     as,
     BEGINNING,
     Duration,
+    Gain,
     Hz,
     INITIAL,
     Meters,
@@ -29,7 +29,7 @@ describe('compile voices', () => {
 
     const testNote: Note = {
         duration: { scalar: as.Scalar<Duration>(3) },
-        gain: { scalar: as.Scalar<Amplitude>(0.3) },
+        gain: { scalar: as.Scalar<Gain>(0.3) },
         pitch: { scalar: as.Scalar<Pitch>(3) },
         position: { scalar: as.Scalar<Position>(3) },
         sustain: { scalar: as.Scalar<Duration>(3) },
@@ -37,14 +37,14 @@ describe('compile voices', () => {
     const expectedSound: Sound = {
         duration: as.Translation<Point<Ms>>(9),
         frequency: as.Point<Hz>(9),
-        gain: as.Amplitude(0.9),
+        gain: as.Gain(0.9),
         position: [ 9, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
         sustain: as.Translation<Point<Ms>>(8.9),
     }
 
     const otherTestNote: Note = {
         duration: { scalar: as.Scalar<Duration>(3) },
-        gain: { scalar: as.Scalar<Amplitude>(0) },
+        gain: { scalar: as.Scalar<Gain>(0) },
         pitch: { scalar: as.Scalar<Pitch>(3) },
         position: { scalar: as.Scalar<Position>(3) },
         sustain: { scalar: as.Scalar<Duration>(3) },
@@ -52,14 +52,14 @@ describe('compile voices', () => {
     const otherExpectedSound: Sound = {
         duration: as.Translation<Point<Ms>>(9),
         frequency: as.Point<Hz>(9),
-        gain: as.Amplitude(0),
+        gain: as.Gain(0),
         position: [ 9, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
         sustain: as.Translation<Point<Ms>>(8.9),
     }
 
     const otherOtherTestNote: Note = {
         duration: { scalar: as.Scalar<Duration>(3) },
-        gain: { scalar: as.Scalar<Amplitude>(0.3) },
+        gain: { scalar: as.Scalar<Gain>(0.3) },
         pitch: { scalar: as.Scalar<Pitch>(0) },
         position: { scalar: as.Scalar<Position>(3) },
         sustain: { scalar: as.Scalar<Duration>(3) },
@@ -67,7 +67,7 @@ describe('compile voices', () => {
     const otherOtherExpectedSound: Sound = {
         duration: as.Translation<Point<Ms>>(9),
         frequency: as.Point<Hz>(0),
-        gain: as.Amplitude(0.9),
+        gain: as.Gain(0.9),
         position: [ 9, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
         sustain: as.Translation<Point<Ms>>(8.9),
     }

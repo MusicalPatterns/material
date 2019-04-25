@@ -1,10 +1,10 @@
 import { StandardSpec, StandardSpecs } from '@musical-patterns/spec'
 import {
-    Amplitude,
     as,
     Base,
     Duration,
     Frequency,
+    Gain,
     Hz,
     Integer,
     Ms,
@@ -58,13 +58,13 @@ const materializeStandardScales:
         specs: SpecsType,
         options?: MaterializeStandardScalesOptions,
         // tslint:disable-next-line no-any
-    ) => [ Scale<Amplitude>, Scale<Duration>, Scale<Pitch> ] & Array<Scale<any>> =
+    ) => [ Scale<Gain>, Scale<Duration>, Scale<Pitch> ] & Array<Scale<any>> =
     <SpecsType extends StandardSpecs>(
         specs: SpecsType,
         { durationScalars, pitchScalars }: MaterializeStandardScalesOptions = {},
         // tslint:disable-next-line no-any
-    ): [ Scale<Amplitude>, Scale<Duration>, Scale<Pitch> ] & Array<Scale<any>> => {
-        const gainScale: Scale<Amplitude> = computeNonScale()
+    ): [ Scale<Gain>, Scale<Duration>, Scale<Pitch> ] & Array<Scale<any>> => {
+        const gainScale: Scale<Gain> = computeNonScale()
         const basisDuration: Duration = specs[ StandardSpec.BASIS_DURATION ] || as.Translation<Point<Ms>>(1)
         const basisDurationTranslation: Translation<Duration> =
             specs[ StandardSpec.BASIS_DURATION_TRANSLATION ] || as.Translation<Duration>(0)

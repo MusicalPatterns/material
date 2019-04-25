@@ -1,10 +1,10 @@
 import {
-    Amplitude,
     as,
     Cardinal,
     E,
     Exponent,
     Frequency,
+    Gain,
     Hz,
     Logarithm,
     negative,
@@ -26,46 +26,46 @@ import {
 
 const applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount:
     (
-        originalGainScalar: Scalar<Amplitude>,
+        originalGainScalar: Scalar<Gain>,
         parameters: { circledPitchIndex: Ordinal<Hz[]>, pitchClassCount: Cardinal },
-    ) => Scalar<Amplitude> =
+    ) => Scalar<Gain> =
     (
-        originalGainScalar: Scalar<Amplitude>,
+        originalGainScalar: Scalar<Gain>,
         parameters: ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
-    ): Scalar<Amplitude> => {
+    ): Scalar<Gain> => {
         const normalDistributionExponent: Exponent<Logarithm> =
             computeExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount(parameters)
 
-        const pitchCircularBase: Logarithm<Scalar<Amplitude>> = use.Exponent(
+        const pitchCircularBase: Logarithm<Scalar<Gain>> = use.Exponent(
             E,
             negative(use.Scalar(normalDistributionExponent, ONE_HALF)),
         )
-        const pitchCircularScaling: Scalar<Scalar<Amplitude>> =
-            as.Scalar<Scalar<Amplitude>>(notAs.Logarithm(pitchCircularBase))
+        const pitchCircularScaling: Scalar<Scalar<Gain>> =
+            as.Scalar<Scalar<Gain>>(notAs.Logarithm(pitchCircularBase))
 
         return use.Scalar(originalGainScalar, pitchCircularScaling)
     }
 
 const applyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSize:
     (
-        originalGainScalar: Scalar<Amplitude>,
+        originalGainScalar: Scalar<Gain>,
         parameters: { circledPitchScalar: Scalar<Frequency>, windowSize: WindowSize },
-    ) => Scalar<Amplitude> =
+    ) => Scalar<Gain> =
     (
-        originalGainScalar: Scalar<Amplitude>,
+        originalGainScalar: Scalar<Gain>,
         parameters: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters,
-    ): Scalar<Amplitude> => {
+    ): Scalar<Gain> => {
         const normalDistributionExponent: Exponent<Logarithm> =
             computeExponentOfNormalDistributionWithTechniqueScalarScalingByWindowSize(parameters)
 
-        const pitchCircularBase: Logarithm<Scalar<Amplitude>> = use.Exponent(
+        const pitchCircularBase: Logarithm<Scalar<Gain>> = use.Exponent(
             E,
             negative(use.Scalar(normalDistributionExponent, ONE_HALF)),
         )
-        const pitchCircularScaling: Scalar<Scalar<Amplitude>> =
-            as.Scalar<Scalar<Amplitude>>(notAs.Logarithm(pitchCircularBase))
+        const pitchCircularScaling: Scalar<Scalar<Gain>> =
+            as.Scalar<Scalar<Gain>>(notAs.Logarithm(pitchCircularBase))
 
-        return as.Scalar<Amplitude>(notAs.Scalar(use.Scalar(originalGainScalar, pitchCircularScaling)))
+        return as.Scalar<Gain>(notAs.Scalar(use.Scalar(originalGainScalar, pitchCircularScaling)))
     }
 
 export {

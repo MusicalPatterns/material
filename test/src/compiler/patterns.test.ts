@@ -40,7 +40,7 @@ describe('compile pattern', () => {
     const expectedSound: Sound = {
         duration: as.Translation<Point<Ms>>(9),
         frequency: as.Point<Hz>(9),
-        gain: as.Amplitude(0.9),
+        gain: as.Gain(0.9),
         position: [ 9, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
         sustain: as.Translation<Point<Ms>>(8.9),
     }

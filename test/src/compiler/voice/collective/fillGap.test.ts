@@ -7,7 +7,7 @@ describe('fill gap', () => {
             {
                 duration: as.Translation<Point<Ms>>(8),
                 frequency: as.Point<Hz>(1),
-                gain: as.Amplitude(1),
+                gain: as.Gain(1),
                 position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
                 sustain: as.Translation<Point<Ms>>(7.9),
             },
@@ -45,21 +45,21 @@ describe('fill gap', () => {
                 {
                     duration: as.Translation<Point<Ms>>(8),
                     frequency: as.Point<Hz>(1),
-                    gain: as.Amplitude(1),
+                    gain: as.Gain(1),
                     position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
                     sustain: as.Translation<Point<Ms>>(7.9),
                 },
                 {
                     duration: as.Translation<Point<Ms>>(11),
                     frequency: as.Point<Hz>(1),
-                    gain: as.Amplitude(1),
+                    gain: as.Gain(1),
                     position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
                     sustain: as.Translation<Point<Ms>>(10.9),
                 },
                 {
                     duration: as.Translation<Point<Ms>>(11),
                     frequency: as.Point<Hz>(1),
-                    gain: as.Amplitude(1),
+                    gain: as.Gain(1),
                     position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
                     sustain: as.Translation<Point<Ms>>(10.9),
                 },
@@ -71,7 +71,7 @@ describe('fill gap', () => {
             {
                 duration: as.Translation<Point<Ms>>(11),
                 frequency: as.Point<Hz>(1),
-                gain: as.Amplitude(1),
+                gain: as.Gain(1),
                 position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
                 sustain: as.Translation<Point<Ms>>(10.9),
             },
@@ -110,7 +110,7 @@ describe('fill gap', () => {
                 {
                     duration: as.Translation<Point<Ms>>(11),
                     frequency: as.Point<Hz>(1),
-                    gain: as.Amplitude(1),
+                    gain: as.Gain(1),
                     position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
                     sustain: as.Translation<Point<Ms>>(10.9),
                 },
