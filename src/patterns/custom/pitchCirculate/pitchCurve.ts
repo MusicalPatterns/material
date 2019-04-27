@@ -22,9 +22,9 @@ const transposePitchIndexForTier: (
         { pitchClassCount, tierIndex }: ComputeCircledPitchIndexParameters,
     ): Ordinal<Hz[]> => {
         const pitchIndexWrappedWithinPitchClassCountToRemoveOriginalWindowLocationInformation: Ordinal<Hz[]> =
-            use.IntegerModulus(
+            use.Remaindee(
                 originalPitchIndex,
-                as.IntegerModulus<Ordinal<Hz[]>>(as.number(pitchClassCount)),
+                as.Remaindee<Ordinal<Hz[]>>(as.number(pitchClassCount)),
             )
 
         const baseTierTransposition: Transition<Hz[]> =
