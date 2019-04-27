@@ -12,7 +12,7 @@ type Segment = Note[][]
 
 type Rendering<ContourType> = (block: Block) => ContourPiece<ContourType>
 
-type RenderingByBlockElement<ContourType> = (cell: number) => ContourPiece<ContourType>
+type RenderingByBlockElement<ContourType> = (blockElement: number) => ContourPiece<ContourType>
 
 type PitchOnly = 1 & { _PitchOnlyBrand: void }
 type DurationOnly = 1 & { _DurationOnlyBrand: void }
