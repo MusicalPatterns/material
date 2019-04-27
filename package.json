@@ -1,6 +1,6 @@
 {
   "name": "@musical-patterns/material",
-  "version": "1.0.75",
+  "version": "1.0.76",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "license": "MIT",
@@ -15,7 +15,7 @@
     "@mohayonao/wave-tables": "^0.2.0",
     "@musical-patterns/cli": "^1.0.555",
     "@musical-patterns/id": "^1.0.6",
-    "@musical-patterns/pattern-material-qa": "^1.0.152",
+    "@musical-patterns/pattern-material-qa": "^1.0.153",
     "@musical-patterns/spec": "^1.0.28",
     "@musical-patterns/utilities": "^1.0.533",
     "@types/three": "^0.93.22",
