@@ -13,7 +13,6 @@ report*.json
 .idea/codeStyles/Project.xml
 .idea/compiler.xml
 .idea/encodings.xml
-.idea/inspectionProfiles/Project_Default.xml
 .idea/jsLibraryMappings.xml
 .idea/jsLinters/tslint.xml
 .idea/misc.xml
