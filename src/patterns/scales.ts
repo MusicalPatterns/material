@@ -14,7 +14,7 @@ import {
 } from '@musical-patterns/utilities'
 import { Scale } from '../types'
 // tslint:disable-next-line max-line-length
-import { ENOUGH_HARMONIC_SERIES_STEPS_TO_LEAVE_HUMAN_HEARING_RANGE_WHEN_STARTING_FROM_PITCH_STANDARD } from './constants'
+import { ENOUGH_HARMONIC_SERIES_STEPS_TO_LEAVE_HUMAN_HEARING_RANGE_FROM_THREE_OCTAVES_BELOW_PITCH_STANDARD } from './constants'
 import { MaterializeStandardScalesOptions } from './types'
 
 const computeNonScale: <NumericType extends Number = number>() => Scale<NumericType> =
@@ -24,7 +24,7 @@ const computeHarmonicSeriesScale: <NumericType extends Number = Pitch>() => Scal
     <NumericType extends Number = Pitch>(): Scale<NumericType> => ({
         scalars: range(
             ONE,
-            ENOUGH_HARMONIC_SERIES_STEPS_TO_LEAVE_HUMAN_HEARING_RANGE_WHEN_STARTING_FROM_PITCH_STANDARD,
+            ENOUGH_HARMONIC_SERIES_STEPS_TO_LEAVE_HUMAN_HEARING_RANGE_FROM_THREE_OCTAVES_BELOW_PITCH_STANDARD,
         )
             .map((integer: Integer) => as.Scalar<NumericType>(integer)),
     })
@@ -33,7 +33,7 @@ const computeSubharmonicSeriesScale: <NumericType extends Number = Pitch>() => S
     <NumericType extends Number = Pitch>(): Scale<NumericType> => ({
         scalars: range(
             ONE,
-            ENOUGH_HARMONIC_SERIES_STEPS_TO_LEAVE_HUMAN_HEARING_RANGE_WHEN_STARTING_FROM_PITCH_STANDARD,
+            ENOUGH_HARMONIC_SERIES_STEPS_TO_LEAVE_HUMAN_HEARING_RANGE_FROM_THREE_OCTAVES_BELOW_PITCH_STANDARD,
         )
             .map((integer: Integer) => as.Scalar<NumericType>(reciprocal(integer))),
     })
