@@ -1,14 +1,4 @@
-import {
-    as,
-    Frequency,
-    INITIAL,
-    Integer,
-
-    Ordinal,
-    Scalar,
-    slice,
-    ZERO_AND_POSITIVE_INTEGERS,
-} from '@musical-patterns/utilities'
+import { as, Frequency, range, Integer, Ordinal, Scalar } from '@musical-patterns/utilities'
 import { Note } from '../../../compiler'
 import { PITCH_CIRCULAR_TIER_COUNT } from './constants'
 import {
@@ -26,7 +16,7 @@ const pitchCirculate: (notes: Note[], options: PitchCirculateOptions) => Note[][
             periodSize = as.Scalar<Scalar<Frequency>>(1),
         }: PitchCirculateOptions,
     ): Note[][] =>
-        slice(ZERO_AND_POSITIVE_INTEGERS, INITIAL, as.Ordinal<Integer[]>(as.number(PITCH_CIRCULAR_TIER_COUNT)))
+        range(PITCH_CIRCULAR_TIER_COUNT)
             .map((integer: Integer) => as.Ordinal<PeriodSize[]>(integer))
             .map((tierIndex: Ordinal<PeriodSize[]>): Note[] =>
                 technique === PitchCircularTechnique.INDEX_TRANSLATION_BY_PITCH_CLASS_COUNT ?

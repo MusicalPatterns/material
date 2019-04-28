@@ -13,7 +13,6 @@ export {
     computeNonScale,
     computeFlatDurationsScale,
     computeHarmonicSeriesScale,
-    computeOctaveSeriesScale,
     computeSubharmonicSeriesScale,
 } from './scales'
 export {

@@ -1,25 +1,20 @@
 import { StandardSpec, StandardSpecs } from '@musical-patterns/spec'
 import {
     as,
-    Base,
     Duration,
-    Frequency,
     Gain,
     Hz,
     Integer,
     Ms,
-
-    OCTAVE,
+    ONE,
     Pitch,
-    POSITIVE_INTEGERS,
-    Power,
+    range,
     reciprocal,
-    Scalar,
     Translation,
-    use,
-    ZERO_AND_POSITIVE_INTEGERS,
 } from '@musical-patterns/utilities'
 import { Scale } from '../types'
+// tslint:disable-next-line max-line-length
+import { ENOUGH_HARMONIC_SERIES_STEPS_TO_LEAVE_HUMAN_HEARING_RANGE_WHEN_STARTING_FROM_PITCH_STANDARD } from './constants'
 import { MaterializeStandardScalesOptions } from './types'
 
 const computeNonScale: <NumericType extends Number = number>() => Scale<NumericType> =
@@ -27,30 +22,24 @@ const computeNonScale: <NumericType extends Number = number>() => Scale<NumericT
 
 const computeHarmonicSeriesScale: <NumericType extends Number = Pitch>() => Scale<NumericType> =
     <NumericType extends Number = Pitch>(): Scale<NumericType> => ({
-        scalars: POSITIVE_INTEGERS.map((integer: Integer) => as.Scalar<NumericType>(integer)),
+        scalars: range(
+            ONE,
+            ENOUGH_HARMONIC_SERIES_STEPS_TO_LEAVE_HUMAN_HEARING_RANGE_WHEN_STARTING_FROM_PITCH_STANDARD,
+        ).map((integer: Integer) => as.Scalar<NumericType>(integer)),
     })
 
 const computeSubharmonicSeriesScale: <NumericType extends Number = Pitch>() => Scale<NumericType> =
     <NumericType extends Number = Pitch>(): Scale<NumericType> => ({
-        scalars: POSITIVE_INTEGERS.map((integer: Integer) => as.Scalar<NumericType>(reciprocal(integer))),
+        scalars: range(
+            ONE,
+            ENOUGH_HARMONIC_SERIES_STEPS_TO_LEAVE_HUMAN_HEARING_RANGE_WHEN_STARTING_FROM_PITCH_STANDARD,
+        ).map((integer: Integer) => as.Scalar<NumericType>(reciprocal(integer))),
     })
 
 const computeFlatDurationsScale: () => Scale<Duration> =
     // tslint:disable-next-line no-unnecessary-callback-wrapper
     (): Scale<Duration> =>
         computeHarmonicSeriesScale()
-
-const computeOctaveSeriesScale: () => Scale<Pitch> =
-    (): Scale<Pitch> => ({
-        scalars: ZERO_AND_POSITIVE_INTEGERS
-            .map((integer: Integer) => as.Power<Base<Frequency>>(integer))
-            .map((power: Power<Base<Frequency>>): Scalar<Pitch> =>
-                as.Scalar<Pitch>(as.number(use.Power(
-                    OCTAVE,
-                    power,
-                ))),
-            ),
-    })
 
 const materializeStandardScales:
     <SpecsType extends StandardSpecs>(
@@ -93,6 +82,5 @@ export {
     computeNonScale,
     computeFlatDurationsScale,
     computeHarmonicSeriesScale,
-    computeOctaveSeriesScale,
     computeSubharmonicSeriesScale,
 }

@@ -9,7 +9,6 @@ export {
     computeNonScale,
     computeFlatDurationsScale,
     computeHarmonicSeriesScale,
-    computeOctaveSeriesScale,
     computeSubharmonicSeriesScale,
     PitchCircularTechnique,
     pitchCirculate,

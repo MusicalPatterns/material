@@ -34,7 +34,6 @@ export {
     CompiledPattern,
 } from './interface/indexForTest'
 export {
-    computeOctaveSeriesScale,
     computeNotesTotalDurationByIndex,
     computeNotesTotalDurationByScalar,
     computeTotalPitchDurationContourDuration,
