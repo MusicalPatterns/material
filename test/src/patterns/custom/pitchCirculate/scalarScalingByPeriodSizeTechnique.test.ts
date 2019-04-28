@@ -13,7 +13,7 @@ import {
 } from '@musical-patterns/utilities'
 import { Note, PitchCircularTechnique, pitchCirculate, Scale } from '../../../../../src/indexForTest'
 
-describe('pitch circulate, using the technique of scalar scaling by window size', () => {
+describe('pitch circulate, using the technique of scalar scaling by period size', () => {
     let outputSetOfNotes: Note[][]
 
     const A: Scalar<Gain> = as.Scalar<Gain>(0.011)
@@ -48,13 +48,13 @@ describe('pitch circulate, using the technique of scalar scaling by window size'
             outputSetOfNotes = pitchCirculate(
                 inputNotes,
                 {
-                    technique: PitchCircularTechnique.SCALAR_SCALING_BY_WINDOW_SIZE,
-                    windowSize: as.Scalar<Scalar<Frequency>>(2),
+                    periodSize: as.Scalar<Scalar<Frequency>>(2),
+                    technique: PitchCircularTechnique.SCALAR_SCALING_BY_PERIOD_SIZE,
                 },
             )
         })
 
-        it('scales the pitches so that each set of notes is off from the next by the window size (and for now always returning three sets of notes, starting with the lowest possible set of notes)', () => {
+        it('scales the pitches so that each set of notes is off from the next by the period size (and for now always returning three sets of notes, starting with the lowest possible set of notes)', () => {
             expect(outputSetOfNotes[ 0 ][ 0 ].pitch!.scalar)
                 .toEqual(as.Scalar<Pitch>(57 / 32))
             expect(outputSetOfNotes[ 1 ][ 0 ].pitch!.scalar)
@@ -110,8 +110,8 @@ describe('pitch circulate, using the technique of scalar scaling by window size'
             outputSetOfNotes = pitchCirculate(
                 inputNotes,
                 {
-                    technique: PitchCircularTechnique.SCALAR_SCALING_BY_WINDOW_SIZE,
-                    windowSize: as.Scalar<Scalar<Frequency>>(2),
+                    periodSize: as.Scalar<Scalar<Frequency>>(2),
+                    technique: PitchCircularTechnique.SCALAR_SCALING_BY_PERIOD_SIZE,
                 },
             )
         })
@@ -236,8 +236,8 @@ describe('pitch circulate, using the technique of scalar scaling by window size'
             outputSetOfNotes = pitchCirculate(
                 inputNotes,
                 {
-                    technique: PitchCircularTechnique.SCALAR_SCALING_BY_WINDOW_SIZE,
-                    windowSize: as.Scalar<Scalar<Frequency>>(2),
+                    periodSize: as.Scalar<Scalar<Frequency>>(2),
+                    technique: PitchCircularTechnique.SCALAR_SCALING_BY_PERIOD_SIZE,
                 },
             )
         })
@@ -335,8 +335,8 @@ describe('pitch circulate, using the technique of scalar scaling by window size'
             outputSetOfNotes = pitchCirculate(
                 inputNotes,
                 {
-                    technique: PitchCircularTechnique.SCALAR_SCALING_BY_WINDOW_SIZE,
-                    windowSize: as.Scalar<Scalar<Frequency>>(2),
+                    periodSize: as.Scalar<Scalar<Frequency>>(2),
+                    technique: PitchCircularTechnique.SCALAR_SCALING_BY_PERIOD_SIZE,
                 },
             )
         })

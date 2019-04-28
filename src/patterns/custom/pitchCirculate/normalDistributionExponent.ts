@@ -19,8 +19,8 @@ import {
 import { KINDA_GUESSING_AT_A_GOOD_SIGMA, NEGATIVE_POINT_FIVE_TRANSLATION, PITCH_CIRCULAR_TIER_COUNT } from './constants'
 import {
     ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
-    ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters,
-    WindowSize,
+    ApplyPitchCircularGainCurveWithTechniqueScalarScalingByPeriodSizeParameters,
+    PeriodSize,
 } from './types'
 
 const computeNumeratorOfExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount:
@@ -50,16 +50,16 @@ const computeNumeratorOfExponentOfNormalDistributionWithTechniqueIndexTranslatio
         )
     }
 
-const computeNumeratorOfExponentOfNormalDistributionWithTechniqueScalarScalingByWindowSize:
-    (parameters: { circledPitchScalar: Scalar<Frequency>, windowSize: WindowSize }) => number =
+const computeNumeratorOfExponentOfNormalDistributionWithTechniqueScalarScalingByPeriodSize:
+    (parameters: { circledPitchScalar: Scalar<Frequency>, periodSize: PeriodSize }) => number =
     (
         {
-            windowSize,
+            periodSize,
             circledPitchScalar,
-        }: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters,
+        }: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByPeriodSizeParameters,
     ): number => {
-        const maximumPitchAcrossAllTiers: WindowSize = use.Exponent(
-            windowSize,
+        const maximumPitchAcrossAllTiers: PeriodSize = use.Exponent(
+            periodSize,
             as.Exponent<Scalar<Scalar<Frequency>>>(as.number(PITCH_CIRCULAR_TIER_COUNT)),
         )
         const circledPitchScalarProportionOfTotalPitchCount: number =
@@ -93,11 +93,11 @@ const computeExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchCla
             )),
         )
 
-const computeExponentOfNormalDistributionWithTechniqueScalarScalingByWindowSize:
-    (parameters: { circledPitchScalar: Scalar<Frequency>, windowSize: WindowSize }) => Exponent<Logarithm> =
-    (parameters: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters): Exponent<Logarithm> =>
+const computeExponentOfNormalDistributionWithTechniqueScalarScalingByPeriodSize:
+    (parameters: { circledPitchScalar: Scalar<Frequency>, periodSize: PeriodSize }) => Exponent<Logarithm> =
+    (parameters: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByPeriodSizeParameters): Exponent<Logarithm> =>
         as.Exponent<Logarithm>(
-            computeNumeratorOfExponentOfNormalDistributionWithTechniqueScalarScalingByWindowSize(parameters) /
+            computeNumeratorOfExponentOfNormalDistributionWithTechniqueScalarScalingByPeriodSize(parameters) /
             as.number(use.Multiple(
                 use.Power(KINDA_GUESSING_AT_A_GOOD_SIGMA, SQUARED),
                 DOUBLE,
@@ -106,5 +106,5 @@ const computeExponentOfNormalDistributionWithTechniqueScalarScalingByWindowSize:
 
 export {
     computeExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount,
-    computeExponentOfNormalDistributionWithTechniqueScalarScalingByWindowSize,
+    computeExponentOfNormalDistributionWithTechniqueScalarScalingByPeriodSize,
 }

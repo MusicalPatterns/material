@@ -13,9 +13,9 @@ import { Note } from '../../../compiler'
 import { PITCH_CIRCULAR_TIER_COUNT } from './constants'
 import {
     computeTierWithTechniqueIndexTranslationByPitchClassCount,
-    computeTierWithTechniqueScalarScalingByWindowSize,
+    computeTierWithTechniqueScalarScalingByPeriodSize,
 } from './tier'
-import { PitchCircularTechnique, PitchCirculateOptions, WindowSize } from './types'
+import { PeriodSize, PitchCircularTechnique, PitchCirculateOptions } from './types'
 
 const pitchCirculate: (notes: Note[], options: PitchCirculateOptions) => Note[][] =
     (
@@ -23,15 +23,15 @@ const pitchCirculate: (notes: Note[], options: PitchCirculateOptions) => Note[][
         {
             technique,
             pitchClassCount = as.Cardinal(0),
-            windowSize = as.Scalar<Scalar<Frequency>>(1),
+            periodSize = as.Scalar<Scalar<Frequency>>(1),
         }: PitchCirculateOptions,
     ): Note[][] =>
         slice(ZERO_AND_POSITIVE_INTEGERS, INITIAL, as.Ordinal<Integer[]>(as.number(PITCH_CIRCULAR_TIER_COUNT)))
-            .map((integer: Integer) => as.Ordinal<WindowSize[]>(integer))
-            .map((tierIndex: Ordinal<WindowSize[]>): Note[] =>
+            .map((integer: Integer) => as.Ordinal<PeriodSize[]>(integer))
+            .map((tierIndex: Ordinal<PeriodSize[]>): Note[] =>
                 technique === PitchCircularTechnique.INDEX_TRANSLATION_BY_PITCH_CLASS_COUNT ?
                     computeTierWithTechniqueIndexTranslationByPitchClassCount(notes, tierIndex, pitchClassCount) :
-                    computeTierWithTechniqueScalarScalingByWindowSize(notes, tierIndex, windowSize),
+                    computeTierWithTechniqueScalarScalingByPeriodSize(notes, tierIndex, periodSize),
             )
 
 export {

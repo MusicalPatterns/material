@@ -16,12 +16,12 @@ import {
 } from '@musical-patterns/utilities'
 import {
     computeExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount,
-    computeExponentOfNormalDistributionWithTechniqueScalarScalingByWindowSize,
+    computeExponentOfNormalDistributionWithTechniqueScalarScalingByPeriodSize,
 } from './normalDistributionExponent'
 import {
     ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
-    ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters,
-    WindowSize,
+    ApplyPitchCircularGainCurveWithTechniqueScalarScalingByPeriodSizeParameters,
+    PeriodSize,
 } from './types'
 
 const applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount:
@@ -46,17 +46,17 @@ const applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount:
         return use.Scalar(originalGainScalar, pitchCircularScaling)
     }
 
-const applyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSize:
+const applyPitchCircularGainCurveWithTechniqueScalarScalingByPeriodSize:
     (
         originalGainScalar: Scalar<Gain>,
-        parameters: { circledPitchScalar: Scalar<Frequency>, windowSize: WindowSize },
+        parameters: { circledPitchScalar: Scalar<Frequency>, periodSize: PeriodSize },
     ) => Scalar<Gain> =
     (
         originalGainScalar: Scalar<Gain>,
-        parameters: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters,
+        parameters: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByPeriodSizeParameters,
     ): Scalar<Gain> => {
         const normalDistributionExponent: Exponent<Logarithm> =
-            computeExponentOfNormalDistributionWithTechniqueScalarScalingByWindowSize(parameters)
+            computeExponentOfNormalDistributionWithTechniqueScalarScalingByPeriodSize(parameters)
 
         const pitchCircularBase: Logarithm<Scalar<Gain>> = use.Exponent(
             E,
@@ -70,5 +70,5 @@ const applyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSize:
 
 export {
     applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount,
-    applyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSize,
+    applyPitchCircularGainCurveWithTechniqueScalarScalingByPeriodSize,
 }

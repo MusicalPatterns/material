@@ -2,14 +2,14 @@ import { as, Cardinal, Frequency, Gain, Hz, insteadOf, Ordinal, Pitch, Scalar } 
 import { Note } from '../../../compiler'
 import {
     applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount,
-    applyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSize,
+    applyPitchCircularGainCurveWithTechniqueScalarScalingByPeriodSize,
 } from './gainCurve'
 import { scalePitchScalarForTier, transposePitchIndexForTier } from './pitchCurve'
-import { WindowSize } from './types'
+import { PeriodSize } from './types'
 
 const computeTierWithTechniqueIndexTranslationByPitchClassCount:
-    (notes: Note[], tierIndex: Ordinal<WindowSize[]>, pitchClassCount: Cardinal) => Note[] =
-    (notes: Note[], tierIndex: Ordinal<WindowSize[]>, pitchClassCount: Cardinal): Note[] =>
+    (notes: Note[], tierIndex: Ordinal<PeriodSize[]>, pitchClassCount: Cardinal) => Note[] =
+    (notes: Note[], tierIndex: Ordinal<PeriodSize[]>, pitchClassCount: Cardinal): Note[] =>
         notes.map((note: Note): Note => {
             const originalPitchIndex: Ordinal<Hz[]> =
                 insteadOf<Ordinal, Hz[]>(note.pitch && note.pitch.index || as.Ordinal<Hz[]>(0))
@@ -39,9 +39,9 @@ const computeTierWithTechniqueIndexTranslationByPitchClassCount:
             }
         })
 
-const computeTierWithTechniqueScalarScalingByWindowSize:
-    (notes: Note[], tierIndex: Ordinal<WindowSize[]>, windowSize: WindowSize) => Note[] =
-    (notes: Note[], tierIndex: Ordinal<WindowSize[]>, windowSize: WindowSize): Note[] =>
+const computeTierWithTechniqueScalarScalingByPeriodSize:
+    (notes: Note[], tierIndex: Ordinal<PeriodSize[]>, periodSize: PeriodSize) => Note[] =
+    (notes: Note[], tierIndex: Ordinal<PeriodSize[]>, periodSize: PeriodSize): Note[] =>
         notes.map((note: Note): Note => {
             const originalPitchScalar: Scalar<Frequency> =
                 insteadOf<Scalar, Frequency>(note.pitch && note.pitch.scalar || as.Scalar(1))
@@ -49,13 +49,13 @@ const computeTierWithTechniqueScalarScalingByWindowSize:
 
             const circledPitchScalar: Scalar<Frequency> = scalePitchScalarForTier(
                 originalPitchScalar,
-                { windowSize, tierIndex },
+                { periodSize, tierIndex },
             )
 
             const pitchCircledGainScalar: Scalar<Gain> =
-                applyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSize(
+                applyPitchCircularGainCurveWithTechniqueScalarScalingByPeriodSize(
                     originalGainScalar,
-                    { circledPitchScalar, windowSize },
+                    { circledPitchScalar, periodSize },
                 )
 
             return {
@@ -73,5 +73,5 @@ const computeTierWithTechniqueScalarScalingByWindowSize:
 
 export {
     computeTierWithTechniqueIndexTranslationByPitchClassCount,
-    computeTierWithTechniqueScalarScalingByWindowSize,
+    computeTierWithTechniqueScalarScalingByPeriodSize,
 }

@@ -2,23 +2,23 @@ import { Cardinal, Frequency, Hz, Ordinal, Scalar } from '@musical-patterns/util
 
 enum PitchCircularTechnique {
     INDEX_TRANSLATION_BY_PITCH_CLASS_COUNT = 'INDEX_TRANSLATION_BY_PITCH_CLASS_COUNT',
-    SCALAR_SCALING_BY_WINDOW_SIZE = 'SCALAR_SCALING_BY_WINDOW_SIZE',
+    SCALAR_SCALING_BY_PERIOD_SIZE = 'SCALAR_SCALING_BY_PERIOD_SIZE',
 }
 
 interface PitchCirculateOptions {
+    periodSize?: PeriodSize,
     pitchClassCount?: Cardinal,
     technique: PitchCircularTechnique,
-    windowSize?: WindowSize,
 }
 
 interface ComputeCircledPitchIndexParameters {
     pitchClassCount: Cardinal,
-    tierIndex: Ordinal<WindowSize[]>,
+    tierIndex: Ordinal<PeriodSize[]>,
 }
 
 interface ComputeCircledPitchScalarParameters {
-    tierIndex: Ordinal<WindowSize[]>,
-    windowSize: WindowSize,
+    periodSize: PeriodSize,
+    tierIndex: Ordinal<PeriodSize[]>,
 }
 
 interface ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters {
@@ -26,12 +26,12 @@ interface ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCo
     pitchClassCount: Cardinal,
 }
 
-interface ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters {
+interface ApplyPitchCircularGainCurveWithTechniqueScalarScalingByPeriodSizeParameters {
     circledPitchScalar: Scalar<Frequency>,
-    windowSize: WindowSize,
+    periodSize: PeriodSize,
 }
 
-type WindowSize = Scalar<Scalar<Frequency>>
+type PeriodSize = Scalar<Scalar<Frequency>>
 
 export {
     PitchCircularTechnique,
@@ -39,6 +39,6 @@ export {
     ComputeCircledPitchIndexParameters,
     ComputeCircledPitchScalarParameters,
     ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
-    ApplyPitchCircularGainCurveWithTechniqueScalarScalingByWindowSizeParameters,
-    WindowSize,
+    ApplyPitchCircularGainCurveWithTechniqueScalarScalingByPeriodSizeParameters,
+    PeriodSize,
 }
