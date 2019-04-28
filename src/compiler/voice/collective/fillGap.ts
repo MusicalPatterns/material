@@ -1,4 +1,4 @@
-import { as, difference, Duration, isUndefined, Maybe, Ms,  Point } from '@musical-patterns/utilities'
+import { as, difference, Duration, isUndefined, Maybe, Ms, Point } from '@musical-patterns/utilities'
 import { Sound } from '../../../performer'
 import { Scale } from '../../../types'
 import { SectionInfo } from '../individual'

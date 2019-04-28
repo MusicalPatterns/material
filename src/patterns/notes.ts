@@ -1,4 +1,4 @@
-import { as, Duration,  Ordinal, Scalar, use } from '@musical-patterns/utilities'
+import { as, Duration, Ordinal, Scalar, use } from '@musical-patterns/utilities'
 import { Note } from '../compiler'
 
 const computeNotesTotalDurationByScalar: (notes: Note[]) => number =

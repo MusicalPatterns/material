@@ -1,4 +1,4 @@
-import { as, Frequency, range, Integer, Ordinal, Scalar } from '@musical-patterns/utilities'
+import { as, Frequency, Integer, Ordinal, range, Scalar } from '@musical-patterns/utilities'
 import { Note } from '../../../compiler'
 import { PITCH_CIRCULAR_TIER_COUNT } from './constants'
 import {

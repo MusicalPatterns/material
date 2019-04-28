@@ -25,7 +25,8 @@ const computeHarmonicSeriesScale: <NumericType extends Number = Pitch>() => Scal
         scalars: range(
             ONE,
             ENOUGH_HARMONIC_SERIES_STEPS_TO_LEAVE_HUMAN_HEARING_RANGE_WHEN_STARTING_FROM_PITCH_STANDARD,
-        ).map((integer: Integer) => as.Scalar<NumericType>(integer)),
+        )
+            .map((integer: Integer) => as.Scalar<NumericType>(integer)),
     })
 
 const computeSubharmonicSeriesScale: <NumericType extends Number = Pitch>() => Scale<NumericType> =
@@ -33,7 +34,8 @@ const computeSubharmonicSeriesScale: <NumericType extends Number = Pitch>() => S
         scalars: range(
             ONE,
             ENOUGH_HARMONIC_SERIES_STEPS_TO_LEAVE_HUMAN_HEARING_RANGE_WHEN_STARTING_FROM_PITCH_STANDARD,
-        ).map((integer: Integer) => as.Scalar<NumericType>(reciprocal(integer))),
+        )
+            .map((integer: Integer) => as.Scalar<NumericType>(reciprocal(integer))),
     })
 
 const computeFlatDurationsScale: () => Scale<Duration> =

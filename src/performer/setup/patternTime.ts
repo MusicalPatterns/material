@@ -1,4 +1,4 @@
-import { as, difference, Duration, Ms,  ofNotAs, Point, sum, use } from '@musical-patterns/utilities'
+import { as, difference, Duration, Ms, ofNotAs, Point, sum, use } from '@musical-patterns/utilities'
 import { NON_SEGNO_TIME } from '../performance'
 import { ComputePatternTimeParameters } from './types'
 

@@ -8,7 +8,6 @@ import {
     Hz,
     Logarithm,
     negative,
-
     ONE_HALF,
     Ordinal,
     Scalar,

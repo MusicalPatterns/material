@@ -8,7 +8,6 @@ import {
     Frequency,
     Hz,
     Logarithm,
-
     ofNotAs,
     Ordinal,
     quotient,

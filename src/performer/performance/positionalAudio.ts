@@ -1,4 +1,4 @@
-import { as, Coordinate,  Position, use, X_AXIS, Y_AXIS, Z_AXIS } from '@musical-patterns/utilities'
+import { as, Coordinate, Position, use, X_AXIS, Y_AXIS, Z_AXIS } from '@musical-patterns/utilities'
 import { Object3D, PositionalAudio } from 'three'
 import { Vrb } from 'vrb'
 import { SourceNode } from './source'

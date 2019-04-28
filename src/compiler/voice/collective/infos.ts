@@ -6,7 +6,6 @@ import {
     max,
     Ms,
     NO_DURATION,
-
     Point,
     round,
     sum,

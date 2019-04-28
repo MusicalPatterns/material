@@ -5,7 +5,6 @@ import {
     Cardinal,
     Logarithm,
     negative,
-
     reciprocal,
     SQUARE_ROOT_OF_TWO,
     Translation,

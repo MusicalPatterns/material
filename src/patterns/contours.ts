@@ -1,6 +1,6 @@
 // tslint:disable no-magic-numbers
 
-import { as, ContourElement, ContourPiece,  Scalar, sum } from '@musical-patterns/utilities'
+import { as, ContourElement, ContourPiece, sum } from '@musical-patterns/utilities'
 import { STANDARD_PITCH_INDEX_INDICATING_REST } from './constants'
 import { PitchDuration } from './types'
 

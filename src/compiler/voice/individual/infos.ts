@@ -1,4 +1,4 @@
-import { as, Duration, findIndex, Ms,  Ordinal, Point, sum } from '@musical-patterns/utilities'
+import { as, Duration, findIndex, Ms, Ordinal, Point, sum } from '@musical-patterns/utilities'
 import { computeIndividualRepetendDuration } from './repetendDuration'
 import { computeIndividualSegnoTime } from './segnoTime'
 import { IndividualVoiceInfo, SectionInfo } from './types'
