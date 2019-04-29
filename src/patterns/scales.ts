@@ -3,9 +3,8 @@ import {
     as,
     Duration,
     Gain,
-    Hz,
     Integer,
-    Ms,
+    musicalAs,
     ONE,
     Pitch,
     range,
@@ -55,7 +54,7 @@ const materializeStandardScales:
         // tslint:disable-next-line no-any
     ): [ Scale<Gain>, Scale<Duration>, Scale<Pitch> ] & Array<Scale<any>> => {
         const gainScale: Scale<Gain> = computeNonScale()
-        const basisDuration: Duration = specs[ StandardSpec.BASIS_DURATION ] || as.Delta<Ms>(1)
+        const basisDuration: Duration = specs[ StandardSpec.BASIS_DURATION ] || musicalAs.Duration(1)
         const basisDurationTranslation: Translation<Duration> =
             specs[ StandardSpec.BASIS_DURATION_TRANSLATION ] || as.Translation<Duration>(0)
         const durationsScale: Scale<Duration> = {
@@ -63,7 +62,7 @@ const materializeStandardScales:
             scalars: durationScalars,
             translation: basisDurationTranslation,
         }
-        const basisFrequency: Pitch = specs[ StandardSpec.BASIS_FREQUENCY ] || as.Point<Hz>(1)
+        const basisFrequency: Pitch = specs[ StandardSpec.BASIS_FREQUENCY ] || musicalAs.Pitch(1)
         const basisFrequencyTranslation: Translation<Pitch> =
             specs[ StandardSpec.BASIS_FREQUENCY_TRANSLATION ] || as.Translation<Pitch>(0)
         const pitchesScale: Scale<Pitch> = {

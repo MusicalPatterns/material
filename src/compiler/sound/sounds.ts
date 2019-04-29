@@ -6,7 +6,7 @@ import {
     Gain,
     INITIAL,
     Meters,
-    MULTIPLICATIVE_IDENTITY,
+    MULTIPLICATIVE_IDENTITY, musicalAs,
     Pitch,
     Position,
     THREE_DIMENSIONAL,
@@ -37,7 +37,7 @@ const compilePosition: (notePosition?: PositionFeature, options?: CompileSoundsO
             :
             []
         while (position.length < as.number(THREE_DIMENSIONAL)) {
-            position.push(as.Point<Meters>(0))
+            position.push(musicalAs.Position(0))
         }
 
         return position

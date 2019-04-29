@@ -1,4 +1,4 @@
-import { as, Duration, Hz, Meters, Ms } from '@musical-patterns/utilities'
+import { as, Duration, Hz, Meters, Ms, musicalAs } from '@musical-patterns/utilities'
 import {
     computeIndividualSoundsAndSectionInfos,
     Note,
@@ -27,29 +27,29 @@ describe('compute individual sounds and section infos', () => {
         const actualSoundsAndSectionInfos: SoundsAndSectionInfos = computeIndividualSoundsAndSectionInfos(sections, { scales })
 
         const expectedSound: Sound = {
-            duration: as.Delta<Ms>(3),
-            frequency: as.Point<Hz>(1),
+            duration: musicalAs.Duration(3),
+            frequency: musicalAs.Pitch(1),
             gain: as.Gain(1),
-            position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
-            sustain: as.Delta<Ms>(2.9),
+            position: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+            sustain: musicalAs.Duration(2.9),
         }
         const otherExpectedSound: Sound = {
-            duration: as.Delta<Ms>(9),
-            frequency: as.Point<Hz>(1),
+            duration: musicalAs.Duration(9),
+            frequency: musicalAs.Pitch(1),
             gain: as.Gain(1),
-            position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
-            sustain: as.Delta<Ms>(8.9),
+            position: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+            sustain: musicalAs.Duration(8.9),
         }
         expect(actualSoundsAndSectionInfos)
             .toEqual({
                 sectionInfos: [
                     {
                         doesRepeatForever: false,
-                        totalDuration: as.Delta<Ms>(12),
+                        totalDuration: musicalAs.Duration(12),
                     },
                     {
                         doesRepeatForever: true,
-                        totalDuration: as.Delta<Ms>(9),
+                        totalDuration: musicalAs.Duration(9),
                     },
                 ],
                 sounds: [

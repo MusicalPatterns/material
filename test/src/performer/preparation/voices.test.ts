@@ -1,4 +1,4 @@
-import { as, Hz, INITIAL, Meters, Ms, NO_DURATION, Point } from '@musical-patterns/utilities'
+import { as, INITIAL, Ms, musicalAs, NO_DURATION, Point } from '@musical-patterns/utilities'
 import { OscillatorName, PreparedVoice, prepareVoices, Sound, SourceType, Voice } from '../../../../src/indexForTest'
 
 describe('prepare voices', () => {
@@ -28,18 +28,18 @@ describe('prepare voices', () => {
                     segnoIndex: INITIAL,
                     sounds: [
                         {
-                            duration: as.Delta<Ms>(5),
-                            frequency: as.Point<Hz>(1),
+                            duration: musicalAs.Duration(5),
+                            frequency: musicalAs.Pitch(1),
                             gain: as.Gain(1),
-                            position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
-                            sustain: as.Delta<Ms>(4),
+                            position: [ 1 ].map((dimension: number) => musicalAs.Position(dimension)),
+                            sustain: musicalAs.Duration(4),
                         },
                         {
-                            duration: as.Delta<Ms>(3),
-                            frequency: as.Point<Hz>(1),
+                            duration: musicalAs.Duration(3),
+                            frequency: musicalAs.Pitch(1),
                             gain: as.Gain(1),
-                            position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
-                            sustain: as.Delta<Ms>(1),
+                            position: [ 1 ].map((dimension: number) => musicalAs.Position(dimension)),
+                            sustain: musicalAs.Duration(1),
                         },
                     ],
                     sourceRequest: {
@@ -70,18 +70,18 @@ describe('prepare voices', () => {
                     segnoIndex: INITIAL,
                     sounds: [
                         {
-                            duration: as.Delta<Ms>(5),
-                            frequency: as.Point<Hz>(1),
+                            duration: musicalAs.Duration(5),
+                            frequency: musicalAs.Pitch(1),
                             gain: as.Gain(1),
-                            position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
-                            sustain: as.Delta<Ms>(4),
+                            position: [ 1 ].map((dimension: number) => musicalAs.Position(dimension)),
+                            sustain: musicalAs.Duration(4),
                         },
                         {
-                            duration: as.Delta<Ms>(3),
-                            frequency: as.Point<Hz>(1),
+                            duration: musicalAs.Duration(3),
+                            frequency: musicalAs.Pitch(1),
                             gain: as.Gain(1),
-                            position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
-                            sustain: as.Delta<Ms>(1),
+                            position: [ 1 ].map((dimension: number) => musicalAs.Position(dimension)),
+                            sustain: musicalAs.Duration(1),
                         },
                     ],
                     sourceRequest: {
@@ -112,25 +112,25 @@ describe('prepare voices', () => {
                     segnoIndex: as.Ordinal<Sound[]>(1),
                     sounds: [
                         {
-                            duration: as.Delta<Ms>(5),
-                            frequency: as.Point<Hz>(1),
+                            duration: musicalAs.Duration(5),
+                            frequency: musicalAs.Pitch(1),
                             gain: as.Gain(1),
-                            position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
-                            sustain: as.Delta<Ms>(4),
+                            position: [ 1 ].map((dimension: number) => musicalAs.Position(dimension)),
+                            sustain: musicalAs.Duration(4),
                         },
                         {
-                            duration: as.Delta<Ms>(1),
-                            frequency: as.Point<Hz>(1),
+                            duration: musicalAs.Duration(1),
+                            frequency: musicalAs.Pitch(1),
                             gain: as.Gain(1),
-                            position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
-                            sustain: as.Delta<Ms>(1),
+                            position: [ 1 ].map((dimension: number) => musicalAs.Position(dimension)),
+                            sustain: musicalAs.Duration(1),
                         },
                         {
-                            duration: as.Delta<Ms>(3),
-                            frequency: as.Point<Hz>(1),
+                            duration: musicalAs.Duration(3),
+                            frequency: musicalAs.Pitch(1),
                             gain: as.Gain(1),
-                            position: [ 1 ].map((dimension: number) => as.Point<Meters>(dimension)),
-                            sustain: as.Delta<Ms>(1),
+                            position: [ 1 ].map((dimension: number) => musicalAs.Position(dimension)),
+                            sustain: musicalAs.Duration(1),
                         },
                     ],
                     sourceRequest: {

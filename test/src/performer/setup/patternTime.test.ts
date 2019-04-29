@@ -1,10 +1,10 @@
-import { as, BEGINNING, Duration, Ms, Point } from '@musical-patterns/utilities'
+import { as, BEGINNING, Duration, Ms, musicalAs, Point } from '@musical-patterns/utilities'
 import { computePatternTime, NON_SEGNO_TIME } from '../../../../src/indexForTest'
 
 describe('pattern time', () => {
     it('keeps repeating from the segno time', () => {
         const segnoTime: Point<Ms> = as.Point<Ms>(5)
-        const totalDuration: Duration = as.Delta<Ms>(10)
+        const totalDuration: Duration = musicalAs.Duration(10)
         expect(computePatternTime({
             segnoTime,
             time: BEGINNING,
@@ -50,7 +50,7 @@ describe('pattern time', () => {
 
     it('when segno time is -1 (has no repetend), time sticks at the end', () => {
         const segnoTime: Point<Ms> = NON_SEGNO_TIME
-        const totalDuration: Duration = as.Delta<Ms>(10)
+        const totalDuration: Duration = musicalAs.Duration(10)
         expect(computePatternTime({
             segnoTime,
             time: BEGINNING,

@@ -1,4 +1,4 @@
-import { as, difference, Duration, isUndefined, Maybe, Ms, Point } from '@musical-patterns/utilities'
+import { as, difference, Duration, isUndefined, Maybe, Ms, musicalAs, Point } from '@musical-patterns/utilities'
 import { Sound } from '../../../performer'
 import { Scale } from '../../../types'
 import { SectionInfo } from '../individual'
@@ -23,7 +23,7 @@ const fillGap: (parameters: {
         }
 
         const gapToBeFilled: Duration = difference(
-            as.Delta<Ms>(as.number(collectiveEndTime)),
+            musicalAs.Duration(as.number(collectiveEndTime)),
             computeSoundsDuration(sounds),
         )
 

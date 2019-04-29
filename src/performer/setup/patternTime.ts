@@ -1,4 +1,4 @@
-import { as, difference, Duration, Ms, ofNotAs, Point, sum, use } from '@musical-patterns/utilities'
+import { as, difference, Duration, Ms, musicalAs, ofNotAs, Point, sum, use } from '@musical-patterns/utilities'
 import { NON_SEGNO_TIME } from '../performance'
 import { ComputePatternTimeParameters } from './types'
 
@@ -20,7 +20,7 @@ const computePatternTime: (parameters: {
 
         const introDuration: Duration = difference(totalDuration, repetendDuration)
         const timeWithinRepetend: Duration = use.Modulus(
-            difference(as.Delta<Ms>(as.number(time)), introDuration),
+            difference(musicalAs.Duration(as.number(time)), introDuration),
             as.Modulus(ofNotAs(repetendDuration)),
         )
 

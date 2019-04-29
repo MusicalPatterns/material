@@ -3,8 +3,8 @@ import {
     Cents,
     centsTranslationToPitchScalar,
     Frequency,
-    Hz,
     insteadOf,
+    musicalAs,
     ofNotAs,
     Pitch,
     reciprocal,
@@ -17,7 +17,7 @@ import { SampleData } from './types'
 const computePlaybackRate: (sampleData: SampleData, frequency: Pitch) => Pitch =
     (sampleData: SampleData, frequency: Pitch): Pitch => {
         if (sampleData.unpitched) {
-            return as.Point<Hz>(1)
+            return musicalAs.Pitch(1)
         }
 
         const pitch: Pitch = use.Scalar(

@@ -1,15 +1,4 @@
-import {
-    as,
-    Duration,
-    Hz,
-    INITIAL,
-    Meters,
-    Ms,
-    NO_DURATION,
-    Ordinal,
-    Point,
-    repeat,
-} from '@musical-patterns/utilities'
+import { as, Duration, INITIAL, Ms, musicalAs, NO_DURATION, Ordinal, Point, repeat } from '@musical-patterns/utilities'
 import {
     applyCollectiveInfos,
     Entity,
@@ -26,11 +15,11 @@ describe('apply collective infos', () => {
         const originalSounds: Sound[] = repeat(
             [
                 {
-                    duration: as.Delta<Ms>(20),
-                    frequency: as.Point<Hz>(1),
+                    duration: musicalAs.Duration(20),
+                    frequency: musicalAs.Pitch(1),
                     gain: as.Gain(1),
-                    position: [ 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
-                    sustain: as.Delta<Ms>(9),
+                    position: [ 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+                    sustain: musicalAs.Duration(9),
                 },
             ],
             as.Cardinal<Sound[]>(5),
@@ -64,11 +53,11 @@ describe('apply collective infos', () => {
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: as.Delta<Ms>(99),
+                totalDuration: musicalAs.Duration(99),
             },
             {
                 doesRepeatForever: true,
-                totalDuration: as.Delta<Ms>(11),
+                totalDuration: musicalAs.Duration(11),
             },
         ]
 
@@ -98,25 +87,25 @@ describe('apply collective infos', () => {
                 segnoIndex: as.Ordinal<Sound[]>(3),
                 sounds: originalSounds.concat([
                     {
-                        duration: as.Delta<Ms>(11),
-                        frequency: as.Point<Hz>(1),
+                        duration: musicalAs.Duration(11),
+                        frequency: musicalAs.Pitch(1),
                         gain: as.Gain(1),
-                        position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
-                        sustain: as.Delta<Ms>(10.9),
+                        position: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+                        sustain: musicalAs.Duration(10.9),
                     },
                     {
-                        duration: as.Delta<Ms>(11),
-                        frequency: as.Point<Hz>(1),
+                        duration: musicalAs.Duration(11),
+                        frequency: musicalAs.Pitch(1),
                         gain: as.Gain(1),
-                        position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
-                        sustain: as.Delta<Ms>(10.9),
+                        position: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+                        sustain: musicalAs.Duration(10.9),
                     },
                     {
-                        duration: as.Delta<Ms>(11),
-                        frequency: as.Point<Hz>(1),
+                        duration: musicalAs.Duration(11),
+                        frequency: musicalAs.Pitch(1),
                         gain: as.Gain(1),
-                        position: [ 0, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
-                        sustain: as.Delta<Ms>(10.9),
+                        position: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+                        sustain: musicalAs.Duration(10.9),
                     },
                 ]),
                 sourceRequest: {

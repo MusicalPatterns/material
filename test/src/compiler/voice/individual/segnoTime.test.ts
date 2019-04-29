@@ -1,4 +1,4 @@
-import { as, Ms, NOT_FOUND, Ordinal, Point } from '@musical-patterns/utilities'
+import { as, Ms, musicalAs, NOT_FOUND, Ordinal, Point } from '@musical-patterns/utilities'
 import { computeIndividualSegnoTime, SectionInfo } from '../../../../../src/indexForTest'
 
 describe('compute individual segno time', () => {
@@ -7,15 +7,15 @@ describe('compute individual segno time', () => {
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: as.Delta<Ms>(99),
+                totalDuration: musicalAs.Duration(99),
             },
             {
                 doesRepeatForever: false,
-                totalDuration: as.Delta<Ms>(33),
+                totalDuration: musicalAs.Duration(33),
             },
             {
                 doesRepeatForever: true,
-                totalDuration: as.Delta<Ms>(4236),
+                totalDuration: musicalAs.Duration(4236),
             },
         ]
 
@@ -33,11 +33,11 @@ describe('compute individual segno time', () => {
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
-                totalDuration: as.Delta<Ms>(99),
+                totalDuration: musicalAs.Duration(99),
             },
             {
                 doesRepeatForever: false,
-                totalDuration: as.Delta<Ms>(33),
+                totalDuration: musicalAs.Duration(33),
             },
         ]
 

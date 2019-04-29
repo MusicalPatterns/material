@@ -1,6 +1,6 @@
 // tslint:disable no-any
 
-import { as, Hz, Pitch, Scalar } from '@musical-patterns/utilities'
+import { as, musicalAs, Pitch, Scalar } from '@musical-patterns/utilities'
 import { compileSoundFeature, CompileSoundsOptions, Feature, Scale } from '../../../../src/indexForTest'
 
 describe('compile sound feature', () => {
@@ -178,13 +178,13 @@ describe('compile sound feature', () => {
             translation: as.Translation<Pitch>(0.1),
         }
         const scaleWithScalarAndTranslation: Scale<Pitch> = {
-            basis: as.Point<Hz>(7),
+            basis: musicalAs.Pitch(7),
             scalars: [ 2, 4, 6, 8 ].map((scalar: number) => as.Scalar<Pitch>(scalar)),
             translation: as.Translation<Pitch>(3),
         }
         const soundFeature: Pitch = compileSoundFeature(noteFeature, { scales: [ scaleWithScalarAndTranslation ] })
 
         expect(soundFeature)
-            .toBe(as.Point<Hz>(20.6))
+            .toBe(musicalAs.Pitch(20.6))
     })
 })

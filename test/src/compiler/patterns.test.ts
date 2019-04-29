@@ -4,7 +4,7 @@ import {
     Hz,
     insteadOf,
     Meters,
-    Ms,
+    Ms, musicalAs,
     NO_DURATION,
     ONE_TENTH,
     Scalar,
@@ -37,11 +37,11 @@ describe('compile pattern', () => {
             sustain: { scalar: testSpecs.testSpec },
         })
     const expectedSound: Sound = {
-        duration: as.Delta<Ms>(9),
-        frequency: as.Point<Hz>(9),
+        duration: musicalAs.Duration(9),
+        frequency: musicalAs.Pitch(9),
         gain: as.Gain(0.9),
-        position: [ 9, 0, 0 ].map((dimension: number) => as.Point<Meters>(dimension)),
-        sustain: as.Delta<Ms>(8.9),
+        position: [ 9, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+        sustain: musicalAs.Duration(8.9),
     }
 
     const material: Material = {
@@ -73,7 +73,7 @@ describe('compile pattern', () => {
         expect(actualCompiledPattern)
             .toEqual({
                 segnoTime: BEGINNING,
-                totalDuration: as.Delta<Ms>(9),
+                totalDuration: musicalAs.Duration(9),
                 voices: [
                     {
                         delay: NO_DURATION,
@@ -103,7 +103,7 @@ describe('compile pattern', () => {
         expect(actualCompiledPattern)
             .toEqual({
                 segnoTime: BEGINNING,
-                totalDuration: as.Delta<Ms>(9),
+                totalDuration: musicalAs.Duration(9),
                 voices: [
                     {
                         delay: NO_DURATION,
@@ -135,7 +135,7 @@ describe('compile pattern', () => {
         expect(actualCompiledPattern)
             .toEqual({
                 segnoTime: BEGINNING,
-                totalDuration: as.Delta<Ms>(9),
+                totalDuration: musicalAs.Duration(9),
                 voices: [
                     {
                         delay: NO_DURATION,
