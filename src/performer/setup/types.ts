@@ -1,10 +1,10 @@
 import { Duration, Ms, Point } from '@musical-patterns/utilities'
 
-type OnUpdate = (timePosition: Point<Ms>) => void
+type OnUpdate = (time: Point<Ms>) => void
 
 interface ComputePatternTimeParameters {
     segnoTime: Point<Ms>,
-    timePosition: Point<Ms>,
+    time: Point<Ms>,
     totalDuration: Duration,
 }
 

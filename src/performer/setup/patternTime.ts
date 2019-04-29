@@ -4,14 +4,14 @@ import { ComputePatternTimeParameters } from './types'
 
 const computePatternTime: (parameters: {
     segnoTime: Point<Ms>,
-    timePosition: Point<Ms>,
+    time: Point<Ms>,
     totalDuration: Duration,
 }) => Point<Ms> =
-    ({ timePosition, totalDuration, segnoTime }: ComputePatternTimeParameters): Point<Ms> => {
+    ({ time, totalDuration, segnoTime }: ComputePatternTimeParameters): Point<Ms> => {
         const repetendDuration: Duration = difference(totalDuration, as.Translation(ofNotAs(segnoTime)))
 
-        if (as.number(timePosition) < as.number(totalDuration)) {
-            return timePosition
+        if (as.number(time) < as.number(totalDuration)) {
+            return time
         }
 
         if (segnoTime === NON_SEGNO_TIME) {
@@ -20,7 +20,7 @@ const computePatternTime: (parameters: {
 
         const introDuration: Duration = difference(totalDuration, repetendDuration)
         const timeWithinRepetend: Duration = use.Modulus(
-            difference(as.Delta<Ms>(as.number(timePosition)), introDuration),
+            difference(as.Delta<Ms>(as.number(time)), introDuration),
             as.Modulus(ofNotAs(repetendDuration)),
         )
 

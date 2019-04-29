@@ -1,15 +1,15 @@
 import { BEGINNING, isUndefined, Ms, Point } from '@musical-patterns/utilities'
 import { StateKey, store } from '../state'
 import { PreparedVoice, Sound, Voice } from '../types'
-import { computeNextSoundAfterTimePosition } from './nextSoundAfterTimePosition'
+import { computeNextSoundAfterTime } from './nextSoundAfterTime'
 import { applySoundAdjustmentsForPerformer } from './sounds'
 import { getSource } from './sources'
 
-const prepareVoices: (voices: Voice[], timePosition?: Point<Ms>) => Promise<PreparedVoice[]> =
-    async (voices: Voice[], timePosition?: Point<Ms>): Promise<PreparedVoice[]> => {
-        let timePositionToStartAt: Point<Ms> = timePosition || BEGINNING
-        if (isUndefined(timePosition)) {
-            timePositionToStartAt = store.getState()
+const prepareVoices: (voices: Voice[], time?: Point<Ms>) => Promise<PreparedVoice[]> =
+    async (voices: Voice[], time?: Point<Ms>): Promise<PreparedVoice[]> => {
+        let timeToStartAt: Point<Ms> = time || BEGINNING
+        if (isUndefined(time)) {
+            timeToStartAt = store.getState()
                 .get(StateKey.TIME_POSITION)
         }
 
@@ -17,10 +17,10 @@ const prepareVoices: (voices: Voice[], timePosition?: Point<Ms>) => Promise<Prep
             const { delay, sounds, sourceRequest, segnoIndex } = voice
             const adjustedSounds: Sound[] = applySoundAdjustmentsForPerformer(sounds, sourceRequest)
 
-            const { soundIndex, nextStart } = computeNextSoundAfterTimePosition({
+            const { soundIndex, nextStart } = computeNextSoundAfterTime({
                 segnoIndex,
                 sounds: adjustedSounds,
-                timePosition: timePositionToStartAt,
+                time: timeToStartAt,
             })
 
             return {

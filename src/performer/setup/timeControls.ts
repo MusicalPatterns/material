@@ -5,19 +5,19 @@ import { OnUpdate } from './types'
 
 const setupTimeControls: (onUpdate: OnUpdate) => void =
     (onUpdate: OnUpdate): void => {
-        let previousTimePosition: Point<Ms> = BEGINNING
+        let previousTime: Point<Ms> = BEGINNING
         store.subscribe((): void => {
             const state: ImmutableState = store.getState()
-            const timePosition: Point<Ms> = state
+            const time: Point<Ms> = state
                 .get(StateKey.TIME_POSITION)
             const totalDuration: Duration = state
                 .get(StateKey.TOTAL_DURATION)
             const segnoTime: Point<Ms> = state
                 .get(StateKey.SEGNO_TIME)
 
-            if (timePosition !== previousTimePosition) {
-                onUpdate(computePatternTime({ timePosition, totalDuration, segnoTime }))
-                previousTimePosition = timePosition
+            if (time !== previousTime) {
+                onUpdate(computePatternTime({ time, totalDuration, segnoTime }))
+                previousTime = time
             }
         })
     }

@@ -7,42 +7,42 @@ describe('pattern time', () => {
         const totalDuration: Duration = as.Delta<Ms>(10)
         expect(computePatternTime({
             segnoTime,
-            timePosition: BEGINNING,
+            time: BEGINNING,
             totalDuration,
         }))
             .toBe(BEGINNING)
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: as.Point<Ms>(5),
+            time: as.Point<Ms>(5),
             totalDuration,
         }))
             .toBe(as.Point<Ms>(5))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: as.Point<Ms>(9),
+            time: as.Point<Ms>(9),
             totalDuration,
         }))
             .toBe(as.Point<Ms>(9))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: as.Point<Ms>(10),
+            time: as.Point<Ms>(10),
             totalDuration,
         }))
             .toBe(as.Point<Ms>(5))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: as.Point<Ms>(14),
+            time: as.Point<Ms>(14),
             totalDuration,
         }))
             .toBe(as.Point<Ms>(9))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: as.Point<Ms>(20),
+            time: as.Point<Ms>(20),
             totalDuration,
         }))
             .toBe(as.Point<Ms>(5))
@@ -53,42 +53,42 @@ describe('pattern time', () => {
         const totalDuration: Duration = as.Delta<Ms>(10)
         expect(computePatternTime({
             segnoTime,
-            timePosition: BEGINNING,
+            time: BEGINNING,
             totalDuration,
         }))
             .toBe(BEGINNING)
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: as.Point<Ms>(5),
+            time: as.Point<Ms>(5),
             totalDuration,
         }))
             .toBe(as.Point<Ms>(5))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: as.Point<Ms>(9),
+            time: as.Point<Ms>(9),
             totalDuration,
         }))
             .toBe(as.Point<Ms>(9))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: as.Point<Ms>(10),
+            time: as.Point<Ms>(10),
             totalDuration,
         }))
             .toBe(as.Point<Ms>(10))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: as.Point<Ms>(14),
+            time: as.Point<Ms>(14),
             totalDuration,
         }))
             .toBe(as.Point<Ms>(10))
 
         expect(computePatternTime({
             segnoTime,
-            timePosition: as.Point<Ms>(20),
+            time: as.Point<Ms>(20),
             totalDuration,
         }))
             .toBe(as.Point<Ms>(10))

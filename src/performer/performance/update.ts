@@ -34,11 +34,11 @@ const startPreparedVoiceSound: (preparedVoice: PreparedVoice, sound: Sound) => v
         }
     }
 
-const update: (preparedVoice: PreparedVoice, timePosition: Point<Ms>) => void =
-    (preparedVoice: PreparedVoice, timePosition: Point<Ms>): void => {
+const update: (preparedVoice: PreparedVoice, time: Point<Ms>) => void =
+    (preparedVoice: PreparedVoice, time: Point<Ms>): void => {
         const { delay, sounds, soundIndex, nextStart, nextStop, source } = preparedVoice
 
-        if (timePosition > use.Translation(nextStop, delay)) {
+        if (time > use.Translation(nextStop, delay)) {
             source.stopSound()
         }
 
@@ -51,7 +51,7 @@ const update: (preparedVoice: PreparedVoice, timePosition: Point<Ms>) => void =
         }
         const sound: Sound = use.Ordinal(sounds, soundIndex)
 
-        if (timePosition > use.Translation(nextStart, delay)) {
+        if (time > use.Translation(nextStart, delay)) {
             startPreparedVoiceSound(preparedVoice, sound)
         }
     }

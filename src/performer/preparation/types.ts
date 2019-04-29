@@ -21,10 +21,10 @@ interface NextSound {
     soundIndex: Ordinal<Sound[]>,
 }
 
-interface ComputeNextSoundAfterTimePositionParameters {
+interface ComputeNextSoundAfterTimeParameters {
     segnoIndex: Ordinal<Sound[]>,
     sounds: Sound[],
-    timePosition: Point<Ms>,
+    time: Point<Ms>,
 }
 
 export {
@@ -32,5 +32,5 @@ export {
     NextSound,
     SampleSourceRequest,
     OscillatorSourceRequest,
-    ComputeNextSoundAfterTimePositionParameters,
+    ComputeNextSoundAfterTimeParameters,
 }

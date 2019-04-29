@@ -1,36 +1,11 @@
-import {
-    BEGINNING,
-    Duration,
-    INCREMENT,
-    indexOfFinalElement,
-    INITIAL,
-    isEmpty,
-    isUndefined,
-    Ms,
-    Ordinal,
-    Point,
-    use,
-} from '@musical-patterns/utilities'
+import { isEmpty, isUndefined, Ms, Ordinal, Point } from '@musical-patterns/utilities'
+import { soundIterator } from '../../../helpers'
 import { NON_SEGNO_INDEX, NON_SEGNO_TIME, Sound, Voice } from '../../../performer'
 import { ComputeSegnoIndexParameters } from './types'
 
-const computeFirstSoundIndexAfterTime: (sounds: Sound[], timePosition: Point<Ms>) => Ordinal<Sound[]> =
-    (sounds: Sound[], timePosition: Point<Ms>): Ordinal<Sound[]> => {
-        let soundIndex: Ordinal<Sound[]> = INITIAL
-        let nextStart: Point<Ms> = BEGINNING
-        while (nextStart < timePosition) {
-            const nextSound: Sound = use.Ordinal(sounds, soundIndex)
-            const duration: Duration = nextSound.duration
-            nextStart = use.Translation(nextStart, duration)
-            soundIndex = use.Cardinal(soundIndex, INCREMENT)
-
-            if (soundIndex > indexOfFinalElement(sounds)) {
-                break
-            }
-        }
-
-        return soundIndex
-    }
+const computeFirstSoundIndexAfterTime: (sounds: Sound[], time: Point<Ms>) => Ordinal<Sound[]> =
+    (sounds: Sound[], time: Point<Ms>): Ordinal<Sound[]> =>
+        soundIterator({ sounds, upToTime: time }).soundIndex
 
 const computeSegnoIndex: (parameters: {
     collectiveSegnoTime: Point<Ms>
