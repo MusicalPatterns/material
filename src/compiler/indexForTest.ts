@@ -5,7 +5,7 @@ export { compilePattern } from './patterns'
 export {
     compileSound,
     compileSoundFeature,
-    NoteFeature,
+    Feature,
     Note,
     CompileSoundsOptions,
 } from './sound/indexForTest'

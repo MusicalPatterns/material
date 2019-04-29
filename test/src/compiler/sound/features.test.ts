@@ -1,7 +1,7 @@
 // tslint:disable no-any
 
 import { as, Hz, Pitch, Scalar } from '@musical-patterns/utilities'
-import { compileSoundFeature, CompileSoundsOptions, NoteFeature, Scale } from '../../../../src/indexForTest'
+import { compileSoundFeature, CompileSoundsOptions, Feature, Scale } from '../../../../src/indexForTest'
 
 describe('compile sound feature', () => {
     let scales: Scale[]
@@ -19,7 +19,7 @@ describe('compile sound feature', () => {
     })
 
     it('defaults scale index to zero, index to zero, translation to zero, and scalar to zero', () => {
-        const noteFeature: NoteFeature = {}
+        const noteFeature: Feature = {}
         const soundFeature: number = compileSoundFeature(noteFeature, options)
 
         expect(soundFeature)
@@ -27,7 +27,7 @@ describe('compile sound feature', () => {
     })
 
     it('uses index to choose later notes in the scale', () => {
-        const noteFeature: NoteFeature = {
+        const noteFeature: Feature = {
             index: as.Ordinal<Scalar[]>(2),
         }
         const soundFeature: number = compileSoundFeature(noteFeature, options)
@@ -37,7 +37,7 @@ describe('compile sound feature', () => {
     })
 
     it('uses scale index to switch scales', () => {
-        const noteFeature: NoteFeature = {
+        const noteFeature: Feature = {
             scaleIndex: as.Ordinal<Scale[]>(1),
         }
         const soundFeature: number = compileSoundFeature(noteFeature, options)
@@ -47,7 +47,7 @@ describe('compile sound feature', () => {
     })
 
     it('uses scalar to stretch arbitrarily', () => {
-        const noteFeature: NoteFeature = {
+        const noteFeature: Feature = {
             scalar: as.Scalar(1.25),
         }
         const soundFeature: number = compileSoundFeature(noteFeature, options)
@@ -57,7 +57,7 @@ describe('compile sound feature', () => {
     })
 
     it('uses translation to shift around arbitrarily', () => {
-        const noteFeature: NoteFeature = {
+        const noteFeature: Feature = {
             translation: as.Translation(0.1),
         }
         const soundFeature: number = compileSoundFeature(noteFeature, options)
@@ -67,7 +67,7 @@ describe('compile sound feature', () => {
     })
 
     it(`defaults to 1 if the scale's scalars are empty`, () => {
-        const noteFeature: NoteFeature = {}
+        const noteFeature: Feature = {}
         const soundFeature: number = compileSoundFeature(noteFeature, { scales: [ { scalars: [] } ] })
 
         expect(soundFeature)
@@ -79,7 +79,7 @@ describe('compile sound feature', () => {
             scalars: [ 2, 4, 6, 8 ].map(as.Scalar),
             translation: as.Translation(3),
         }
-        const noteFeature: NoteFeature = {}
+        const noteFeature: Feature = {}
         const soundFeature: number = compileSoundFeature(noteFeature, { scales: [ scaleWithTranslation ] })
 
         expect(soundFeature)
@@ -91,7 +91,7 @@ describe('compile sound feature', () => {
             basis: 7,
             scalars: [ 2, 4, 6, 8 ].map(as.Scalar),
         }
-        const noteFeature: NoteFeature = {}
+        const noteFeature: Feature = {}
         const soundFeature: number = compileSoundFeature(noteFeature, { scales: [ scaleWithScalar ] })
 
         expect(soundFeature)
@@ -99,7 +99,7 @@ describe('compile sound feature', () => {
     })
 
     it('applies scalar first, then translation', () => {
-        const noteFeature: NoteFeature = {
+        const noteFeature: Feature = {
             scalar: as.Scalar(1.25),
             translation: as.Translation(0.1),
         }
@@ -110,7 +110,7 @@ describe('compile sound feature', () => {
     })
 
     it('applies scalar from the scale first, then translation from the scale', () => {
-        const noteFeature: NoteFeature = {}
+        const noteFeature: Feature = {}
         const scaleWithScalarAndTranslation: Scale = {
             basis: 7,
             scalars: [ 2, 4, 6, 8 ].map(as.Scalar),
@@ -123,7 +123,7 @@ describe('compile sound feature', () => {
     })
 
     it('can apply translations and scalars from both scale and the note, scalars first', () => {
-        const noteFeature: NoteFeature = {
+        const noteFeature: Feature = {
             scalar: as.Scalar(1.25),
             translation: as.Translation(0.1),
         }
@@ -153,7 +153,7 @@ describe('compile sound feature', () => {
     })
 
     it('rounds, to avoid off by 0.000000000001 errors when comparing patterns compiled on different systems', () => {
-        const noteFeature: NoteFeature = {
+        const noteFeature: Feature = {
             translation: as.Translation(0.1239147293578729037982375),
         }
         const soundFeature: number = compileSoundFeature(noteFeature, options)
@@ -163,7 +163,7 @@ describe('compile sound feature', () => {
     })
 
     it('does not crash when given super tiny numbers', () => {
-        const noteFeature: NoteFeature = {
+        const noteFeature: Feature = {
             scalar: as.Scalar(1.000000001e-9),
         }
         const soundFeature: number = compileSoundFeature(noteFeature, options)
@@ -173,7 +173,7 @@ describe('compile sound feature', () => {
     })
 
     it('detects the type of the feature', () => {
-        const noteFeature: NoteFeature<Pitch> = {
+        const noteFeature: Feature<Pitch> = {
             scalar: as.Scalar<Pitch>(1.25),
             translation: as.Translation<Pitch>(0.1),
         }

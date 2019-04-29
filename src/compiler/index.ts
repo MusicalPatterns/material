@@ -1,7 +1,7 @@
 export { compilePattern } from './patterns'
 
 export {
-    NoteFeature,
+    Feature,
     Note,
     PositionFeature,
 } from './sound'

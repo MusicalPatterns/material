@@ -13,7 +13,7 @@ import {
 } from '@musical-patterns/utilities'
 import { Scale } from '../../types'
 import { COMPILER_PRECISION } from './constants'
-import { CompileSoundsOptions, ComputeScalePropertiesParameters, NoteFeature, ScaleProperties } from './types'
+import { CompileSoundsOptions, ComputeScalePropertiesParameters, Feature, ScaleProperties } from './types'
 
 const computeScaleProperties: <FeatureType extends Number = number>(scaleStuffParameters: {
     index: Ordinal<Array<Scalar<FeatureType>>>,
@@ -43,10 +43,10 @@ const computeScaleProperties: <FeatureType extends Number = number>(scaleStuffPa
     }
 
 const compileSoundFeature: <FeatureType extends Number = number>(
-    noteFeature: NoteFeature<FeatureType>, options?: { scales?: Array<Scale<FeatureType>> },
+    noteFeature: Feature<FeatureType>, options?: { scales?: Array<Scale<FeatureType>> },
 ) => FeatureType =
     <FeatureType extends Number = number>(
-        noteFeature: NoteFeature<FeatureType>, options?: CompileSoundsOptions<FeatureType>,
+        noteFeature: Feature<FeatureType>, options?: CompileSoundsOptions<FeatureType>,
     ): FeatureType => {
         const {
             index = INITIAL,

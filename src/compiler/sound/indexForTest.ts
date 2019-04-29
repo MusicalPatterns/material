@@ -4,7 +4,7 @@ export { compileSound } from './sounds'
 export { compileSoundFeature } from './features'
 
 export {
-    NoteFeature,
+    Feature,
     Note,
     CompileSoundsOptions,
 } from './types'

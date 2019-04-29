@@ -15,10 +15,10 @@ import {
 import { Sound } from '../../performer'
 import { DEFAULT_TRANSLATION_FOR_ALMOST_FULL_SUSTAIN } from './constants'
 import { compileSoundFeature } from './features'
-import { CompileSoundsOptions, Note, NoteFeature, PositionFeature } from './types'
+import { CompileSoundsOptions, Feature, Note, PositionFeature } from './types'
 
-const computeDefaultNoteFeature: <FeatureType extends Number = number>() => NoteFeature<FeatureType> =
-    <FeatureType extends Number = number>(): NoteFeature<FeatureType> => ({
+const computeDefaultFeature: <FeatureType extends Number = number>() => Feature<FeatureType> =
+    <FeatureType extends Number = number>(): Feature<FeatureType> => ({
         index: INITIAL,
         scalar: MULTIPLICATIVE_IDENTITY,
         scaleIndex: INITIAL,
@@ -30,7 +30,7 @@ const compilePosition: (notePosition?: PositionFeature, options?: CompileSoundsO
         const position: Coordinate<Position> = notePosition ?
             notePosition instanceof Array ?
                 notePosition.map(
-                    (positionElement: NoteFeature<Position>): Position =>
+                    (positionElement: Feature<Position>): Position =>
                         compileSoundFeature(positionElement, options as CompileSoundsOptions<Position>))
                 :
                 [ compileSoundFeature(notePosition, options as CompileSoundsOptions<Position>) ]
@@ -45,7 +45,7 @@ const compilePosition: (notePosition?: PositionFeature, options?: CompileSoundsO
 
 const compileSustain: (note: Note, duration: Duration, options?: CompileSoundsOptions) => Duration =
     (note: Note, duration: Duration, options?: CompileSoundsOptions): Duration => {
-        const noteSustain: NoteFeature<Duration> = note.sustain || note.duration || computeDefaultNoteFeature()
+        const noteSustain: Feature<Duration> = note.sustain || note.duration || computeDefaultFeature()
         const sustain: Duration = compileSoundFeature(noteSustain, options as CompileSoundsOptions<Duration>)
 
         return sustain < duration ?
@@ -56,9 +56,9 @@ const compileSustain: (note: Note, duration: Duration, options?: CompileSoundsOp
 const compileSound: (note: Note, options?: CompileSoundsOptions) => Sound =
     (note: Note, options?: CompileSoundsOptions): Sound => {
         const {
-            duration: noteDuration = computeDefaultNoteFeature<Duration>(),
-            gain: noteGain = computeDefaultNoteFeature<Gain>(),
-            pitch: notePitch = computeDefaultNoteFeature<Pitch>(),
+            duration: noteDuration = computeDefaultFeature<Duration>(),
+            gain: noteGain = computeDefaultFeature<Gain>(),
+            pitch: notePitch = computeDefaultFeature<Pitch>(),
         } = note
 
         const duration: Duration = compileSoundFeature(noteDuration, options as CompileSoundsOptions<Duration>)

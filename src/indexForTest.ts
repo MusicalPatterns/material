@@ -4,7 +4,7 @@ export {
     compilePattern,
     compileSound,
     compileSoundFeature,
-    NoteFeature,
+    Feature,
     Note,
     CompileSoundsOptions,
     compileSourceRequest,

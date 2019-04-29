@@ -3,7 +3,7 @@ export { compileSoundFeature } from './features'
 
 export {
     Note,
-    NoteFeature,
+    Feature,
     CompileSoundsOptions,
     PositionFeature,
 } from './types'

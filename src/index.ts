@@ -150,7 +150,7 @@ export {
     CompilePatternParameters,
     computeNotesTotalCompiledDuration,
     TimbreNameEnum,
-    NoteFeature,
+    Feature,
     Section,
     TimbreName,
     PositionFeature,
