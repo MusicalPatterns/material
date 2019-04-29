@@ -7,9 +7,9 @@ import {
     Exponent,
     Frequency,
     Hz,
-    Logarithm,
     ofNotAs,
     Ordinal,
+    pow,
     quotient,
     Scalar,
     SQUARED,
@@ -80,25 +80,25 @@ const computeNumeratorOfExponentOfNormalDistributionWithTechniqueScalarScalingBy
     }
 
 const computeExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount:
-    (parameters: { circledPitchIndex: Ordinal<Hz[]>, pitchClassCount: Cardinal }) => Exponent<Logarithm> =
+    (parameters: { circledPitchIndex: Ordinal<Hz[]>, pitchClassCount: Cardinal }) => Exponent =
     (
         parameters: ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
-    ): Exponent<Logarithm> =>
-        as.Exponent<Logarithm>(
+    ): Exponent =>
+        as.Exponent(
             computeNumeratorOfExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount(parameters) /
             as.number(use.Multiple(
-                use.Power(KINDA_GUESSING_AT_A_GOOD_SIGMA, SQUARED),
+                pow(KINDA_GUESSING_AT_A_GOOD_SIGMA, SQUARED),
                 DOUBLE,
             )),
         )
 
 const computeExponentOfNormalDistributionWithTechniqueScalarScalingByPeriodSize:
-    (parameters: { circledPitchScalar: Scalar<Frequency>, periodSize: PeriodSize }) => Exponent<Logarithm> =
-    (parameters: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByPeriodSizeParameters): Exponent<Logarithm> =>
-        as.Exponent<Logarithm>(
+    (parameters: { circledPitchScalar: Scalar<Frequency>, periodSize: PeriodSize }) => Exponent =
+    (parameters: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByPeriodSizeParameters): Exponent =>
+        as.Exponent(
             computeNumeratorOfExponentOfNormalDistributionWithTechniqueScalarScalingByPeriodSize(parameters) /
             as.number(use.Multiple(
-                use.Power(KINDA_GUESSING_AT_A_GOOD_SIGMA, SQUARED),
+                pow(KINDA_GUESSING_AT_A_GOOD_SIGMA, SQUARED),
                 DOUBLE,
             )),
         )

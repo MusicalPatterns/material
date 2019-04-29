@@ -9,7 +9,7 @@ import {
     Logarithm,
     negative,
     ONE_HALF,
-    Ordinal,
+    Ordinal, pow,
     Scalar,
     use,
 } from '@musical-patterns/utilities'
@@ -32,15 +32,14 @@ const applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount:
         originalGainScalar: Scalar<Gain>,
         parameters: ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
     ): Scalar<Gain> => {
-        const normalDistributionExponent: Exponent<Logarithm> =
+        const normalDistributionExponent: Exponent =
             computeExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount(parameters)
 
-        const pitchCircularBase: Logarithm<Scalar<Gain>> = use.Exponent(
+        const pitchCircularBase: Logarithm<Scalar<Gain>> = as.Logarithm<Scalar<Gain>>(pow(
             E,
             negative(use.Scalar(normalDistributionExponent, ONE_HALF)),
-        )
-        const pitchCircularScaling: Scalar<Scalar<Gain>> =
-            as.Scalar<Scalar<Gain>>(as.number(pitchCircularBase))
+        ))
+        const pitchCircularScaling: Scalar<Scalar<Gain>> = as.Scalar<Scalar<Gain>>(as.number(pitchCircularBase))
 
         return use.Scalar(originalGainScalar, pitchCircularScaling)
     }
@@ -54,15 +53,14 @@ const applyPitchCircularGainCurveWithTechniqueScalarScalingByPeriodSize:
         originalGainScalar: Scalar<Gain>,
         parameters: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByPeriodSizeParameters,
     ): Scalar<Gain> => {
-        const normalDistributionExponent: Exponent<Logarithm> =
+        const normalDistributionExponent: Exponent =
             computeExponentOfNormalDistributionWithTechniqueScalarScalingByPeriodSize(parameters)
 
-        const pitchCircularBase: Logarithm<Scalar<Gain>> = use.Exponent(
+        const pitchCircularBase: Logarithm<Scalar<Gain>> = as.Logarithm<Scalar<Gain>>(pow(
             E,
             negative(use.Scalar(normalDistributionExponent, ONE_HALF)),
-        )
-        const pitchCircularScaling: Scalar<Scalar<Gain>> =
-            as.Scalar<Scalar<Gain>>(as.number(pitchCircularBase))
+        ))
+        const pitchCircularScaling: Scalar<Scalar<Gain>> = as.Scalar<Scalar<Gain>>(as.number(pitchCircularBase))
 
         return as.Scalar<Gain>(as.number(use.Scalar(originalGainScalar, pitchCircularScaling)))
     }
