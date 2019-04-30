@@ -74,10 +74,10 @@ describe('pitch circulate, using the technique of index translation by pitch cla
         beforeEach(() => {
             const inputNotes: Note[] = [
                 {
-                    value: {
-                        index: as.Ordinal<Array<Scalar<Value>>>(3),
-                        scalar: as.Scalar<Value>(4),
-                        scaleIndex: as.Ordinal<Array<Scale<Value>>>(5),
+                    envelope: {
+                        index: as.Ordinal<Array<Scalar<Value>>>(6),
+                        scalar: as.Scalar<Value>(7),
+                        scaleIndex: as.Ordinal<Array<Scale<Value>>>(8),
                     },
                     intensity: {
                         index: as.Ordinal<Array<Scalar<Intensity>>>(9),
@@ -92,10 +92,10 @@ describe('pitch circulate, using the technique of index translation by pitch cla
                         scalar: as.Scalar<Position>(4),
                         scaleIndex: as.Ordinal<Array<Scale<Position>>>(6),
                     } ],
-                    envelope: {
-                        index: as.Ordinal<Array<Scalar<Value>>>(6),
-                        scalar: as.Scalar<Value>(7),
-                        scaleIndex: as.Ordinal<Array<Scale<Value>>>(8),
+                    value: {
+                        index: as.Ordinal<Array<Scalar<Value>>>(3),
+                        scalar: as.Scalar<Value>(4),
+                        scaleIndex: as.Ordinal<Array<Scale<Value>>>(5),
                     },
                 },
             ]

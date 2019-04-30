@@ -28,17 +28,17 @@ describe('compute individual sounds and section infos', () => {
 
         const expectedSound: Sound = {
             duration: musicalAs.Duration(3),
-            tone: musicalAs.Tone(1),
             gain: musicalAs.Gain(1),
             location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
             sustain: musicalAs.Duration(2.9),
+            tone: musicalAs.Tone(1),
         }
         const otherExpectedSound: Sound = {
             duration: musicalAs.Duration(9),
-            tone: musicalAs.Tone(1),
             gain: musicalAs.Gain(1),
             location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
             sustain: musicalAs.Duration(8.9),
+            tone: musicalAs.Tone(1),
         }
         expect(actualSoundsAndSectionInfos)
             .toEqual({

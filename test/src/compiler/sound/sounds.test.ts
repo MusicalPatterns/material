@@ -83,11 +83,11 @@ describe('compile sound', () => {
     describe('sustain', () => {
         it('caps sustain at slightly less than the duration', () => {
             const note: Note = {
-                value: {
-                    scalar: as.Scalar<Value>(3),
-                },
                 envelope: {
                     scalar: as.Scalar<Value>(8),
+                },
+                value: {
+                    scalar: as.Scalar<Value>(3),
                 },
             }
             const sound: Sound = compileSound(note)
@@ -115,11 +115,11 @@ describe('compile sound', () => {
 
         it('uses sustain if given and less than duration', () => {
             const note: Note = {
-                value: {
-                    scalar: as.Scalar<Value>(3),
-                },
                 envelope: {
                     scalar: as.Scalar<Value>(2),
+                },
+                value: {
+                    scalar: as.Scalar<Value>(3),
                 },
             }
 

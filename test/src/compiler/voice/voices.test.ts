@@ -26,48 +26,48 @@ describe('compile voices', () => {
     const scales: Scale[] = [ { scalars: [ as.Scalar(3) ] } ]
 
     const testNote: Note = {
-        value: { scalar: as.Scalar<Value>(3) },
+        envelope: { scalar: as.Scalar<Value>(3) },
         intensity: { scalar: as.Scalar<Intensity>(0.3) },
         pitch: { scalar: as.Scalar<Pitch>(3) },
         position: { scalar: as.Scalar<Position>(3) },
-        envelope: { scalar: as.Scalar<Value>(3) },
+        value: { scalar: as.Scalar<Value>(3) },
     }
     const expectedSound: Sound = {
         duration: musicalAs.Duration(9),
-        tone: musicalAs.Tone(9),
         gain: musicalAs.Gain(0.9),
         location: [ 9, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
         sustain: musicalAs.Duration(8.9),
+        tone: musicalAs.Tone(9),
     }
 
     const otherTestNote: Note = {
-        value: { scalar: as.Scalar<Value>(3) },
+        envelope: { scalar: as.Scalar<Value>(3) },
         intensity: { scalar: as.Scalar<Intensity>(0) },
         pitch: { scalar: as.Scalar<Pitch>(3) },
         position: { scalar: as.Scalar<Position>(3) },
-        envelope: { scalar: as.Scalar<Value>(3) },
+        value: { scalar: as.Scalar<Value>(3) },
     }
     const otherExpectedSound: Sound = {
         duration: musicalAs.Duration(9),
-        tone: musicalAs.Tone(9),
         gain: musicalAs.Gain(0),
         location: [ 9, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
         sustain: musicalAs.Duration(8.9),
+        tone: musicalAs.Tone(9),
     }
 
     const otherOtherTestNote: Note = {
-        value: { scalar: as.Scalar<Value>(3) },
+        envelope: { scalar: as.Scalar<Value>(3) },
         intensity: { scalar: as.Scalar<Intensity>(0.3) },
         pitch: { scalar: as.Scalar<Pitch>(0) },
         position: { scalar: as.Scalar<Position>(3) },
-        envelope: { scalar: as.Scalar<Value>(3) },
+        value: { scalar: as.Scalar<Value>(3) },
     }
     const otherOtherExpectedSound: Sound = {
         duration: musicalAs.Duration(9),
-        tone: musicalAs.Tone(0),
         gain: musicalAs.Gain(0.9),
         location: [ 9, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
         sustain: musicalAs.Duration(8.9),
+        tone: musicalAs.Tone(0),
     }
 
     describe('when all entities enumerate their repetitions i.e. the song ends instead of repeating forever', () => {

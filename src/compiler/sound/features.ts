@@ -61,20 +61,20 @@ const compileSoundFeature: <FeatureType extends Number = number>(
 
         soundFeature = use.Scalar(
             soundFeature,
-            insteadOf<Scalar, AbstractToPhysical<FeatureType>>(noteScalar)
+            insteadOf<Scalar, AbstractToPhysical<FeatureType>>(noteScalar),
         )
         soundFeature = use.Scalar(
             soundFeature,
-            insteadOf<Scalar, AbstractToPhysical<FeatureType>>(scaleScalar || MULTIPLICATIVE_IDENTITY)
+            insteadOf<Scalar, AbstractToPhysical<FeatureType>>(scaleScalar || MULTIPLICATIVE_IDENTITY),
         )
 
         soundFeature = use.Translation(
             soundFeature,
-            insteadOf<Translation, AbstractToPhysical<FeatureType>>(noteTranslation)
+            insteadOf<Translation, AbstractToPhysical<FeatureType>>(noteTranslation),
         )
         soundFeature = use.Translation(
             soundFeature,
-            insteadOf<Translation, AbstractToPhysical<FeatureType>>(scaleTranslation)
+            insteadOf<Translation, AbstractToPhysical<FeatureType>>(scaleTranslation),
         )
 
         return round(soundFeature, COMPILER_PRECISION)

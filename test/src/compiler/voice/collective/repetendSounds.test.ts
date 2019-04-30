@@ -31,10 +31,10 @@ describe('compute repetend sounds', () => {
             .toEqual([
                 {
                     duration: musicalAs.Duration(11),
-                    tone: musicalAs.Tone(1),
                     gain: musicalAs.Gain(1),
                     location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                     sustain: musicalAs.Duration(10.9),
+                    tone: musicalAs.Tone(1),
                 },
             ])
     })

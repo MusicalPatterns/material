@@ -18,10 +18,10 @@ describe('compute segno index', () => {
             [
                 {
                     duration: musicalAs.Duration(20),
-                    tone: musicalAs.Tone(1),
                     gain: musicalAs.Gain(1),
                     location: [ 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                     sustain: musicalAs.Duration(9),
+                    tone: musicalAs.Tone(1),
                 },
             ],
             as.Cardinal<Sound[]>(5),

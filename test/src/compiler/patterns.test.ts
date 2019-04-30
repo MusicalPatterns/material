@@ -19,18 +19,18 @@ describe('compile pattern', () => {
 
     const testNote: (testSpecs: TestSpecs) => Note =
         (testSpecs: TestSpecs): Note => ({
-            value: { scalar: testSpecs.testSpec },
+            envelope: { scalar: testSpecs.testSpec },
             intensity: { scalar: use.Scalar(testSpecs.testSpec, ONE_TENTH) },
             pitch: { scalar: testSpecs.testSpec },
             position: { scalar: testSpecs.testSpec },
-            envelope: { scalar: testSpecs.testSpec },
+            value: { scalar: testSpecs.testSpec },
         })
     const expectedSound: Sound = {
         duration: musicalAs.Duration(9),
-        tone: musicalAs.Tone(9),
         gain: musicalAs.Gain(0.9),
         location: [ 9, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
         sustain: musicalAs.Duration(8.9),
+        tone: musicalAs.Tone(9),
     }
 
     const material: Material = {

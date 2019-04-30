@@ -29,17 +29,17 @@ describe('prepare voices', () => {
                     sounds: [
                         {
                             duration: musicalAs.Duration(5),
-                            tone: musicalAs.Tone(1),
                             gain: musicalAs.Gain(1),
                             location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
                             sustain: musicalAs.Duration(4),
+                            tone: musicalAs.Tone(1),
                         },
                         {
                             duration: musicalAs.Duration(3),
-                            tone: musicalAs.Tone(1),
                             gain: musicalAs.Gain(1),
                             location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
                             sustain: musicalAs.Duration(1),
+                            tone: musicalAs.Tone(1),
                         },
                     ],
                     sourceRequest: {
@@ -71,17 +71,17 @@ describe('prepare voices', () => {
                     sounds: [
                         {
                             duration: musicalAs.Duration(5),
-                            tone: musicalAs.Tone(1),
                             gain: musicalAs.Gain(1),
                             location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
                             sustain: musicalAs.Duration(4),
+                            tone: musicalAs.Tone(1),
                         },
                         {
                             duration: musicalAs.Duration(3),
-                            tone: musicalAs.Tone(1),
                             gain: musicalAs.Gain(1),
                             location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
                             sustain: musicalAs.Duration(1),
+                            tone: musicalAs.Tone(1),
                         },
                     ],
                     sourceRequest: {
@@ -113,24 +113,24 @@ describe('prepare voices', () => {
                     sounds: [
                         {
                             duration: musicalAs.Duration(5),
-                            tone: musicalAs.Tone(1),
                             gain: musicalAs.Gain(1),
                             location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
                             sustain: musicalAs.Duration(4),
+                            tone: musicalAs.Tone(1),
                         },
                         {
                             duration: musicalAs.Duration(1),
-                            tone: musicalAs.Tone(1),
                             gain: musicalAs.Gain(1),
                             location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
                             sustain: musicalAs.Duration(1),
+                            tone: musicalAs.Tone(1),
                         },
                         {
                             duration: musicalAs.Duration(3),
-                            tone: musicalAs.Tone(1),
                             gain: musicalAs.Gain(1),
                             location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
                             sustain: musicalAs.Duration(1),
+                            tone: musicalAs.Tone(1),
                         },
                     ],
                     sourceRequest: {

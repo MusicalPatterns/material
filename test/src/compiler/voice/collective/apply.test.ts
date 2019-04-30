@@ -16,10 +16,10 @@ describe('apply collective infos', () => {
             [
                 {
                     duration: musicalAs.Duration(20),
-                    tone: musicalAs.Tone(1),
                     gain: musicalAs.Gain(1),
                     location: [ 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                     sustain: musicalAs.Duration(9),
+                    tone: musicalAs.Tone(1),
                 },
             ],
             as.Cardinal<Sound[]>(5),
@@ -88,24 +88,24 @@ describe('apply collective infos', () => {
                 sounds: originalSounds.concat([
                     {
                         duration: musicalAs.Duration(11),
-                        tone: musicalAs.Tone(1),
                         gain: musicalAs.Gain(1),
                         location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                         sustain: musicalAs.Duration(10.9),
+                        tone: musicalAs.Tone(1),
                     },
                     {
                         duration: musicalAs.Duration(11),
-                        tone: musicalAs.Tone(1),
                         gain: musicalAs.Gain(1),
                         location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                         sustain: musicalAs.Duration(10.9),
+                        tone: musicalAs.Tone(1),
                     },
                     {
                         duration: musicalAs.Duration(11),
-                        tone: musicalAs.Tone(1),
                         gain: musicalAs.Gain(1),
                         location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                         sustain: musicalAs.Duration(10.9),
+                        tone: musicalAs.Tone(1),
                     },
                 ]),
                 sourceRequest: {

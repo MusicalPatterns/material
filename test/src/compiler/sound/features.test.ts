@@ -139,14 +139,14 @@ describe('compile sound feature', () => {
     })
 
     it('handles empty scales', () => {
-        const soundFeature: Tone = compileSoundFeature({} as Feature<Pitch>, { scales: [] })
+        const soundFeature: Tone = compileSoundFeature<Pitch>({}, { scales: [] })
 
         expect(soundFeature)
             .toBe(musicalAs.Tone(1))
     })
 
     it('handles missing scales', () => {
-        const soundFeature: Tone = compileSoundFeature({} as Feature<Pitch>)
+        const soundFeature: Tone = compileSoundFeature<Pitch>({})
 
         expect(soundFeature)
             .toBe(musicalAs.Tone(1))

@@ -6,10 +6,10 @@ describe('fill gap', () => {
         const originalSounds: Sound[] = [
             {
                 duration: musicalAs.Duration(8),
-                tone: musicalAs.Tone(1),
                 gain: musicalAs.Gain(1),
                 location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                 sustain: musicalAs.Duration(7.9),
+                tone: musicalAs.Tone(1),
             },
         ]
         const sectionInfos: SectionInfo[] = [
@@ -44,24 +44,24 @@ describe('fill gap', () => {
             .toEqual([
                 {
                     duration: musicalAs.Duration(8),
-                    tone: musicalAs.Tone(1),
                     gain: musicalAs.Gain(1),
                     location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                     sustain: musicalAs.Duration(7.9),
+                    tone: musicalAs.Tone(1),
                 },
                 {
                     duration: musicalAs.Duration(11),
-                    tone: musicalAs.Tone(1),
                     gain: musicalAs.Gain(1),
                     location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                     sustain: musicalAs.Duration(10.9),
+                    tone: musicalAs.Tone(1),
                 },
                 {
                     duration: musicalAs.Duration(11),
-                    tone: musicalAs.Tone(1),
                     gain: musicalAs.Gain(1),
                     location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                     sustain: musicalAs.Duration(10.9),
+                    tone: musicalAs.Tone(1),
                 },
             ])
     })
@@ -70,10 +70,10 @@ describe('fill gap', () => {
         const originalSounds: Sound[] = [
             {
                 duration: musicalAs.Duration(11),
-                tone: musicalAs.Tone(1),
                 gain: musicalAs.Gain(1),
                 location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                 sustain: musicalAs.Duration(10.9),
+                tone: musicalAs.Tone(1),
             },
         ]
         const sectionInfos: SectionInfo[] = [
@@ -109,10 +109,10 @@ describe('fill gap', () => {
             .toEqual([
                 {
                     duration: musicalAs.Duration(11),
-                    tone: musicalAs.Tone(1),
                     gain: musicalAs.Gain(1),
                     location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                     sustain: musicalAs.Duration(10.9),
+                    tone: musicalAs.Tone(1),
                 },
             ])
     })
