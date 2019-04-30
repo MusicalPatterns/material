@@ -17,7 +17,7 @@ import {
     Value,
 } from '@musical-patterns/utilities'
 import { Sound } from '../../performer'
-import { DEFAULT_TRANSLATION_FOR_ALMOST_FULL_SUSTAIN } from './constants'
+import { DEFAULT_TRANSLATION_FOR_ALMOST_FULL_ENVELOPE } from './constants'
 import { compileSoundFeature } from './features'
 import { CompileSoundsOptions, Feature, Note, PositionFeature } from './types'
 
@@ -54,7 +54,7 @@ const compileSustain: (note: Note, duration: Duration, options?: CompileSoundsOp
 
         return sustain < duration ?
             sustain :
-            use.Translation(duration, DEFAULT_TRANSLATION_FOR_ALMOST_FULL_SUSTAIN)
+            use.Translation(duration, DEFAULT_TRANSLATION_FOR_ALMOST_FULL_ENVELOPE)
     }
 
 const compileSound: (note: Note, options?: CompileSoundsOptions) => Sound =
