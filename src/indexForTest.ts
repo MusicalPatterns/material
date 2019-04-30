@@ -9,7 +9,7 @@ export {
     CompileSoundsOptions,
     compileSourceRequest,
     TimbreNameEnum,
-    computeNotesTotalCompiledDuration,
+    computeNotesDuration,
     computeIndividualVoiceAndInfo,
     IndividualVoiceAndInfo,
     Section,
@@ -34,13 +34,13 @@ export {
     CompiledPattern,
 } from './interface/indexForTest'
 export {
-    computeNotesTotalDurationByIndex,
-    computeNotesTotalDurationByScalar,
-    computeTotalPitchDurationContourDuration,
+    computeNotesValueIndexSum,
+    computeNotesValueScalarSum,
+    computeTotalPitchValueContourValue,
     PitchCircularTechnique,
     pitchCirculate,
     Segment,
-    PitchDuration,
+    PitchValue,
 } from './patterns/indexForTest'
 export {
     update,

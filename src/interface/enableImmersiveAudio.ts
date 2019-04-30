@@ -37,7 +37,7 @@ const computeToggleImmersiveAudio: ({ vrb }: { vrb: Vrb }) => {
     })
 
 const enableImmersiveAudio: (enableImmersiveAudioParameters?: {
-    homePosition?: Coordinate,
+    homeLocation?: Coordinate,
     onNoVr?: VoidFunction,
     onReady?: VoidFunction,
     vrb?: Vrb,
@@ -46,7 +46,7 @@ const enableImmersiveAudio: (enableImmersiveAudioParameters?: {
     exitImmersiveAudio: VoidFunction,
 } =
     (enableImmersiveAudioParameters: EnableImmersiveAudioParameters = {}): ToggleImmersiveAudioHandlers => {
-        const { homePosition, vrb, onReady = noop, onNoVr = noop } = enableImmersiveAudioParameters
+        const { homeLocation, vrb, onReady = noop, onNoVr = noop } = enableImmersiveAudioParameters
         let webVr: Vrb
         if (vrb) {
             webVr = vrb
@@ -69,7 +69,7 @@ const enableImmersiveAudio: (enableImmersiveAudioParameters?: {
 
         const batchedAction: BatchAction = batchActions([
             { type: StateKey.WEB_VR, data: webVr },
-            { type: StateKey.HOME_POSITION, data: homePosition },
+            { type: StateKey.HOME_LOCATION, data: homeLocation },
         ])
         store.dispatch(batchedAction)
 

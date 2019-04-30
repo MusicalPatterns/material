@@ -1,7 +1,7 @@
 import { Duration, isUndefined, ONCE, repeat } from '@musical-patterns/utilities'
 import { Sound } from '../../../performer'
 import { compileSounds, CompileSoundsOptions } from '../../sound'
-import { computeSoundsDuration } from '../totalCompiledDuration'
+import { computeSoundsDuration } from '../durations'
 import { Section } from '../types'
 import { SectionInfo, SoundsAndSectionInfos } from './types'
 

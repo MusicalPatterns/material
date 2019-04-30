@@ -10,7 +10,7 @@ export {
     TimbreName,
 } from './source'
 export {
-    computeNotesTotalCompiledDuration,
+    computeNotesDuration,
     computeSoundsDuration,
     Section,
 } from './voice'

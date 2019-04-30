@@ -1,9 +1,9 @@
-import { as, Cardinal, Frequency, Gain, Hz, insteadOf, Ordinal, Pitch, Scalar } from '@musical-patterns/utilities'
+import { as, Cardinal, Hz, insteadOf, Intensity, Ordinal, Pitch, Scalar } from '@musical-patterns/utilities'
 import { Note } from '../../../compiler'
 import {
-    applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount,
-    applyPitchCircularGainCurveWithTechniqueScalarScalingByPeriodSize,
-} from './gainCurve'
+    applyPitchCircularIntensityCurveWithTechniqueIndexTranslationByPitchClassCount,
+    applyPitchCircularIntensityCurveWithTechniqueScalarScalingByPeriodSize,
+} from './intensityCurve'
 import { scalePitchScalarForTier, transposePitchIndexForTier } from './pitchCurve'
 import { PeriodSize } from './types'
 
@@ -13,24 +13,25 @@ const computeTierWithTechniqueIndexTranslationByPitchClassCount:
         notes.map((note: Note): Note => {
             const originalPitchIndex: Ordinal<Hz[]> =
                 insteadOf<Ordinal, Hz[]>(note.pitch && note.pitch.index || as.Ordinal<Hz[]>(0))
-            const originalGainScalar: Scalar<Gain> = note.gain && note.gain.scalar || as.Scalar<Gain>(1)
+            const originalIntensityScalar: Scalar<Intensity> =
+                note.intensity && note.intensity.scalar || as.Scalar<Intensity>(1)
 
             const circledPitchIndex: Ordinal<Hz[]> = transposePitchIndexForTier(
                 originalPitchIndex,
                 { pitchClassCount, tierIndex },
             )
 
-            const pitchCircledGainScalar: Scalar<Gain> =
-                applyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCount(
-                    originalGainScalar,
+            const pitchCircledIntensityScalar: Scalar<Intensity> =
+                applyPitchCircularIntensityCurveWithTechniqueIndexTranslationByPitchClassCount(
+                    originalIntensityScalar,
                     { circledPitchIndex, pitchClassCount },
                 )
 
             return {
                 ...note,
-                gain: {
-                    ...note.gain,
-                    scalar: pitchCircledGainScalar,
+                intensity: {
+                    ...note.intensity,
+                    scalar: pitchCircledIntensityScalar,
                 },
                 pitch: {
                     ...note.pitch,
@@ -43,26 +44,27 @@ const computeTierWithTechniqueScalarScalingByPeriodSize:
     (notes: Note[], tierIndex: Ordinal<PeriodSize[]>, periodSize: PeriodSize) => Note[] =
     (notes: Note[], tierIndex: Ordinal<PeriodSize[]>, periodSize: PeriodSize): Note[] =>
         notes.map((note: Note): Note => {
-            const originalPitchScalar: Scalar<Frequency> =
-                insteadOf<Scalar, Frequency>(note.pitch && note.pitch.scalar || as.Scalar(1))
-            const originalGainScalar: Scalar<Gain> = note.gain && note.gain.scalar || as.Scalar<Gain>(1)
+            const originalPitchScalar: Scalar<Pitch> =
+                insteadOf<Scalar, Pitch>(note.pitch && note.pitch.scalar || as.Scalar(1))
+            const originalIntensityScalar: Scalar<Intensity> =
+                note.intensity && note.intensity.scalar || as.Scalar<Intensity>(1)
 
-            const circledPitchScalar: Scalar<Frequency> = scalePitchScalarForTier(
+            const circledPitchScalar: Scalar<Pitch> = scalePitchScalarForTier(
                 originalPitchScalar,
                 { periodSize, tierIndex },
             )
 
-            const pitchCircledGainScalar: Scalar<Gain> =
-                applyPitchCircularGainCurveWithTechniqueScalarScalingByPeriodSize(
-                    originalGainScalar,
+            const pitchCircledIntensityScalar: Scalar<Intensity> =
+                applyPitchCircularIntensityCurveWithTechniqueScalarScalingByPeriodSize(
+                    originalIntensityScalar,
                     { circledPitchScalar, periodSize },
                 )
 
             return {
                 ...note,
-                gain: {
-                    ...note.gain,
-                    scalar: pitchCircledGainScalar,
+                intensity: {
+                    ...note.intensity,
+                    scalar: pitchCircledIntensityScalar,
                 },
                 pitch: {
                     ...note.pitch,

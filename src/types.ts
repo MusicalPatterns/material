@@ -1,6 +1,17 @@
 // tslint:disable no-any
 
-import { Duration, Scalar, Translation } from '@musical-patterns/utilities'
+import {
+    Duration,
+    Gain,
+    Intensity,
+    Location,
+    Pitch,
+    Position,
+    Scalar,
+    Tone,
+    Translation,
+    Value,
+} from '@musical-patterns/utilities'
 import { Section, TimbreName } from './compiler'
 
 interface Material {
@@ -18,10 +29,17 @@ interface Entity {
 }
 
 interface Scale<NumericType extends Number = number> {
-    basis?: NumericType,
+    basis?: AbstractToPhysical<NumericType>,
     scalars?: Array<Scalar<NumericType>>,
-    translation?: Translation<NumericType>,
+    translation?: Translation<AbstractToPhysical<NumericType>>,
 }
+
+type AbstractToPhysical<AbstractType> =
+    AbstractType extends Value ? Duration :
+        AbstractType extends Pitch ? Tone :
+            AbstractType extends Intensity ? Gain :
+                AbstractType extends Position ? Location :
+                    Number
 
 export {
     Material,
@@ -29,4 +47,5 @@ export {
     MaterializeScales,
     Entity,
     Scale,
+    AbstractToPhysical,
 }

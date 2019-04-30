@@ -1,4 +1,4 @@
-import { as, Duration, musicalAs } from '@musical-patterns/utilities'
+import { Duration, musicalAs } from '@musical-patterns/utilities'
 import { computeFillGapSounds, Sound } from '../../../../../src/indexForTest'
 
 describe('compute fill gap sounds', () => {
@@ -6,16 +6,16 @@ describe('compute fill gap sounds', () => {
         const repetendSounds: Sound[] = [
             {
                 duration: musicalAs.Duration(5),
-                frequency: musicalAs.Pitch(1),
-                gain: as.Gain(1),
-                position: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+                tone: musicalAs.Tone(1),
+                gain: musicalAs.Gain(1),
+                location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                 sustain: musicalAs.Duration(4.9),
             },
             {
                 duration: musicalAs.Duration(6),
-                frequency: musicalAs.Pitch(1),
-                gain: as.Gain(1),
-                position: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+                tone: musicalAs.Tone(1),
+                gain: musicalAs.Gain(1),
+                location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                 sustain: musicalAs.Duration(4.9),
             },
         ]
@@ -27,37 +27,37 @@ describe('compute fill gap sounds', () => {
             .toEqual([
                 {
                     duration: musicalAs.Duration(5),
-                    frequency: musicalAs.Pitch(1),
-                    gain: as.Gain(1),
-                    position: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+                    tone: musicalAs.Tone(1),
+                    gain: musicalAs.Gain(1),
+                    location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                     sustain: musicalAs.Duration(4.9),
                 },
                 {
                     duration: musicalAs.Duration(6),
-                    frequency: musicalAs.Pitch(1),
-                    gain: as.Gain(1),
-                    position: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+                    tone: musicalAs.Tone(1),
+                    gain: musicalAs.Gain(1),
+                    location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                     sustain: musicalAs.Duration(4.9),
                 },
                 {
                     duration: musicalAs.Duration(5),
-                    frequency: musicalAs.Pitch(1),
-                    gain: as.Gain(1),
-                    position: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+                    tone: musicalAs.Tone(1),
+                    gain: musicalAs.Gain(1),
+                    location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                     sustain: musicalAs.Duration(4.9),
                 },
                 {
                     duration: musicalAs.Duration(6),
-                    frequency: musicalAs.Pitch(1),
-                    gain: as.Gain(1),
-                    position: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+                    tone: musicalAs.Tone(1),
+                    gain: musicalAs.Gain(1),
+                    location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                     sustain: musicalAs.Duration(4.9),
                 },
                 {
                     duration: musicalAs.Duration(5),
-                    frequency: musicalAs.Pitch(1),
-                    gain: as.Gain(1),
-                    position: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+                    tone: musicalAs.Tone(1),
+                    gain: musicalAs.Gain(1),
+                    location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                     sustain: musicalAs.Duration(4.9),
                 },
             ])

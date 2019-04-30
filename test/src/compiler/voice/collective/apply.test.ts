@@ -1,4 +1,4 @@
-import { as, Duration, INITIAL, Ms, musicalAs, NO_DURATION, Ordinal, Point, repeat } from '@musical-patterns/utilities'
+import { as, INITIAL, Ms, musicalAs, NO_DURATION, Ordinal, Point, repeat, Value } from '@musical-patterns/utilities'
 import {
     applyCollectiveInfos,
     Entity,
@@ -16,9 +16,9 @@ describe('apply collective infos', () => {
             [
                 {
                     duration: musicalAs.Duration(20),
-                    frequency: musicalAs.Pitch(1),
-                    gain: as.Gain(1),
-                    position: [ 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+                    tone: musicalAs.Tone(1),
+                    gain: musicalAs.Gain(1),
+                    location: [ 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                     sustain: musicalAs.Duration(9),
                 },
             ],
@@ -39,11 +39,11 @@ describe('apply collective infos', () => {
         const entities: Entity[] = [ {}, {}, {
             sections: [
                 {
-                    notes: [ { duration: { scalar: as.Scalar<Duration>(11) } } ],
+                    notes: [ { value: { scalar: as.Scalar<Value>(11) } } ],
                     repetitions: as.Cardinal(9),
                 },
                 {
-                    notes: [ { duration: { scalar: as.Scalar<Duration>(11) } } ],
+                    notes: [ { value: { scalar: as.Scalar<Value>(11) } } ],
                 },
             ],
         } ]
@@ -88,23 +88,23 @@ describe('apply collective infos', () => {
                 sounds: originalSounds.concat([
                     {
                         duration: musicalAs.Duration(11),
-                        frequency: musicalAs.Pitch(1),
-                        gain: as.Gain(1),
-                        position: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+                        tone: musicalAs.Tone(1),
+                        gain: musicalAs.Gain(1),
+                        location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                         sustain: musicalAs.Duration(10.9),
                     },
                     {
                         duration: musicalAs.Duration(11),
-                        frequency: musicalAs.Pitch(1),
-                        gain: as.Gain(1),
-                        position: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+                        tone: musicalAs.Tone(1),
+                        gain: musicalAs.Gain(1),
+                        location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                         sustain: musicalAs.Duration(10.9),
                     },
                     {
                         duration: musicalAs.Duration(11),
-                        frequency: musicalAs.Pitch(1),
-                        gain: as.Gain(1),
-                        position: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+                        tone: musicalAs.Tone(1),
+                        gain: musicalAs.Gain(1),
+                        location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                         sustain: musicalAs.Duration(10.9),
                     },
                 ]),

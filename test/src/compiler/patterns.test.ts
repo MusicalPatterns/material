@@ -1,15 +1,4 @@
-import {
-    as,
-    BEGINNING,
-    Hz,
-    insteadOf,
-    Meters,
-    Ms, musicalAs,
-    NO_DURATION,
-    ONE_TENTH,
-    Scalar,
-    use,
-} from '@musical-patterns/utilities'
+import { as, BEGINNING, insteadOf, musicalAs, NO_DURATION, ONE_TENTH, Scalar, use } from '@musical-patterns/utilities'
 import {
     CompiledPattern,
     compilePattern,
@@ -30,17 +19,17 @@ describe('compile pattern', () => {
 
     const testNote: (testSpecs: TestSpecs) => Note =
         (testSpecs: TestSpecs): Note => ({
-            duration: { scalar: testSpecs.testSpec },
-            gain: { scalar: use.Scalar(testSpecs.testSpec, ONE_TENTH) },
+            value: { scalar: testSpecs.testSpec },
+            intensity: { scalar: use.Scalar(testSpecs.testSpec, ONE_TENTH) },
             pitch: { scalar: testSpecs.testSpec },
             position: { scalar: testSpecs.testSpec },
-            sustain: { scalar: testSpecs.testSpec },
+            envelope: { scalar: testSpecs.testSpec },
         })
     const expectedSound: Sound = {
         duration: musicalAs.Duration(9),
-        frequency: musicalAs.Pitch(9),
-        gain: as.Gain(0.9),
-        position: [ 9, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+        tone: musicalAs.Tone(9),
+        gain: musicalAs.Gain(0.9),
+        location: [ 9, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
         sustain: musicalAs.Duration(8.9),
     }
 

@@ -5,10 +5,10 @@ import {
     Cardinal,
     DOUBLE,
     Exponent,
-    Frequency,
     Hz,
     ofNotAs,
     Ordinal,
+    Pitch,
     pow,
     quotient,
     Scalar,
@@ -17,8 +17,8 @@ import {
 } from '@musical-patterns/utilities'
 import { KINDA_GUESSING_AT_A_GOOD_SIGMA, NEGATIVE_POINT_FIVE_TRANSLATION, PITCH_CIRCULAR_TIER_COUNT } from './constants'
 import {
-    ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
-    ApplyPitchCircularGainCurveWithTechniqueScalarScalingByPeriodSizeParameters,
+    ApplyPitchCircularIntensityCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
+    ApplyPitchCircularIntensityCurveWithTechniqueScalarScalingByPeriodSizeParameters,
     PeriodSize,
 } from './types'
 
@@ -28,7 +28,7 @@ const computeNumeratorOfExponentOfNormalDistributionWithTechniqueIndexTranslatio
         {
             pitchClassCount,
             circledPitchIndex,
-        }: ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
+        }: ApplyPitchCircularIntensityCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
     ): number => {
         const maximumPitchAcrossAllTiers: Ordinal<Hz[]> = as.Ordinal<Hz[]>(as.number(use.Multiple(
             pitchClassCount,
@@ -50,21 +50,21 @@ const computeNumeratorOfExponentOfNormalDistributionWithTechniqueIndexTranslatio
     }
 
 const computeNumeratorOfExponentOfNormalDistributionWithTechniqueScalarScalingByPeriodSize:
-    (parameters: { circledPitchScalar: Scalar<Frequency>, periodSize: PeriodSize }) => number =
+    (parameters: { circledPitchScalar: Scalar<Pitch>, periodSize: PeriodSize }) => number =
     (
         {
             periodSize,
             circledPitchScalar,
-        }: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByPeriodSizeParameters,
+        }: ApplyPitchCircularIntensityCurveWithTechniqueScalarScalingByPeriodSizeParameters,
     ): number => {
         const maximumPitchAcrossAllTiers: PeriodSize = use.Exponent(
             periodSize,
-            as.Exponent<Scalar<Scalar<Frequency>>>(as.number(PITCH_CIRCULAR_TIER_COUNT)),
+            as.Exponent<Scalar<Scalar<Pitch>>>(as.number(PITCH_CIRCULAR_TIER_COUNT)),
         )
         const circledPitchScalarProportionOfTotalPitchCount: number =
             as.number(use.Base(
                 circledPitchScalar,
-                as.Base<Scalar<Frequency>>(as.number(maximumPitchAcrossAllTiers)),
+                as.Base<Scalar<Pitch>>(as.number(maximumPitchAcrossAllTiers)),
             ))
         const pitchProportionOfTotalTranslatedToBePositiveIfGreaterThanMedianAndNegativeIfLesser: number =
             use.Translation(circledPitchScalarProportionOfTotalPitchCount, NEGATIVE_POINT_FIVE_TRANSLATION)
@@ -82,7 +82,7 @@ const computeNumeratorOfExponentOfNormalDistributionWithTechniqueScalarScalingBy
 const computeExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount:
     (parameters: { circledPitchIndex: Ordinal<Hz[]>, pitchClassCount: Cardinal }) => Exponent =
     (
-        parameters: ApplyPitchCircularGainCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
+        parameters: ApplyPitchCircularIntensityCurveWithTechniqueIndexTranslationByPitchClassCountParameters,
     ): Exponent =>
         as.Exponent(
             computeNumeratorOfExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchClassCount(parameters) /
@@ -93,8 +93,8 @@ const computeExponentOfNormalDistributionWithTechniqueIndexTranslationByPitchCla
         )
 
 const computeExponentOfNormalDistributionWithTechniqueScalarScalingByPeriodSize:
-    (parameters: { circledPitchScalar: Scalar<Frequency>, periodSize: PeriodSize }) => Exponent =
-    (parameters: ApplyPitchCircularGainCurveWithTechniqueScalarScalingByPeriodSizeParameters): Exponent =>
+    (parameters: { circledPitchScalar: Scalar<Pitch>, periodSize: PeriodSize }) => Exponent =
+    (parameters: ApplyPitchCircularIntensityCurveWithTechniqueScalarScalingByPeriodSizeParameters): Exponent =>
         as.Exponent(
             computeNumeratorOfExponentOfNormalDistributionWithTechniqueScalarScalingByPeriodSize(parameters) /
             as.number(use.Multiple(

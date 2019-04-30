@@ -22,20 +22,20 @@ const computeStartSound: (parameters: {
     ({ timbre, webVr, sourceType, immersiveAudioEnabled }: ComputeStartSoundParameters): StartSoundAndStartedSound => {
         const startedSound: StartedSound = {}
 
-        const startSound: StartSound = ({ gain, frequency, playbackRate, position }: SoundToPlay): void => {
+        const startSound: StartSound = ({ gain, tone, playbackRate, location }: SoundToPlay): void => {
             const sourceNode: SourceNode = computeSourceNode({
-                frequency,
                 immersiveAudioEnabled,
                 playbackRate,
                 sourceType,
                 timbre,
+                tone,
                 webVr,
             })
             startedSound.sourceNode = sourceNode
             if (immersiveAudioEnabled && webVr) {
                 const positionNode: Object3D = new Object3D()
                 startedSound.positionNode = positionNode
-                startedSound.positionalAudio = computePositionalAudio({ position, positionNode, sourceNode, webVr })
+                startedSound.positionalAudio = computePositionalAudio({ location, positionNode, sourceNode, webVr })
             }
             startedSound.gainNode = computeGainNode({ gain, sourceNode, positionalAudio: startedSound.positionalAudio })
             startedSound.sourceNode.start()

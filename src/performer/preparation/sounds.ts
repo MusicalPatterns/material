@@ -1,9 +1,9 @@
-import { Coordinate, Maybe, Position, ThreeDimensional } from '@musical-patterns/utilities'
+import { Coordinate, Location, Maybe, ThreeDimensional } from '@musical-patterns/utilities'
 import { Vrb } from 'vrb'
 import { ImmutableState, StateKey, store } from '../state'
 import { Sound } from '../types'
-import { applyHomePosition } from './applyHomePosition'
-import { applyGainScalarForWebAudioOscillators } from './oscillator'
+import { applyHomeLocation } from './applyHomeLocation'
+import { applyGainNormalScalarForWebAudioOscillators } from './oscillator'
 import { applyPlaybackRate } from './sample'
 import { sourceRequestIsSampleSourceRequest } from './typeGuards'
 import { SourceRequest } from './types'
@@ -16,15 +16,15 @@ const applySoundAdjustmentsForPerformer: (sounds: Sound[], options: SourceReques
                 applyPlaybackRate(sound, sourceRequest.timbreName))
         }
         else {
-            outputSounds = outputSounds.map(applyGainScalarForWebAudioOscillators)
+            outputSounds = outputSounds.map(applyGainNormalScalarForWebAudioOscillators)
         }
 
         const state: ImmutableState = store.getState()
         const webVr: Maybe<Vrb> = state.get(StateKey.WEB_VR)
-        const homePosition: Maybe<Coordinate<Position, ThreeDimensional>> = state.get(StateKey.HOME_POSITION)
-        if (webVr && homePosition) {
+        const homeLocation: Maybe<Coordinate<Location, ThreeDimensional>> = state.get(StateKey.HOME_LOCATION)
+        if (webVr && homeLocation) {
             outputSounds = outputSounds.map((sound: Sound): Sound =>
-                applyHomePosition(sound, homePosition))
+                applyHomeLocation(sound, homeLocation))
         }
 
         return outputSounds

@@ -2,12 +2,12 @@
 
 import { as, ContourElement, ContourPiece, sum } from '@musical-patterns/utilities'
 import { STANDARD_PITCH_INDEX_INDICATING_REST } from './constants'
-import { PitchDuration } from './types'
+import { PitchValue } from './types'
 
-const computeTotalPitchDurationContourDuration: (contour: ContourPiece<PitchDuration>) => number =
-    (contour: ContourPiece<PitchDuration>): number =>
+const computeTotalPitchValueContourValue: (contour: ContourPiece<PitchValue>) => number =
+    (contour: ContourPiece<PitchValue>): number =>
         contour.reduce(
-            (accumulator: number, contourElement: ContourElement<PitchDuration>) => {
+            (accumulator: number, contourElement: ContourElement<PitchValue>) => {
                 const duration: number = contourElement[ 1 ]
 
                 return sum(accumulator, duration)
@@ -15,11 +15,11 @@ const computeTotalPitchDurationContourDuration: (contour: ContourPiece<PitchDura
             0,
         )
 
-const pitchDurationRest: (duration: number) => ContourPiece<PitchDuration> =
-    (duration: number): ContourPiece<PitchDuration> =>
-        as.ContourPiece<PitchDuration>([ [ as.number(STANDARD_PITCH_INDEX_INDICATING_REST), duration ] ])
+const pitchValueRest: (duration: number) => ContourPiece<PitchValue> =
+    (duration: number): ContourPiece<PitchValue> =>
+        as.ContourPiece<PitchValue>([ [ as.number(STANDARD_PITCH_INDEX_INDICATING_REST), duration ] ])
 
 export {
-    computeTotalPitchDurationContourDuration,
-    pitchDurationRest,
+    computeTotalPitchValueContourValue,
+    pitchValueRest,
 }

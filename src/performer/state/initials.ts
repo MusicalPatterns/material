@@ -11,7 +11,7 @@ const initialState: ImmutableState = typedMap<State>({
     [ StateKey.SEGNO_TIME ]: BEGINNING,
     [ StateKey.IMMERSIVE_AUDIO_READY ]: false,
     [ StateKey.WEB_VR ]: undefined,
-    [ StateKey.HOME_POSITION ]: undefined,
+    [ StateKey.HOME_LOCATION ]: undefined,
     [ StateKey.SAMPLE_DATA ]: undefined,
     [ StateKey.IMMERSIVE_AUDIO_ENABLED ]: false,
     [ StateKey.IMMERSIVE_AUDIO_ON ]: false,

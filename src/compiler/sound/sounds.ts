@@ -5,12 +5,16 @@ import {
     Duration,
     Gain,
     INITIAL,
-    Meters,
-    MULTIPLICATIVE_IDENTITY, musicalAs,
+    Intensity,
+    Location,
+    MULTIPLICATIVE_IDENTITY,
+    musicalAs,
     Pitch,
     Position,
     THREE_DIMENSIONAL,
+    Tone,
     use,
+    Value,
 } from '@musical-patterns/utilities'
 import { Sound } from '../../performer'
 import { DEFAULT_TRANSLATION_FOR_ALMOST_FULL_SUSTAIN } from './constants'
@@ -25,28 +29,28 @@ const computeDefaultFeature: <FeatureType extends Number = number>() => Feature<
         translation: ADDITIVE_IDENTITY,
     })
 
-const compilePosition: (notePosition?: PositionFeature, options?: CompileSoundsOptions) => Coordinate<Position> =
-    (notePosition?: PositionFeature, options?: CompileSoundsOptions): Coordinate<Position> => {
-        const position: Coordinate<Position> = notePosition ?
-            notePosition instanceof Array ?
-                notePosition.map(
-                    (positionElement: Feature<Position>): Position =>
+const compileLocation: (position?: PositionFeature, options?: CompileSoundsOptions) => Coordinate<Location> =
+    (position?: PositionFeature, options?: CompileSoundsOptions): Coordinate<Location> => {
+        const location: Coordinate<Location> = position ?
+            position instanceof Array ?
+                position.map(
+                    (positionElement: Feature<Position>) =>
                         compileSoundFeature(positionElement, options as CompileSoundsOptions<Position>))
                 :
-                [ compileSoundFeature(notePosition, options as CompileSoundsOptions<Position>) ]
+                [ compileSoundFeature(position, options as CompileSoundsOptions<Position>) ]
             :
             []
-        while (position.length < as.number(THREE_DIMENSIONAL)) {
-            position.push(musicalAs.Position(0))
+        while (location.length < as.number(THREE_DIMENSIONAL)) {
+            location.push(musicalAs.Location(0))
         }
 
-        return position
+        return location
     }
 
 const compileSustain: (note: Note, duration: Duration, options?: CompileSoundsOptions) => Duration =
     (note: Note, duration: Duration, options?: CompileSoundsOptions): Duration => {
-        const noteSustain: Feature<Duration> = note.sustain || note.duration || computeDefaultFeature()
-        const sustain: Duration = compileSoundFeature(noteSustain, options as CompileSoundsOptions<Duration>)
+        const envelope: Feature<Value> = note.envelope || note.value || computeDefaultFeature()
+        const sustain: Duration = compileSoundFeature(envelope, options as CompileSoundsOptions<Value>)
 
         return sustain < duration ?
             sustain :
@@ -56,19 +60,19 @@ const compileSustain: (note: Note, duration: Duration, options?: CompileSoundsOp
 const compileSound: (note: Note, options?: CompileSoundsOptions) => Sound =
     (note: Note, options?: CompileSoundsOptions): Sound => {
         const {
-            duration: noteDuration = computeDefaultFeature<Duration>(),
-            gain: noteGain = computeDefaultFeature<Gain>(),
-            pitch: notePitch = computeDefaultFeature<Pitch>(),
+            value = computeDefaultFeature<Value>(),
+            intensity = computeDefaultFeature<Intensity>(),
+            pitch = computeDefaultFeature<Pitch>(),
         } = note
 
-        const duration: Duration = compileSoundFeature(noteDuration, options as CompileSoundsOptions<Duration>)
-        const gain: Gain = compileSoundFeature(noteGain, options as CompileSoundsOptions<Gain>)
-        const frequency: Pitch = compileSoundFeature(notePitch, options as CompileSoundsOptions<Pitch>)
+        const duration: Duration = compileSoundFeature(value, options as CompileSoundsOptions<Value>)
+        const gain: Gain = compileSoundFeature(intensity, options as CompileSoundsOptions<Intensity>)
+        const tone: Tone = compileSoundFeature(pitch, options as CompileSoundsOptions<Pitch>)
 
-        const position: Coordinate<Position> = compilePosition(note.position, options)
+        const location: Coordinate<Location> = compileLocation(note.position, options)
         const sustain: Duration = compileSustain(note, duration, options)
 
-        return { duration, gain, frequency, position, sustain }
+        return { duration, gain, tone, location, sustain }
     }
 
 const compileSounds: (notes: Note[], options: CompileSoundsOptions) => Sound[] =

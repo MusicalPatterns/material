@@ -5,17 +5,17 @@ import Spy = jasmine.Spy
 describe('update', () => {
     const testSoundDurationFive: Sound = {
         duration: musicalAs.Duration(5),
-        frequency: musicalAs.Pitch(1),
-        gain: as.Gain(1),
-        position: [ 1 ].map((dimension: number) => musicalAs.Position(dimension)),
+        tone: musicalAs.Tone(1),
+        gain: musicalAs.Gain(1),
+        location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
         sustain: musicalAs.Duration(1),
     }
 
     const testSoundDurationThree: Sound = {
         duration: musicalAs.Duration(3),
-        frequency: musicalAs.Pitch(1),
-        gain: as.Gain(1),
-        position: [ 1 ].map((dimension: number) => musicalAs.Position(dimension)),
+        tone: musicalAs.Tone(1),
+        gain: musicalAs.Gain(1),
+        location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
         sustain: musicalAs.Duration(1),
     }
 

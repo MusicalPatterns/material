@@ -3,42 +3,41 @@
 import {
     as,
     computeEqualDivisionPitchScalars,
-    Duration,
-    Frequency,
-    Gain,
+    Intensity,
     Pitch,
     Position,
     Scalar,
     use,
+    Value,
 } from '@musical-patterns/utilities'
 import { Note, PitchCircularTechnique, pitchCirculate, Scale } from '../../../../../src/indexForTest'
 
 describe('pitch circulate, using the technique of scalar scaling by period size', () => {
     let outputSetOfNotes: Note[][]
 
-    const A: Scalar<Gain> = as.Scalar<Gain>(0.011)
-    const B: Scalar<Gain> = as.Scalar<Gain>(0.020)
-    const C: Scalar<Gain> = as.Scalar<Gain>(0.034)
-    const D: Scalar<Gain> = as.Scalar<Gain>(0.056)
-    const E: Scalar<Gain> = as.Scalar<Gain>(0.089)
-    const F: Scalar<Gain> = as.Scalar<Gain>(0.135)
-    const G: Scalar<Gain> = as.Scalar<Gain>(0.198)
-    const H: Scalar<Gain> = as.Scalar<Gain>(0.278)
-    const I: Scalar<Gain> = as.Scalar<Gain>(0.375)
-    const J: Scalar<Gain> = as.Scalar<Gain>(0.487)
-    const K: Scalar<Gain> = as.Scalar<Gain>(0.607)
-    const L: Scalar<Gain> = as.Scalar<Gain>(0.726)
-    const M: Scalar<Gain> = as.Scalar<Gain>(0.835)
-    const N: Scalar<Gain> = as.Scalar<Gain>(0.923)
-    const O: Scalar<Gain> = as.Scalar<Gain>(0.980)
-    const P: Scalar<Gain> = as.Scalar<Gain>(1.000)
+    const A: Scalar<Intensity> = as.Scalar<Intensity>(0.011)
+    const B: Scalar<Intensity> = as.Scalar<Intensity>(0.020)
+    const C: Scalar<Intensity> = as.Scalar<Intensity>(0.034)
+    const D: Scalar<Intensity> = as.Scalar<Intensity>(0.056)
+    const E: Scalar<Intensity> = as.Scalar<Intensity>(0.089)
+    const F: Scalar<Intensity> = as.Scalar<Intensity>(0.135)
+    const G: Scalar<Intensity> = as.Scalar<Intensity>(0.198)
+    const H: Scalar<Intensity> = as.Scalar<Intensity>(0.278)
+    const I: Scalar<Intensity> = as.Scalar<Intensity>(0.375)
+    const J: Scalar<Intensity> = as.Scalar<Intensity>(0.487)
+    const K: Scalar<Intensity> = as.Scalar<Intensity>(0.607)
+    const L: Scalar<Intensity> = as.Scalar<Intensity>(0.726)
+    const M: Scalar<Intensity> = as.Scalar<Intensity>(0.835)
+    const N: Scalar<Intensity> = as.Scalar<Intensity>(0.923)
+    const O: Scalar<Intensity> = as.Scalar<Intensity>(0.980)
+    const P: Scalar<Intensity> = as.Scalar<Intensity>(1.000)
 
     describe('given some notes, will return a set of version of those notes which together constitute the pitch circled version of it', () => {
-        const originalGain: Scalar<Gain> = as.Scalar<Gain>(0.5)
+        const originalIntensityScalar: Scalar<Intensity> = as.Scalar<Intensity>(0.5)
         beforeEach(() => {
             const inputNotes: Note[] = [ {
-                gain: {
-                    scalar: originalGain,
+                intensity: {
+                    scalar: originalIntensityScalar,
                 },
                 pitch: {
                     scalar: as.Scalar<Pitch>(57),
@@ -48,7 +47,7 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
             outputSetOfNotes = pitchCirculate(
                 inputNotes,
                 {
-                    periodSize: as.Scalar<Scalar<Frequency>>(2),
+                    periodSize: as.Scalar<Scalar<Pitch>>(2),
                     technique: PitchCircularTechnique.SCALAR_SCALING_BY_PERIOD_SIZE,
                 },
             )
@@ -64,16 +63,16 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
         })
 
         it('maps the gain to a normal distribution curve, so that the center set of notes is loud, and the outer sets of notes get quieter depending on how far from the center they are', () => {
-            const MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE: Scalar<Scalar<Gain>> = as.Scalar<Scalar<Gain>>(0.410)
-            const LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES: Scalar<Scalar<Gain>> = as.Scalar<Scalar<Gain>>(0.800)
-            const QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE: Scalar<Scalar<Gain>> = as.Scalar<Scalar<Gain>>(0.028)
+            const MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE: Scalar<Scalar<Intensity>> = as.Scalar<Scalar<Intensity>>(0.410)
+            const LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES: Scalar<Scalar<Intensity>> = as.Scalar<Scalar<Intensity>>(0.800)
+            const QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE: Scalar<Scalar<Intensity>> = as.Scalar<Scalar<Intensity>>(0.028)
 
-            expect(outputSetOfNotes[ 0 ][ 0 ].gain!.scalar!)
-                .toBeCloseToTyped(use.Scalar(originalGain, MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE))
-            expect(outputSetOfNotes[ 1 ][ 0 ].gain!.scalar!)
-                .toBeCloseToTyped(use.Scalar(originalGain, LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES))
-            expect(outputSetOfNotes[ 2 ][ 0 ].gain!.scalar!)
-                .toBeCloseToTyped(use.Scalar(originalGain, QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE))
+            expect(outputSetOfNotes[ 0 ][ 0 ].intensity!.scalar!)
+                .toBeCloseToTyped(use.Scalar(originalIntensityScalar, MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE))
+            expect(outputSetOfNotes[ 1 ][ 0 ].intensity!.scalar!)
+                .toBeCloseToTyped(use.Scalar(originalIntensityScalar, LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES))
+            expect(outputSetOfNotes[ 2 ][ 0 ].intensity!.scalar!)
+                .toBeCloseToTyped(use.Scalar(originalIntensityScalar, QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE))
         })
     })
 
@@ -81,14 +80,14 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
         beforeEach(() => {
             const inputNotes: Note[] = [
                 {
-                    duration: {
-                        index: as.Ordinal<Array<Scalar<Duration>>>(3),
-                        scalar: as.Scalar<Duration>(4),
-                        scaleIndex: as.Ordinal<Array<Scale<Duration>>>(5),
+                    value: {
+                        index: as.Ordinal<Array<Scalar<Value>>>(3),
+                        scalar: as.Scalar<Value>(4),
+                        scaleIndex: as.Ordinal<Array<Scale<Value>>>(5),
                     },
-                    gain: {
-                        index: as.Ordinal<Array<Scalar<Gain>>>(9),
-                        scaleIndex: as.Ordinal<Array<Scale<Gain>>>(5),
+                    intensity: {
+                        index: as.Ordinal<Array<Scalar<Intensity>>>(9),
+                        scaleIndex: as.Ordinal<Array<Scale<Intensity>>>(5),
                     },
                     pitch: {
                         index: as.Ordinal<Array<Scalar<Pitch>>>(11),
@@ -99,10 +98,10 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
                         scalar: as.Scalar<Position>(4),
                         scaleIndex: as.Ordinal<Array<Scale<Position>>>(6),
                     } ],
-                    sustain: {
-                        index: as.Ordinal<Array<Scalar<Duration>>>(6),
-                        scalar: as.Scalar<Duration>(7),
-                        scaleIndex: as.Ordinal<Array<Scale<Duration>>>(8),
+                    envelope: {
+                        index: as.Ordinal<Array<Scalar<Value>>>(6),
+                        scalar: as.Scalar<Value>(7),
+                        scaleIndex: as.Ordinal<Array<Scale<Value>>>(8),
                     },
                 },
             ]
@@ -110,51 +109,51 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
             outputSetOfNotes = pitchCirculate(
                 inputNotes,
                 {
-                    periodSize: as.Scalar<Scalar<Frequency>>(2),
+                    periodSize: as.Scalar<Scalar<Pitch>>(2),
                     technique: PitchCircularTechnique.SCALAR_SCALING_BY_PERIOD_SIZE,
                 },
             )
         })
 
         it('copies the duration into each set of notes', () => {
-            expect(outputSetOfNotes[ 0 ][ 0 ].duration)
+            expect(outputSetOfNotes[ 0 ][ 0 ].value)
                 .toEqual({
-                    index: as.Ordinal<Array<Scalar<Duration>>>(3),
-                    scalar: as.Scalar<Duration>(4),
-                    scaleIndex: as.Ordinal<Array<Scale<Duration>>>(5),
+                    index: as.Ordinal<Array<Scalar<Value>>>(3),
+                    scalar: as.Scalar<Value>(4),
+                    scaleIndex: as.Ordinal<Array<Scale<Value>>>(5),
                 })
-            expect(outputSetOfNotes[ 1 ][ 0 ].duration)
+            expect(outputSetOfNotes[ 1 ][ 0 ].value)
                 .toEqual({
-                    index: as.Ordinal<Array<Scalar<Duration>>>(3),
-                    scalar: as.Scalar<Duration>(4),
-                    scaleIndex: as.Ordinal<Array<Scale<Duration>>>(5),
+                    index: as.Ordinal<Array<Scalar<Value>>>(3),
+                    scalar: as.Scalar<Value>(4),
+                    scaleIndex: as.Ordinal<Array<Scale<Value>>>(5),
                 })
-            expect(outputSetOfNotes[ 2 ][ 0 ].duration)
+            expect(outputSetOfNotes[ 2 ][ 0 ].value)
                 .toEqual({
-                    index: as.Ordinal<Array<Scalar<Duration>>>(3),
-                    scalar: as.Scalar<Duration>(4),
-                    scaleIndex: as.Ordinal<Array<Scale<Duration>>>(5),
+                    index: as.Ordinal<Array<Scalar<Value>>>(3),
+                    scalar: as.Scalar<Value>(4),
+                    scaleIndex: as.Ordinal<Array<Scale<Value>>>(5),
                 })
         })
 
         it('copies the sustain into each set of notes', () => {
-            expect(outputSetOfNotes[ 0 ][ 0 ].sustain)
+            expect(outputSetOfNotes[ 0 ][ 0 ].envelope)
                 .toEqual({
-                    index: as.Ordinal<Array<Scalar<Duration>>>(6),
-                    scalar: as.Scalar<Duration>(7),
-                    scaleIndex: as.Ordinal<Array<Scale<Duration>>>(8),
+                    index: as.Ordinal<Array<Scalar<Value>>>(6),
+                    scalar: as.Scalar<Value>(7),
+                    scaleIndex: as.Ordinal<Array<Scale<Value>>>(8),
                 })
-            expect(outputSetOfNotes[ 1 ][ 0 ].sustain)
+            expect(outputSetOfNotes[ 1 ][ 0 ].envelope)
                 .toEqual({
-                    index: as.Ordinal<Array<Scalar<Duration>>>(6),
-                    scalar: as.Scalar<Duration>(7),
-                    scaleIndex: as.Ordinal<Array<Scale<Duration>>>(8),
+                    index: as.Ordinal<Array<Scalar<Value>>>(6),
+                    scalar: as.Scalar<Value>(7),
+                    scaleIndex: as.Ordinal<Array<Scale<Value>>>(8),
                 })
-            expect(outputSetOfNotes[ 2 ][ 0 ].sustain)
+            expect(outputSetOfNotes[ 2 ][ 0 ].envelope)
                 .toEqual({
-                    index: as.Ordinal<Array<Scalar<Duration>>>(6),
-                    scalar: as.Scalar<Duration>(7),
-                    scaleIndex: as.Ordinal<Array<Scale<Duration>>>(8),
+                    index: as.Ordinal<Array<Scalar<Value>>>(6),
+                    scalar: as.Scalar<Value>(7),
+                    scaleIndex: as.Ordinal<Array<Scale<Value>>>(8),
                 })
         })
 
@@ -198,21 +197,21 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
         })
 
         it('copies the gain scale index into each set of notes', () => {
-            expect(outputSetOfNotes[ 0 ][ 0 ].gain!.scaleIndex)
-                .toEqual(as.Ordinal<Array<Scale<Gain>>>(5))
-            expect(outputSetOfNotes[ 1 ][ 0 ].gain!.scaleIndex)
-                .toEqual(as.Ordinal<Array<Scale<Gain>>>(5))
-            expect(outputSetOfNotes[ 2 ][ 0 ].gain!.scaleIndex)
-                .toEqual(as.Ordinal<Array<Scale<Gain>>>(5))
+            expect(outputSetOfNotes[ 0 ][ 0 ].intensity!.scaleIndex)
+                .toEqual(as.Ordinal<Array<Scale<Intensity>>>(5))
+            expect(outputSetOfNotes[ 1 ][ 0 ].intensity!.scaleIndex)
+                .toEqual(as.Ordinal<Array<Scale<Intensity>>>(5))
+            expect(outputSetOfNotes[ 2 ][ 0 ].intensity!.scaleIndex)
+                .toEqual(as.Ordinal<Array<Scale<Intensity>>>(5))
         })
 
         it('copies the gain index into each set of notes', () => {
-            expect(outputSetOfNotes[ 0 ][ 0 ].gain!.index)
-                .toEqual(as.Ordinal<Array<Scalar<Gain>>>(9))
-            expect(outputSetOfNotes[ 1 ][ 0 ].gain!.index)
-                .toEqual(as.Ordinal<Array<Scalar<Gain>>>(9))
-            expect(outputSetOfNotes[ 2 ][ 0 ].gain!.index)
-                .toEqual(as.Ordinal<Array<Scalar<Gain>>>(9))
+            expect(outputSetOfNotes[ 0 ][ 0 ].intensity!.index)
+                .toEqual(as.Ordinal<Array<Scalar<Intensity>>>(9))
+            expect(outputSetOfNotes[ 1 ][ 0 ].intensity!.index)
+                .toEqual(as.Ordinal<Array<Scalar<Intensity>>>(9))
+            expect(outputSetOfNotes[ 2 ][ 0 ].intensity!.index)
+                .toEqual(as.Ordinal<Array<Scalar<Intensity>>>(9))
         })
     })
 
@@ -236,7 +235,7 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
             outputSetOfNotes = pitchCirculate(
                 inputNotes,
                 {
-                    periodSize: as.Scalar<Scalar<Frequency>>(2),
+                    periodSize: as.Scalar<Scalar<Pitch>>(2),
                     technique: PitchCircularTechnique.SCALAR_SCALING_BY_PERIOD_SIZE,
                 },
             )
@@ -245,78 +244,78 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
         it('it should return the same result after one loop around the pitch classes', () => {
             const [ lowNotes, middleNotes, highNotes ] = outputSetOfNotes
 
-            expect(lowNotes[ 0 ].gain!.scalar)
-                .toEqual(lowNotes[ 10 ].gain!.scalar)
-            expect(middleNotes[ 0 ].gain!.scalar)
-                .toEqual(middleNotes[ 10 ].gain!.scalar)
-            expect(highNotes[ 0 ].gain!.scalar)
-                .toEqual(highNotes[ 10 ].gain!.scalar)
+            expect(lowNotes[ 0 ].intensity!.scalar)
+                .toEqual(lowNotes[ 10 ].intensity!.scalar)
+            expect(middleNotes[ 0 ].intensity!.scalar)
+                .toEqual(middleNotes[ 10 ].intensity!.scalar)
+            expect(highNotes[ 0 ].intensity!.scalar)
+                .toEqual(highNotes[ 10 ].intensity!.scalar)
         })
 
         it('the gain of the low notes at the end connects back up with the gain of the middle notes at the beginning, and the gain at the end of the middle notes connects back up with the gain of the high notes at the beginning', () => {
             const [ lowNotes, middleNotes, highNotes ] = outputSetOfNotes
 
-            expect(lowNotes[ 0 ].gain!.scalar!)
+            expect(lowNotes[ 0 ].intensity!.scalar!)
                 .toBeCloseToTyped(A)
-            expect(lowNotes[ 1 ].gain!.scalar!)
+            expect(lowNotes[ 1 ].intensity!.scalar!)
                 .toBeCloseToTyped(B)
-            expect(lowNotes[ 2 ].gain!.scalar!)
+            expect(lowNotes[ 2 ].intensity!.scalar!)
                 .toBeCloseToTyped(C)
-            expect(lowNotes[ 3 ].gain!.scalar!)
+            expect(lowNotes[ 3 ].intensity!.scalar!)
                 .toBeCloseToTyped(D)
-            expect(lowNotes[ 4 ].gain!.scalar!)
+            expect(lowNotes[ 4 ].intensity!.scalar!)
                 .toBeCloseToTyped(E)
-            expect(lowNotes[ 5 ].gain!.scalar!)
+            expect(lowNotes[ 5 ].intensity!.scalar!)
                 .toBeCloseToTyped(F)
-            expect(lowNotes[ 6 ].gain!.scalar!)
+            expect(lowNotes[ 6 ].intensity!.scalar!)
                 .toBeCloseToTyped(G)
-            expect(lowNotes[ 7 ].gain!.scalar!)
+            expect(lowNotes[ 7 ].intensity!.scalar!)
                 .toBeCloseToTyped(H)
-            expect(lowNotes[ 8 ].gain!.scalar!)
+            expect(lowNotes[ 8 ].intensity!.scalar!)
                 .toBeCloseToTyped(I)
-            expect(lowNotes[ 9 ].gain!.scalar!)
+            expect(lowNotes[ 9 ].intensity!.scalar!)
                 .toBeCloseToTyped(J)
 
-            expect(middleNotes[ 0 ].gain!.scalar!)
+            expect(middleNotes[ 0 ].intensity!.scalar!)
                 .toBeCloseToTyped(K)
-            expect(middleNotes[ 1 ].gain!.scalar!)
+            expect(middleNotes[ 1 ].intensity!.scalar!)
                 .toBeCloseToTyped(L)
-            expect(middleNotes[ 2 ].gain!.scalar!)
+            expect(middleNotes[ 2 ].intensity!.scalar!)
                 .toBeCloseToTyped(M)
-            expect(middleNotes[ 3 ].gain!.scalar!)
+            expect(middleNotes[ 3 ].intensity!.scalar!)
                 .toBeCloseToTyped(N)
-            expect(middleNotes[ 4 ].gain!.scalar!)
+            expect(middleNotes[ 4 ].intensity!.scalar!)
                 .toBeCloseToTyped(O)
-            expect(middleNotes[ 5 ].gain!.scalar!)
+            expect(middleNotes[ 5 ].intensity!.scalar!)
                 .toBeCloseToTyped(P)
-            expect(middleNotes[ 6 ].gain!.scalar!)
+            expect(middleNotes[ 6 ].intensity!.scalar!)
                 .toBeCloseToTyped(O)
-            expect(middleNotes[ 7 ].gain!.scalar!)
+            expect(middleNotes[ 7 ].intensity!.scalar!)
                 .toBeCloseToTyped(N)
-            expect(middleNotes[ 8 ].gain!.scalar!)
+            expect(middleNotes[ 8 ].intensity!.scalar!)
                 .toBeCloseToTyped(M)
-            expect(middleNotes[ 9 ].gain!.scalar!)
+            expect(middleNotes[ 9 ].intensity!.scalar!)
                 .toBeCloseToTyped(L)
 
-            expect(highNotes[ 0 ].gain!.scalar!)
+            expect(highNotes[ 0 ].intensity!.scalar!)
                 .toBeCloseToTyped(K)
-            expect(highNotes[ 1 ].gain!.scalar!)
+            expect(highNotes[ 1 ].intensity!.scalar!)
                 .toBeCloseToTyped(J)
-            expect(highNotes[ 2 ].gain!.scalar!)
+            expect(highNotes[ 2 ].intensity!.scalar!)
                 .toBeCloseToTyped(I)
-            expect(highNotes[ 3 ].gain!.scalar!)
+            expect(highNotes[ 3 ].intensity!.scalar!)
                 .toBeCloseToTyped(H)
-            expect(highNotes[ 4 ].gain!.scalar!)
+            expect(highNotes[ 4 ].intensity!.scalar!)
                 .toBeCloseToTyped(G)
-            expect(highNotes[ 5 ].gain!.scalar!)
+            expect(highNotes[ 5 ].intensity!.scalar!)
                 .toBeCloseToTyped(F)
-            expect(highNotes[ 6 ].gain!.scalar!)
+            expect(highNotes[ 6 ].intensity!.scalar!)
                 .toBeCloseToTyped(E)
-            expect(highNotes[ 7 ].gain!.scalar!)
+            expect(highNotes[ 7 ].intensity!.scalar!)
                 .toBeCloseToTyped(D)
-            expect(highNotes[ 8 ].gain!.scalar!)
+            expect(highNotes[ 8 ].intensity!.scalar!)
                 .toBeCloseToTyped(C)
-            expect(highNotes[ 9 ].gain!.scalar!)
+            expect(highNotes[ 9 ].intensity!.scalar!)
                 .toBeCloseToTyped(B)
         })
     })
@@ -335,7 +334,7 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
             outputSetOfNotes = pitchCirculate(
                 inputNotes,
                 {
-                    periodSize: as.Scalar<Scalar<Frequency>>(2),
+                    periodSize: as.Scalar<Scalar<Pitch>>(2),
                     technique: PitchCircularTechnique.SCALAR_SCALING_BY_PERIOD_SIZE,
                 },
             )
@@ -344,37 +343,37 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
         it('works', () => {
             const [ lowNotes, middleNotes, highNotes ] = outputSetOfNotes
 
-            expect(lowNotes[ 0 ].gain!.scalar!)
+            expect(lowNotes[ 0 ].intensity!.scalar!)
                 .toBeCloseToTyped(A)
-            expect(lowNotes[ 1 ].gain!.scalar!)
+            expect(lowNotes[ 1 ].intensity!.scalar!)
                 .toBeCloseToTyped(C)
-            expect(lowNotes[ 2 ].gain!.scalar!)
+            expect(lowNotes[ 2 ].intensity!.scalar!)
                 .toBeCloseToTyped(E)
-            expect(lowNotes[ 3 ].gain!.scalar!)
+            expect(lowNotes[ 3 ].intensity!.scalar!)
                 .toBeCloseToTyped(G)
-            expect(lowNotes[ 4 ].gain!.scalar!)
+            expect(lowNotes[ 4 ].intensity!.scalar!)
                 .toBeCloseToTyped(I)
 
-            expect(middleNotes[ 0 ].gain!.scalar!)
+            expect(middleNotes[ 0 ].intensity!.scalar!)
                 .toBeCloseToTyped(K)
-            expect(middleNotes[ 1 ].gain!.scalar!)
+            expect(middleNotes[ 1 ].intensity!.scalar!)
                 .toBeCloseToTyped(M)
-            expect(middleNotes[ 2 ].gain!.scalar!)
+            expect(middleNotes[ 2 ].intensity!.scalar!)
                 .toBeCloseToTyped(O)
-            expect(middleNotes[ 3 ].gain!.scalar!)
+            expect(middleNotes[ 3 ].intensity!.scalar!)
                 .toBeCloseToTyped(O)
-            expect(middleNotes[ 4 ].gain!.scalar!)
+            expect(middleNotes[ 4 ].intensity!.scalar!)
                 .toBeCloseToTyped(M)
 
-            expect(highNotes[ 0 ].gain!.scalar!)
+            expect(highNotes[ 0 ].intensity!.scalar!)
                 .toBeCloseToTyped(K)
-            expect(highNotes[ 1 ].gain!.scalar!)
+            expect(highNotes[ 1 ].intensity!.scalar!)
                 .toBeCloseToTyped(I)
-            expect(highNotes[ 2 ].gain!.scalar!)
+            expect(highNotes[ 2 ].intensity!.scalar!)
                 .toBeCloseToTyped(G)
-            expect(highNotes[ 3 ].gain!.scalar!)
+            expect(highNotes[ 3 ].intensity!.scalar!)
                 .toBeCloseToTyped(E)
-            expect(highNotes[ 4 ].gain!.scalar!)
+            expect(highNotes[ 4 ].intensity!.scalar!)
                 .toBeCloseToTyped(C)
         })
     })

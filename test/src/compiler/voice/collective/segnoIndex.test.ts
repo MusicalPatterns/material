@@ -1,4 +1,4 @@
-import { as, Hz, Meters, Ms, musicalAs, NO_DURATION, Ordinal, Point, repeat } from '@musical-patterns/utilities'
+import { as, Ms, musicalAs, NO_DURATION, Ordinal, Point, repeat } from '@musical-patterns/utilities'
 import {
     computeSegnoIndex,
     NON_SEGNO_INDEX,
@@ -18,9 +18,9 @@ describe('compute segno index', () => {
             [
                 {
                     duration: musicalAs.Duration(20),
-                    frequency: musicalAs.Pitch(1),
-                    gain: as.Gain(1),
-                    position: [ 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+                    tone: musicalAs.Tone(1),
+                    gain: musicalAs.Gain(1),
+                    location: [ 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                     sustain: musicalAs.Duration(9),
                 },
             ],

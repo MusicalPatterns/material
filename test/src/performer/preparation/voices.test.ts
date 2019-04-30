@@ -2,7 +2,7 @@ import { as, INITIAL, Ms, musicalAs, NO_DURATION, Point } from '@musical-pattern
 import { OscillatorName, PreparedVoice, prepareVoices, Sound, SourceType, Voice } from '../../../../src/indexForTest'
 
 describe('prepare voices', () => {
-    it('does not crash if a voice with empty sounds is prepared when the time position is not at the beginning', async (done: DoneFn) => {
+    it('does not crash if a voice with empty sounds is prepared when the time is not at the beginning', async (done: DoneFn) => {
         const voices: Voice[] = [
             {
                 delay: NO_DURATION,
@@ -29,16 +29,16 @@ describe('prepare voices', () => {
                     sounds: [
                         {
                             duration: musicalAs.Duration(5),
-                            frequency: musicalAs.Pitch(1),
-                            gain: as.Gain(1),
-                            position: [ 1 ].map((dimension: number) => musicalAs.Position(dimension)),
+                            tone: musicalAs.Tone(1),
+                            gain: musicalAs.Gain(1),
+                            location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
                             sustain: musicalAs.Duration(4),
                         },
                         {
                             duration: musicalAs.Duration(3),
-                            frequency: musicalAs.Pitch(1),
-                            gain: as.Gain(1),
-                            position: [ 1 ].map((dimension: number) => musicalAs.Position(dimension)),
+                            tone: musicalAs.Tone(1),
+                            gain: musicalAs.Gain(1),
+                            location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
                             sustain: musicalAs.Duration(1),
                         },
                     ],
@@ -71,16 +71,16 @@ describe('prepare voices', () => {
                     sounds: [
                         {
                             duration: musicalAs.Duration(5),
-                            frequency: musicalAs.Pitch(1),
-                            gain: as.Gain(1),
-                            position: [ 1 ].map((dimension: number) => musicalAs.Position(dimension)),
+                            tone: musicalAs.Tone(1),
+                            gain: musicalAs.Gain(1),
+                            location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
                             sustain: musicalAs.Duration(4),
                         },
                         {
                             duration: musicalAs.Duration(3),
-                            frequency: musicalAs.Pitch(1),
-                            gain: as.Gain(1),
-                            position: [ 1 ].map((dimension: number) => musicalAs.Position(dimension)),
+                            tone: musicalAs.Tone(1),
+                            gain: musicalAs.Gain(1),
+                            location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
                             sustain: musicalAs.Duration(1),
                         },
                     ],
@@ -113,23 +113,23 @@ describe('prepare voices', () => {
                     sounds: [
                         {
                             duration: musicalAs.Duration(5),
-                            frequency: musicalAs.Pitch(1),
-                            gain: as.Gain(1),
-                            position: [ 1 ].map((dimension: number) => musicalAs.Position(dimension)),
+                            tone: musicalAs.Tone(1),
+                            gain: musicalAs.Gain(1),
+                            location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
                             sustain: musicalAs.Duration(4),
                         },
                         {
                             duration: musicalAs.Duration(1),
-                            frequency: musicalAs.Pitch(1),
-                            gain: as.Gain(1),
-                            position: [ 1 ].map((dimension: number) => musicalAs.Position(dimension)),
+                            tone: musicalAs.Tone(1),
+                            gain: musicalAs.Gain(1),
+                            location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
                             sustain: musicalAs.Duration(1),
                         },
                         {
                             duration: musicalAs.Duration(3),
-                            frequency: musicalAs.Pitch(1),
-                            gain: as.Gain(1),
-                            position: [ 1 ].map((dimension: number) => musicalAs.Position(dimension)),
+                            tone: musicalAs.Tone(1),
+                            gain: musicalAs.Gain(1),
+                            location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
                             sustain: musicalAs.Duration(1),
                         },
                     ],

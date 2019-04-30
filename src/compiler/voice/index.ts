@@ -1,5 +1,5 @@
 export { compileVoices } from './voices'
-export { computeSoundsDuration, computeNotesTotalCompiledDuration } from './totalCompiledDuration'
+export { computeSoundsDuration, computeNotesDuration } from './durations'
 
 export {
     Section,

@@ -1,15 +1,14 @@
 import {
     as,
     BEGINNING,
-    Duration,
-    Gain,
-    Hz,
     INITIAL,
-    Meters,
-    Ms, musicalAs,
+    Intensity,
+    Ms,
+    musicalAs,
     NO_DURATION,
     Pitch,
     Position,
+    Value,
 } from '@musical-patterns/utilities'
 import {
     CompiledPattern,
@@ -27,47 +26,47 @@ describe('compile voices', () => {
     const scales: Scale[] = [ { scalars: [ as.Scalar(3) ] } ]
 
     const testNote: Note = {
-        duration: { scalar: as.Scalar<Duration>(3) },
-        gain: { scalar: as.Scalar<Gain>(0.3) },
+        value: { scalar: as.Scalar<Value>(3) },
+        intensity: { scalar: as.Scalar<Intensity>(0.3) },
         pitch: { scalar: as.Scalar<Pitch>(3) },
         position: { scalar: as.Scalar<Position>(3) },
-        sustain: { scalar: as.Scalar<Duration>(3) },
+        envelope: { scalar: as.Scalar<Value>(3) },
     }
     const expectedSound: Sound = {
         duration: musicalAs.Duration(9),
-        frequency: musicalAs.Pitch(9),
-        gain: as.Gain(0.9),
-        position: [ 9, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+        tone: musicalAs.Tone(9),
+        gain: musicalAs.Gain(0.9),
+        location: [ 9, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
         sustain: musicalAs.Duration(8.9),
     }
 
     const otherTestNote: Note = {
-        duration: { scalar: as.Scalar<Duration>(3) },
-        gain: { scalar: as.Scalar<Gain>(0) },
+        value: { scalar: as.Scalar<Value>(3) },
+        intensity: { scalar: as.Scalar<Intensity>(0) },
         pitch: { scalar: as.Scalar<Pitch>(3) },
         position: { scalar: as.Scalar<Position>(3) },
-        sustain: { scalar: as.Scalar<Duration>(3) },
+        envelope: { scalar: as.Scalar<Value>(3) },
     }
     const otherExpectedSound: Sound = {
         duration: musicalAs.Duration(9),
-        frequency: musicalAs.Pitch(9),
-        gain: as.Gain(0),
-        position: [ 9, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+        tone: musicalAs.Tone(9),
+        gain: musicalAs.Gain(0),
+        location: [ 9, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
         sustain: musicalAs.Duration(8.9),
     }
 
     const otherOtherTestNote: Note = {
-        duration: { scalar: as.Scalar<Duration>(3) },
-        gain: { scalar: as.Scalar<Gain>(0.3) },
+        value: { scalar: as.Scalar<Value>(3) },
+        intensity: { scalar: as.Scalar<Intensity>(0.3) },
         pitch: { scalar: as.Scalar<Pitch>(0) },
         position: { scalar: as.Scalar<Position>(3) },
-        sustain: { scalar: as.Scalar<Duration>(3) },
+        envelope: { scalar: as.Scalar<Value>(3) },
     }
     const otherOtherExpectedSound: Sound = {
         duration: musicalAs.Duration(9),
-        frequency: musicalAs.Pitch(0),
-        gain: as.Gain(0.9),
-        position: [ 9, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+        tone: musicalAs.Tone(0),
+        gain: musicalAs.Gain(0.9),
+        location: [ 9, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
         sustain: musicalAs.Duration(8.9),
     }
 

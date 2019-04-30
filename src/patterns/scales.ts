@@ -4,15 +4,18 @@ import { StandardSpec, StandardSpecs } from '@musical-patterns/spec'
 import {
     as,
     Duration,
-    Gain,
     Integer,
+    Intensity,
+    Location,
     musicalAs,
     ONE,
     Pitch,
     Position,
     range,
     reciprocal,
+    Tone,
     Translation,
+    Value,
 } from '@musical-patterns/utilities'
 import { Scale } from '../types'
 // tslint:disable-next-line max-line-length
@@ -40,9 +43,9 @@ const computeSubharmonicSeriesScale: <NumericType extends Number = Pitch>() => S
             .map((integer: Integer) => as.Scalar<NumericType>(reciprocal(integer))),
     })
 
-const computeFlatDurationsScale: () => Scale<Duration> =
+const computeFlatValuesScale: () => Scale<Value> =
     // tslint:disable-next-line no-unnecessary-callback-wrapper
-    (): Scale<Duration> =>
+    (): Scale<Value> =>
         computeHarmonicSeriesScale()
 
 const materializeStandardScales:
@@ -50,8 +53,8 @@ const materializeStandardScales:
         specs: SpecsType,
         options?: MaterializeStandardScalesOptions,
     ) => [
-        Scale<Gain>,
-        Scale<Duration>,
+        Scale<Intensity>,
+        Scale<Value>,
         Scale<Pitch>,
         Scale<Position>,
         Scale<Position>,
@@ -61,56 +64,56 @@ const materializeStandardScales:
     // tslint:disable-next-line cyclomatic-complexity
     <SpecsType extends StandardSpecs>(
         specs: SpecsType,
-        { durationScalars, pitchScalars }: MaterializeStandardScalesOptions = {},
+        { valueScalars, pitchScalars }: MaterializeStandardScalesOptions = {},
     ): [
-        Scale<Gain>,
-        Scale<Duration>,
+        Scale<Intensity>,
+        Scale<Value>,
         Scale<Pitch>,
         Scale<Position>,
         Scale<Position>,
         Scale<Position>
         // tslint:disable-next-line no-any
         ] & Array<Scale<any>> => {
-        const gainScale: Scale<Gain> = computeNonScale()
+        const intensityScale: Scale<Intensity> = computeNonScale()
 
-        const basisDuration: Duration = specs[ StandardSpec.BASIS_DURATION ] || musicalAs.Duration(1)
-        const basisDurationTranslation: Translation<Duration> =
-            specs[ StandardSpec.BASIS_DURATION_TRANSLATION ] || as.Translation<Duration>(0)
-        const durationsScale: Scale<Duration> = {
-            basis: basisDuration,
-            scalars: durationScalars,
-            translation: basisDurationTranslation,
+        const msPhysicalization: Duration = specs[ StandardSpec.MS_PHYSICALIZATION ] || musicalAs.Duration(1)
+        const msPhysicalizationTranslation: Translation<Duration> =
+            specs[ StandardSpec.MS_PHYSICALIZATION_TRANSLATION ] || as.Translation<Duration>(0)
+        const valueScale: Scale<Value> = {
+            basis: msPhysicalization,
+            scalars: valueScalars,
+            translation: msPhysicalizationTranslation,
         }
 
-        const basisFrequency: Pitch = specs[ StandardSpec.BASIS_FREQUENCY ] || musicalAs.Pitch(1)
-        const basisFrequencyTranslation: Translation<Pitch> =
-            specs[ StandardSpec.BASIS_FREQUENCY_TRANSLATION ] || as.Translation<Pitch>(0)
+        const hzPhysicalization: Tone = specs[ StandardSpec.HZ_PHYSICALIZATION ] || musicalAs.Tone(1)
+        const hzPhysicalizationTranslation: Translation<Tone> =
+            specs[ StandardSpec.HZ_PHYSICALIZATION_TRANSLATION ] || as.Translation<Tone>(0)
         const pitchesScale: Scale<Pitch> = {
-            basis: basisFrequency,
+            basis: hzPhysicalization,
             scalars: pitchScalars,
-            translation: basisFrequencyTranslation,
+            translation: hzPhysicalizationTranslation,
         }
 
-        const basisPosition: Position = specs[ StandardSpec.BASIS_POSITION ] || musicalAs.Position(1)
-        const basisPositionTranslation: Array<Translation<Position>> =
-            specs[ StandardSpec.BASIS_POSITION_TRANSLATION ] ||
-            [ 0, 0, 0 ].map((dimension: number) => as.Translation<Position>(dimension))
+        const metersPhysicalization: Location = specs[ StandardSpec.METERS_PHYSICALIZATION ] || musicalAs.Location(1)
+        const metersPhysicalizationTranslation: Array<Translation<Location>> =
+            specs[ StandardSpec.METERS_PHYSICALIZATION_TRANSLATION ] ||
+            [ 0, 0, 0 ].map((dimension: number) => as.Translation<Location>(dimension))
         const xScale: Scale<Position> = {
-            basis: basisPosition,
-            translation: basisPositionTranslation[ 0 ],
+            basis: metersPhysicalization,
+            translation: metersPhysicalizationTranslation[ 0 ],
         }
         const yScale: Scale<Position> = {
-            basis: basisPosition,
-            translation: basisPositionTranslation[ 0 ],
+            basis: metersPhysicalization,
+            translation: metersPhysicalizationTranslation[ 0 ],
         }
         const zScale: Scale<Position> = {
-            basis: basisPosition,
-            translation: basisPositionTranslation[ 0 ],
+            basis: metersPhysicalization,
+            translation: metersPhysicalizationTranslation[ 0 ],
         }
 
         return [
-            gainScale,
-            durationsScale,
+            intensityScale,
+            valueScale,
             pitchesScale,
             xScale,
             yScale,
@@ -121,7 +124,7 @@ const materializeStandardScales:
 export {
     materializeStandardScales,
     computeNonScale,
-    computeFlatDurationsScale,
+    computeFlatValuesScale,
     computeHarmonicSeriesScale,
     computeSubharmonicSeriesScale,
 }

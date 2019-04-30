@@ -1,12 +1,12 @@
 // tslint:disable no-reaching-imports
 
-export { computeNotesTotalDurationByIndex, computeNotesTotalDurationByScalar } from './notes'
-export { computeTotalPitchDurationContourDuration } from './contours'
+export { computeNotesValueIndexSum, computeNotesValueScalarSum } from './notes'
+export { computeTotalPitchValueContourValue } from './contours'
 export {
     PitchCircularTechnique,
     pitchCirculate,
 } from './custom/indexForTest'
 export {
     Segment,
-    PitchDuration,
+    PitchValue,
 } from './types'

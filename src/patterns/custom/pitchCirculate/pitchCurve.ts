@@ -1,11 +1,11 @@
 import {
     as,
     Cardinal,
-    Frequency,
     Hz,
     insteadOf,
     Ordinal,
     periodReduce,
+    Pitch,
     Scalar,
     Transition,
     use,
@@ -39,14 +39,14 @@ const transposePitchIndexForTier: (
     }
 
 const scalePitchScalarForTier: (
-    originalPitchScalar: Scalar<Frequency>,
+    originalPitchScalar: Scalar<Pitch>,
     parameters: { periodSize: PeriodSize, tierIndex: Ordinal<PeriodSize[]> },
-) => Scalar<Frequency> =
+) => Scalar<Pitch> =
     (
-        originalPitchScalar: Scalar<Frequency>,
+        originalPitchScalar: Scalar<Pitch>,
         { periodSize, tierIndex }: ComputeCircledPitchScalarParameters,
-    ): Scalar<Frequency> => {
-        const pitchScalarReducedWithinPeriodSizeToRemovePeriodLocationInformation: Scalar<Frequency> = periodReduce(
+    ): Scalar<Pitch> => {
+        const pitchScalarReducedWithinPeriodSizeToRemovePeriodLocationInformation: Scalar<Pitch> = periodReduce(
             originalPitchScalar,
             periodSize,
         )

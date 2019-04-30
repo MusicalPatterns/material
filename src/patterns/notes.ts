@@ -1,36 +1,36 @@
-import { as, Duration, Ordinal, Scalar, use } from '@musical-patterns/utilities'
+import { as, Ordinal, Scalar, use, Value } from '@musical-patterns/utilities'
 import { Note } from '../compiler'
 
-const computeNotesTotalDurationByScalar: (notes: Note[]) => number =
+const computeNotesValueScalarSum: (notes: Note[]) => number =
     (notes: Note[]): number =>
         notes.reduce(
-            (accumulator: number, { duration }: Note): number => {
-                const durationScalar: Scalar<Duration> = duration && duration.scalar || as.Scalar<Duration>(0)
+            (accumulator: number, { value }: Note): number => {
+                const valueScalar: Scalar<Value> = value && value.scalar || as.Scalar<Value>(0)
 
                 return use.Translation(
                     accumulator,
-                    as.Translation(as.number(durationScalar)),
+                    as.Translation(as.number(valueScalar)),
                 )
             },
             0,
         )
 
-const computeNotesTotalDurationByIndex: (notes: Note[]) => number =
+const computeNotesValueIndexSum: (notes: Note[]) => number =
     (notes: Note[]): number =>
         notes.reduce(
-            (accumulator: number, { duration }: Note): number => {
-                const durationIndex: Ordinal<Array<Scalar<Duration>>> =
-                    duration && duration.index || as.Ordinal<Array<Scalar<Duration>>>(0)
+            (accumulator: number, { value }: Note): number => {
+                const valueIndex: Ordinal<Array<Scalar<Value>>> =
+                    value && value.index || as.Ordinal<Array<Scalar<Value>>>(0)
 
                 return use.Translation(
                     accumulator,
-                    as.Translation(as.number(durationIndex)),
+                    as.Translation(as.number(valueIndex)),
                 )
             },
             0,
         )
 
 export {
-    computeNotesTotalDurationByIndex,
-    computeNotesTotalDurationByScalar,
+    computeNotesValueIndexSum,
+    computeNotesValueScalarSum,
 }

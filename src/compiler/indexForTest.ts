@@ -14,7 +14,7 @@ export {
     TimbreNameEnum,
 } from './source/indexForTest'
 export {
-    computeNotesTotalCompiledDuration,
+    computeNotesDuration,
     computeIndividualVoiceAndInfo,
     IndividualVoiceAndInfo,
     Section,

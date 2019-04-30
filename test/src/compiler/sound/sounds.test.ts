@@ -1,4 +1,4 @@
-import { as, Duration, musicalAs, Position } from '@musical-patterns/utilities'
+import { as, musicalAs, Position, Value } from '@musical-patterns/utilities'
 import { compileSound, Note, Sound } from '../../../../src/indexForTest'
 
 describe('compile sound', () => {
@@ -16,17 +16,17 @@ describe('compile sound', () => {
 
         it('gain to 1', () => {
             expect(sound.gain)
-                .toBe(as.Gain(1))
+                .toBe(musicalAs.Gain(1))
         })
 
         it('frequency to 1', () => {
-            expect(sound.frequency)
-                .toBe(musicalAs.Pitch(1))
+            expect(sound.tone)
+                .toBe(musicalAs.Tone(1))
         })
 
         it('position to the origin', () => {
-            expect(sound.position)
-                .toEqual([ 0, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)))
+            expect(sound.location)
+                .toEqual([ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)))
         })
 
         it('sustain to 0.9', () => {
@@ -44,8 +44,8 @@ describe('compile sound', () => {
             }
             const sound: Sound = compileSound(note)
 
-            expect(sound.position)
-                .toEqual([ 3, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)))
+            expect(sound.location)
+                .toEqual([ 3, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)))
         })
 
         it('works for a single element position', () => {
@@ -58,8 +58,8 @@ describe('compile sound', () => {
             }
             const sound: Sound = compileSound(note)
 
-            expect(sound.position)
-                .toEqual([ 3, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)))
+            expect(sound.location)
+                .toEqual([ 3, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)))
         })
 
         it('works for a two element position', () => {
@@ -75,19 +75,19 @@ describe('compile sound', () => {
             }
             const sound: Sound = compileSound(note)
 
-            expect(sound.position)
-                .toEqual([ 3, 2, 0 ].map((dimension: number) => musicalAs.Position(dimension)))
+            expect(sound.location)
+                .toEqual([ 3, 2, 0 ].map((dimension: number) => musicalAs.Location(dimension)))
         })
     })
 
     describe('sustain', () => {
         it('caps sustain at slightly less than the duration', () => {
             const note: Note = {
-                duration: {
-                    scalar: as.Scalar<Duration>(3),
+                value: {
+                    scalar: as.Scalar<Value>(3),
                 },
-                sustain: {
-                    scalar: as.Scalar<Duration>(8),
+                envelope: {
+                    scalar: as.Scalar<Value>(8),
                 },
             }
             const sound: Sound = compileSound(note)
@@ -100,8 +100,8 @@ describe('compile sound', () => {
 
         it('defaults sustain to slightly less than the duration', () => {
             const note: Note = {
-                duration: {
-                    scalar: as.Scalar<Duration>(3),
+                value: {
+                    scalar: as.Scalar<Value>(3),
                 },
             }
 
@@ -115,11 +115,11 @@ describe('compile sound', () => {
 
         it('uses sustain if given and less than duration', () => {
             const note: Note = {
-                duration: {
-                    scalar: as.Scalar<Duration>(3),
+                value: {
+                    scalar: as.Scalar<Value>(3),
                 },
-                sustain: {
-                    scalar: as.Scalar<Duration>(2),
+                envelope: {
+                    scalar: as.Scalar<Value>(2),
                 },
             }
 

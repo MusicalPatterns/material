@@ -1,4 +1,4 @@
-import { as, Frequency, Integer, Ordinal, range, Scalar } from '@musical-patterns/utilities'
+import { as, Integer, Ordinal, Pitch, range, Scalar } from '@musical-patterns/utilities'
 import { Note } from '../../../compiler'
 import { PITCH_CIRCULAR_TIER_COUNT } from './constants'
 import {
@@ -13,7 +13,7 @@ const pitchCirculate: (notes: Note[], options: PitchCirculateOptions) => Note[][
         {
             technique,
             pitchClassCount = as.Cardinal(0),
-            periodSize = as.Scalar<Scalar<Frequency>>(1),
+            periodSize = as.Scalar<Scalar<Pitch>>(1),
         }: PitchCirculateOptions,
     ): Note[][] =>
         range(PITCH_CIRCULAR_TIER_COUNT)

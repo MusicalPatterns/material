@@ -1,18 +1,18 @@
-import { as, Duration, musicalAs, Scalar } from '@musical-patterns/utilities'
-import { computeNotesTotalCompiledDuration, Note, Scale } from '../../../../src/indexForTest'
+import { as, Duration, musicalAs, Scalar, Value } from '@musical-patterns/utilities'
+import { computeNotesDuration, Note, Scale } from '../../../../src/indexForTest'
 
-describe('total compiled duration', () => {
+describe('durations', () => {
     describe('of notes', () => {
         it('tells you how long a set of note are going to take to play once compiled', () => {
             const notes: Note[] = [
                 {
-                    duration: {
-                        scalar: as.Scalar<Duration>(2),
+                    value: {
+                        scalar: as.Scalar<Value>(2),
                     },
                 },
                 {
-                    duration: {
-                        index: as.Ordinal<Array<Scalar<Duration>>>(1),
+                    value: {
+                        index: as.Ordinal<Array<Scalar<Value>>>(1),
                     },
                 },
             ]
@@ -20,7 +20,7 @@ describe('total compiled duration', () => {
                 { scalars: [ 5, 7 ].map(as.Scalar) },
             ]
 
-            const actual: Duration = computeNotesTotalCompiledDuration(notes, scales)
+            const actual: Duration = computeNotesDuration(notes, scales)
 
             expect(actual)
                 .toBe(musicalAs.Duration(17))

@@ -14,7 +14,7 @@ const startPreparedVoiceSound: (preparedVoice: PreparedVoice, sound: Sound) => v
     (preparedVoice: PreparedVoice, sound: Sound): void => {
         preparedVoice.source.startSound({
             ...sound,
-            position: sound.position || [ 0, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+            location: sound.location || [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
         })
 
         preparedVoice.nextStop = use.Translation(

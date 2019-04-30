@@ -1,4 +1,4 @@
-import { as, Duration, Hz, Maybe, Meters, Ms, musicalAs } from '@musical-patterns/utilities'
+import { as, Maybe, musicalAs, Value } from '@musical-patterns/utilities'
 import { computeRepetendSounds, Scale, Section, SectionInfo, Sound } from '../../../../../src/indexForTest'
 
 describe('compute repetend sounds', () => {
@@ -17,11 +17,11 @@ describe('compute repetend sounds', () => {
         ]
         const sections: Section[] = [
             {
-                notes: [ { duration: { scalar: as.Scalar<Duration>(11) } } ],
+                notes: [ { value: { scalar: as.Scalar<Value>(11) } } ],
                 repetitions: as.Cardinal(9),
             },
             {
-                notes: [ { duration: { scalar: as.Scalar<Duration>(11) } } ],
+                notes: [ { value: { scalar: as.Scalar<Value>(11) } } ],
             },
         ]
 
@@ -31,9 +31,9 @@ describe('compute repetend sounds', () => {
             .toEqual([
                 {
                     duration: musicalAs.Duration(11),
-                    frequency: musicalAs.Pitch(1),
-                    gain: as.Gain(1),
-                    position: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Position(dimension)),
+                    tone: musicalAs.Tone(1),
+                    gain: musicalAs.Gain(1),
+                    location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
                     sustain: musicalAs.Duration(10.9),
                 },
             ])
@@ -52,11 +52,11 @@ describe('compute repetend sounds', () => {
         ]
         const sections: Section[] = [
             {
-                notes: [ { duration: { scalar: as.Scalar<Duration>(11) } } ],
+                notes: [ { value: { scalar: as.Scalar<Value>(11) } } ],
                 repetitions: as.Cardinal(9),
             },
             {
-                notes: [ { duration: { scalar: as.Scalar<Duration>(11) } } ],
+                notes: [ { value: { scalar: as.Scalar<Value>(11) } } ],
                 repetitions: as.Cardinal(8),
             },
         ]

@@ -1,57 +1,57 @@
-import { as, Duration, Scalar } from '@musical-patterns/utilities'
-import { computeNotesTotalDurationByIndex, computeNotesTotalDurationByScalar, Note } from '../../../src/indexForTest'
+import { as, Scalar, Value } from '@musical-patterns/utilities'
+import { computeNotesValueIndexSum, computeNotesValueScalarSum, Note } from '../../../src/indexForTest'
 
 describe('notes utilities', () => {
-    describe('notes total duration by scalar', () => {
-        it(`sums the scalars of each note's duration`, () => {
+    describe('notes total value by scalar', () => {
+        it(`sums the scalars of each note's value`, () => {
             const notes: Note[] = [
                 {
-                    duration: {
-                        scalar: as.Scalar<Duration>(4),
+                    value: {
+                        scalar: as.Scalar<Value>(4),
                     },
                 },
                 {
-                    duration: {
-                        scalar: as.Scalar<Duration>(7),
+                    value: {
+                        scalar: as.Scalar<Value>(7),
                     },
                 },
                 {
-                    duration: {
-                        scalar: as.Scalar<Duration>(8),
+                    value: {
+                        scalar: as.Scalar<Value>(8),
                     },
                 },
             ]
 
-            const actualNotesTotalDurationByScalar: number = computeNotesTotalDurationByScalar(notes)
+            const notesValueScalarSum: number = computeNotesValueScalarSum(notes)
 
-            expect(actualNotesTotalDurationByScalar)
+            expect(notesValueScalarSum)
                 .toBe(19)
         })
     })
 
-    describe('notes total duration by scalar', () => {
-        it(`sums the scalars of each note's duration`, () => {
+    describe('notes total value by scalar', () => {
+        it(`sums the scalars of each note's value`, () => {
             const notes: Note[] = [
                 {
-                    duration: {
-                        index: as.Ordinal<Array<Scalar<Duration>>>(4),
+                    value: {
+                        index: as.Ordinal<Array<Scalar<Value>>>(4),
                     },
                 },
                 {
-                    duration: {
-                        index: as.Ordinal<Array<Scalar<Duration>>>(7),
+                    value: {
+                        index: as.Ordinal<Array<Scalar<Value>>>(7),
                     },
                 },
                 {
-                    duration: {
-                        index: as.Ordinal<Array<Scalar<Duration>>>(8),
+                    value: {
+                        index: as.Ordinal<Array<Scalar<Value>>>(8),
                     },
                 },
             ]
 
-            const actualNotesTotalDurationByIndex: number = computeNotesTotalDurationByIndex(notes)
+            const notesValueIndexSum: number = computeNotesValueIndexSum(notes)
 
-            expect(actualNotesTotalDurationByIndex)
+            expect(notesValueIndexSum)
                 .toBe(19)
         })
     })

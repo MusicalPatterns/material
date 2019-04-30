@@ -12,7 +12,7 @@ const applyPlaybackRate: (sound: Sound, timbreName: SampleName) => Sound =
             .get(StateKey.SAMPLE_DATA)
 
         if (sampleData) {
-            sound.playbackRate = computePlaybackRate(sampleData[ timbreName ], sound.frequency)
+            sound.playbackRate = computePlaybackRate(sampleData[ timbreName ], sound.tone)
         }
 
         return outputSound

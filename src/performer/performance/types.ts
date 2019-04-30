@@ -1,13 +1,13 @@
-import { Coordinate, Gain, Maybe, Pitch, Position } from '@musical-patterns/utilities'
+import { Coordinate, Gain, Location, Maybe, Tone } from '@musical-patterns/utilities'
 import { Object3D, PositionalAudio } from 'three'
 import { Vrb } from 'vrb'
 import { SourceNode } from './source'
 
 interface SoundToPlay {
-    frequency: Pitch,
     gain: Gain,
-    playbackRate?: Pitch,
-    position: Coordinate<Position>,
+    location: Coordinate<Location>,
+    playbackRate?: Tone,
+    tone: Tone,
 }
 
 type StartSound = (sound: SoundToPlay) => void
@@ -47,7 +47,7 @@ interface ComputeGainNodeParameters {
 }
 
 interface ComputePositionalAudioParameters {
-    position: Coordinate<Position>,
+    location: Coordinate<Location>,
     positionNode: Object3D,
     sourceNode: SourceNode,
     webVr: Vrb,
