@@ -1,3 +1,5 @@
+// tslint:disable max-file-line-count
+
 import { StandardSpec, StandardSpecs } from '@musical-patterns/spec'
 import {
     as,
@@ -7,6 +9,7 @@ import {
     musicalAs,
     ONE,
     Pitch,
+    Position,
     range,
     reciprocal,
     Translation,
@@ -46,14 +49,30 @@ const materializeStandardScales:
     <SpecsType extends StandardSpecs>(
         specs: SpecsType,
         options?: MaterializeStandardScalesOptions,
+    ) => [
+        Scale<Gain>,
+        Scale<Duration>,
+        Scale<Pitch>,
+        Scale<Position>,
+        Scale<Position>,
+        Scale<Position>
         // tslint:disable-next-line no-any
-    ) => [ Scale<Gain>, Scale<Duration>, Scale<Pitch> ] & Array<Scale<any>> =
+        ] & Array<Scale<any>> =
+    // tslint:disable-next-line cyclomatic-complexity
     <SpecsType extends StandardSpecs>(
         specs: SpecsType,
         { durationScalars, pitchScalars }: MaterializeStandardScalesOptions = {},
+    ): [
+        Scale<Gain>,
+        Scale<Duration>,
+        Scale<Pitch>,
+        Scale<Position>,
+        Scale<Position>,
+        Scale<Position>
         // tslint:disable-next-line no-any
-    ): [ Scale<Gain>, Scale<Duration>, Scale<Pitch> ] & Array<Scale<any>> => {
+        ] & Array<Scale<any>> => {
         const gainScale: Scale<Gain> = computeNonScale()
+
         const basisDuration: Duration = specs[ StandardSpec.BASIS_DURATION ] || musicalAs.Duration(1)
         const basisDurationTranslation: Translation<Duration> =
             specs[ StandardSpec.BASIS_DURATION_TRANSLATION ] || as.Translation<Duration>(0)
@@ -62,6 +81,7 @@ const materializeStandardScales:
             scalars: durationScalars,
             translation: basisDurationTranslation,
         }
+
         const basisFrequency: Pitch = specs[ StandardSpec.BASIS_FREQUENCY ] || musicalAs.Pitch(1)
         const basisFrequencyTranslation: Translation<Pitch> =
             specs[ StandardSpec.BASIS_FREQUENCY_TRANSLATION ] || as.Translation<Pitch>(0)
@@ -71,10 +91,30 @@ const materializeStandardScales:
             translation: basisFrequencyTranslation,
         }
 
+        const basisPosition: Position = specs[ StandardSpec.BASIS_POSITION ] || musicalAs.Position(1)
+        const basisPositionTranslation: Array<Translation<Position>> =
+            specs[ StandardSpec.BASIS_POSITION_TRANSLATION ] ||
+            [ 0, 0, 0 ].map((dimension: number) => as.Translation<Position>(dimension))
+        const xScale: Scale<Position> = {
+            basis: basisPosition,
+            translation: basisPositionTranslation[ 0 ],
+        }
+        const yScale: Scale<Position> = {
+            basis: basisPosition,
+            translation: basisPositionTranslation[ 0 ],
+        }
+        const zScale: Scale<Position> = {
+            basis: basisPosition,
+            translation: basisPositionTranslation[ 0 ],
+        }
+
         return [
             gainScale,
             durationsScale,
             pitchesScale,
+            xScale,
+            yScale,
+            zScale,
         ]
     }
 
