@@ -9,7 +9,7 @@ const computeSetTimeActions: (time: Point<Ms>) => Promise<Action[]> =
 
         return [
             { type: StateKey.PREPARED_VOICES, data: preparedVoices },
-            { type: StateKey.TIME_POSITION, data: time },
+            { type: StateKey.TIME, data: time },
         ]
     }
 

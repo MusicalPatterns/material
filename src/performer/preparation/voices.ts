@@ -10,7 +10,7 @@ const prepareVoices: (voices: Voice[], time?: Point<Ms>) => Promise<PreparedVoic
         let timeToStartAt: Point<Ms> = time || BEGINNING
         if (isUndefined(time)) {
             timeToStartAt = store.getState()
-                .get(StateKey.TIME_POSITION)
+                .get(StateKey.TIME)
         }
 
         return Promise.all(voices.map(async (voice: Voice): Promise<PreparedVoice> => {

@@ -43,7 +43,7 @@ const computeSubharmonicSeriesScale: <NumericType extends Number = Pitch>() => S
             .map((integer: Integer) => as.Scalar<NumericType>(reciprocal(integer))),
     })
 
-const computeFlatValuesScale: () => Scale<Value> =
+const computeFlatValueScale: () => Scale<Value> =
     // tslint:disable-next-line no-unnecessary-callback-wrapper
     (): Scale<Value> =>
         computeHarmonicSeriesScale()
@@ -124,7 +124,7 @@ const materializeStandardScales:
 export {
     materializeStandardScales,
     computeNonScale,
-    computeFlatValuesScale,
+    computeFlatValueScale,
     computeHarmonicSeriesScale,
     computeSubharmonicSeriesScale,
 }

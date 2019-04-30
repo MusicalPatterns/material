@@ -6,7 +6,7 @@ const initialState: ImmutableState = typedMap<State>({
     [ StateKey.PAUSED ]: true,
     [ StateKey.PREPARED_VOICES ]: [],
     [ StateKey.VOICES ]: [],
-    [ StateKey.TIME_POSITION ]: BEGINNING,
+    [ StateKey.TIME ]: BEGINNING,
     [ StateKey.TOTAL_DURATION ]: NO_DURATION,
     [ StateKey.SEGNO_TIME ]: BEGINNING,
     [ StateKey.IMMERSIVE_AUDIO_READY ]: false,

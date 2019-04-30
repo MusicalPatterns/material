@@ -11,7 +11,7 @@ export {
 export {
     materializeStandardScales,
     computeNonScale,
-    computeFlatValuesScale,
+    computeFlatValueScale,
     computeHarmonicSeriesScale,
     computeSubharmonicSeriesScale,
 } from './scales'
@@ -149,7 +149,7 @@ export {
 } from './types'
 
 export {
-    STANDARD_DURATION_SCALE_INDEX,
+    STANDARD_VALUE_SCALE_INDEX,
     STANDARD_PITCH_SCALE_INDEX,
     FULL_GAIN,
     SILENT,

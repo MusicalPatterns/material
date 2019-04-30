@@ -10,10 +10,10 @@ const onClockMessage: (event: MessageEvent) => void =
             return
         }
 
-        const time: Point<Ms> = state.get(StateKey.TIME_POSITION)
+        const time: Point<Ms> = state.get(StateKey.TIME)
         const clockTimeIncrement: Duration = musicalAs.Duration(event.data)
         const newTime: Point<Ms> = use.Translation(time, clockTimeIncrement)
-        store.dispatch({ type: StateKey.TIME_POSITION, data: newTime })
+        store.dispatch({ type: StateKey.TIME, data: newTime })
 
         const preparedVoices: PreparedVoice[] = state.get(StateKey.PREPARED_VOICES)
         preparedVoices.forEach((preparedVoice: PreparedVoice): void => {

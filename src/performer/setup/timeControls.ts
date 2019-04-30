@@ -9,7 +9,7 @@ const setupTimeControls: (onUpdate: OnUpdate) => void =
         store.subscribe((): void => {
             const state: ImmutableState = store.getState()
             const time: Point<Ms> = state
-                .get(StateKey.TIME_POSITION)
+                .get(StateKey.TIME)
             const totalDuration: Duration = state
                 .get(StateKey.TOTAL_DURATION)
             const segnoTime: Point<Ms> = state
