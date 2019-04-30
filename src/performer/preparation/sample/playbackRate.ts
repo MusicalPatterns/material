@@ -2,9 +2,9 @@ import {
     as,
     Cents,
     centsTranslationToPitchScalar,
+    insteadOf,
     musicalAs,
-    Pitch,
-    reciprocal,
+    product,
     Scalar,
     Tone,
     use,
@@ -18,14 +18,14 @@ const computePlaybackRate: (sampleData: SampleData, tone: Tone) => Tone =
             return musicalAs.Tone(1)
         }
 
-        const pitch: Pitch = musicalAs.Pitch(use.Scalar(
-            as.number(tone),
-            as.Scalar(as.number(reciprocal(STANDARDIZED_SAMPLE_PITCH_OF_C5))),
-        ))
-        const sampleToneScalar: Scalar<Pitch> =
-            centsTranslationToPitchScalar(sampleData.centsTranslation || as.Translation<Cents>(0))
+        const sampleToneScalar: Scalar<Tone> = insteadOf<Scalar, Tone>(
+            centsTranslationToPitchScalar(sampleData.centsTranslation || as.Translation<Cents>(0)),
+        )
 
-        return musicalAs.Tone(as.number(use.Scalar(pitch, sampleToneScalar)))
+        return use.Scalar(
+            product(tone, STANDARDIZED_SAMPLE_PITCH_OF_C5),
+            sampleToneScalar,
+        )
     }
 
 export {
