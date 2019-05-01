@@ -24,11 +24,11 @@ const computeStartSound: (parameters: {
 
         const startSound: StartSound = ({ gain, tone, playbackRate, location }: SoundToPlay): void => {
             const sourceNode: SourceNode = computeSourceNode({
+                frequency: tone,
                 immersiveAudioEnabled,
                 playbackRate,
                 sourceType,
                 timbre,
-                tone,
                 webVr,
             })
             startedSound.sourceNode = sourceNode

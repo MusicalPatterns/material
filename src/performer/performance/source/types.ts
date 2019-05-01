@@ -4,11 +4,11 @@ import { SourceType, Timbre } from '../types'
 
 // tslint:disable-next-line no-any
 interface ComputeSourceNodeParameters extends ObjectOf<any> {
+    frequency: Tone,
     immersiveAudioEnabled: boolean,
     playbackRate?: Tone,
     sourceType: SourceType,
     timbre: Timbre,
-    tone: Tone,
     webVr?: Vrb,
 }
 
