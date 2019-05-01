@@ -37,7 +37,7 @@ const computeScaleProperties: <FeatureType extends Number = number>(scaleStuffPa
             use.Ordinal(scales[ abstractName ] as Array<Scale<FeatureType>>, scaleIndex)
         const {
             translation: scaleTranslation = ADDITIVE_IDENTITY,
-            basis: scaleBasis = 1 as unknown as AbstractToPhysical<FeatureType>,
+            basis: basis = 1 as unknown as AbstractToPhysical<FeatureType>,
             scalars = [],
         } = scale
 
@@ -45,7 +45,7 @@ const computeScaleProperties: <FeatureType extends Number = number>(scaleStuffPa
             undefined :
             use.Ordinal(scalars, index)
 
-        return { scaleTranslation, scaleBasis, scaleScalar }
+        return { scaleTranslation, basis, scaleScalar }
     }
 
 const compileSoundFeature: <FeatureType extends Number = number>(
@@ -61,14 +61,14 @@ const compileSoundFeature: <FeatureType extends Number = number>(
             scaleIndex = INITIAL,
         } = noteFeature
 
-        const { scaleBasis, scaleScalar, scaleTranslation } = computeScaleProperties({
+        const { basis, scaleScalar, scaleTranslation } = computeScaleProperties({
             abstractName,
             index,
             options,
             scaleIndex,
         })
 
-        let soundFeature: AbstractToPhysical<FeatureType> = scaleBasis
+        let soundFeature: AbstractToPhysical<FeatureType> = basis
 
         soundFeature = use.Scalar(
             soundFeature,

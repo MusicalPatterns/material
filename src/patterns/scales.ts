@@ -13,6 +13,7 @@ import {
     Position,
     range,
     reciprocal,
+    Scalar,
     Tone,
     Translation,
     Value,
@@ -52,7 +53,10 @@ const computeFlatValueScale: () => Scale<Value> =
 const materializeStandardScales:
     <SpecsType extends StandardSpecs>(
         specs: SpecsType,
-        options?: MaterializeStandardScalesOptions,
+        options?: {
+            pitchScalars?: Array<Scalar<Pitch>>,
+            valueScalars?: Array<Scalar<Value>>,
+        },
     ) => Scales =
     // tslint:disable-next-line cyclomatic-complexity
     <SpecsType extends StandardSpecs>(

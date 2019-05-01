@@ -16,7 +16,7 @@ interface ComputeScalePropertiesParameters<FeatureType extends Number = number> 
 }
 
 interface ScaleProperties<FeatureType extends Number = number> {
-    scaleBasis: AbstractToPhysical<FeatureType>,
+    basis: AbstractToPhysical<FeatureType>,
     scaleScalar: Maybe<Scalar<FeatureType>>,
     scaleTranslation: Translation<FeatureType>,
 }
