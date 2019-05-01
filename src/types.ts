@@ -4,7 +4,7 @@ import {
     Duration,
     Gain,
     Intensity,
-    Location,
+    Location, Maybe,
     Pitch,
     Position,
     Scalar,
@@ -39,7 +39,8 @@ type Scales = Partial<{
     [ AbstractName.PITCH ]: Array<Scale<Pitch>>,
     [ AbstractName.POSITION ]: Array<Scale<Position>>,
     [ AbstractName.VALUE ]: Array<Scale<Value>>,
-}>
+    // tslint:disable-next-line max-union-size
+}> & Partial<{ [Index in Partial<AbstractName>]: Array<Scale<Intensity | Pitch | Position | Value>> }>
 
 type AbstractToPhysical<AbstractType> =
     AbstractType extends Value ? Duration :
