@@ -154,6 +154,7 @@ export {
     Section,
     TimbreName,
     PositionFeature,
+    AbstractName,
 } from './compiler'
 export {
     OnUpdate,
@@ -181,4 +182,5 @@ export {
     MaterializeScales,
     MaterializeEntities,
     Entity,
+    Scales,
 } from './types'
