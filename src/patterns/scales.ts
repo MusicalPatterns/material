@@ -17,7 +17,8 @@ import {
     Translation,
     Value,
 } from '@musical-patterns/utilities'
-import { Scale } from '../types'
+import { AbstractName } from '../compiler'
+import { Scale, Scales } from '../types'
 // tslint:disable-next-line max-line-length
 import { ENOUGH_HARMONIC_SERIES_STEPS_TO_LEAVE_HUMAN_HEARING_RANGE_FROM_THREE_OCTAVES_BELOW_PITCH_STANDARD } from './constants'
 import { MaterializeStandardScalesOptions } from './types'
@@ -52,28 +53,12 @@ const materializeStandardScales:
     <SpecsType extends StandardSpecs>(
         specs: SpecsType,
         options?: MaterializeStandardScalesOptions,
-    ) => [
-        Scale<Intensity>,
-        Scale<Value>,
-        Scale<Pitch>,
-        Scale<Position>,
-        Scale<Position>,
-        Scale<Position>
-        // tslint:disable-next-line no-any
-        ] & Array<Scale<any>> =
+    ) => Scales =
     // tslint:disable-next-line cyclomatic-complexity
     <SpecsType extends StandardSpecs>(
         specs: SpecsType,
         { valueScalars, pitchScalars }: MaterializeStandardScalesOptions = {},
-    ): [
-        Scale<Intensity>,
-        Scale<Value>,
-        Scale<Pitch>,
-        Scale<Position>,
-        Scale<Position>,
-        Scale<Position>
-        // tslint:disable-next-line no-any
-        ] & Array<Scale<any>> => {
+    ): Scales => {
         const intensityScale: Scale<Intensity> = computeNonScale()
 
         const msPhysicalization: Duration = specs[ StandardSpec.MS_PHYSICALIZATION ] || musicalAs.Duration(1)
@@ -88,7 +73,7 @@ const materializeStandardScales:
         const hzPhysicalization: Tone = specs[ StandardSpec.HZ_PHYSICALIZATION ] || musicalAs.Tone(1)
         const hzPhysicalizationTranslation: Translation<Tone> =
             specs[ StandardSpec.HZ_PHYSICALIZATION_TRANSLATION ] || as.Translation<Tone>(0)
-        const pitchesScale: Scale<Pitch> = {
+        const pitchScale: Scale<Pitch> = {
             basis: hzPhysicalization,
             scalars: pitchScalars,
             translation: hzPhysicalizationTranslation,
@@ -111,14 +96,12 @@ const materializeStandardScales:
             translation: metersPhysicalizationTranslation[ 0 ],
         }
 
-        return [
-            intensityScale,
-            valueScale,
-            pitchesScale,
-            xScale,
-            yScale,
-            zScale,
-        ]
+        return {
+            [ AbstractName.INTENSITY ]: [ intensityScale ],
+            [ AbstractName.VALUE ]: [ valueScale ],
+            [ AbstractName.PITCH ]: [ pitchScale ],
+            [ AbstractName.POSITION ]: [ xScale, yScale, zScale ],
+        }
     }
 
 export {
