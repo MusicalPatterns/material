@@ -1,5 +1,5 @@
 import { Cardinal } from '@musical-patterns/utilities'
-import { Entity, Scale } from '../../types'
+import { Entity, Scales } from '../../types'
 import { Note } from '../sound'
 
 interface Section {
@@ -9,12 +9,12 @@ interface Section {
 
 interface CompileVoiceParameters {
     entity: Entity,
-    scales?: Scale[]
+    scales?: Scales,
 }
 
 interface CompileVoicesParameters {
     entities: Entity[],
-    scales?: Scale[]
+    scales?: Scales,
 }
 
 export {

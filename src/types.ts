@@ -12,7 +12,7 @@ import {
     Translation,
     Value,
 } from '@musical-patterns/utilities'
-import { Section, TimbreName } from './compiler'
+import { AbstractName, Section, TimbreName } from './compiler'
 
 interface Material {
     materializeEntities: MaterializeEntities,
@@ -20,19 +20,26 @@ interface Material {
 }
 
 type MaterializeEntities = (specs?: any) => Entity[]
-type MaterializeScales = (specs?: any) => Scale[]
+type MaterializeScales = (specs?: any) => Scales
 
-interface Entity {
-    delay?: Duration,
-    sections?: Section[],
-    timbreName?: TimbreName,
-}
+type Entity = Partial<{
+    delay: Duration,
+    sections: Section[],
+    timbreName: TimbreName,
+}>
 
-interface Scale<NumericType extends Number = number> {
-    basis?: AbstractToPhysical<NumericType>,
-    scalars?: Array<Scalar<NumericType>>,
-    translation?: Translation<AbstractToPhysical<NumericType>>,
-}
+type Scale<NumericType extends Number = number> = Partial<{
+    basis: AbstractToPhysical<NumericType>,
+    scalars: Array<Scalar<NumericType>>,
+    translation: Translation<AbstractToPhysical<NumericType>>,
+}>
+
+type Scales = Partial<{
+    [ AbstractName.INTENSITY ]: Array<Scale<Intensity>>,
+    [ AbstractName.PITCH ]: Array<Scale<Pitch>>,
+    [ AbstractName.POSITION ]: Array<Scale<Position>>,
+    [ AbstractName.VALUE ]: Array<Scale<Value>>,
+}>
 
 type AbstractToPhysical<AbstractType> =
     AbstractType extends Value ? Duration :
@@ -48,4 +55,5 @@ export {
     Entity,
     Scale,
     AbstractToPhysical,
+    Scales,
 }

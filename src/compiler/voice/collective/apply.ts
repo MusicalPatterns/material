@@ -1,6 +1,6 @@
 import { isEmpty, Maybe, Ms, Ordinal, Point, use } from '@musical-patterns/utilities'
 import { Sound, Voice } from '../../../performer'
-import { Entity, Scale } from '../../../types'
+import { Entity, Scales } from '../../../types'
 import { SectionInfo } from '../individual'
 import { Section } from '../types'
 import { fillGap } from './fillGap'
@@ -20,7 +20,7 @@ const applyCollectiveInfos: (parameters: {
     entities: Entity[],
     entityIndex: Ordinal<Entity[]>,
     individualSegnoTime: Point<Ms>,
-    scales: Maybe<Scale[]>,
+    scales: Maybe<Scales>,
     sectionInfos: SectionInfo[],
     voice: Voice,
 }) => Voice =
@@ -40,7 +40,7 @@ const applyCollectiveInfos: (parameters: {
         if (!collectiveShareSegnoTime) {
             voice.sounds = fillGap({
                 collectiveEndTime,
-                scales: scales || [],
+                scales: scales || {},
                 sectionInfos,
                 sections: computeSections(entities, entityIndex),
                 sounds: voice.sounds || [],

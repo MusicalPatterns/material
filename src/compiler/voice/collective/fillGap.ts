@@ -1,6 +1,6 @@
 import { as, difference, Duration, isUndefined, Maybe, Ms, musicalAs, Point } from '@musical-patterns/utilities'
 import { Sound } from '../../../performer'
-import { Scale } from '../../../types'
+import { Scales } from '../../../types'
 import { computeSoundsDuration } from '../durations'
 import { SectionInfo } from '../individual'
 import { Section } from '../types'
@@ -10,7 +10,7 @@ import { FillGapParameters } from './types'
 
 const fillGap: (parameters: {
     collectiveEndTime: Point<Ms>,
-    scales: Scale[],
+    scales: Scales,
     sectionInfos: SectionInfo[],
     sections: Section[],
     sounds: Sound[],

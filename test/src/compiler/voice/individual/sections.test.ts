@@ -2,7 +2,7 @@ import { as, musicalAs, Value } from '@musical-patterns/utilities'
 import {
     computeIndividualSoundsAndSectionInfos,
     Note,
-    Scale,
+    Scales,
     Section,
     Sound,
     SoundsAndSectionInfos,
@@ -22,7 +22,7 @@ describe('compute individual sounds and section infos', () => {
                 notes: [ otherTestNote ],
             },
         ]
-        const scales: Scale[] = []
+        const scales: Scales = {}
 
         const actualSoundsAndSectionInfos: SoundsAndSectionInfos = computeIndividualSoundsAndSectionInfos(sections, { scales })
 

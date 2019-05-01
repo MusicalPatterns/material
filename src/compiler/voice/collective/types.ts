@@ -1,18 +1,18 @@
 import { Duration, Ms, Ordinal, Point } from '@musical-patterns/utilities'
 import { Sound, Voice } from '../../../performer'
-import { Entity, Scale } from '../../../types'
+import { Entity, Scales } from '../../../types'
 import { SectionInfo } from '../individual'
 import { CompileVoicesParameters, Section } from '../types'
 
 interface ComputeRepetendSoundsParameters {
-    scales: Scale[],
+    scales: Scales,
     sectionInfos: SectionInfo[],
     sections: Section[],
 }
 
 interface FillGapParameters {
     collectiveEndTime: Point<Ms>,
-    scales: Scale[],
+    scales: Scales,
     sectionInfos: SectionInfo[],
     sections: Section[],
     sounds: Sound[],

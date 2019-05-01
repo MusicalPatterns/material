@@ -11,19 +11,25 @@ import {
     Value,
 } from '@musical-patterns/utilities'
 import {
+    AbstractName,
     CompiledPattern,
     compileVoices,
     Entity,
     NON_SEGNO_INDEX,
     Note,
     OscillatorName,
-    Scale,
+    Scales,
     Sound,
     SourceType,
 } from '../../../../src/indexForTest'
 
 describe('compile voices', () => {
-    const scales: Scale[] = [ { scalars: [ as.Scalar(3) ] } ]
+    const scales: Scales = {
+        [ AbstractName.VALUE ]: [ { scalars: [ as.Scalar<Value>(3) ] } ],
+        [ AbstractName.INTENSITY ]: [ { scalars: [ as.Scalar<Intensity>(3) ] } ],
+        [ AbstractName.PITCH ]: [ { scalars: [ as.Scalar<Pitch>(3) ] } ],
+        [ AbstractName.POSITION ]: [ { scalars: [ as.Scalar<Position>(3) ] } ],
+    }
 
     const testNote: Note = {
         envelope: { scalar: as.Scalar<Value>(3) },

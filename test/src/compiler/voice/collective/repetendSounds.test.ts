@@ -1,8 +1,8 @@
 import { as, Maybe, musicalAs, Value } from '@musical-patterns/utilities'
-import { computeRepetendSounds, Scale, Section, SectionInfo, Sound } from '../../../../../src/indexForTest'
+import { computeRepetendSounds, Scales, Section, SectionInfo, Sound } from '../../../../../src/indexForTest'
 
 describe('compute repetend sounds', () => {
-    const scales: Scale[] = []
+    const scales: Scales = {}
 
     it('returns the section that repeats forever, compiled notes to sounds', () => {
         const sectionInfos: SectionInfo[] = [

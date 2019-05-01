@@ -19,7 +19,7 @@ import {
 import { Sound } from '../../performer'
 import { DEFAULT_TRANSLATION_FOR_ALMOST_FULL_ENVELOPE } from './constants'
 import { compileSoundFeature } from './features'
-import { CompileSoundsOptions, Feature, Note, PositionFeature } from './types'
+import { AbstractName, CompileSoundsOptions, Feature, Note, PositionFeature } from './types'
 
 const computeDefaultFeature: <FeatureType extends Number = number>() => Feature<FeatureType> =
     <FeatureType extends Number = number>(): Feature<FeatureType> => ({
@@ -35,9 +35,9 @@ const compileLocation: (position?: PositionFeature, options?: CompileSoundsOptio
             position instanceof Array ?
                 position.map(
                     (positionElement: Feature<Position>) =>
-                        compileSoundFeature(positionElement, options as CompileSoundsOptions<Position>))
+                        compileSoundFeature(positionElement, AbstractName.POSITION, options as CompileSoundsOptions))
                 :
-                [ compileSoundFeature(position, options as CompileSoundsOptions<Position>) ]
+                [ compileSoundFeature(position, AbstractName.POSITION, options as CompileSoundsOptions) ]
             :
             []
         while (location.length < as.number(THREE_DIMENSIONAL)) {
@@ -50,7 +50,7 @@ const compileLocation: (position?: PositionFeature, options?: CompileSoundsOptio
 const compileSustain: (note: Note, duration: Duration, options?: CompileSoundsOptions) => Duration =
     (note: Note, duration: Duration, options?: CompileSoundsOptions): Duration => {
         const envelope: Feature<Value> = note.envelope || note.value || computeDefaultFeature()
-        const sustain: Duration = compileSoundFeature(envelope, options as CompileSoundsOptions<Value>)
+        const sustain: Duration = compileSoundFeature(envelope, AbstractName.VALUE, options as CompileSoundsOptions)
 
         return sustain < duration ?
             sustain :
@@ -65,9 +65,9 @@ const compileSound: (note: Note, options?: CompileSoundsOptions) => Sound =
             pitch = computeDefaultFeature<Pitch>(),
         } = note
 
-        const duration: Duration = compileSoundFeature(value, options as CompileSoundsOptions<Value>)
-        const gain: Gain = compileSoundFeature(intensity, options as CompileSoundsOptions<Intensity>)
-        const tone: Tone = compileSoundFeature(pitch, options as CompileSoundsOptions<Pitch>)
+        const duration: Duration = compileSoundFeature(value, AbstractName.VALUE, options as CompileSoundsOptions)
+        const gain: Gain = compileSoundFeature(intensity, AbstractName.INTENSITY, options as CompileSoundsOptions)
+        const tone: Tone = compileSoundFeature(pitch, AbstractName.PITCH, options as CompileSoundsOptions)
 
         const location: Coordinate<Location> = compileLocation(note.position, options)
         const sustain: Duration = compileSustain(note, duration, options)

@@ -4,6 +4,7 @@ export {
     Feature,
     Note,
     PositionFeature,
+    AbstractName,
 } from './sound'
 export {
     TimbreNameEnum,

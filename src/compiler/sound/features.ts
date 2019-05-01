@@ -11,24 +11,30 @@ import {
     Translation,
     use,
 } from '@musical-patterns/utilities'
-import { AbstractToPhysical, Scale } from '../../types'
+import { AbstractToPhysical, Scale, Scales } from '../../types'
 import { COMPILER_PRECISION } from './constants'
-import { CompileSoundsOptions, ComputeScalePropertiesParameters, Feature, ScaleProperties } from './types'
+import { AbstractName, CompileSoundsOptions, ComputeScalePropertiesParameters, Feature, ScaleProperties } from './types'
+
+const emptyScales: Scales = {}
 
 const computeScaleProperties: <FeatureType extends Number = number>(scaleStuffParameters: {
+    abstractName: AbstractName,
     index: Ordinal<Array<Scalar<FeatureType>>>,
-    options?: CompileSoundsOptions<FeatureType>,
+    options?: CompileSoundsOptions,
     scaleIndex: Ordinal<Array<Scale<FeatureType>>>,
 }) => ScaleProperties<FeatureType> =
     <FeatureType extends Number = number>(
         {
+            abstractName,
             index,
             scaleIndex,
             options,
         }: ComputeScalePropertiesParameters<FeatureType>,
     ): ScaleProperties<FeatureType> => {
-        const { scales = [] } = options || {}
-        const scale: Scale<FeatureType> = isEmpty(scales) ? { scalars: [] } : use.Ordinal(scales, scaleIndex)
+        const { scales = emptyScales } = options || {}
+        const scale: Scale<FeatureType> = isEmpty((scales[ abstractName ] || []) as Array<Scale<FeatureType>>) ?
+            { scalars: [] } :
+            use.Ordinal(scales[ abstractName ] as Array<Scale<FeatureType>>, scaleIndex)
         const {
             translation: scaleTranslation = ADDITIVE_IDENTITY,
             basis: scaleBasis = 1 as unknown as AbstractToPhysical<FeatureType>,
@@ -43,10 +49,10 @@ const computeScaleProperties: <FeatureType extends Number = number>(scaleStuffPa
     }
 
 const compileSoundFeature: <FeatureType extends Number = number>(
-    noteFeature: Feature<FeatureType>, options?: { scales?: Array<Scale<FeatureType>> },
+    noteFeature: Feature<FeatureType>, abstractName: AbstractName, options?: { scales?: Scales },
 ) => AbstractToPhysical<FeatureType> =
     <FeatureType extends Number = number>(
-        noteFeature: Feature<FeatureType>, options?: CompileSoundsOptions<FeatureType>,
+        noteFeature: Feature<FeatureType>, abstractName: AbstractName, options?: CompileSoundsOptions,
     ): AbstractToPhysical<FeatureType> => {
         const {
             index = INITIAL,
@@ -55,7 +61,12 @@ const compileSoundFeature: <FeatureType extends Number = number>(
             scaleIndex = INITIAL,
         } = noteFeature
 
-        const { scaleBasis, scaleScalar, scaleTranslation } = computeScaleProperties({ index, scaleIndex, options })
+        const { scaleBasis, scaleScalar, scaleTranslation } = computeScaleProperties({
+            abstractName,
+            index,
+            options,
+            scaleIndex,
+        })
 
         let soundFeature: AbstractToPhysical<FeatureType> = scaleBasis
 

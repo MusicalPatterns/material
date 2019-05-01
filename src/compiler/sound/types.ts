@@ -1,5 +1,5 @@
 import { Intensity, Maybe, Ordinal, Pitch, Position, Scalar, Translation, Value } from '@musical-patterns/utilities'
-import { AbstractToPhysical, Scale } from '../../types'
+import { AbstractToPhysical, Scale, Scales } from '../../types'
 
 interface Feature<FeatureType extends Number = number> {
     index?: Ordinal<Array<Scalar<FeatureType>>>,
@@ -9,8 +9,9 @@ interface Feature<FeatureType extends Number = number> {
 }
 
 interface ComputeScalePropertiesParameters<FeatureType extends Number = number> {
+    abstractName: AbstractName,
     index: Ordinal<Array<Scalar<FeatureType>>>,
-    options?: CompileSoundsOptions<FeatureType>,
+    options?: CompileSoundsOptions,
     scaleIndex: Ordinal<Array<Scale<FeatureType>>>,
 }
 
@@ -30,8 +31,15 @@ interface Note {
     value?: Feature<Value>,
 }
 
-interface CompileSoundsOptions<FeatureType extends Number = number> {
-    scales?: Array<Scale<FeatureType>>,
+interface CompileSoundsOptions {
+    scales?: Scales,
+}
+
+enum AbstractName {
+    VALUE = 'VALUE',
+    POSITION = 'POSITION',
+    PITCH = 'PITCH',
+    INTENSITY = 'INTENSITY',
 }
 
 export {
@@ -41,4 +49,5 @@ export {
     ComputeScalePropertiesParameters,
     CompileSoundsOptions,
     PositionFeature,
+    AbstractName,
 }

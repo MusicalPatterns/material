@@ -7,4 +7,5 @@ export {
     Feature,
     Note,
     CompileSoundsOptions,
+    AbstractName,
 } from './types'

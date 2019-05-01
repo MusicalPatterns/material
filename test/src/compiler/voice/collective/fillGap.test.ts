@@ -34,7 +34,7 @@ describe('fill gap', () => {
 
         const actualFilledGapSounds: Sound[] = fillGap({
             collectiveEndTime: as.Point<Ms>(30),
-            scales: [],
+            scales: {},
             sectionInfos,
             sections,
             sounds: originalSounds,
@@ -99,7 +99,7 @@ describe('fill gap', () => {
 
         const actualFilledGapSounds: Sound[] = fillGap({
             collectiveEndTime: as.Point<Ms>(100),
-            scales: [],
+            scales: {},
             sectionInfos,
             sections,
             sounds: originalSounds,

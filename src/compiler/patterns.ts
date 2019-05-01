@@ -1,5 +1,5 @@
 import { CompiledPattern } from '../interface'
-import { Entity, Material, Scale } from '../types'
+import { Entity, Material, Scales } from '../types'
 import { CompilePatternParameters } from './types'
 import { compileVoices } from './voice'
 
@@ -17,7 +17,7 @@ const compilePattern: (compilePatternParameters: {
         const { materializeEntities, materializeScales }: Material = material
 
         const entities: Entity[] = materializeEntities(specsToCompileWith)
-        const scales: Scale[] = materializeScales ? materializeScales(specsToCompileWith) : []
+        const scales: Scales = materializeScales ? materializeScales(specsToCompileWith) : {}
 
         return compileVoices({ entities, scales })
     }

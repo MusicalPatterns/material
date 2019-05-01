@@ -8,6 +8,7 @@ export {
     Feature,
     Note,
     CompileSoundsOptions,
+    AbstractName,
 } from './sound/indexForTest'
 export {
     compileSourceRequest,

@@ -1,12 +1,26 @@
-import { as, BEGINNING, insteadOf, musicalAs, NO_DURATION, ONE_TENTH, Scalar, use } from '@musical-patterns/utilities'
 import {
+    as,
+    BEGINNING,
+    insteadOf,
+    Intensity,
+    musicalAs,
+    NO_DURATION,
+    ONE_TENTH,
+    Pitch,
+    Position,
+    Scalar,
+    use,
+    Value,
+} from '@musical-patterns/utilities'
+import {
+    AbstractName,
     CompiledPattern,
     compilePattern,
     Entity,
     Material,
     Note,
     OscillatorName,
-    Scale,
+    Scales,
     Sound,
     SourceType,
 } from '../../../src/indexForTest'
@@ -35,11 +49,28 @@ describe('compile pattern', () => {
 
     const material: Material = {
         materializeEntities: (): Entity[] => [],
-        materializeScales: (testSpecs: TestSpecs): Scale[] => [
-            {
-                scalars: [ insteadOf<Scalar>(testSpecs.testSpec) ],
-            },
-        ],
+        materializeScales: (testSpecs: TestSpecs): Scales => ({
+            [ AbstractName.VALUE ]: [
+                {
+                    scalars: [ insteadOf<Scalar, Value>(testSpecs.testSpec) ],
+                },
+            ],
+            [ AbstractName.PITCH ]: [
+                {
+                    scalars: [ insteadOf<Scalar, Pitch>(testSpecs.testSpec) ],
+                },
+            ],
+            [ AbstractName.INTENSITY ]: [
+                {
+                    scalars: [ insteadOf<Scalar, Intensity>(testSpecs.testSpec) ],
+                },
+            ],
+            [ AbstractName.POSITION ]: [
+                {
+                    scalars: [ insteadOf<Scalar, Position>(testSpecs.testSpec) ],
+                },
+            ],
+        }),
     }
 
     beforeEach(() => {

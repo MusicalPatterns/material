@@ -1,26 +1,35 @@
 // tslint:disable no-any
 
 import { as, musicalAs, Pitch, Scalar, Tone } from '@musical-patterns/utilities'
-import { compileSoundFeature, CompileSoundsOptions, Feature, Scale } from '../../../../src/indexForTest'
+import {
+    AbstractName,
+    compileSoundFeature,
+    CompileSoundsOptions,
+    Feature,
+    Scale,
+    Scales,
+} from '../../../../src/indexForTest'
 
-describe('compile sound feature', () => {
-    let scales: Array<Scale<Pitch>>
-    let options: CompileSoundsOptions<Pitch>
+describe('compile feature', () => {
+    let scales: Scales
+    let options: CompileSoundsOptions
     beforeEach(() => {
-        scales = [
-            {
-                scalars: [ 2, 4, 8, 16 ].map((numeral: number) => as.Scalar<Pitch>(numeral)),
-            },
-            {
-                scalars: [ 3, 9, 27, 81 ].map((numeral: number) => as.Scalar<Pitch>(numeral)),
-            },
-        ]
+        scales = {
+            [ AbstractName.PITCH ]: [
+                {
+                    scalars: [ 2, 4, 8, 16 ].map((numeral: number) => as.Scalar<Pitch>(numeral)),
+                },
+                {
+                    scalars: [ 3, 9, 27, 81 ].map((numeral: number) => as.Scalar<Pitch>(numeral)),
+                },
+            ],
+        }
         options = { scales }
     })
 
     it('defaults scale index to zero, index to zero, translation to zero, and scalar to zero', () => {
         const noteFeature: Feature<Pitch> = {}
-        const soundFeature: Tone = compileSoundFeature(noteFeature, options)
+        const soundFeature: Tone = compileSoundFeature(noteFeature, AbstractName.PITCH, options)
 
         expect(soundFeature)
             .toBe(musicalAs.Tone(2))
@@ -30,7 +39,7 @@ describe('compile sound feature', () => {
         const noteFeature: Feature<Pitch> = {
             index: as.Ordinal<Array<Scalar<Pitch>>>(2),
         }
-        const soundFeature: Tone = compileSoundFeature(noteFeature, options)
+        const soundFeature: Tone = compileSoundFeature(noteFeature, AbstractName.PITCH, options)
 
         expect(soundFeature)
             .toBe(musicalAs.Tone(8))
@@ -40,7 +49,7 @@ describe('compile sound feature', () => {
         const noteFeature: Feature<Pitch> = {
             scaleIndex: as.Ordinal<Array<Scale<Pitch>>>(1),
         }
-        const soundFeature: Tone = compileSoundFeature(noteFeature, options)
+        const soundFeature: Tone = compileSoundFeature(noteFeature, AbstractName.PITCH, options)
 
         expect(soundFeature)
             .toBe(musicalAs.Tone(3))
@@ -50,7 +59,7 @@ describe('compile sound feature', () => {
         const noteFeature: Feature<Pitch> = {
             scalar: as.Scalar<Pitch>(1.25),
         }
-        const soundFeature: Tone = compileSoundFeature(noteFeature, options)
+        const soundFeature: Tone = compileSoundFeature(noteFeature, AbstractName.PITCH, options)
 
         expect(soundFeature)
             .toBe(musicalAs.Tone(2.5))
@@ -60,7 +69,7 @@ describe('compile sound feature', () => {
         const noteFeature: Feature<Pitch> = {
             translation: as.Translation<Pitch>(0.1),
         }
-        const soundFeature: Tone = compileSoundFeature(noteFeature, options)
+        const soundFeature: Tone = compileSoundFeature(noteFeature, AbstractName.PITCH, options)
 
         expect(soundFeature)
             .toBe(musicalAs.Tone(2.1))
@@ -68,7 +77,11 @@ describe('compile sound feature', () => {
 
     it(`defaults to 1 if the scale's scalars are empty`, () => {
         const noteFeature: Feature<Pitch> = {}
-        const soundFeature: Tone = compileSoundFeature(noteFeature, { scales: [ { scalars: [] } ] })
+        const soundFeature: Tone = compileSoundFeature(
+            noteFeature,
+            AbstractName.PITCH,
+            { scales: { [ AbstractName.PITCH ]: [ { scalars: [] } ] } },
+        )
 
         expect(soundFeature)
             .toBe(musicalAs.Tone(1))
@@ -80,7 +93,11 @@ describe('compile sound feature', () => {
             translation: as.Translation<Tone>(3),
         }
         const noteFeature: Feature<Pitch> = {}
-        const soundFeature: Tone = compileSoundFeature(noteFeature, { scales: [ scaleWithTranslation ] })
+        const soundFeature: Tone = compileSoundFeature(
+            noteFeature,
+            AbstractName.PITCH,
+            { scales: { [ AbstractName.PITCH ]: [ scaleWithTranslation ] } },
+        )
 
         expect(soundFeature)
             .toBe(musicalAs.Tone(5))
@@ -92,7 +109,11 @@ describe('compile sound feature', () => {
             scalars: [ 2, 4, 6, 8 ].map((numeral: number) => as.Scalar<Pitch>(numeral)),
         }
         const noteFeature: Feature<Pitch> = {}
-        const soundFeature: Tone = compileSoundFeature(noteFeature, { scales: [ scaleWithScalar ] })
+        const soundFeature: Tone = compileSoundFeature(
+            noteFeature,
+            AbstractName.PITCH,
+            { scales: { [ AbstractName.PITCH ]: [ scaleWithScalar ] } },
+        )
 
         expect(soundFeature)
             .toBe(musicalAs.Tone(14))
@@ -103,7 +124,7 @@ describe('compile sound feature', () => {
             scalar: as.Scalar<Pitch>(1.25),
             translation: as.Translation<Pitch>(0.1),
         }
-        const soundFeature: Tone = compileSoundFeature(noteFeature, options)
+        const soundFeature: Tone = compileSoundFeature(noteFeature, AbstractName.PITCH, options)
 
         expect(soundFeature)
             .toBe(musicalAs.Tone(2.6))
@@ -116,7 +137,11 @@ describe('compile sound feature', () => {
             scalars: [ 2, 4, 6, 8 ].map((numeral: number) => as.Scalar<Pitch>(numeral)),
             translation: as.Translation<Tone>(3),
         }
-        const soundFeature: Tone = compileSoundFeature(noteFeature, { scales: [ scaleWithScalarAndTranslation ] })
+        const soundFeature: Tone = compileSoundFeature(
+            noteFeature,
+            AbstractName.PITCH,
+            { scales: { [ AbstractName.PITCH ]: [ scaleWithScalarAndTranslation ] } },
+        )
 
         expect(soundFeature)
             .toBe(musicalAs.Tone(17))
@@ -132,21 +157,25 @@ describe('compile sound feature', () => {
             scalars: [ 2, 4, 6, 8 ].map((numeral: number) => as.Scalar<Pitch>(numeral)),
             translation: as.Translation<Tone>(3),
         }
-        const soundFeature: Tone = compileSoundFeature(noteFeature, { scales: [ scaleWithScalarAndTranslation ] })
+        const soundFeature: Tone = compileSoundFeature(
+            noteFeature,
+            AbstractName.PITCH,
+            { scales: { [ AbstractName.PITCH ]: [ scaleWithScalarAndTranslation ] } },
+        )
 
         expect(soundFeature)
             .toBe(musicalAs.Tone(20.6))
     })
 
     it('handles empty scales', () => {
-        const soundFeature: Tone = compileSoundFeature<Pitch>({}, { scales: [] })
+        const soundFeature: Tone = compileSoundFeature<Pitch>({}, AbstractName.PITCH, { scales: {} })
 
         expect(soundFeature)
             .toBe(musicalAs.Tone(1))
     })
 
     it('handles missing scales', () => {
-        const soundFeature: Tone = compileSoundFeature<Pitch>({})
+        const soundFeature: Tone = compileSoundFeature<Pitch>({}, AbstractName.PITCH)
 
         expect(soundFeature)
             .toBe(musicalAs.Tone(1))
@@ -156,7 +185,7 @@ describe('compile sound feature', () => {
         const noteFeature: Feature<Pitch> = {
             translation: as.Translation<Pitch>(0.1239147293578729037982375),
         }
-        const soundFeature: Tone = compileSoundFeature(noteFeature, options)
+        const soundFeature: Tone = compileSoundFeature(noteFeature, AbstractName.PITCH, options)
 
         expect(soundFeature)
             .toBe(musicalAs.Tone(2.12391))
@@ -166,7 +195,7 @@ describe('compile sound feature', () => {
         const noteFeature: Feature<Pitch> = {
             scalar: as.Scalar<Pitch>(1.000000001e-9),
         }
-        const soundFeature: Tone = compileSoundFeature(noteFeature, options)
+        const soundFeature: Tone = compileSoundFeature(noteFeature, AbstractName.PITCH, options)
 
         expect(soundFeature)
             .toBe(musicalAs.Tone(0))

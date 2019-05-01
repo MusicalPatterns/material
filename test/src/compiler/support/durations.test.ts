@@ -1,5 +1,5 @@
 import { as, Duration, musicalAs, Scalar, Value } from '@musical-patterns/utilities'
-import { computeNotesDuration, Note, Scale } from '../../../../src/indexForTest'
+import { AbstractName, computeNotesDuration, Note, Scales } from '../../../../src/indexForTest'
 
 describe('durations', () => {
     describe('of notes', () => {
@@ -16,9 +16,11 @@ describe('durations', () => {
                     },
                 },
             ]
-            const scales: Scale[] = [
-                { scalars: [ 5, 7 ].map(as.Scalar) },
-            ]
+            const scales: Scales = {
+                [ AbstractName.VALUE ]: [
+                    { scalars: [ 5, 7 ].map((numeral: number) => as.Scalar<Value>(numeral)) },
+                ],
+            }
 
             const actual: Duration = computeNotesDuration(notes, scales)
 

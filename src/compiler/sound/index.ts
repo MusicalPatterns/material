@@ -6,4 +6,5 @@ export {
     Feature,
     CompileSoundsOptions,
     PositionFeature,
+    AbstractName,
 } from './types'

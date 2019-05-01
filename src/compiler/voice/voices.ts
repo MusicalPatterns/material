@@ -1,12 +1,12 @@
 import { as, insteadOf, map, ofNotAs, Ordinal } from '@musical-patterns/utilities'
 import { CompiledPattern } from '../../interface'
 import { Voice } from '../../performer'
-import { Entity, Scale } from '../../types'
+import { Entity, Scales } from '../../types'
 import { applyCollectiveInfos, computeCollectiveInfos } from './collective'
 import { computeIndividualVoiceAndInfo, IndividualVoiceAndInfo } from './individual'
 import { CompileVoicesParameters } from './types'
 
-const compileVoices: (parameters: { entities: Entity[], scales?: Scale[] }) => CompiledPattern =
+const compileVoices: (parameters: { entities: Entity[], scales?: Scales }) => CompiledPattern =
     ({ entities, scales }: CompileVoicesParameters): CompiledPattern => {
         const individualVoicesAndInfos: IndividualVoiceAndInfo[] = entities.map((entity: Entity) =>
             computeIndividualVoiceAndInfo({ entity, scales }),

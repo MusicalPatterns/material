@@ -3,7 +3,7 @@ import {
     applyCollectiveInfos,
     Entity,
     OscillatorName,
-    Scale,
+    Scales,
     SectionInfo,
     Sound,
     SourceType,
@@ -48,7 +48,7 @@ describe('apply collective infos', () => {
             ],
         } ]
 
-        const scales: Scale[] = []
+        const scales: Scales = {}
 
         const sectionInfos: SectionInfo[] = [
             {
