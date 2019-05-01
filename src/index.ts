@@ -137,8 +137,6 @@ export {
     PitchValueIntensityEnvelopeXScale,
     PitchValueIntensityEnvelopeXYScale,
     PitchValueIntensityEnvelopeXYZScale,
-    STANDARD_VALUE_SCALE_INDEX,
-    STANDARD_PITCH_SCALE_INDEX,
     FULL_GAIN,
     SILENT,
     STANDARD_PITCH_INDEX_INDICATING_REST,
