@@ -6,6 +6,7 @@ import {
     Gain,
     INITIAL,
     Intensity,
+    isArray,
     Location,
     MULTIPLICATIVE_IDENTITY,
     musicalAs,
@@ -32,7 +33,7 @@ const computeDefaultFeature: <FeatureType extends Number = number>() => Feature<
 const compileLocation: (position?: PositionFeature, options?: CompileSoundsOptions) => Coordinate<Location> =
     (position?: PositionFeature, options?: CompileSoundsOptions): Coordinate<Location> => {
         const location: Coordinate<Location> = position ?
-            position instanceof Array ?
+            isArray(position) ?
                 position.map(
                     (positionElement: Feature<Position>) =>
                         compileSoundFeature(positionElement, AbstractName.POSITION, options as CompileSoundsOptions))
