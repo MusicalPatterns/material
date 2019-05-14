@@ -21,6 +21,10 @@ export {
 } from './custom'
 
 export {
+    ENOUGH_HARMONIC_SERIES_STEPS_TO_LEAVE_HUMAN_HEARING_RANGE_FROM_THREE_OCTAVES_BELOW_PITCH_STANDARD,
+} from './constants'
+
+export {
     Segment,
     Rendering,
     RenderingByBlockElement,
