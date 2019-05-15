@@ -1,6 +1,7 @@
 import {
     ADDITIVE_IDENTITY,
     as,
+    computeLength,
     Coordinate,
     Duration,
     Gain,
@@ -41,7 +42,7 @@ const compileLocation: (position?: PositionFeature, options?: CompileSoundsOptio
                 [ compileSoundFeature(position, AbstractName.POSITION, options as CompileSoundsOptions) ]
             :
             []
-        while (location.length < as.number(THREE_DIMENSIONAL)) {
+        while (computeLength(location) < THREE_DIMENSIONAL) {
             location.push(musicalAs.Location(0))
         }
 
