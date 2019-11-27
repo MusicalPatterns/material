@@ -1,66 +1,66 @@
-// Import { Id } from '@musical-patterns/id'
-// Import { patterns } from '@musical-patterns/pattern-material-qa'
-// Import { as, isUndefined, Ms } from '@musical-patterns/utilities'
-// Import {
-//     EnableImmersiveAudio,
-//     Pause,
-//     Play,
-//     SetPattern,
-//     SetTime,
-//     SetupPerformer,
-//     Stop,
-//     ToggleImmersiveAudioHandlers,
-// } from './interface'
-//
-// Const setupQa: () => Promise<void> =
-//     Async (): Promise<void> => {
-//         Const { [ Id.MATERIAL_QA ]: materialQa, [ Id.MATERIAL_QA_DELAY ]: materialQaDelay } = patterns
-//         Await setupPerformer({ pattern: materialQa })
-//         Const { enterImmersiveAudio, exitImmersiveAudio }: ToggleImmersiveAudioHandlers = enableImmersiveAudio()
-//
-//         Const setTimeButton: HTMLElement = document.createElement('button')
-//         SetTimeButton.innerText = 'Set Ms (to 14800)'
-//         // tslint:disable-next-line no-magic-numbers
-//         SetTimeButton.addEventListener('click', async () => setTime(as.Point<Ms>(14800)))
-//         Document.body.appendChild(setTimeButton)
-//
-//         Const stopButton: HTMLElement = document.createElement('button')
-//         StopButton.innerText = 'Stop'
-//         StopButton.addEventListener('click', stop)
-//         Document.body.appendChild(stopButton)
-//
-//         Const playButton: HTMLElement = document.createElement('button')
-//         PlayButton.innerText = 'Play'
-//         PlayButton.addEventListener('click', play)
-//         Document.body.appendChild(playButton)
-//
-//         Const pauseButton: HTMLElement = document.createElement('button')
-//         PauseButton.innerText = 'Pause'
-//         PauseButton.addEventListener('click', pause)
-//         Document.body.appendChild(pauseButton)
-//
-//         Const enterImmersiveAudioButton: HTMLElement = document.createElement('button')
-//         EnterImmersiveAudioButton.innerText = 'Enter Immersive Audio'
-//         EnterImmersiveAudioButton.addEventListener('click', enterImmersiveAudio)
-//         Document.body.appendChild(enterImmersiveAudioButton)
-//
-//         Const exitImmersiveAudioButton: HTMLElement = document.createElement('button')
-//         ExitImmersiveAudioButton.innerText = 'Exit Immersive Audio'
-//         ExitImmersiveAudioButton.addEventListener('click', exitImmersiveAudio)
-//         Document.body.appendChild(exitImmersiveAudioButton)
-//
-//         Const materialQaDelayButton: HTMLElement = document.createElement('button')
-//         MaterialQaDelayButton.innerText = 'Switch to Delay Pattern'
-//         MaterialQaDelayButton.addEventListener('click', async () => {
-//             If (isUndefined(materialQaDelay)) {
-//                 Return
-//             }
-//
-//             Await setPattern(materialQaDelay)
-//         })
-//         Document.body.appendChild(materialQaDelayButton)
-//     }
-//
-// SetupQa()
-// //     .then()
-// //     .catch()
+import { Id } from '@musical-patterns/id'
+import { patterns } from '@musical-patterns/pattern-material-qa'
+import { as, isUndefined, Ms } from '@musical-patterns/utilities'
+import {
+    enableImmersiveAudio,
+    pause,
+    play,
+    setPattern,
+    setTime,
+    setupPerformer,
+    stop,
+    ToggleImmersiveAudioHandlers,
+} from './interface'
+
+const setupQa: () => Promise<void> =
+    async (): Promise<void> => {
+        const { [ Id.MATERIAL_QA ]: materialQa, [ Id.MATERIAL_QA_DELAY ]: materialQaDelay } = patterns
+        await setupPerformer({ pattern: materialQa })
+        const { enterImmersiveAudio, exitImmersiveAudio }: ToggleImmersiveAudioHandlers = enableImmersiveAudio()
+
+        const setTimeButton: HTMLElement = document.createElement('button')
+        setTimeButton.innerText = 'Set Ms (to 14800)'
+        // tslint:disable-next-line no-magic-numbers
+        setTimeButton.addEventListener('click', async () => setTime(as.Point<Ms>(14800)))
+        document.body.appendChild(setTimeButton)
+
+        const stopButton: HTMLElement = document.createElement('button')
+        stopButton.innerText = 'Stop'
+        stopButton.addEventListener('click', stop)
+        document.body.appendChild(stopButton)
+
+        const playButton: HTMLElement = document.createElement('button')
+        playButton.innerText = 'Play'
+        playButton.addEventListener('click', play)
+        document.body.appendChild(playButton)
+
+        const pauseButton: HTMLElement = document.createElement('button')
+        pauseButton.innerText = 'Pause'
+        pauseButton.addEventListener('click', pause)
+        document.body.appendChild(pauseButton)
+
+        const enterImmersiveAudioButton: HTMLElement = document.createElement('button')
+        enterImmersiveAudioButton.innerText = 'Enter Immersive Audio'
+        enterImmersiveAudioButton.addEventListener('click', enterImmersiveAudio)
+        document.body.appendChild(enterImmersiveAudioButton)
+
+        const exitImmersiveAudioButton: HTMLElement = document.createElement('button')
+        exitImmersiveAudioButton.innerText = 'Exit Immersive Audio'
+        exitImmersiveAudioButton.addEventListener('click', exitImmersiveAudio)
+        document.body.appendChild(exitImmersiveAudioButton)
+
+        const materialQaDelayButton: HTMLElement = document.createElement('button')
+        materialQaDelayButton.innerText = 'Switch to Delay Pattern'
+        materialQaDelayButton.addEventListener('click', async () => {
+            if (isUndefined(materialQaDelay)) {
+                return
+            }
+
+            await setPattern(materialQaDelay)
+        })
+        document.body.appendChild(materialQaDelayButton)
+    }
+
+setupQa()
+    .then()
+    .catch()
