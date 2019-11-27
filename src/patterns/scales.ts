@@ -1,6 +1,6 @@
 // tslint:disable max-file-line-count
 
-import { StandardSpec, StandardSpecs } from '@musical-patterns/spec'
+import { Specs, StandardSpec } from '@musical-patterns/spec'
 import {
     as,
     Duration,
@@ -51,7 +51,7 @@ const computeFlatValueScale: () => Scale<Value> =
         computeHarmonicSeriesScale()
 
 const materializeStandardScales:
-    <SpecsType extends StandardSpecs>(
+    <SpecsType extends Specs>(
         specs: SpecsType,
         options?: {
             pitchScalars?: Array<Scalar<Pitch>>,
@@ -59,7 +59,7 @@ const materializeStandardScales:
         },
     ) => Scales =
     // tslint:disable-next-line cyclomatic-complexity
-    <SpecsType extends StandardSpecs>(
+    <SpecsType extends Specs>(
         specs: SpecsType,
         { valueScalars, pitchScalars }: MaterializeStandardScalesOptions = {},
     ): Scales => {

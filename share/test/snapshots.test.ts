@@ -7,10 +7,11 @@ describe('snapshots', () => {
     // tslint:disable-next-line no-require-imports
     const { pattern } = require('../src/indexForTest')
 
-    const presetsSnapshotTests: (presets: ObjectOf<Preset>) => Promise<void[]> =
-        async (presets: ObjectOf<Preset>): Promise<void[]> =>
+    const presetsSnapshotTests: (presets: ObjectOf<Preset>) => Promise<unknown[]> =
+        async (presets: ObjectOf<Preset>): Promise<unknown[]> =>
             Promise.all(Object.entries(presets)
-                .map(async ([ presetName, preset ]: [ string, Preset ]) => {
+                .map(async ([ presetName, preset ]: [ string, Preset ]): Promise<unknown> =>
+                    // tslint:disable-next-line no-void-expression
                     it(`${presetName} preset stays locked down`, async (done: DoneFn) => {
                         expect(JSON.parse(JSON.stringify(
                             await compilePattern({ material: pattern.material, specs: preset.specs }),
@@ -25,8 +26,8 @@ describe('snapshots', () => {
                             )))
 
                         done()
-                    })
-                }),
+                    }),
+                ),
             )
 
     if (!pattern) {
