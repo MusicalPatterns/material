@@ -8,8 +8,8 @@ import {
     TimbreNameEnum,
 } from '../../../../src/indexForTest'
 
-describe('compile source', () => {
-    it('works for samples', () => {
+describe('compile source', (): void => {
+    it('works for samples', (): void => {
         const sourceRequest: Maybe<SourceRequest> = compileSourceRequest(TimbreNameEnum.KICK)
 
         expect(sourceRequest)
@@ -19,7 +19,7 @@ describe('compile source', () => {
             })
     })
 
-    it('works for oscillators', () => {
+    it('works for oscillators', (): void => {
         const sourceRequest: Maybe<SourceRequest> = compileSourceRequest(TimbreNameEnum.SINE)
 
         expect(sourceRequest)

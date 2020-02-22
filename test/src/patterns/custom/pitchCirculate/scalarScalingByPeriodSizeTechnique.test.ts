@@ -12,7 +12,7 @@ import {
 } from '@musical-patterns/utilities'
 import { Note, PitchCircularTechnique, pitchCirculate, Scale } from '../../../../../src/indexForTest'
 
-describe('pitch circulate, using the technique of scalar scaling by period size', () => {
+describe('pitch circulate, using the technique of scalar scaling by period size', (): void => {
     let outputSetOfNotes: Note[][]
 
     const A: Scalar<Intensity> = as.Scalar<Intensity>(0.011)
@@ -32,9 +32,9 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
     const O: Scalar<Intensity> = as.Scalar<Intensity>(0.980)
     const P: Scalar<Intensity> = as.Scalar<Intensity>(1.000)
 
-    describe('given some notes, will return a set of version of those notes which together constitute the pitch circled version of it', () => {
+    describe('given some notes, will return a set of version of those notes which together constitute the pitch circled version of it', (): void => {
         const originalIntensityScalar: Scalar<Intensity> = as.Scalar<Intensity>(0.5)
-        beforeEach(() => {
+        beforeEach((): void => {
             const inputNotes: Note[] = [ {
                 intensity: {
                     scalar: originalIntensityScalar,
@@ -53,7 +53,7 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
             )
         })
 
-        it('scales the pitches so that each set of notes is off from the next by the period size (and for now always returning three sets of notes, starting with the lowest possible set of notes)', () => {
+        it('scales the pitches so that each set of notes is off from the next by the period size (and for now always returning three sets of notes, starting with the lowest possible set of notes)', (): void => {
             expect(outputSetOfNotes[ 0 ][ 0 ].pitch!.scalar)
                 .toEqual(as.Scalar<Pitch>(57 / 32))
             expect(outputSetOfNotes[ 1 ][ 0 ].pitch!.scalar)
@@ -62,7 +62,7 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
                 .toEqual(as.Scalar<Pitch>(57 / 8))
         })
 
-        it('maps the gain to a normal distribution curve, so that the center set of notes is loud, and the outer sets of notes get quieter depending on how far from the center they are', () => {
+        it('maps the gain to a normal distribution curve, so that the center set of notes is loud, and the outer sets of notes get quieter depending on how far from the center they are', (): void => {
             const MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE: Scalar<Scalar<Intensity>> = as.Scalar<Scalar<Intensity>>(0.410)
             const LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES: Scalar<Scalar<Intensity>> = as.Scalar<Scalar<Intensity>>(0.800)
             const QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE: Scalar<Scalar<Intensity>> = as.Scalar<Scalar<Intensity>>(0.028)
@@ -76,8 +76,8 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
         })
     })
 
-    describe('preserving all the other information (besides pitch scalar and gain scalar)', () => {
-        beforeEach(() => {
+    describe('preserving all the other information (besides pitch scalar and gain scalar)', (): void => {
+        beforeEach((): void => {
             const inputNotes: Note[] = [
                 {
                     envelope: {
@@ -115,7 +115,7 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
             )
         })
 
-        it('copies the duration into each set of notes', () => {
+        it('copies the duration into each set of notes', (): void => {
             expect(outputSetOfNotes[ 0 ][ 0 ].value)
                 .toEqual({
                     index: as.Ordinal<Array<Scalar<Value>>>(3),
@@ -136,7 +136,7 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
                 })
         })
 
-        it('copies the sustain into each set of notes', () => {
+        it('copies the sustain into each set of notes', (): void => {
             expect(outputSetOfNotes[ 0 ][ 0 ].envelope)
                 .toEqual({
                     index: as.Ordinal<Array<Scalar<Value>>>(6),
@@ -157,7 +157,7 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
                 })
         })
 
-        it('copies the position into each set of notes', () => {
+        it('copies the position into each set of notes', (): void => {
             expect(outputSetOfNotes[ 0 ][ 0 ].position)
                 .toEqual([ {
                     index: as.Ordinal<Array<Scalar<Position>>>(2),
@@ -178,7 +178,7 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
                 } ])
         })
 
-        it('copies the pitch scale index into each set of notes', () => {
+        it('copies the pitch scale index into each set of notes', (): void => {
             expect(outputSetOfNotes[ 0 ][ 0 ].pitch!.scaleIndex)
                 .toEqual(as.Ordinal<Array<Scale<Pitch>>>(10))
             expect(outputSetOfNotes[ 1 ][ 0 ].pitch!.scaleIndex)
@@ -187,7 +187,7 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
                 .toEqual(as.Ordinal<Array<Scale<Pitch>>>(10))
         })
 
-        it('copies the pitch index into each set of notes', () => {
+        it('copies the pitch index into each set of notes', (): void => {
             expect(outputSetOfNotes[ 0 ][ 0 ].pitch!.index)
                 .toEqual(as.Ordinal<Array<Scalar<Pitch>>>(11))
             expect(outputSetOfNotes[ 1 ][ 0 ].pitch!.index)
@@ -196,7 +196,7 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
                 .toEqual(as.Ordinal<Array<Scalar<Pitch>>>(11))
         })
 
-        it('copies the gain scale index into each set of notes', () => {
+        it('copies the gain scale index into each set of notes', (): void => {
             expect(outputSetOfNotes[ 0 ][ 0 ].intensity!.scaleIndex)
                 .toEqual(as.Ordinal<Array<Scale<Intensity>>>(5))
             expect(outputSetOfNotes[ 1 ][ 0 ].intensity!.scaleIndex)
@@ -205,7 +205,7 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
                 .toEqual(as.Ordinal<Array<Scale<Intensity>>>(5))
         })
 
-        it('copies the gain index into each set of notes', () => {
+        it('copies the gain index into each set of notes', (): void => {
             expect(outputSetOfNotes[ 0 ][ 0 ].intensity!.index)
                 .toEqual(as.Ordinal<Array<Scalar<Intensity>>>(9))
             expect(outputSetOfNotes[ 1 ][ 0 ].intensity!.index)
@@ -215,8 +215,8 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
         })
     })
 
-    describe('gain goes in a cycle', () => {
-        beforeEach(() => {
+    describe('gain goes in a cycle', (): void => {
+        beforeEach((): void => {
             const tenEdScalars: Array<Scalar<Pitch>> = computeEqualDivisionPitchScalars(as.Denominator(10))
             const inputNotes: Note[] = [
                 { pitch: { scalar: tenEdScalars[ 0 ] } },
@@ -241,7 +241,7 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
             )
         })
 
-        it('it should return the same result after one loop around the pitch classes', () => {
+        it('it should return the same result after one loop around the pitch classes', (): void => {
             const [ lowNotes, middleNotes, highNotes ] = outputSetOfNotes
 
             expect(lowNotes[ 0 ].intensity!.scalar)
@@ -252,7 +252,7 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
                 .toEqual(highNotes[ 10 ].intensity!.scalar)
         })
 
-        it('the gain of the low notes at the end connects back up with the gain of the middle notes at the beginning, and the gain at the end of the middle notes connects back up with the gain of the high notes at the beginning', () => {
+        it('the gain of the low notes at the end connects back up with the gain of the middle notes at the beginning, and the gain at the end of the middle notes connects back up with the gain of the high notes at the beginning', (): void => {
             const [ lowNotes, middleNotes, highNotes ] = outputSetOfNotes
 
             expect(lowNotes[ 0 ].intensity!.scalar!)
@@ -320,8 +320,8 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
         })
     })
 
-    describe('gain curve is almost zero at the edges and slopes nicely up to a 1 in the middle, for other pitch class counts too', () => {
-        beforeEach(() => {
+    describe('gain curve is almost zero at the edges and slopes nicely up to a 1 in the middle, for other pitch class counts too', (): void => {
+        beforeEach((): void => {
             const fiveEdScalars: Array<Scalar<Pitch>> = computeEqualDivisionPitchScalars(as.Denominator(5))
             const inputNotes: Note[] = [
                 { pitch: { scalar: fiveEdScalars[ 0 ] } },
@@ -340,7 +340,7 @@ describe('pitch circulate, using the technique of scalar scaling by period size'
             )
         })
 
-        it('works', () => {
+        it('works', (): void => {
             const [ lowNotes, middleNotes, highNotes ] = outputSetOfNotes
 
             expect(lowNotes[ 0 ].intensity!.scalar!)

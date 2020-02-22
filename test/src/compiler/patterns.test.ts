@@ -3,6 +3,7 @@ import {
     BEGINNING,
     insteadOf,
     Intensity,
+    Location,
     musicalAs,
     NO_DURATION,
     ONE_TENTH,
@@ -26,7 +27,7 @@ import {
 } from '../../../src/indexForTest'
 import { TestSpecs } from '../../support'
 
-describe('compile pattern', () => {
+describe('compile pattern', (): void => {
     const specs: TestSpecs = {
         testSpec: 3,
     }
@@ -42,7 +43,7 @@ describe('compile pattern', () => {
     const expectedSound: Sound = {
         duration: musicalAs.Duration(9),
         gain: musicalAs.Gain(0.9),
-        location: [ 9, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
+        location: [ 9, 0, 0 ].map((dimension: number): Location => musicalAs.Location(dimension)),
         sustain: musicalAs.Duration(8.9),
         tone: musicalAs.Tone(9),
     }
@@ -73,7 +74,7 @@ describe('compile pattern', () => {
         }),
     }
 
-    beforeEach(() => {
+    beforeEach((): void => {
         material.materializeEntities = (testSpecs: TestSpecs): Entity[] => [
             {
                 sections: [
@@ -87,7 +88,7 @@ describe('compile pattern', () => {
         ]
     })
 
-    it('given specs, takes them into account', async (done: DoneFn) => {
+    it('given specs, takes them into account', async (done: DoneFn): Promise<void> => {
         const actualCompiledPattern: CompiledPattern = await compilePattern({ material, specs })
 
         expect(actualCompiledPattern)
@@ -110,7 +111,7 @@ describe('compile pattern', () => {
         done()
     })
 
-    it('if specs are not explicitly provided to override default, the default is finding the initial specs within the spec key of the pattern, so that you can just pass it a friggin pattern', async (done: DoneFn) => {
+    it('if specs are not explicitly provided to override default, the default is finding the initial specs within the spec key of the pattern, so that you can just pass it a friggin pattern', async (done: DoneFn): Promise<void> => {
         const patternLikeObject: { material: Material, spec: { initialSpecs: TestSpecs } } = {
             material,
             spec: {
@@ -140,7 +141,7 @@ describe('compile pattern', () => {
         done()
     })
 
-    it('prefers the top-level specs provision to the finding it inside spec key of pattern', async (done: DoneFn) => {
+    it('prefers the top-level specs provision to the finding it inside spec key of pattern', async (done: DoneFn): Promise<void> => {
         const patternLikeObject: { material: Material, spec: { initialSpecs: TestSpecs } } = {
             material,
             spec: {

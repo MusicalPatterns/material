@@ -18,6 +18,7 @@ import {
     Translation,
     Value,
 } from '@musical-patterns/utilities'
+import { Thunk } from '../../../utilities'
 import { AbstractName } from '../compiler'
 import { Scale, Scales } from '../types'
 // tslint:disable-next-line max-line-length
@@ -33,7 +34,7 @@ const computeHarmonicSeriesScale: <NumericType extends Number = Pitch>() => Scal
             ONE,
             ENOUGH_HARMONIC_SERIES_STEPS_TO_LEAVE_HUMAN_HEARING_RANGE_FROM_THREE_OCTAVES_BELOW_PITCH_STANDARD,
         )
-            .map((integer: Integer) => as.Scalar<NumericType>(integer)),
+            .map((integer: Integer): Scalar<NumericType> => as.Scalar<NumericType>(integer)),
     })
 
 const computeSubharmonicSeriesScale: <NumericType extends Number = Pitch>() => Scale<NumericType> =
@@ -42,10 +43,10 @@ const computeSubharmonicSeriesScale: <NumericType extends Number = Pitch>() => S
             ONE,
             ENOUGH_HARMONIC_SERIES_STEPS_TO_LEAVE_HUMAN_HEARING_RANGE_FROM_THREE_OCTAVES_BELOW_PITCH_STANDARD,
         )
-            .map((integer: Integer) => as.Scalar<NumericType>(reciprocal(integer))),
+            .map((integer: Integer): Scalar<NumericType> => as.Scalar<NumericType>(reciprocal(integer))),
     })
 
-const computeFlatValueScale: () => Scale<Value> =
+const thunkFlatValueScale: Thunk<Scale<Value>> =
     // tslint:disable-next-line no-unnecessary-callback-wrapper
     (): Scale<Value> =>
         computeHarmonicSeriesScale()
@@ -86,7 +87,7 @@ const materializeStandardScales:
         const metersPhysicalization: Location = specs[ StandardSpec.METERS_PHYSICALIZATION ] || musicalAs.Location(1)
         const metersPhysicalizationTranslation: Array<Translation<Location>> =
             specs[ StandardSpec.METERS_PHYSICALIZATION_TRANSLATION ] ||
-            [ 0, 0, 0 ].map((dimension: number) => as.Translation<Location>(dimension))
+            [ 0, 0, 0 ].map((dimension: number): Translation<Location> => as.Translation<Location>(dimension))
         const xScale: Scale<Position> = {
             basis: metersPhysicalization,
             translation: metersPhysicalizationTranslation[ 0 ],
@@ -111,7 +112,7 @@ const materializeStandardScales:
 export {
     materializeStandardScales,
     computeNonScale,
-    computeFlatValueScale,
+    thunkFlatValueScale,
     computeHarmonicSeriesScale,
     computeSubharmonicSeriesScale,
 }

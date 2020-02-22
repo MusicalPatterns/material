@@ -8,9 +8,10 @@ import { CompileVoicesParameters } from './types'
 
 const compileVoices: (parameters: { entities: Entity[], scales?: Scales }) => CompiledPattern =
     ({ entities, scales }: CompileVoicesParameters): CompiledPattern => {
-        const individualVoicesAndInfos: IndividualVoiceAndInfo[] = entities.map((entity: Entity) =>
-            computeIndividualVoiceAndInfo({ entity, scales }),
-        )
+        const individualVoicesAndInfos: IndividualVoiceAndInfo[] =
+            entities.map((entity: Entity): IndividualVoiceAndInfo =>
+                computeIndividualVoiceAndInfo({ entity, scales }),
+            )
 
         const {
             collectiveEndTime,
@@ -23,7 +24,7 @@ const compileVoices: (parameters: { entities: Entity[], scales?: Scales }) => Co
             (
                 { voice, voiceInfo: { sectionInfos, individualSegnoTime } }: IndividualVoiceAndInfo,
                 index: Ordinal<IndividualVoiceAndInfo[]>,
-            ) =>
+            ): Voice =>
                 applyCollectiveInfos({
                     collectiveEndTime,
                     collectiveSegnoTime,

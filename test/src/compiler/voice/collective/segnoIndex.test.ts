@@ -1,4 +1,4 @@
-import { as, Ms, musicalAs, NO_DURATION, Ordinal, Point, repeat } from '@musical-patterns/utilities'
+import { as, Location, Ms, musicalAs, NO_DURATION, Ordinal, Point, repeat } from '@musical-patterns/utilities'
 import {
     computeSegnoIndex,
     NON_SEGNO_INDEX,
@@ -9,7 +9,7 @@ import {
     Voice,
 } from '../../../../../src/indexForTest'
 
-describe('compute segno index', () => {
+describe('compute segno index', (): void => {
     const collectiveSegnoTime: Point<Ms> = as.Point<Ms>(44)
     const voice: Voice = {
         delay: NO_DURATION,
@@ -19,7 +19,7 @@ describe('compute segno index', () => {
                 {
                     duration: musicalAs.Duration(20),
                     gain: musicalAs.Gain(1),
-                    location: [ 0 ].map((dimension: number) => musicalAs.Location(dimension)),
+                    location: [ 0 ].map((dimension: number): Location => musicalAs.Location(dimension)),
                     sustain: musicalAs.Duration(9),
                     tone: musicalAs.Tone(1),
                 },
@@ -33,12 +33,12 @@ describe('compute segno index', () => {
     }
     let individualSegnoTime: Point<Ms>
 
-    describe('when the voice has no repetend', () => {
-        beforeEach(() => {
+    describe('when the voice has no repetend', (): void => {
+        beforeEach((): void => {
             individualSegnoTime = as.Point<Ms>(-1)
         })
 
-        it('it returns the non-segno-index which will tell the performer not to repeat it', () => {
+        it('it returns the non-segno-index which will tell the performer not to repeat it', (): void => {
             const actualSegnoIndex: Ordinal<Sound[]> = computeSegnoIndex({
                 collectiveSegnoTime,
                 individualSegnoTime,
@@ -50,13 +50,13 @@ describe('compute segno index', () => {
         })
     })
 
-    describe('when the voice does have a repetend', () => {
-        beforeEach(() => {
+    describe('when the voice does have a repetend', (): void => {
+        beforeEach((): void => {
             const SOME_REALISTIC_BUT_MOSTLY_ARBITRARY_INDIVIDUAL_SEGNO_TIME: Point<Ms> = as.Point<Ms>(60)
             individualSegnoTime = SOME_REALISTIC_BUT_MOSTLY_ARBITRARY_INDIVIDUAL_SEGNO_TIME
         })
 
-        it('returns the first index of the voice sounds after the collective segno time', () => {
+        it('returns the first index of the voice sounds after the collective segno time', (): void => {
             const actualSegnoIndex: Ordinal<Sound[]> = computeSegnoIndex({
                 collectiveSegnoTime,
                 individualSegnoTime,
@@ -68,13 +68,13 @@ describe('compute segno index', () => {
         })
     })
 
-    describe('when the voice has no sounds', () => {
-        beforeEach(() => {
+    describe('when the voice has no sounds', (): void => {
+        beforeEach((): void => {
             const ANY_SEGNO_TIME_OTHER_THAN_NON_SEGNO_TIME: Point<Ms> = as.Point<Ms>(35)
             individualSegnoTime = ANY_SEGNO_TIME_OTHER_THAN_NON_SEGNO_TIME
         })
 
-        it('returns the non segno index', () => {
+        it('returns the non segno index', (): void => {
             const actualSegnoIndex: Ordinal<Sound[]> = computeSegnoIndex({
                 collectiveSegnoTime,
                 individualSegnoTime,

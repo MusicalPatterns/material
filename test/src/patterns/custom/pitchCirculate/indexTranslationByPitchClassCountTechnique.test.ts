@@ -3,7 +3,7 @@
 import { as, Intensity, Pitch, Position, Scalar, use, Value } from '@musical-patterns/utilities'
 import { Note, PitchCircularTechnique, pitchCirculate, Scale } from '../../../../../src/indexForTest'
 
-describe('pitch circulate, using the technique of index translation by pitch class count', () => {
+describe('pitch circulate, using the technique of index translation by pitch class count', (): void => {
     let outputSetOfNotes: Note[][]
 
     const A: Scalar<Intensity> = as.Scalar<Intensity>(0.011)
@@ -26,9 +26,9 @@ describe('pitch circulate, using the technique of index translation by pitch cla
     const R: Scalar<Intensity> = as.Scalar<Intensity>(0.986)
     const S: Scalar<Intensity> = as.Scalar<Intensity>(1.000)
 
-    describe('given a set of notes, will return a set of sets of notes which together constitute the pitch circled version of it', () => {
+    describe('given a set of notes, will return a set of sets of notes which together constitute the pitch circled version of it', (): void => {
         const originalIntensityScalar: Scalar<Intensity> = as.Scalar<Intensity>(0.5)
-        beforeEach(() => {
+        beforeEach((): void => {
             const inputNotes: Note[] = [ {
                 intensity: {
                     scalar: originalIntensityScalar,
@@ -47,7 +47,7 @@ describe('pitch circulate, using the technique of index translation by pitch cla
             )
         })
 
-        it('translates the pitch indices so that each set of notes is separated from the next by the pitch class count (and for now always returning three sets of notes, starting with the lowest possible set of notes)', () => {
+        it('translates the pitch indices so that each set of notes is separated from the next by the pitch class count (and for now always returning three sets of notes, starting with the lowest possible set of notes)', (): void => {
             expect(outputSetOfNotes[ 0 ][ 0 ].pitch!.index)
                 .toEqual(as.Ordinal<Array<Scalar<Pitch>>>(9))
             expect(outputSetOfNotes[ 1 ][ 0 ].pitch!.index)
@@ -56,7 +56,7 @@ describe('pitch circulate, using the technique of index translation by pitch cla
                 .toEqual(as.Ordinal<Array<Scalar<Pitch>>>(33))
         })
 
-        it('maps the gain to a normal distribution curve, so that the center set of notes is loud, and the outer sets of notes get quieter depending on how far from the center they are (treating each index as an equal step, irrespective to whether they give differently sized pitch changes)', () => {
+        it('maps the gain to a normal distribution curve, so that the center set of notes is loud, and the outer sets of notes get quieter depending on how far from the center they are (treating each index as an equal step, irrespective to whether they give differently sized pitch changes)', (): void => {
             const MEDIUM_LOUD_IN_THE_LOW_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_ITS_ALMOST_INTO_THE_LOUD_MIDDLE: Scalar<Scalar<Intensity>> = as.Scalar<Scalar<Intensity>>(0.324)
             const LOUDEST_IN_THE_MIDDLE_BUT_NOT_FULL_GAIN_SINCE_ITS_CLOSER_TO_HIGH_NOTES: Scalar<Scalar<Intensity>> = as.Scalar<Scalar<Intensity>>(0.882)
             const QUIETEST_IN_THE_HIGH_NOTES_BECAUSE_WITHIN_SCALE_ITS_CLOSER_TO_HIGH_SO_CLOSER_TO_BEING_GONE_THERE: Scalar<Scalar<Intensity>> = as.Scalar<Scalar<Intensity>>(0.043)
@@ -70,8 +70,8 @@ describe('pitch circulate, using the technique of index translation by pitch cla
         })
     })
 
-    describe('preserving all the other information (besides pitch index and gain scalar)', () => {
-        beforeEach(() => {
+    describe('preserving all the other information (besides pitch index and gain scalar)', (): void => {
+        beforeEach((): void => {
             const inputNotes: Note[] = [
                 {
                     envelope: {
@@ -109,7 +109,7 @@ describe('pitch circulate, using the technique of index translation by pitch cla
             )
         })
 
-        it('copies the duration into each set of notes', () => {
+        it('copies the duration into each set of notes', (): void => {
             expect(outputSetOfNotes[ 0 ][ 0 ].value)
                 .toEqual({
                     index: as.Ordinal<Array<Scalar<Value>>>(3),
@@ -130,7 +130,7 @@ describe('pitch circulate, using the technique of index translation by pitch cla
                 })
         })
 
-        it('copies the sustain into each set of notes', () => {
+        it('copies the sustain into each set of notes', (): void => {
             expect(outputSetOfNotes[ 0 ][ 0 ].envelope)
                 .toEqual({
                     index: as.Ordinal<Array<Scalar<Value>>>(6),
@@ -151,7 +151,7 @@ describe('pitch circulate, using the technique of index translation by pitch cla
                 })
         })
 
-        it('copies the position into each set of notes', () => {
+        it('copies the position into each set of notes', (): void => {
             expect(outputSetOfNotes[ 0 ][ 0 ].position)
                 .toEqual([ {
                     index: as.Ordinal<Array<Scalar<Position>>>(2),
@@ -172,7 +172,7 @@ describe('pitch circulate, using the technique of index translation by pitch cla
                 } ])
         })
 
-        it('copies the pitch scale index into each set of notes', () => {
+        it('copies the pitch scale index into each set of notes', (): void => {
             expect(outputSetOfNotes[ 0 ][ 0 ].pitch!.scaleIndex)
                 .toEqual(as.Ordinal<Array<Scale<Pitch>>>(10))
             expect(outputSetOfNotes[ 1 ][ 0 ].pitch!.scaleIndex)
@@ -181,7 +181,7 @@ describe('pitch circulate, using the technique of index translation by pitch cla
                 .toEqual(as.Ordinal<Array<Scale<Pitch>>>(10))
         })
 
-        it('copies the pitch scalar into each set of notes', () => {
+        it('copies the pitch scalar into each set of notes', (): void => {
             expect(outputSetOfNotes[ 0 ][ 0 ].pitch!.scalar)
                 .toEqual(as.Scalar<Pitch>(11))
             expect(outputSetOfNotes[ 1 ][ 0 ].pitch!.scalar)
@@ -190,7 +190,7 @@ describe('pitch circulate, using the technique of index translation by pitch cla
                 .toEqual(as.Scalar<Pitch>(11))
         })
 
-        it('copies the gain scale index into each set of notes', () => {
+        it('copies the gain scale index into each set of notes', (): void => {
             expect(outputSetOfNotes[ 0 ][ 0 ].intensity!.scaleIndex)
                 .toEqual(as.Ordinal<Array<Scale<Intensity>>>(5))
             expect(outputSetOfNotes[ 1 ][ 0 ].intensity!.scaleIndex)
@@ -199,7 +199,7 @@ describe('pitch circulate, using the technique of index translation by pitch cla
                 .toEqual(as.Ordinal<Array<Scale<Intensity>>>(5))
         })
 
-        it('copies the gain index into each set of notes', () => {
+        it('copies the gain index into each set of notes', (): void => {
             expect(outputSetOfNotes[ 0 ][ 0 ].intensity!.index)
                 .toEqual(as.Ordinal<Array<Scalar<Intensity>>>(9))
             expect(outputSetOfNotes[ 1 ][ 0 ].intensity!.index)
@@ -209,8 +209,8 @@ describe('pitch circulate, using the technique of index translation by pitch cla
         })
     })
 
-    describe('gain goes in a cycle', () => {
-        beforeEach(() => {
+    describe('gain goes in a cycle', (): void => {
+        beforeEach((): void => {
             const inputNotes: Note[] = [
                 { pitch: { index: as.Ordinal<Array<Scalar<Pitch>>>(0) } },
                 { pitch: { index: as.Ordinal<Array<Scalar<Pitch>>>(1) } },
@@ -236,7 +236,7 @@ describe('pitch circulate, using the technique of index translation by pitch cla
             )
         })
 
-        it('it should return the same result after one loop around the pitch classes', () => {
+        it('it should return the same result after one loop around the pitch classes', (): void => {
             const [ lowNotes, middleNotes, highNotes ] = outputSetOfNotes
 
             expect(lowNotes[ 0 ].intensity!.scalar)
@@ -247,7 +247,7 @@ describe('pitch circulate, using the technique of index translation by pitch cla
                 .toEqual(highNotes[ 12 ].intensity!.scalar)
         })
 
-        it('the gain of the low notes at the end connects back up with the gain of the middle notes at the beginning, and the gain at the end of the middle notes connects back up with the gain of the high notes at the beginning', () => {
+        it('the gain of the low notes at the end connects back up with the gain of the middle notes at the beginning, and the gain at the end of the middle notes connects back up with the gain of the high notes at the beginning', (): void => {
             const [ lowNotes, middleNotes, highNotes ] = outputSetOfNotes
 
             expect(lowNotes[ 0 ].intensity!.scalar!)
@@ -327,8 +327,8 @@ describe('pitch circulate, using the technique of index translation by pitch cla
         })
     })
 
-    describe('gain curve is almost zero at the edges and slopes nicely up to a 1 in the middle, for other pitch class counts too', () => {
-        beforeEach(() => {
+    describe('gain curve is almost zero at the edges and slopes nicely up to a 1 in the middle, for other pitch class counts too', (): void => {
+        beforeEach((): void => {
             const inputNotes: Note[] = [
                 { pitch: { index: as.Ordinal<Array<Scalar<Pitch>>>(0) } },
                 { pitch: { index: as.Ordinal<Array<Scalar<Pitch>>>(1) } },
@@ -347,7 +347,7 @@ describe('pitch circulate, using the technique of index translation by pitch cla
             )
         })
 
-        it('works', () => {
+        it('works', (): void => {
             const [ lowNotes, middleNotes, highNotes ] = outputSetOfNotes
 
             expect(lowNotes[ 0 ].intensity!.scalar!)

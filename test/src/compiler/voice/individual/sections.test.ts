@@ -1,4 +1,4 @@
-import { as, musicalAs, Value } from '@musical-patterns/utilities'
+import { as, Location, musicalAs, Value } from '@musical-patterns/utilities'
 import {
     computeIndividualSoundsAndSectionInfos,
     Note,
@@ -8,8 +8,8 @@ import {
     SoundsAndSectionInfos,
 } from '../../../../../src/indexForTest'
 
-describe('compute individual sounds and section infos', () => {
-    it(`compiles each of the sections's notes and concatenates them, while reporting information about each of the sections as it goes`, () => {
+describe('compute individual sounds and section infos', (): void => {
+    it(`compiles each of the sections's notes and concatenates them, while reporting information about each of the sections as it goes`, (): void => {
         const testNote: Note = { value: { scalar: as.Scalar<Value>(3) } }
         const otherTestNote: Note = { value: { scalar: as.Scalar<Value>(9) } }
 
@@ -29,14 +29,14 @@ describe('compute individual sounds and section infos', () => {
         const expectedSound: Sound = {
             duration: musicalAs.Duration(3),
             gain: musicalAs.Gain(1),
-            location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
+            location: [ 0, 0, 0 ].map((dimension: number): Location => musicalAs.Location(dimension)),
             sustain: musicalAs.Duration(2.9),
             tone: musicalAs.Tone(1),
         }
         const otherExpectedSound: Sound = {
             duration: musicalAs.Duration(9),
             gain: musicalAs.Gain(1),
-            location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
+            location: [ 0, 0, 0 ].map((dimension: number): Location => musicalAs.Location(dimension)),
             sustain: musicalAs.Duration(8.9),
             tone: musicalAs.Tone(1),
         }

@@ -21,7 +21,7 @@ const setupQa: () => Promise<void> =
         const setTimeButton: HTMLElement = document.createElement('button')
         setTimeButton.innerText = 'Set Ms (to 14800)'
         // tslint:disable-next-line no-magic-numbers
-        setTimeButton.addEventListener('click', async () => setTime(as.Point<Ms>(14800)))
+        setTimeButton.addEventListener('click', async (): Promise<void> => setTime(as.Point<Ms>(14800)))
         document.body.appendChild(setTimeButton)
 
         const stopButton: HTMLElement = document.createElement('button')
@@ -51,7 +51,7 @@ const setupQa: () => Promise<void> =
 
         const materialQaDelayButton: HTMLElement = document.createElement('button')
         materialQaDelayButton.innerText = 'Switch to Delay Pattern'
-        materialQaDelayButton.addEventListener('click', async () => {
+        materialQaDelayButton.addEventListener('click', async (): Promise<void> => {
             if (isUndefined(materialQaDelay)) {
                 return
             }

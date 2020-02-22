@@ -7,7 +7,7 @@ const computeIndividualVoiceInfo: (sectionInfos: SectionInfo[]) => IndividualVoi
     (sectionInfos: SectionInfo[]): IndividualVoiceInfo => {
         const individualRepetendIndex: Ordinal<SectionInfo[]> = findIndex(
             sectionInfos,
-            (sectionInfo: SectionInfo) => sectionInfo.doesRepeatForever,
+            (sectionInfo: SectionInfo): boolean => sectionInfo.doesRepeatForever,
         )
 
         const individualSegnoTime: Point<Ms> = computeIndividualSegnoTime({
@@ -19,7 +19,7 @@ const computeIndividualVoiceInfo: (sectionInfos: SectionInfo[]) => IndividualVoi
             sectionInfos,
         })
         const individualEndTime: Point<Ms> = as.Point<Ms>(as.number(sum(
-            ...sectionInfos.map((sectionInfo: SectionInfo) => sectionInfo.totalDuration),
+            ...sectionInfos.map((sectionInfo: SectionInfo): Duration => sectionInfo.totalDuration),
         )))
 
         return {

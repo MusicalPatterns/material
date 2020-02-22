@@ -1,9 +1,9 @@
 import { as, Duration, musicalAs, Scalar, Value } from '@musical-patterns/utilities'
 import { AbstractName, computeNotesDuration, Note, Scales } from '../../../../src/indexForTest'
 
-describe('durations', () => {
-    describe('of notes', () => {
-        it('tells you how long a set of note are going to take to play once compiled', () => {
+describe('durations', (): void => {
+    describe('of notes', (): void => {
+        it('tells you how long a set of note are going to take to play once compiled', (): void => {
             const notes: Note[] = [
                 {
                     value: {
@@ -18,7 +18,7 @@ describe('durations', () => {
             ]
             const scales: Scales = {
                 [ AbstractName.VALUE ]: [
-                    { scalars: [ 5, 7 ].map((numeral: number) => as.Scalar<Value>(numeral)) },
+                    { scalars: [ 5, 7 ].map((numeral: number): Scalar<Value> => as.Scalar<Value>(numeral)) },
                 ],
             }
 

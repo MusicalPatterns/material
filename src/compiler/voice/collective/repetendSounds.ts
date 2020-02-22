@@ -9,7 +9,7 @@ import { ComputeRepetendSoundsParameters } from './types'
 const computeRepetendIndex: (sectionInfos: SectionInfo[]) => Ordinal<Section[]> =
     (sectionInfos: SectionInfo[]): Ordinal<Section[]> => {
         let repetendIndex: Ordinal<Section[]> = NOT_FOUND
-        forEach(sectionInfos, (sectionInfo: SectionInfo, index: Ordinal<SectionInfo[]>) => {
+        forEach(sectionInfos, (sectionInfo: SectionInfo, index: Ordinal<SectionInfo[]>): void => {
             if (sectionInfo.doesRepeatForever) {
                 repetendIndex = insteadOf<Ordinal, Section[]>(index)
             }

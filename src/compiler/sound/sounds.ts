@@ -36,7 +36,7 @@ const compileLocation: (position?: PositionFeature, options?: CompileSoundsOptio
         const location: Coordinate<Location> = position ?
             isArray(position) ?
                 position.map(
-                    (positionElement: Feature<Position>) =>
+                    (positionElement: Feature<Position>): Location =>
                         compileSoundFeature(positionElement, AbstractName.POSITION, options as CompileSoundsOptions))
                 :
                 [ compileSoundFeature(position, AbstractName.POSITION, options as CompileSoundsOptions) ]

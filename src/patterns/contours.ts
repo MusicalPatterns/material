@@ -7,7 +7,7 @@ import { PitchValue } from './types'
 const computeTotalPitchValueContourValue: (contour: ContourPiece<PitchValue>) => number =
     (contour: ContourPiece<PitchValue>): number =>
         contour.reduce(
-            (accumulator: number, contourElement: ContourElement<PitchValue>) => {
+            (accumulator: number, contourElement: ContourElement<PitchValue>): number => {
                 const duration: number = contourElement[ 1 ]
 
                 return sum(accumulator, duration)

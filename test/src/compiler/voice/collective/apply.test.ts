@@ -1,4 +1,4 @@
-import { as, INITIAL, Ms, musicalAs, NO_DURATION, Ordinal, Point, repeat, Value } from '@musical-patterns/utilities'
+import { as, INITIAL, Location, Ms, musicalAs, NO_DURATION, Ordinal, Point, repeat, Value } from '@musical-patterns/utilities'
 import {
     applyCollectiveInfos,
     Entity,
@@ -10,14 +10,14 @@ import {
     Voice,
 } from '../../../../../src/indexForTest'
 
-describe('apply collective infos', () => {
-    it('adds the segno index and extends sounds to fill the gap (this example is frankenstein and does not really internally agree; this test is kind of at too much of an integration level to be super useful)', () => {
+describe('apply collective infos', (): void => {
+    it('adds the segno index and extends sounds to fill the gap (this example is frankenstein and does not really internally agree; this test is kind of at too much of an integration level to be super useful)', (): void => {
         const originalSounds: Sound[] = repeat(
             [
                 {
                     duration: musicalAs.Duration(20),
                     gain: musicalAs.Gain(1),
-                    location: [ 0 ].map((dimension: number) => musicalAs.Location(dimension)),
+                    location: [ 0 ].map((dimension: number): Location => musicalAs.Location(dimension)),
                     sustain: musicalAs.Duration(9),
                     tone: musicalAs.Tone(1),
                 },
@@ -89,21 +89,21 @@ describe('apply collective infos', () => {
                     {
                         duration: musicalAs.Duration(11),
                         gain: musicalAs.Gain(1),
-                        location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
+                        location: [ 0, 0, 0 ].map((dimension: number): Location => musicalAs.Location(dimension)),
                         sustain: musicalAs.Duration(10.9),
                         tone: musicalAs.Tone(1),
                     },
                     {
                         duration: musicalAs.Duration(11),
                         gain: musicalAs.Gain(1),
-                        location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
+                        location: [ 0, 0, 0 ].map((dimension: number): Location => musicalAs.Location(dimension)),
                         sustain: musicalAs.Duration(10.9),
                         tone: musicalAs.Tone(1),
                     },
                     {
                         duration: musicalAs.Duration(11),
                         gain: musicalAs.Gain(1),
-                        location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
+                        location: [ 0, 0, 0 ].map((dimension: number): Location => musicalAs.Location(dimension)),
                         sustain: musicalAs.Duration(10.9),
                         tone: musicalAs.Tone(1),
                     },

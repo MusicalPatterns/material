@@ -3,7 +3,7 @@ import { Preset } from '@musical-patterns/spec'
 import { ObjectOf } from '@musical-patterns/utilities'
 import * as path from 'path'
 
-describe('snapshots', () => {
+describe('snapshots', (): void => {
     // tslint:disable-next-line no-require-imports
     const { pattern } = require('../src/indexForTest')
 
@@ -15,7 +15,7 @@ describe('snapshots', () => {
                     //     return
                     // }
 
-                    return it(`${presetName} preset stays locked down`, async (done: DoneFn) => {
+                    return it(`${presetName} preset stays locked down`, async (done: DoneFn): Promise<void> => {
                         expect(JSON.parse(JSON.stringify(
                             await compilePattern({ material: pattern.material, specs: preset.specs }),
                             undefined,
@@ -39,13 +39,13 @@ describe('snapshots', () => {
         const submoduleCategory: string = pathArray[ pathArray.length - 2 ]
 
         if (submoduleCategory === 'patterns') {
-            it('includes this test', () => {
+            it('includes this test', (): void => {
                 fail(`A pattern was not found. Ensure you are exporting the pattern from your 'src/indexForTest.ts'.`)
             })
         }
     }
     else {
-        it('initial stays locked down', async (done: DoneFn) => {
+        it('initial stays locked down', async (done: DoneFn): Promise<void> => {
             expect(JSON.parse(JSON.stringify(
                 await compilePattern(pattern),
                 undefined,

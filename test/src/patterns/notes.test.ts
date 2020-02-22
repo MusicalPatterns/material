@@ -1,9 +1,9 @@
 import { as, Scalar, Value } from '@musical-patterns/utilities'
 import { computeNotesValueIndexSum, computeNotesValueScalarSum, Note } from '../../../src/indexForTest'
 
-describe('notes utilities', () => {
-    describe('notes total value by scalar', () => {
-        it(`sums the scalars of each note's value`, () => {
+describe('notes utilities', (): void => {
+    describe('notes total value by scalar', (): void => {
+        it(`sums the scalars of each note's value`, (): void => {
             const notes: Note[] = [
                 {
                     value: {
@@ -29,8 +29,8 @@ describe('notes utilities', () => {
         })
     })
 
-    describe('notes total value by scalar', () => {
-        it(`sums the scalars of each note's value`, () => {
+    describe('notes total value by scalar', (): void => {
+        it(`sums the scalars of each note's value`, (): void => {
             const notes: Note[] = [
                 {
                     value: {

@@ -17,7 +17,7 @@ const pitchCirculate: (notes: Note[], options: PitchCirculateOptions) => Note[][
         }: PitchCirculateOptions,
     ): Note[][] =>
         range(PITCH_CIRCULAR_TIER_COUNT)
-            .map((integer: Integer) => as.Ordinal<PeriodSize[]>(integer))
+            .map((integer: Integer): Ordinal<PeriodSize[]> => as.Ordinal<PeriodSize[]>(integer))
             .map((tierIndex: Ordinal<PeriodSize[]>): Note[] =>
                 technique === PitchCircularTechnique.INDEX_TRANSLATION_BY_PITCH_CLASS_COUNT ?
                     computeTierWithTechniqueIndexTranslationByPitchClassCount(notes, tierIndex, pitchClassCount) :

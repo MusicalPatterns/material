@@ -8,8 +8,8 @@ import {
     TEMPORARY_UNDEFINED_SEGNO_INDEX,
 } from '../../../../../src/indexForTest'
 
-describe('compute individual voice and info', () => {
-    it('defaults', () => {
+describe('compute individual voice and info', (): void => {
+    it('defaults', (): void => {
         const actualVoiceAndInfo: IndividualVoiceAndInfo = computeIndividualVoiceAndInfo({ entity: {} })
 
         expect(actualVoiceAndInfo)

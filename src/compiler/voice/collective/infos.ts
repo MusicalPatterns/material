@@ -18,19 +18,19 @@ import { CollectiveVoiceInfos, PluckedVoiceInfos } from './types'
 const pluckInfos: (individualVoicesAndInfos: IndividualVoiceAndInfo[]) => PluckedVoiceInfos =
     (individualVoicesAndInfos: IndividualVoiceAndInfo[]): PluckedVoiceInfos => {
         const individualVoiceInfos: IndividualVoiceInfo[] = individualVoicesAndInfos.map(
-            (voiceAndInfo: IndividualVoiceAndInfo) => voiceAndInfo.voiceInfo,
+            (voiceAndInfo: IndividualVoiceAndInfo): IndividualVoiceInfo => voiceAndInfo.voiceInfo,
         )
 
         const individualSegnoTimes: Array<Point<Ms>> =
-            individualVoiceInfos.map((voiceInfo: IndividualVoiceInfo) =>
+            individualVoiceInfos.map((voiceInfo: IndividualVoiceInfo): Point<Ms> =>
                 voiceInfo.individualSegnoTime,
             )
         const individualRepetendDurations: Duration[] =
-            individualVoiceInfos.map((individualVoiceInfo: IndividualVoiceInfo) =>
+            individualVoiceInfos.map((individualVoiceInfo: IndividualVoiceInfo): Duration =>
                 individualVoiceInfo.individualRepetendDuration,
             )
         const individualEndTimes: Array<Point<Ms>> =
-            individualVoiceInfos.map((individualVoiceInfo: IndividualVoiceInfo) =>
+            individualVoiceInfos.map((individualVoiceInfo: IndividualVoiceInfo): Point<Ms> =>
                 individualVoiceInfo.individualEndTime,
             )
 
@@ -55,9 +55,11 @@ const computeCollectiveInfosFromPluckedInfos: (parameters: {
             as.number(NON_SEGNO_TIME) :
             computeLeastCommonMultiple(
                 ...individualRepetendDurations
-                    .filter((individualRepetendDuration: Duration) => individualRepetendDuration !== NO_DURATION)
+                    .filter(
+                        (individualRepetendDuration: Duration): boolean => individualRepetendDuration !== NO_DURATION,
+                    )
                     // tslint:disable-next-line no-unnecessary-callback-wrapper
-                    .map((individualRepetendDuration: Duration) => round(individualRepetendDuration))
+                    .map((individualRepetendDuration: Duration): Duration => round(individualRepetendDuration))
                     .map(as.Integer),
             ),
         )

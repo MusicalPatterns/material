@@ -8,7 +8,7 @@ const computeIndividualSegnoTimeWhenVoiceHasRepetend:
     (sectionInfos: SectionInfo[], individualRepetendIndex: Ordinal<SectionInfo[]>): Point<Ms> =>
         slice(sectionInfos, INITIAL, individualRepetendIndex)
             .reduce(
-                (accumulator: Point<Ms>, sectionInfo: SectionInfo) =>
+                (accumulator: Point<Ms>, sectionInfo: SectionInfo): Point<Ms> =>
                     use.Translation(accumulator, sectionInfo.totalDuration),
                 BEGINNING,
             )

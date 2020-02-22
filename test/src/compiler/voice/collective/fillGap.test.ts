@@ -1,13 +1,13 @@
-import { as, Ms, musicalAs, Value } from '@musical-patterns/utilities'
+import { as, Location, Ms, musicalAs, Value } from '@musical-patterns/utilities'
 import { fillGap, Section, SectionInfo, Sound } from '../../../../../src/indexForTest'
 
-describe('fill gap', () => {
-    it('fills the gap from the individual end time to the collective end time with repetend sounds', () => {
+describe('fill gap', (): void => {
+    it('fills the gap from the individual end time to the collective end time with repetend sounds', (): void => {
         const originalSounds: Sound[] = [
             {
                 duration: musicalAs.Duration(8),
                 gain: musicalAs.Gain(1),
-                location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
+                location: [ 0, 0, 0 ].map((dimension: number): Location => musicalAs.Location(dimension)),
                 sustain: musicalAs.Duration(7.9),
                 tone: musicalAs.Tone(1),
             },
@@ -45,33 +45,33 @@ describe('fill gap', () => {
                 {
                     duration: musicalAs.Duration(8),
                     gain: musicalAs.Gain(1),
-                    location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
+                    location: [ 0, 0, 0 ].map((dimension: number): Location => musicalAs.Location(dimension)),
                     sustain: musicalAs.Duration(7.9),
                     tone: musicalAs.Tone(1),
                 },
                 {
                     duration: musicalAs.Duration(11),
                     gain: musicalAs.Gain(1),
-                    location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
+                    location: [ 0, 0, 0 ].map((dimension: number): Location => musicalAs.Location(dimension)),
                     sustain: musicalAs.Duration(10.9),
                     tone: musicalAs.Tone(1),
                 },
                 {
                     duration: musicalAs.Duration(11),
                     gain: musicalAs.Gain(1),
-                    location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
+                    location: [ 0, 0, 0 ].map((dimension: number): Location => musicalAs.Location(dimension)),
                     sustain: musicalAs.Duration(10.9),
                     tone: musicalAs.Tone(1),
                 },
             ])
     })
 
-    it('if this voice has no repetend, return the sounds as is', () => {
+    it('if this voice has no repetend, return the sounds as is', (): void => {
         const originalSounds: Sound[] = [
             {
                 duration: musicalAs.Duration(11),
                 gain: musicalAs.Gain(1),
-                location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
+                location: [ 0, 0, 0 ].map((dimension: number): Location => musicalAs.Location(dimension)),
                 sustain: musicalAs.Duration(10.9),
                 tone: musicalAs.Tone(1),
             },
@@ -110,7 +110,7 @@ describe('fill gap', () => {
                 {
                     duration: musicalAs.Duration(11),
                     gain: musicalAs.Gain(1),
-                    location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
+                    location: [ 0, 0, 0 ].map((dimension: number): Location => musicalAs.Location(dimension)),
                     sustain: musicalAs.Duration(10.9),
                     tone: musicalAs.Tone(1),
                 },

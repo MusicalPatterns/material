@@ -11,7 +11,7 @@ export {
 export {
     materializeStandardScales,
     computeNonScale,
-    computeFlatValueScale,
+    thunkFlatValueScale,
     computeHarmonicSeriesScale,
     computeSubharmonicSeriesScale,
 } from './scales'

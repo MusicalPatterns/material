@@ -11,7 +11,7 @@ const computeIndividualSoundsAndSectionInfos:
         const sectionInfos: SectionInfo[] = []
 
         const sounds: Sound[] = sections.reduce(
-            (accumulator: Sound[], { notes = [], repetitions }: Section) => {
+            (accumulator: Sound[], { notes = [], repetitions }: Section): Sound[] => {
                 const sectionSounds: Sound[] = repeat(
                     compileSounds(notes, options),
                     repetitions || ONCE,

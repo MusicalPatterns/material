@@ -1,8 +1,8 @@
-import { as, INITIAL, Ms, musicalAs, NO_DURATION, Point } from '@musical-patterns/utilities'
+import { as, INITIAL, Location, Ms, musicalAs, NO_DURATION, Point } from '@musical-patterns/utilities'
 import { OscillatorName, PreparedVoice, prepareVoices, Sound, SourceType, Voice } from '../../../../src/indexForTest'
 
-describe('prepare voices', () => {
-    it('does not crash if a voice with empty sounds is prepared when the time is not at the beginning', async (done: DoneFn) => {
+describe('prepare voices', (): void => {
+    it('does not crash if a voice with empty sounds is prepared when the time is not at the beginning', async (done: DoneFn): Promise<void> => {
         const voices: Voice[] = [
             {
                 delay: NO_DURATION,
@@ -20,8 +20,8 @@ describe('prepare voices', () => {
         done()
     })
 
-    describe('when provided a start time', () => {
-        it('picks the correct first sound index, and the correct time when the next sound will start', async (done: DoneFn) => {
+    describe('when provided a start time', (): void => {
+        it('picks the correct first sound index, and the correct time when the next sound will start', async (done: DoneFn): Promise<void> => {
             const voices: Voice[] = [
                 {
                     delay: NO_DURATION,
@@ -30,14 +30,14 @@ describe('prepare voices', () => {
                         {
                             duration: musicalAs.Duration(5),
                             gain: musicalAs.Gain(1),
-                            location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
+                            location: [ 1 ].map((dimension: number): Location => musicalAs.Location(dimension)),
                             sustain: musicalAs.Duration(4),
                             tone: musicalAs.Tone(1),
                         },
                         {
                             duration: musicalAs.Duration(3),
                             gain: musicalAs.Gain(1),
-                            location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
+                            location: [ 1 ].map((dimension: number): Location => musicalAs.Location(dimension)),
                             sustain: musicalAs.Duration(1),
                             tone: musicalAs.Tone(1),
                         },
@@ -63,7 +63,7 @@ describe('prepare voices', () => {
             done()
         })
 
-        it('if the start time is longer than the pattern itself, it keeps repeating from the beginning', async (done: DoneFn) => {
+        it('if the start time is longer than the pattern itself, it keeps repeating from the beginning', async (done: DoneFn): Promise<void> => {
             const voices: Voice[] = [
                 {
                     delay: NO_DURATION,
@@ -72,14 +72,14 @@ describe('prepare voices', () => {
                         {
                             duration: musicalAs.Duration(5),
                             gain: musicalAs.Gain(1),
-                            location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
+                            location: [ 1 ].map((dimension: number): Location => musicalAs.Location(dimension)),
                             sustain: musicalAs.Duration(4),
                             tone: musicalAs.Tone(1),
                         },
                         {
                             duration: musicalAs.Duration(3),
                             gain: musicalAs.Gain(1),
-                            location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
+                            location: [ 1 ].map((dimension: number): Location => musicalAs.Location(dimension)),
                             sustain: musicalAs.Duration(1),
                             tone: musicalAs.Tone(1),
                         },
@@ -105,7 +105,7 @@ describe('prepare voices', () => {
             done()
         })
 
-        it('if the start time is longer than the pattern itself, it keeps repeating from the segno index, if a segno index is provided', async (done: DoneFn) => {
+        it('if the start time is longer than the pattern itself, it keeps repeating from the segno index, if a segno index is provided', async (done: DoneFn): Promise<void> => {
             const voices: Voice[] = [
                 {
                     delay: NO_DURATION,
@@ -114,21 +114,21 @@ describe('prepare voices', () => {
                         {
                             duration: musicalAs.Duration(5),
                             gain: musicalAs.Gain(1),
-                            location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
+                            location: [ 1 ].map((dimension: number): Location => musicalAs.Location(dimension)),
                             sustain: musicalAs.Duration(4),
                             tone: musicalAs.Tone(1),
                         },
                         {
                             duration: musicalAs.Duration(1),
                             gain: musicalAs.Gain(1),
-                            location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
+                            location: [ 1 ].map((dimension: number): Location => musicalAs.Location(dimension)),
                             sustain: musicalAs.Duration(1),
                             tone: musicalAs.Tone(1),
                         },
                         {
                             duration: musicalAs.Duration(3),
                             gain: musicalAs.Gain(1),
-                            location: [ 1 ].map((dimension: number) => musicalAs.Location(dimension)),
+                            location: [ 1 ].map((dimension: number): Location => musicalAs.Location(dimension)),
                             sustain: musicalAs.Duration(1),
                             tone: musicalAs.Tone(1),
                         },

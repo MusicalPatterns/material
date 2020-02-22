@@ -2,6 +2,7 @@ import {
     INCREMENT,
     indexJustBeyondFinalElement,
     isEmpty,
+    Location,
     Ms,
     musicalAs,
     Point,
@@ -14,7 +15,7 @@ const startPreparedVoiceSound: (preparedVoice: PreparedVoice, sound: Sound) => v
     (preparedVoice: PreparedVoice, sound: Sound): void => {
         preparedVoice.source.startSound({
             ...sound,
-            location: sound.location || [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
+            location: sound.location || [ 0, 0, 0 ].map((dimension: number): Location => musicalAs.Location(dimension)),
         })
 
         preparedVoice.nextStop = use.Translation(

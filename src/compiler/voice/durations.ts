@@ -6,7 +6,7 @@ import { AbstractName, compileSoundFeature, CompileSoundsOptions, Feature, Note 
 const computeNotesDuration: (notes: Note[], scales?: Scales) => Duration =
     (notes: Note[], scales?: Scales): Duration =>
         notes.reduce(
-            (totalDuration: Duration, note: Note) => {
+            (totalDuration: Duration, note: Note): Duration => {
                 const value: Feature<Value> = note.value || {}
                 const options: CompileSoundsOptions = { scales }
                 const duration: Duration = compileSoundFeature(value, AbstractName.VALUE, options)
@@ -19,7 +19,7 @@ const computeNotesDuration: (notes: Note[], scales?: Scales) => Duration =
 const computeSoundsDuration: (sounds: Sound[]) => Duration =
     (sounds: Sound[]): Duration =>
         sounds.reduce(
-            (accumulator: Duration, sound: Sound) =>
+            (accumulator: Duration, sound: Sound): Duration =>
                 sum(accumulator, sound.duration),
             musicalAs.Duration(0),
         )

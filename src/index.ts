@@ -7,7 +7,7 @@ export {
     computeNotesValueScalarSum,
     materializeStandardScales,
     computeNonScale,
-    computeFlatValueScale,
+    thunkFlatValueScale,
     computeHarmonicSeriesScale,
     computeSubharmonicSeriesScale,
     PitchCircularTechnique,

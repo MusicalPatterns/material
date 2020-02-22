@@ -3,9 +3,9 @@
 import {
     as,
     negative,
-    SCIENTIFIC_PITCHES,
     ScientificPitchNoteName,
     ScientificPitchOctaveNumber,
+    SCIENTIFIC_PITCHES,
     Semitones,
     Tone,
 } from '@musical-patterns/utilities'

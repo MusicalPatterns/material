@@ -1,10 +1,10 @@
-import { as, Maybe, musicalAs, Value } from '@musical-patterns/utilities'
+import { as, Location, Maybe, musicalAs, Value } from '@musical-patterns/utilities'
 import { computeRepetendSounds, Scales, Section, SectionInfo, Sound } from '../../../../../src/indexForTest'
 
-describe('compute repetend sounds', () => {
+describe('compute repetend sounds', (): void => {
     const scales: Scales = {}
 
-    it('returns the section that repeats forever, compiled notes to sounds', () => {
+    it('returns the section that repeats forever, compiled notes to sounds', (): void => {
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,
@@ -32,14 +32,14 @@ describe('compute repetend sounds', () => {
                 {
                     duration: musicalAs.Duration(11),
                     gain: musicalAs.Gain(1),
-                    location: [ 0, 0, 0 ].map((dimension: number) => musicalAs.Location(dimension)),
+                    location: [ 0, 0, 0 ].map((dimension: number): Location => musicalAs.Location(dimension)),
                     sustain: musicalAs.Duration(10.9),
                     tone: musicalAs.Tone(1),
                 },
             ])
     })
 
-    it('returns undefined when there is no section that repeats forever)', () => {
+    it('returns undefined when there is no section that repeats forever)', (): void => {
         const sectionInfos: SectionInfo[] = [
             {
                 doesRepeatForever: false,

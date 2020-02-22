@@ -8,7 +8,7 @@ import {
     Voice,
 } from '../../../../../src/indexForTest'
 
-describe('compute collective infos', () => {
+describe('compute collective infos', (): void => {
     const IRRELEVANT_VOICE: Voice = {
         delay: NO_DURATION,
         segnoIndex: INITIAL,
@@ -19,7 +19,7 @@ describe('compute collective infos', () => {
         },
     }
 
-    it('works with a mix of forever repeating and non-forever-repeating voices', () => {
+    it('works with a mix of forever repeating and non-forever-repeating voices', (): void => {
         const individualVoicesAndInfos: IndividualVoiceAndInfo[] = [
             {
                 voice: IRRELEVANT_VOICE,
@@ -61,7 +61,7 @@ describe('compute collective infos', () => {
             })
     })
 
-    it('correctly identifies when voices share a segno time', () => {
+    it('correctly identifies when voices share a segno time', (): void => {
         const individualVoicesAndInfos: IndividualVoiceAndInfo[] = [
             {
                 voice: IRRELEVANT_VOICE,
@@ -94,7 +94,7 @@ describe('compute collective infos', () => {
             })
     })
 
-    it('when the voices do not share a segno time, the collective segno time is the maximum of all the individual ones', () => {
+    it('when the voices do not share a segno time, the collective segno time is the maximum of all the individual ones', (): void => {
         const individualVoicesAndInfos: IndividualVoiceAndInfo[] = [
             {
                 voice: IRRELEVANT_VOICE,
@@ -127,7 +127,7 @@ describe('compute collective infos', () => {
             })
     })
 
-    it('when none of the voices repeat forever, the collective end time is the maximum of the individual end times', () => {
+    it('when none of the voices repeat forever, the collective end time is the maximum of the individual end times', (): void => {
         const individualVoicesAndInfos: IndividualVoiceAndInfo[] = [
             {
                 voice: IRRELEVANT_VOICE,
@@ -160,7 +160,7 @@ describe('compute collective infos', () => {
             })
     })
 
-    it('rounds the durations to prevent skyrocketing collective duration', () => {
+    it('rounds the durations to prevent skyrocketing collective duration', (): void => {
         const individualVoicesAndInfos: IndividualVoiceAndInfo[] = [
             {
                 voice: IRRELEVANT_VOICE,
