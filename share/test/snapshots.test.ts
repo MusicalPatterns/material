@@ -10,11 +10,13 @@ describe('snapshots', (): void => {
     const presetsSnapshotTests: (presets: ObjectOf<Preset>) => Promise<unknown[]> =
         async (presets: ObjectOf<Preset>): Promise<unknown[]> =>
             Promise.all(Object.entries(presets)
+                // tslint:disable-next-line arrow-return-shorthand
                 .map(async ([ presetName, preset ]: [ string, Preset ]): Promise<unknown> => {
                     // if (!['initial', 'anotherFocusedPreset'].includes(presetName)) {
                     //     return
                     // }
 
+                    // tslint:disable-next-line no-void-expression
                     return it(`${presetName} preset stays locked down`, async (done: DoneFn): Promise<void> => {
                         expect(JSON.parse(JSON.stringify(
                             await compilePattern({ material: pattern.material, specs: preset.specs }),
