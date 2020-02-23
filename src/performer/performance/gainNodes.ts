@@ -12,7 +12,7 @@ const computeGainNode: (parameters: {
     ({ sourceNode, positionalAudio, gain }: ComputeGainNodeParameters): GainNode => {
         let gainNode: GainNode
         if (positionalAudio) {
-            gainNode = positionalAudio.getOutput()
+            gainNode = positionalAudio.getOutput() as unknown as GainNode
             positionalAudio.setVolume(as.number(gain))
         }
         else {
