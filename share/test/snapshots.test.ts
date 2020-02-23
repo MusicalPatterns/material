@@ -1,3 +1,5 @@
+// tslint:disable comment-format no-commented-code
+
 import { compilePattern } from '@musical-patterns/material'
 import { Preset } from '@musical-patterns/spec'
 import { ObjectOf } from '@musical-patterns/utilities'
