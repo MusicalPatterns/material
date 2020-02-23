@@ -1,6 +1,6 @@
 {
   "name": "@musical-patterns/material",
-  "version": "1.0.111",
+  "version": "1.0.112",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "license": "MIT",
@@ -16,7 +16,7 @@
     "@musical-patterns/cli": "^1.0.572",
     "@musical-patterns/id": "^1.0.10",
     "@musical-patterns/pattern-material-qa": "^1.0.164",
-    "@musical-patterns/spec": "^1.0.40",
+    "@musical-patterns/spec": "^1.0.45",
     "@musical-patterns/utilities": "^1.0.602",
     "@types/three": "^0.93.31",
     "@types/webpack-env": "^1.14.1",
