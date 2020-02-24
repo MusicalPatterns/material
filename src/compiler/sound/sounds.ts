@@ -1,6 +1,5 @@
 import {
     ADDITIVE_IDENTITY,
-    as,
     computeLength,
     Coordinate,
     Duration,

@@ -1,4 +1,15 @@
-import { as, INITIAL, Location, Ms, musicalAs, NO_DURATION, Ordinal, Point, repeat, Value } from '@musical-patterns/utilities'
+import {
+    as,
+    INITIAL,
+    Location,
+    Ms,
+    musicalAs,
+    NO_DURATION,
+    Ordinal,
+    Point,
+    repeat,
+    Value,
+} from '@musical-patterns/utilities'
 import {
     applyCollectiveInfos,
     Entity,

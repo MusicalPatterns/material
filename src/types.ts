@@ -4,7 +4,7 @@ import {
     Duration,
     Gain,
     Intensity,
-    Location, Maybe,
+    Location,
     Pitch,
     Position,
     Scalar,
