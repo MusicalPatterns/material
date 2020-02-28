@@ -91,6 +91,7 @@ type PitchValueIntensityScale = 4 & { _PitchValueIntensityScaleBrand: unknown }
 type PitchValueEnvelopeX = 4 & { _PitchValueEnvelopeXBrand: unknown }
 type PitchValueEnvelopeXY = 5 & { _PitchValueEnvelopeXYBrand: unknown }
 type PitchValueEnvelopeXYZ = 6 & { _PitchValueEnvelopeXYZBrand: unknown }
+type PitchValueEnvelopeScale = 4 & { _PitchValueEnvelopeScaleBrand: unknown }
 type PitchValueXScale = 4 & { _PitchValueXScale: unknown }
 type PitchValueXYScale = 5 & { _PitchValueXYScale: unknown }
 type PitchValueXYZScale = 6 & { _PitchValueXYZScale: unknown }
@@ -219,6 +220,7 @@ export {
     PitchValueEnvelopeX,
     PitchValueEnvelopeXY,
     PitchValueEnvelopeXYZ,
+    PitchValueEnvelopeScale,
     PitchValueXScale,
     PitchValueXYScale,
     PitchValueXYZScale,

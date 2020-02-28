@@ -92,6 +92,7 @@ export {
     PitchValueEnvelopeX,
     PitchValueEnvelopeXY,
     PitchValueEnvelopeXYZ,
+    PitchValueEnvelopeScale,
     PitchValueXScale,
     PitchValueXYScale,
     PitchValueXYZScale,
