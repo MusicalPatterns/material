@@ -35,7 +35,7 @@ const computeNameAndCentsDeviation = (tone) => {
 
     const noteName = SCIENTIFIC_PITCHES[ Math.floor(scientificPitchIndex) % 12 ]
     const noteOctave = Math.floor(scientificPitchIndex / 12)
-    let name = `${noteName}${noteOctave}`
+    const name = noteName && noteOctave && `${noteName}${noteOctave}` || 'A4'
 
     return { name, centsDeviation }
 }
