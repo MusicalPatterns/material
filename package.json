@@ -26,7 +26,7 @@
     "raf": "^3.4.1",
     "redux": "^4.0.5",
     "redux-batched-actions": "^0.4.1",
-    "three": "^0.113.2",
+    "three": "^0.137.0",
     "url-loader": "^3.0.0",
     "vrb": "^1.1.64",
     "worker-loader": "^2.0.0"
