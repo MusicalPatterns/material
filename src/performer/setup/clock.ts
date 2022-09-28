@@ -11,12 +11,15 @@ const setupClock: () => Promise<void> =
         }
 
         // @ts-ignore
-        import('worker-loader!./clock.worker').then(Clock => {
-            const clock: Worker = new Clock.default()
-            clock.onmessage = onClockMessage
+        import('worker-loader!./clock.worker').then(
+            Clock => {
+                const clock: Worker = new Clock.default()
+                clock.onmessage = onClockMessage
 
-            store.dispatch({ type: StateKey.CLOCK, data: clock })
-        })
+                store.dispatch({ type: StateKey.CLOCK, data: clock })
+            },
+            (error) => console.error("ERROR LOADING CLOCK WORKER: ", error)
+        )
     }
 
 export {
