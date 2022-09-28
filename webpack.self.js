@@ -7,6 +7,11 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.worker\.ts$/,
+                loader: 'worker-loader',
+                options: { inline: 'fallback' },
+            },
+            {
                 test: /\.mp3/,
                 loader: 'url-loader',
             },
