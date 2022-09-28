@@ -15,7 +15,10 @@ const mainLoop: (timestamp: number) => void =
         }
 
         while (delta >= TIME_STEP) {
-            worker.postMessage(TIME_STEP)
+            process.env.NODE_ENV == "test" ?
+                // @ts-ignore
+                worker.postMessage(TIME_STEP, "*") :
+                worker.postMessage(TIME_STEP)
             delta -= TIME_STEP
         }
 

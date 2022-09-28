@@ -1,6 +1,7 @@
 import { Maybe } from '@musical-patterns/utilities'
 import { StateKey, store } from '../state'
 import { onClockMessage } from './onClockMessage'
+import Clock from './clock.worker'
 
 const setupClock: () => Promise<void> =
     async (): Promise<void> => {
@@ -11,15 +12,10 @@ const setupClock: () => Promise<void> =
         }
 
         // @ts-ignore
-        import('worker-loader!./clock.worker').then(
-            Clock => {
-                const clock: Worker = new Clock.default()
-                clock.onmessage = onClockMessage
+        const clock: Worker = new Clock()
+        clock.onmessage = onClockMessage
 
-                store.dispatch({ type: StateKey.CLOCK, data: clock })
-            },
-            (error) => console.error("ERROR LOADING CLOCK WORKER: ", error)
-        )
+        store.dispatch({ type: StateKey.CLOCK, data: clock })
     }
 
 export {
