@@ -1,7 +1,6 @@
 import { Maybe } from '@musical-patterns/utilities'
 import { StateKey, store } from '../state'
 import { onClockMessage } from './onClockMessage'
-import Clock from './clock.worker'
 
 const setupClock: () => Promise<void> =
     async (): Promise<void> => {
@@ -10,9 +9,8 @@ const setupClock: () => Promise<void> =
         if (oldClock) {
             oldClock.terminate()
         }
-
-        // @ts-ignore
-        const clock: Worker = new Clock()
+        
+        const clock: Worker = new Worker(new URL('./clock.worker', import.meta.url))
         clock.onmessage = onClockMessage
 
         store.dispatch({ type: StateKey.CLOCK, data: clock })

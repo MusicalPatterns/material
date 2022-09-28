@@ -1,7 +1,6 @@
 export {
     OnUpdate,
     activateContextInMobileBrowserEnvironments,
-    setupClock,
     setupTimeControls,
 } from './setup'
 export {

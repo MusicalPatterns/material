@@ -4,7 +4,6 @@ import {
     activateContextInMobileBrowserEnvironments,
     computeSampleData,
     OnUpdate,
-    setupClock,
     setupTimeControls,
 } from '../performer'
 import { play } from './play'
@@ -19,7 +18,10 @@ const setupPerformer: (parameters?: {
         activateContextInMobileBrowserEnvironments()
         setupTimeControls(onUpdate)
         computeSampleData()
-        await setupClock()
+        if (process.env.NODE_ENV != 'test') {
+            const { setupClock } = require('../performer/setup/clock')
+            await setupClock()
+        }
 
         if (pattern) {
             const compiledPattern: CompiledPattern = await setPattern(pattern)

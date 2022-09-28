@@ -1,6 +1,6 @@
 {
   "name": "@musical-patterns/material",
-  "version": "1.0.127",
+  "version": "1.0.128",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "license": "MIT",
@@ -29,7 +29,6 @@
     "redux-batched-actions": "^0.5.0",
     "three": "^0.144.0",
     "url-loader": "^4.1.1",
-    "vrb": "^1.1.66",
-    "worker-loader": "^3.0.8"
+    "vrb": "^1.1.66"
   }
 }
