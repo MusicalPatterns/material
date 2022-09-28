@@ -15,10 +15,7 @@ const mainLoop: (timestamp: number) => void =
         }
 
         while (delta >= TIME_STEP) {
-            process.env.NODE_ENV == "test" ?
-                // @ts-ignore
-                worker.postMessage(TIME_STEP, "*") :
-                worker.postMessage(TIME_STEP)
+            worker.postMessage(TIME_STEP)
             delta -= TIME_STEP
         }
 
@@ -27,5 +24,3 @@ const mainLoop: (timestamp: number) => void =
     }
 
 requestAnimationFrame(mainLoop)
-
-export default {} as typeof Worker & (new () => Worker);

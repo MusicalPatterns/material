@@ -7,11 +7,6 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.worker\.ts$/,
-                loader: 'worker-loader',
-                options: { inline: 'fallback' },
-            },
-            {
                 test: /\.mp3/,
                 loader: 'url-loader',
             },
@@ -22,8 +17,5 @@ module.exports = {
     },
     plugins: [
         new CopyWebpackPlugin({ patterns: [ { from: 'assets/**/*' } ] }),
-    ],
-    optimization: {
-        concatenateModules: false
-    },
+    ]
 }
