@@ -19,7 +19,7 @@ const setupPerformer: (parameters?: {
         activateContextInMobileBrowserEnvironments()
         setupTimeControls(onUpdate)
         computeSampleData()
-        setupClock()
+        await setupClock()
 
         if (pattern) {
             const compiledPattern: CompiledPattern = await setPattern(pattern)

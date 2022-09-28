@@ -88,7 +88,7 @@ describe('compile pattern', (): void => {
         ]
     })
 
-    it('given specs, takes them into account', async (done: DoneFn): Promise<void> => {
+    it('given specs, takes them into account', async (): Promise<void> => {
         const actualCompiledPattern: CompiledPattern = await compilePattern({ material, specs })
 
         expect(actualCompiledPattern)
@@ -107,11 +107,9 @@ describe('compile pattern', (): void => {
                     },
                 ],
             })
-
-        done()
     })
 
-    it('if specs are not explicitly provided to override default, the default is finding the initial specs within the spec key of the pattern, so that you can just pass it a friggin pattern', async (done: DoneFn): Promise<void> => {
+    it('if specs are not explicitly provided to override default, the default is finding the initial specs within the spec key of the pattern, so that you can just pass it a friggin pattern', async (): Promise<void> => {
         const patternLikeObject: { material: Material, spec: { initialSpecs: TestSpecs } } = {
             material,
             spec: {
@@ -137,11 +135,9 @@ describe('compile pattern', (): void => {
                     },
                 ],
             })
-
-        done()
     })
 
-    it('prefers the top-level specs provision to the finding it inside spec key of pattern', async (done: DoneFn): Promise<void> => {
+    it('prefers the top-level specs provision to the finding it inside spec key of pattern', async (): Promise<void> => {
         const patternLikeObject: { material: Material, spec: { initialSpecs: TestSpecs } } = {
             material,
             spec: {
@@ -169,7 +165,5 @@ describe('compile pattern', (): void => {
                     },
                 ],
             })
-
-        done()
     })
 })

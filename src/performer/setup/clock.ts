@@ -2,8 +2,8 @@ import { Maybe } from '@musical-patterns/utilities'
 import { StateKey, store } from '../state'
 import { onClockMessage } from './onClockMessage'
 
-const setupClock: VoidFunction =
-    (): void => {
+const setupClock: () => Promise<void> =
+    async (): Promise<void> => {
         const oldClock: Maybe<Worker> = store.getState()
             .get(StateKey.CLOCK)
         if (oldClock) {
@@ -11,12 +11,12 @@ const setupClock: VoidFunction =
         }
 
         // @ts-ignore
-        // tslint:disable-next-line
-        const Clock = require('./clock.worker')
-        const clock: Worker = new Clock()
-        clock.onmessage = onClockMessage
+        import('worker-loader!./clock.worker').then(Clock => {
+            const clock: Worker = new Clock.default()
+            clock.onmessage = onClockMessage
 
-        store.dispatch({ type: StateKey.CLOCK, data: clock })
+            store.dispatch({ type: StateKey.CLOCK, data: clock })
+        })
     }
 
 export {

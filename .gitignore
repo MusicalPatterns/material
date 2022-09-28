@@ -26,12 +26,10 @@ report*.json
 /test/noFailureOnNonEmptySuite.ts
 /test/reporter.ts
 /test/setup.ts
-/test/tslint.json
 /tsconfig.build.json
 /tsconfig.common.json
 /tsconfig.json
 /tsconfig.node.json
-/tslint.json
 /webpack.browser.js
 /webpack.common.js
 /webpack.deploy.js

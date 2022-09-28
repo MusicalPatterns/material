@@ -6,6 +6,8 @@ import { ObjectOf } from '@musical-patterns/utilities'
 import * as path from 'path'
 
 describe('snapshots', (): void => {
+    it("has at least one child", () => {})
+
     // tslint:disable-next-line no-require-imports
     const { pattern } = require('../src/indexForTest')
 
@@ -19,7 +21,7 @@ describe('snapshots', (): void => {
                     // }
 
                     // tslint:disable-next-line no-void-expression
-                    return it(`${presetName} preset stays locked down`, async (done: DoneFn): Promise<void> => {
+                    return it(`${presetName} preset stays locked down`, async (): Promise<void> => {
                         expect(JSON.parse(JSON.stringify(
                             await compilePattern({ material: pattern.material, specs: preset.specs }),
                             undefined,
@@ -31,8 +33,6 @@ describe('snapshots', (): void => {
                                 undefined,
                                 2,
                             )))
-
-                        done()
                     })
                 }),
             )
@@ -49,7 +49,7 @@ describe('snapshots', (): void => {
         }
     }
     else {
-        it('initial stays locked down', async (done: DoneFn): Promise<void> => {
+        it('initial stays locked down', async (): Promise<void> => {
             expect(JSON.parse(JSON.stringify(
                 await compilePattern(pattern),
                 undefined,
@@ -61,8 +61,6 @@ describe('snapshots', (): void => {
                     undefined,
                     2,
                 )))
-
-            done()
         })
 
         if (pattern.spec.presets) {

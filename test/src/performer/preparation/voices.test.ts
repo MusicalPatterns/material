@@ -2,7 +2,7 @@ import { as, INITIAL, Location, Ms, musicalAs, NO_DURATION, Point } from '@music
 import { OscillatorName, PreparedVoice, prepareVoices, Sound, SourceType, Voice } from '../../../../src/indexForTest'
 
 describe('prepare voices', (): void => {
-    it('does not crash if a voice with empty sounds is prepared when the time is not at the beginning', async (done: DoneFn): Promise<void> => {
+    it('does not crash if a voice with empty sounds is prepared when the time is not at the beginning', async (): Promise<void> => {
         const voices: Voice[] = [
             {
                 delay: NO_DURATION,
@@ -17,11 +17,10 @@ describe('prepare voices', (): void => {
         const startTime: Point<Ms> = as.Point<Ms>(2)
 
         await prepareVoices(voices, startTime)
-        done()
     })
 
     describe('when provided a start time', (): void => {
-        it('picks the correct first sound index, and the correct time when the next sound will start', async (done: DoneFn): Promise<void> => {
+        it('picks the correct first sound index, and the correct time when the next sound will start', async (): Promise<void> => {
             const voices: Voice[] = [
                 {
                     delay: NO_DURATION,
@@ -59,11 +58,9 @@ describe('prepare voices', (): void => {
                 .toBe(as.Point<Ms>(5))
             expect(preparedVoice.soundIndex)
                 .toBe(as.Ordinal<Sound[]>(1))
-
-            done()
         })
 
-        it('if the start time is longer than the pattern itself, it keeps repeating from the beginning', async (done: DoneFn): Promise<void> => {
+        it('if the start time is longer than the pattern itself, it keeps repeating from the beginning', async (): Promise<void> => {
             const voices: Voice[] = [
                 {
                     delay: NO_DURATION,
@@ -101,11 +98,9 @@ describe('prepare voices', (): void => {
                 .toBe(as.Point<Ms>(16))
             expect(preparedVoice.soundIndex)
                 .toBe(as.Ordinal<Sound[]>(0))
-
-            done()
         })
 
-        it('if the start time is longer than the pattern itself, it keeps repeating from the segno index, if a segno index is provided', async (done: DoneFn): Promise<void> => {
+        it('if the start time is longer than the pattern itself, it keeps repeating from the segno index, if a segno index is provided', async (): Promise<void> => {
             const voices: Voice[] = [
                 {
                     delay: NO_DURATION,
@@ -150,8 +145,6 @@ describe('prepare voices', (): void => {
                 .toBe(as.Point<Ms>(14))
             expect(preparedVoice.soundIndex)
                 .toBe(as.Ordinal<Sound[]>(2))
-
-            done()
         })
     })
 })

@@ -18,7 +18,7 @@ const load: (sampleName: SampleName) => Promise<void> =
     async (sampleName: SampleName): Promise<void> =>
         new Promise((resolve: VoidFunction): void => {
             const request: XMLHttpRequest = new XMLHttpRequest()
-            const url: string = `../../../../assets/samples/${sampleName}.mp3`
+            const url: string = `assets/samples/${sampleName}.mp3`
             request.open('GET', url, true)
             request.responseType = 'arraybuffer'
 
