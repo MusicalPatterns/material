@@ -9,7 +9,7 @@ module.exports = {
             {
                 test: /\.worker\.ts$/,
                 loader: 'worker-loader',
-                options: { inline: 'fallback' },
+                options: { inline: 'no-fallback' },
             },
             {
                 test: /\.mp3/,
