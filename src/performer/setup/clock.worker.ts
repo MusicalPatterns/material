@@ -28,4 +28,4 @@ const mainLoop: (timestamp: number) => void =
 
 requestAnimationFrame(mainLoop)
 
-export default ((): void => undefined) as unknown
+export default {} as typeof Worker & (new () => Worker);
