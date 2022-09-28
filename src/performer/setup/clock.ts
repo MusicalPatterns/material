@@ -10,7 +10,7 @@ const setupClock: () => Promise<void> =
             oldClock.terminate()
         }
         
-        const clock: Worker = new Worker(new URL('./clock.worker', import.meta.url))
+        const clock: Worker = new Worker(new URL('./clock.worker?inline', import.meta.url))
         clock.onmessage = onClockMessage
 
         store.dispatch({ type: StateKey.CLOCK, data: clock })
