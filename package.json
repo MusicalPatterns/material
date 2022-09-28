@@ -1,6 +1,6 @@
 {
   "name": "@musical-patterns/material",
-  "version": "1.0.130",
+  "version": "1.0.131",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "license": "MIT",
