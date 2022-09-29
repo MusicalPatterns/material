@@ -8,8 +8,8 @@ module.exports = {
         rules: [
             {
                 test: /\.worker\.ts$/,
-                loader: 'worker-loader',
-                options: { inline: 'no-fallback' },
+                loader: 'workerize-loader',
+                options: { inline: true },
             },
             {
                 test: /\.mp3/,
