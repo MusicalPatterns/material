@@ -14,7 +14,8 @@ const computeToggleImmersiveAudio: ({ vrb }: { vrb: Vrb }) => {
     exitImmersiveAudio: VoidFunction,
 } =
     ({ vrb }: ComputeToggleImmersiveAudioParameters): ToggleImmersiveAudioHandlers => ({
-        enterImmersiveAudio: (): void => {
+        enterImmersiveAudio: async (): Promise<void> => {
+            await vrb.toggleVr()
             const immersiveAudioReady: boolean = store.getState()
                 .get(StateKey.IMMERSIVE_AUDIO_READY)
             if (!immersiveAudioReady) {
@@ -22,9 +23,9 @@ const computeToggleImmersiveAudio: ({ vrb }: { vrb: Vrb }) => {
             }
 
             store.dispatch({ type: StateKey.IMMERSIVE_AUDIO_ENABLED, data: true })
-            vrb.toggleVr()
         },
-        exitImmersiveAudio: (): void => {
+        exitImmersiveAudio: async (): Promise<void> => {
+            await vrb.toggleVr()
             const immersiveAudioReady: boolean = store.getState()
                 .get(StateKey.IMMERSIVE_AUDIO_READY)
             if (!immersiveAudioReady) {
@@ -32,7 +33,6 @@ const computeToggleImmersiveAudio: ({ vrb }: { vrb: Vrb }) => {
             }
 
             store.dispatch({ type: StateKey.IMMERSIVE_AUDIO_ENABLED, data: false })
-            vrb.toggleVr()
         },
     })
 
@@ -50,21 +50,15 @@ const enableImmersiveAudio: (enableImmersiveAudioParameters?: {
         let webVr: Vrb
         if (vrb) {
             webVr = vrb
-            const oldOnReady: VoidFunction = webVr.onReady
-            webVr.onReady = (): void => {
-                store.dispatch({ type: StateKey.IMMERSIVE_AUDIO_READY, data: true })
-                oldOnReady()
-            }
+            store.dispatch({ type: StateKey.IMMERSIVE_AUDIO_READY, data: true })
         }
         else {
             webVr = buildVrb({
                 camerasConfig: { INITIAL_PERSPECTIVE_POSITION: [ 0, 0, 0 ] },
                 onNoVr,
-                onReady: (): void => {
-                    store.dispatch({ type: StateKey.IMMERSIVE_AUDIO_READY, data: true })
-                    onReady()
-                },
+                onReady,
             })
+            store.dispatch({ type: StateKey.IMMERSIVE_AUDIO_READY, data: true })
         }
 
         const batchedAction: BatchAction = batchActions([
