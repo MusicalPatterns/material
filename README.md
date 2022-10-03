@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.com/MusicalPatterns/material.svg?branch=master)](https://travis-ci.com/MusicalPatterns/material)
-
 # Musical Patterns - Material
 
 Takes whatever amazing craziness a given pattern calls for and materializes it.
