@@ -13,7 +13,7 @@ module.exports = {
             },
             {
                 test: /\.mp3/,
-                loader: 'url-loader',
+                type: 'asset/resource',
             },
         ],
     },
