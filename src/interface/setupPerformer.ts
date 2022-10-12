@@ -25,7 +25,6 @@ const setupPerformer: (parameters?: {
 
         if (pattern) {
             const compiledPattern: CompiledPattern = await setPattern(pattern)
-            play()
 
             return compiledPattern
         }
